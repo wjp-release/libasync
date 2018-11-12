@@ -32,7 +32,7 @@
 
 namespace wjp {
 
-	class coroutine_engine : public provider {
+	class workstealing_scheduler : public provider {
 
 	};
 
