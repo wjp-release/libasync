@@ -28,13 +28,10 @@
 #include <functional>
 #include "interfaces.h"
 
-// coroutines are user-level light-weight tasks
-
 namespace wjp {
 
-	class workstealing_scheduler : public provider {
+	class worksharing_provider : public provider {
 
 	};
-
 }
 

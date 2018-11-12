@@ -29,7 +29,8 @@
 
 namespace wjp {
 
-	class future : public task {
+	// promise.then().then() 
+	class promise : public task {
 
 	};
 }

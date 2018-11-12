@@ -30,8 +30,9 @@
 
 namespace wjp {
 
-	class threadpool : public provider {
+	class workstealing_provider : public provider {
 
 	};
+
 }
 

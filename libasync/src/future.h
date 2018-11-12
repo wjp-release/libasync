@@ -29,7 +29,8 @@
 
 namespace wjp {
 
-	class promise : public task {
+	//get_value, set_value, wait
+	class future : public task {
 
 	};
 }
