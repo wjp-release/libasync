@@ -11,7 +11,9 @@ poll要被多个异己线程竞争，就要while循环+CAS了。
 
 这个实现的内存模型非常relaxed，并行效果很好。
 
-```cpp
+此外这个实现用的是C11的<stdatomic.h>而不是C++11的<atomic>，我发现C的接口更好用，不必把原来的数据声明成atomic类型。既然都已经手动fine-tune了，自然是越底层越好。C++的atomic类比较适合简单的业务场景。
+
+```c
 int take(Deque *q) {
     size_t b = load_explicit(&q->bottom, relaxed) - 1;
     Array *a = load_explicit(&q->array, relaxed);
