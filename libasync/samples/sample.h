@@ -24,3 +24,5 @@
  */
 
 #pragma once
+
+#include "worksteal_pool.h"

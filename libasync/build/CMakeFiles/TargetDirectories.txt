@@ -1,0 +1,8 @@
+/Users/wjp/Desktop/workspace/libasync/libasync/build/CMakeFiles/rebuild_cache.dir
+/Users/wjp/Desktop/workspace/libasync/libasync/build/CMakeFiles/edit_cache.dir
+/Users/wjp/Desktop/workspace/libasync/libasync/build/src/CMakeFiles/rebuild_cache.dir
+/Users/wjp/Desktop/workspace/libasync/libasync/build/src/CMakeFiles/edit_cache.dir
+/Users/wjp/Desktop/workspace/libasync/libasync/build/src/CMakeFiles/async.dir
+/Users/wjp/Desktop/workspace/libasync/libasync/build/samples/CMakeFiles/rebuild_cache.dir
+/Users/wjp/Desktop/workspace/libasync/libasync/build/samples/CMakeFiles/edit_cache.dir
+/Users/wjp/Desktop/workspace/libasync/libasync/build/samples/CMakeFiles/sample.dir

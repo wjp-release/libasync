@@ -1,0 +1,42 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+.././src/chaselev_deque.h
+cstdint
+-
+atomic
+-
+
+.././src/interface/interfaces.h
+memory
+-
+chrono
+-
+list
+-
+
+.././src/worksteal_pool.h
+functional
+-
+interfaces.h
+.././src/interfaces.h
+
+/Users/wjp/Desktop/workspace/libasync/libasync/samples/sample.cc
+sample.h
+/Users/wjp/Desktop/workspace/libasync/libasync/samples/sample.h
+iostream
+-
+cassert
+-
+chaselev_deque.h
+/Users/wjp/Desktop/workspace/libasync/libasync/samples/chaselev_deque.h
+
+/Users/wjp/Desktop/workspace/libasync/libasync/samples/sample.h
+worksteal_pool.h
+/Users/wjp/Desktop/workspace/libasync/libasync/samples/worksteal_pool.h
+

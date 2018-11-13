@@ -18,6 +18,7 @@ if(MSVC)
 	set(CMAKE_CXX_FLAGS "/W4")
 endif()
 
+include_directories(./src/interface)
 include_directories(./src)
 link_directories(./src)
 add_subdirectory(./src)

@@ -30,8 +30,15 @@
 
 namespace wjp {
 
-	class worksharing_provider : public provider {
+	static inline int duh()
+	{
+		return 2;
+	}
+
+	class worksteal_pool : public provider {
+
 
 	};
+
 }
 

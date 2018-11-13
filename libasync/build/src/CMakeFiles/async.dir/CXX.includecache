@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+.././src/interface/interfaces.h
+memory
+-
+chrono
+-
+list
+-
+
+/Users/wjp/Desktop/workspace/libasync/libasync/src/workshare_pool.cc
+
+/Users/wjp/Desktop/workspace/libasync/libasync/src/worksteal_pool.cc
+worksteal_pool.h
+/Users/wjp/Desktop/workspace/libasync/libasync/src/worksteal_pool.h
+
+/Users/wjp/Desktop/workspace/libasync/libasync/src/worksteal_pool.h
+functional
+-
+interfaces.h
+/Users/wjp/Desktop/workspace/libasync/libasync/src/interfaces.h
+

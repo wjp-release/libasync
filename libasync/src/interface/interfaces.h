@@ -27,6 +27,7 @@
 
 #include <memory>
 #include <chrono>
+#include <list>
 
 namespace wjp {
 

@@ -30,9 +30,8 @@
 
 namespace wjp {
 
-	class workstealing_provider : public provider {
+	class workshare_pool : public provider {
 
 	};
-
 }
 

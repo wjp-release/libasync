@@ -25,12 +25,23 @@
 
 #include "sample.h"
 #include <iostream>
-#include <variant>
 #include <cassert>
 
+#include "chaselev_deque.h"
+
+using namespace wjp;
 int main()
 {
-	std::cout << "duh\n";
+	
+	chaselev_deque q;
+
+	q.push(1);
+	q.push(2);
+	int x=q.take();
+	std::cout<<"take "<<x<<std::endl;
+	x=q.take();
+	std::cout<<"take "<<x<<std::endl;
+
 
 	std::cin.get();
 	return 0;
