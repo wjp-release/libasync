@@ -32,15 +32,22 @@
 using namespace wjp;
 int main()
 {
-	
-	chaselev_deque q;
+	// T must be
+	struct A{
+		A(const std::string& str):x(str){}
+		std::string x;
+	};
 
-	q.push(1);
-	q.push(2);
-	int x=q.take();
-	std::cout<<"take "<<x<<std::endl;
+	chaselev_deque<A> q;
+	auto t1=std::make_shared<A>("duh");
+	auto t2=std::make_shared<A>("wow");
+
+	q.push(t1);
+	q.push(t2);
+	std::shared_ptr<A> x=q.take();
+	std::cout<<"take "<<x->x<<std::endl;
 	x=q.take();
-	std::cout<<"take "<<x<<std::endl;
+	std::cout<<"take "<<x->x<<std::endl;
 
 
 	std::cin.get();

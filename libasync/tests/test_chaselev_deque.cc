@@ -2,22 +2,31 @@
 
 using namespace eventual;
 // testcase: test_todo
-class test_todo : public ::testing::Test {
+class test_chaselev_deque : public ::testing::Test {
 protected:
 	test_todo() {
 
 	}
+
 	virtual ~test_todo() {
 
 	}
+
 	virtual void SetUp() {
+		// Code here will be called immediately after the constructor (right
+		// before each test).
 
 
 	}
+
 	virtual void TearDown() {
+		// Code here will be called immediately after each test (right
+		// before the destructor).
+
 
 	}
-	chaselev_deque q;
+
+	// todo x;
 };
 
 

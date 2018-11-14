@@ -11,6 +11,8 @@ cstdint
 -
 atomic
 -
+memory
+-
 
 .././src/interface/interfaces.h
 memory
