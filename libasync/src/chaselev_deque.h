@@ -28,6 +28,7 @@
 #include <cstdint>
 #include <atomic>
 #include <memory>
+#include <iostream>
 
 //optional 
 
@@ -47,7 +48,9 @@ public:
     // initial capacity must be power of 2
     chaselev_deque(int log2capacity=13)  : array(new atomic_array(1<<log2capacity)),
                                 top(1<<(log2capacity-1)), bottom(1<<(log2capacity-1))
-    {}
+    {
+        print();
+    }
 
     // push, grow, take could only be invoked by the deque's owning thread
     struct atomic_array{
@@ -65,7 +68,19 @@ public:
         }
     };
 
+    void print(){
+        auto arr = array.load(std::memory_order_relaxed);
+        std::cout<<"size="<<arr->capacity.load()<<", top="<<top.load()<<", bottom="<<bottom.load()<<std::endl;
+        std::cout<<"shared_ptrs from top to bottom: ";
+        for(uint64_t i=top.load(std::memory_order_relaxed);i<bottom.load(std::memory_order_relaxed);i++){
+            std::cout<<arr->buffer[i%arr->capacity]<<" ";
+        }  
+        std::cout<<std::endl;
+    }
+
     void grow(){
+        std::cout<<"before grow\n";
+        print();
         auto old_arr = array.load(std::memory_order_relaxed);
         uint64_t new_capacity=old_arr->capacity<<1;
         autorelease{old_arr};
@@ -73,9 +88,12 @@ public:
         array.store(new_arr, std::memory_order_relaxed);
         for(uint64_t i=top.load(std::memory_order_relaxed);i<bottom.load(std::memory_order_relaxed);i++)  
         {
-            auto x = std::atomic_load_explicit(&old_arr->buffer[i], std::memory_order_relaxed);
-            std::atomic_store_explicit(&new_arr->buffer[i], x, std::memory_order_relaxed);
+            auto x = std::atomic_load_explicit(&old_arr->buffer[i%old_arr->capacity], std::memory_order_relaxed);
+            std::cout<<">>> growing x="<<x<<std::endl;
+            std::atomic_store_explicit(&new_arr->buffer[i%new_capacity], x, std::memory_order_relaxed);
         }
+        std::cout<<"after grow\n";
+        print();
     }
 
     std::shared_ptr<T> take() {
@@ -89,6 +107,7 @@ public:
             x = std::atomic_load_explicit(&a->buffer[b % a->capacity], std::memory_order_relaxed);
             if (t == b) { /* Single last element in queue. */
                 if(!top.compare_exchange_strong(t,t+1,std::memory_order_seq_cst, std::memory_order_relaxed)){
+                    std::cout<<"take race failed\n";
                     x=nullptr;
                 }
                 bottom.store(b+1, std::memory_order_relaxed);
@@ -121,7 +140,9 @@ public:
         if (t < b) { 
             auto a = array.load(std::memory_order_consume);  
             x = std::atomic_load_explicit(&a->buffer[t % a->capacity], std::memory_order_relaxed);
+            std::cout<<"x value="<<x<<std::endl;
             if (!top.compare_exchange_strong(t, t + 1, std::memory_order_seq_cst, std::memory_order_relaxed)){
+                std::cout<<"steal race failed\n";
                 return nullptr; 
             }
         }

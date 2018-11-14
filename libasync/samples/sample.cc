@@ -38,17 +38,96 @@ int main()
 		std::string x;
 	};
 
-	chaselev_deque<A> q;
-	auto t1=std::make_shared<A>("duh");
-	auto t2=std::make_shared<A>("wow");
-
+	chaselev_deque<A> q(3);  //cap=8
+	auto t1=std::make_shared<A>("1");
+	auto t2=std::make_shared<A>("2");
+	auto t3=std::make_shared<A>("3");
+	auto t4=std::make_shared<A>("4");
+	auto t5=std::make_shared<A>("5");
+	auto t6=std::make_shared<A>("6");
+	auto t7=std::make_shared<A>("7");
+	auto t8=std::make_shared<A>("8");
+	auto t9=std::make_shared<A>("9");
+	auto t10=std::make_shared<A>("10");
+	auto t11=std::make_shared<A>("11");
+	auto t12=std::make_shared<A>("12");
 	q.push(t1);
+	std::cout<<"push 1\n";
+	q.print();
 	q.push(t2);
+	std::cout<<"push 2\n";
+	q.print();
+	q.push(t3);
+	std::cout<<"push 3\n";
+	q.print();
+	q.push(t4);
+	std::cout<<"push 4\n";
+	q.print();
+	q.push(t5);
+	std::cout<<"push 5\n";
+	q.print();
+	q.push(t6);
+	std::cout<<"push 6\n";
+	q.print();
+	q.push(t7);
+	std::cout<<"push 7\n";
+	q.print();
+	q.push(t8);
+	std::cout<<"push 8\n";
+	q.print();
+	q.push(t9);
+	q.push(t10);
+	std::cout<<"push 10\n";
+	q.print();
+	q.push(t11);
+	q.push(t12);
+	std::cout<<"push 12\n";
+	q.print();
+
 	std::shared_ptr<A> x=q.take();
 	std::cout<<"take "<<x->x<<std::endl;
 	x=q.take();
 	std::cout<<"take "<<x->x<<std::endl;
+	x=q.take();
+	std::cout<<"take "<<x->x<<std::endl;
 
+	q.print();
+
+	x=q.steal();
+	std::cout<<"steal "<<x<<std::endl;
+
+	std::cout<<"steal "<<x->x<<std::endl;
+	x=q.take();
+	std::cout<<"take "<<x->x<<std::endl;
+
+	q.print();
+
+	x=q.take();
+	std::cout<<"take "<<x->x<<std::endl;
+	x=q.steal();
+	std::cout<<"steal "<<x->x<<std::endl;
+	x=q.steal();
+	std::cout<<"steal "<<x->x<<std::endl;
+	x=q.steal();
+	std::cout<<"steal "<<x->x<<std::endl;
+	x=q.steal();
+	std::cout<<"steal "<<x->x<<std::endl;
+	x=q.steal();
+	q.print();
+	std::cout<<"steal "<<x->x<<std::endl;
+	q.print();
+	x=q.take();
+	std::cout<<"take "<<x->x<<std::endl;
+	q.print();
+	x=q.steal();
+	std::cout<<"steal "<<x<<std::endl;
+	q.print();
+	// x=q.take();
+	// std::cout<<"take ptr="<<x<<std::endl;
+	// x=q.take();
+	// std::cout<<"take ptr="<<x<<std::endl;
+	// x=q.steal();
+	// std::cout<<"steal ptr="<<x<<std::endl;
 
 	std::cin.get();
 	return 0;
