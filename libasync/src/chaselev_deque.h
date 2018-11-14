@@ -80,28 +80,20 @@ public:
             std::cout<<arr->at(i)<<" ";
         }  
         std::cout<<"| buffer="<< arr->buffer<<std::endl;
-
         std::cout<<std::endl;
     }
 
     void grow(){
-        std::cout<<"before grow\n";
-        print();
         auto old_arr = array.load(std::memory_order_relaxed);
         uint64_t new_capacity=old_arr->capacity<<1;
         autorelease guard{old_arr}; //must declare variable name here, otherwise old_arr would be destroyed early
-        std::cout<<">>> old_arr="<<old_arr<<", size="<<old_arr->capacity<<", buffer="<< old_arr->buffer<<std::endl;
         auto new_arr=new atomic_array(new_capacity);
-        std::cout<<">>> old_arr="<<old_arr<<", size="<<old_arr->capacity<<", buffer="<< old_arr->buffer<<std::endl;
         for(uint64_t i=top.load(std::memory_order_relaxed);i<bottom.load(std::memory_order_relaxed);i++)  
         {
             auto x = std::atomic_load_explicit(&old_arr->at(i), std::memory_order_relaxed);
-            std::cout<<">>> growing x="<<x<<std::endl;
             std::atomic_store_explicit(&new_arr->at(i), x, std::memory_order_relaxed);
         }
         array.store(new_arr, std::memory_order_relaxed);
-        std::cout<<"after grow\n";
-        print();
     }
 
     std::shared_ptr<T> take() {
@@ -115,7 +107,6 @@ public:
             x = std::atomic_load_explicit(&a->at(b), std::memory_order_relaxed);
             if (t == b) { /* Single last element in queue. */
                 if(!top.compare_exchange_strong(t,t+1,std::memory_order_seq_cst, std::memory_order_relaxed)){
-                    std::cout<<"take race failed\n";
                     x=nullptr;
                 }
                 bottom.store(b+1, std::memory_order_relaxed);
@@ -148,9 +139,7 @@ public:
         if (t < b) { 
             auto a = array.load(std::memory_order_consume);  
             x = std::atomic_load_explicit(&a->at(t), std::memory_order_relaxed);
-            std::cout<<"x value="<<x<<std::endl;
             if (!top.compare_exchange_strong(t, t + 1, std::memory_order_seq_cst, std::memory_order_relaxed)){
-                std::cout<<"steal race failed\n";
                 return nullptr; 
             }
         }
