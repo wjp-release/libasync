@@ -122,12 +122,6 @@ int main()
 	x=q.steal();
 	std::cout<<"steal "<<x<<std::endl;
 	q.print();
-	// x=q.take();
-	// std::cout<<"take ptr="<<x<<std::endl;
-	// x=q.take();
-	// std::cout<<"take ptr="<<x<<std::endl;
-	// x=q.steal();
-	// std::cout<<"steal ptr="<<x<<std::endl;
 
 	std::cin.get();
 	return 0;

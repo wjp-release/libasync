@@ -58,6 +58,10 @@ public:
         ~atomic_array(){delete[]buffer;}
         std::shared_ptr<T>*     buffer;     // should be replaced by std::atomic<std::shared_ptr> in C++20
         std::atomic<uint64_t>   capacity;   // power of 2, grow at rate of *2 each time, init: 2^13(8K), max: 2^26(64M)
+        std::shared_ptr<T>&     at(uint64_t index)
+        {
+            return buffer[index%capacity];
+        }
     };
 
     struct autorelease{  
@@ -71,10 +75,12 @@ public:
     void print(){
         auto arr = array.load(std::memory_order_relaxed);
         std::cout<<"size="<<arr->capacity.load()<<", top="<<top.load()<<", bottom="<<bottom.load()<<std::endl;
-        std::cout<<"shared_ptrs from top to bottom: ";
+        std::cout<<"[top ... bottom]: ";
         for(uint64_t i=top.load(std::memory_order_relaxed);i<bottom.load(std::memory_order_relaxed);i++){
-            std::cout<<arr->buffer[i%arr->capacity]<<" ";
+            std::cout<<arr->at(i)<<" ";
         }  
+        std::cout<<"| buffer="<< arr->buffer<<std::endl;
+
         std::cout<<std::endl;
     }
 
@@ -83,15 +89,17 @@ public:
         print();
         auto old_arr = array.load(std::memory_order_relaxed);
         uint64_t new_capacity=old_arr->capacity<<1;
-        autorelease{old_arr};
+        autorelease guard{old_arr}; //must declare variable name here, otherwise old_arr would be destroyed early
+        std::cout<<">>> old_arr="<<old_arr<<", size="<<old_arr->capacity<<", buffer="<< old_arr->buffer<<std::endl;
         auto new_arr=new atomic_array(new_capacity);
-        array.store(new_arr, std::memory_order_relaxed);
+        std::cout<<">>> old_arr="<<old_arr<<", size="<<old_arr->capacity<<", buffer="<< old_arr->buffer<<std::endl;
         for(uint64_t i=top.load(std::memory_order_relaxed);i<bottom.load(std::memory_order_relaxed);i++)  
         {
-            auto x = std::atomic_load_explicit(&old_arr->buffer[i%old_arr->capacity], std::memory_order_relaxed);
+            auto x = std::atomic_load_explicit(&old_arr->at(i), std::memory_order_relaxed);
             std::cout<<">>> growing x="<<x<<std::endl;
-            std::atomic_store_explicit(&new_arr->buffer[i%new_capacity], x, std::memory_order_relaxed);
+            std::atomic_store_explicit(&new_arr->at(i), x, std::memory_order_relaxed);
         }
+        array.store(new_arr, std::memory_order_relaxed);
         std::cout<<"after grow\n";
         print();
     }
@@ -104,7 +112,7 @@ public:
         auto t=top.load(std::memory_order_relaxed);
         std::shared_ptr<T> x;
         if (t <= b) { /* Non-empty queue. */
-            x = std::atomic_load_explicit(&a->buffer[b % a->capacity], std::memory_order_relaxed);
+            x = std::atomic_load_explicit(&a->at(b), std::memory_order_relaxed);
             if (t == b) { /* Single last element in queue. */
                 if(!top.compare_exchange_strong(t,t+1,std::memory_order_seq_cst, std::memory_order_relaxed)){
                     std::cout<<"take race failed\n";
@@ -127,7 +135,7 @@ public:
             grow();
             a = array.load(std::memory_order_relaxed);
         }
-        std::atomic_store_explicit(&a->buffer[b % a->capacity], x, std::memory_order_relaxed);
+        std::atomic_store_explicit(&a->at(b), x, std::memory_order_relaxed);
         std::atomic_thread_fence(std::memory_order_release);
         bottom.store(b+1, std::memory_order_relaxed);
     }
@@ -139,7 +147,7 @@ public:
         std::shared_ptr<T> x = nullptr;
         if (t < b) { 
             auto a = array.load(std::memory_order_consume);  
-            x = std::atomic_load_explicit(&a->buffer[t % a->capacity], std::memory_order_relaxed);
+            x = std::atomic_load_explicit(&a->at(t), std::memory_order_relaxed);
             std::cout<<"x value="<<x<<std::endl;
             if (!top.compare_exchange_strong(t, t + 1, std::memory_order_seq_cst, std::memory_order_relaxed)){
                 std::cout<<"steal race failed\n";
