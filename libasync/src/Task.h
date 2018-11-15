@@ -26,6 +26,7 @@
 #pragma once
 
 #include "Common.h"
+#include "Runnable.h"
 
 namespace wjp {
 
@@ -36,6 +37,6 @@ namespace wjp {
 		virtual bool is_finished() = 0;
 		virtual void wait() = 0;
 		virtual void wait(std::chrono::milliseconds timeout) = 0;
-		virtual ~task() {}
+		virtual ~Task() {}
 	};
 }

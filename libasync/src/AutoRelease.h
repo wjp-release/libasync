@@ -42,14 +42,14 @@ private:
 template <typename T>
 class AutoRelease{
 public:
-    AutoRelease(T*arr, std::functional<void(T*)> deleter):arr(arr), deleter(deleter){}
+    AutoRelease(T*arr, std::function<void(T*)> deleter):arr(arr), deleter(deleter){}
     ~AutoRelease(){
         if(deleter==nullptr) delete arr;
         else deleter(arr);
     }
 private:
     T* arr;
-    std::functional<void(T*)> deleter;
+    std::function<void(T*)> deleter;
 };
 
 

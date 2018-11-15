@@ -57,42 +57,42 @@ include src/CMakeFiles/async.dir/progress.make
 # Include the compile flags for this target's objects.
 include src/CMakeFiles/async.dir/flags.make
 
-src/CMakeFiles/async.dir/workshare_pool.cc.o: src/CMakeFiles/async.dir/flags.make
-src/CMakeFiles/async.dir/workshare_pool.cc.o: ../src/workshare_pool.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/wjp/Desktop/workspace/libasync/libasync/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object src/CMakeFiles/async.dir/workshare_pool.cc.o"
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/async.dir/workshare_pool.cc.o -c /Users/wjp/Desktop/workspace/libasync/libasync/src/workshare_pool.cc
+src/CMakeFiles/async.dir/FixedPool.cc.o: src/CMakeFiles/async.dir/flags.make
+src/CMakeFiles/async.dir/FixedPool.cc.o: ../src/FixedPool.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/wjp/Desktop/workspace/libasync/libasync/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object src/CMakeFiles/async.dir/FixedPool.cc.o"
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/async.dir/FixedPool.cc.o -c /Users/wjp/Desktop/workspace/libasync/libasync/src/FixedPool.cc
 
-src/CMakeFiles/async.dir/workshare_pool.cc.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/async.dir/workshare_pool.cc.i"
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/wjp/Desktop/workspace/libasync/libasync/src/workshare_pool.cc > CMakeFiles/async.dir/workshare_pool.cc.i
+src/CMakeFiles/async.dir/FixedPool.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/async.dir/FixedPool.cc.i"
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/wjp/Desktop/workspace/libasync/libasync/src/FixedPool.cc > CMakeFiles/async.dir/FixedPool.cc.i
 
-src/CMakeFiles/async.dir/workshare_pool.cc.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/async.dir/workshare_pool.cc.s"
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/wjp/Desktop/workspace/libasync/libasync/src/workshare_pool.cc -o CMakeFiles/async.dir/workshare_pool.cc.s
+src/CMakeFiles/async.dir/FixedPool.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/async.dir/FixedPool.cc.s"
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/wjp/Desktop/workspace/libasync/libasync/src/FixedPool.cc -o CMakeFiles/async.dir/FixedPool.cc.s
 
-src/CMakeFiles/async.dir/worksteal_pool.cc.o: src/CMakeFiles/async.dir/flags.make
-src/CMakeFiles/async.dir/worksteal_pool.cc.o: ../src/worksteal_pool.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/wjp/Desktop/workspace/libasync/libasync/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object src/CMakeFiles/async.dir/worksteal_pool.cc.o"
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/async.dir/worksteal_pool.cc.o -c /Users/wjp/Desktop/workspace/libasync/libasync/src/worksteal_pool.cc
+src/CMakeFiles/async.dir/SpawnSyncPool.cc.o: src/CMakeFiles/async.dir/flags.make
+src/CMakeFiles/async.dir/SpawnSyncPool.cc.o: ../src/SpawnSyncPool.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/wjp/Desktop/workspace/libasync/libasync/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object src/CMakeFiles/async.dir/SpawnSyncPool.cc.o"
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/async.dir/SpawnSyncPool.cc.o -c /Users/wjp/Desktop/workspace/libasync/libasync/src/SpawnSyncPool.cc
 
-src/CMakeFiles/async.dir/worksteal_pool.cc.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/async.dir/worksteal_pool.cc.i"
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/wjp/Desktop/workspace/libasync/libasync/src/worksteal_pool.cc > CMakeFiles/async.dir/worksteal_pool.cc.i
+src/CMakeFiles/async.dir/SpawnSyncPool.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/async.dir/SpawnSyncPool.cc.i"
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/wjp/Desktop/workspace/libasync/libasync/src/SpawnSyncPool.cc > CMakeFiles/async.dir/SpawnSyncPool.cc.i
 
-src/CMakeFiles/async.dir/worksteal_pool.cc.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/async.dir/worksteal_pool.cc.s"
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/wjp/Desktop/workspace/libasync/libasync/src/worksteal_pool.cc -o CMakeFiles/async.dir/worksteal_pool.cc.s
+src/CMakeFiles/async.dir/SpawnSyncPool.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/async.dir/SpawnSyncPool.cc.s"
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build/src && /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/wjp/Desktop/workspace/libasync/libasync/src/SpawnSyncPool.cc -o CMakeFiles/async.dir/SpawnSyncPool.cc.s
 
 # Object files for target async
 async_OBJECTS = \
-"CMakeFiles/async.dir/workshare_pool.cc.o" \
-"CMakeFiles/async.dir/worksteal_pool.cc.o"
+"CMakeFiles/async.dir/FixedPool.cc.o" \
+"CMakeFiles/async.dir/SpawnSyncPool.cc.o"
 
 # External object files for target async
 async_EXTERNAL_OBJECTS =
 
-src/libasync.a: src/CMakeFiles/async.dir/workshare_pool.cc.o
-src/libasync.a: src/CMakeFiles/async.dir/worksteal_pool.cc.o
+src/libasync.a: src/CMakeFiles/async.dir/FixedPool.cc.o
+src/libasync.a: src/CMakeFiles/async.dir/SpawnSyncPool.cc.o
 src/libasync.a: src/CMakeFiles/async.dir/build.make
 src/libasync.a: src/CMakeFiles/async.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/wjp/Desktop/workspace/libasync/libasync/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX static library libasync.a"

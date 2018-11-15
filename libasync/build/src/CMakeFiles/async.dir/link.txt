@@ -1,2 +1,2 @@
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ar qc libasync.a  CMakeFiles/async.dir/workshare_pool.cc.o CMakeFiles/async.dir/worksteal_pool.cc.o
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ar qc libasync.a  CMakeFiles/async.dir/FixedPool.cc.o CMakeFiles/async.dir/SpawnSyncPool.cc.o
 /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib libasync.a

@@ -1,7 +1,6 @@
 #include "gtest/gtest.h"
-
-using namespace eventual;
-// testcase: test_todo
+#include "Common.h"
+using namespace wjp;
 class test_todo : public ::testing::Test {
 protected:
 	test_todo() {
@@ -17,7 +16,6 @@ protected:
 	virtual void TearDown() {
 
 	}
-	chaselev_deque q;
 };
 
 

@@ -122,7 +122,7 @@ protected:
     void                                grow(){
         auto old_arr = array.load(std::memory_order_relaxed);
         uint64_t new_capacity=old_arr->capacity<<1;
-        AutoDelete delguard{old_arr}; //must declare variable name here, otherwise old_arr would be destroyed early
+        AutoDelete<SharedPointerArray> delguard{old_arr}; //must declare variable name here, otherwise old_arr would be destroyed early
         auto new_arr=new SharedPointerArray(new_capacity);
         for(uint64_t i=top.load(std::memory_order_relaxed);i<bottom.load(std::memory_order_relaxed);i++)  
         {

@@ -33,7 +33,7 @@ namespace wjp {
 	class Runnable {
 	public:
 		virtual void run() = 0;
-		virtual ~runnable() {}
+		virtual ~Runnable() {}
 	};
 
 }

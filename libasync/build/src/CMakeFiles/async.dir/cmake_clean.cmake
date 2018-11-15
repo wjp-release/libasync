@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/async.dir/workshare_pool.cc.o"
-  "CMakeFiles/async.dir/worksteal_pool.cc.o"
+  "CMakeFiles/async.dir/FixedPool.cc.o"
+  "CMakeFiles/async.dir/SpawnSyncPool.cc.o"
   "libasync.pdb"
   "libasync.a"
 )

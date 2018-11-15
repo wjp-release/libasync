@@ -26,6 +26,7 @@
 #pragma once
 
 #include "Common.h"
+#include "ThreadPool.h"
 
 namespace wjp {
 

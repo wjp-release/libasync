@@ -78,6 +78,17 @@ edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
 
+# Special rule for the target test
+test:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
+	/opt/local/bin/ctest --force-new-ctest-process $(ARGS)
+.PHONY : test
+
+# Special rule for the target test
+test/fast: test
+
+.PHONY : test/fast
+
 # The main all target
 all: cmake_check_build_system
 	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(CMAKE_COMMAND) -E cmake_progress_start /Users/wjp/Desktop/workspace/libasync/libasync/build/CMakeFiles /Users/wjp/Desktop/workspace/libasync/libasync/build/src/CMakeFiles/progress.marks
@@ -125,59 +136,59 @@ async/fast:
 	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f src/CMakeFiles/async.dir/build.make src/CMakeFiles/async.dir/build
 .PHONY : async/fast
 
-workshare_pool.o: workshare_pool.cc.o
+FixedPool.o: FixedPool.cc.o
 
-.PHONY : workshare_pool.o
-
-# target to build an object file
-workshare_pool.cc.o:
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f src/CMakeFiles/async.dir/build.make src/CMakeFiles/async.dir/workshare_pool.cc.o
-.PHONY : workshare_pool.cc.o
-
-workshare_pool.i: workshare_pool.cc.i
-
-.PHONY : workshare_pool.i
-
-# target to preprocess a source file
-workshare_pool.cc.i:
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f src/CMakeFiles/async.dir/build.make src/CMakeFiles/async.dir/workshare_pool.cc.i
-.PHONY : workshare_pool.cc.i
-
-workshare_pool.s: workshare_pool.cc.s
-
-.PHONY : workshare_pool.s
-
-# target to generate assembly for a file
-workshare_pool.cc.s:
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f src/CMakeFiles/async.dir/build.make src/CMakeFiles/async.dir/workshare_pool.cc.s
-.PHONY : workshare_pool.cc.s
-
-worksteal_pool.o: worksteal_pool.cc.o
-
-.PHONY : worksteal_pool.o
+.PHONY : FixedPool.o
 
 # target to build an object file
-worksteal_pool.cc.o:
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f src/CMakeFiles/async.dir/build.make src/CMakeFiles/async.dir/worksteal_pool.cc.o
-.PHONY : worksteal_pool.cc.o
+FixedPool.cc.o:
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f src/CMakeFiles/async.dir/build.make src/CMakeFiles/async.dir/FixedPool.cc.o
+.PHONY : FixedPool.cc.o
 
-worksteal_pool.i: worksteal_pool.cc.i
+FixedPool.i: FixedPool.cc.i
 
-.PHONY : worksteal_pool.i
+.PHONY : FixedPool.i
 
 # target to preprocess a source file
-worksteal_pool.cc.i:
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f src/CMakeFiles/async.dir/build.make src/CMakeFiles/async.dir/worksteal_pool.cc.i
-.PHONY : worksteal_pool.cc.i
+FixedPool.cc.i:
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f src/CMakeFiles/async.dir/build.make src/CMakeFiles/async.dir/FixedPool.cc.i
+.PHONY : FixedPool.cc.i
 
-worksteal_pool.s: worksteal_pool.cc.s
+FixedPool.s: FixedPool.cc.s
 
-.PHONY : worksteal_pool.s
+.PHONY : FixedPool.s
 
 # target to generate assembly for a file
-worksteal_pool.cc.s:
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f src/CMakeFiles/async.dir/build.make src/CMakeFiles/async.dir/worksteal_pool.cc.s
-.PHONY : worksteal_pool.cc.s
+FixedPool.cc.s:
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f src/CMakeFiles/async.dir/build.make src/CMakeFiles/async.dir/FixedPool.cc.s
+.PHONY : FixedPool.cc.s
+
+SpawnSyncPool.o: SpawnSyncPool.cc.o
+
+.PHONY : SpawnSyncPool.o
+
+# target to build an object file
+SpawnSyncPool.cc.o:
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f src/CMakeFiles/async.dir/build.make src/CMakeFiles/async.dir/SpawnSyncPool.cc.o
+.PHONY : SpawnSyncPool.cc.o
+
+SpawnSyncPool.i: SpawnSyncPool.cc.i
+
+.PHONY : SpawnSyncPool.i
+
+# target to preprocess a source file
+SpawnSyncPool.cc.i:
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f src/CMakeFiles/async.dir/build.make src/CMakeFiles/async.dir/SpawnSyncPool.cc.i
+.PHONY : SpawnSyncPool.cc.i
+
+SpawnSyncPool.s: SpawnSyncPool.cc.s
+
+.PHONY : SpawnSyncPool.s
+
+# target to generate assembly for a file
+SpawnSyncPool.cc.s:
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f src/CMakeFiles/async.dir/build.make src/CMakeFiles/async.dir/SpawnSyncPool.cc.s
+.PHONY : SpawnSyncPool.cc.s
 
 # Help Target
 help:
@@ -187,13 +198,14 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
+	@echo "... test"
 	@echo "... async"
-	@echo "... workshare_pool.o"
-	@echo "... workshare_pool.i"
-	@echo "... workshare_pool.s"
-	@echo "... worksteal_pool.o"
-	@echo "... worksteal_pool.i"
-	@echo "... worksteal_pool.s"
+	@echo "... FixedPool.o"
+	@echo "... FixedPool.i"
+	@echo "... FixedPool.s"
+	@echo "... SpawnSyncPool.o"
+	@echo "... SpawnSyncPool.i"
+	@echo "... SpawnSyncPool.s"
 .PHONY : help
 
 

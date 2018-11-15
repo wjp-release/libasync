@@ -120,57 +120,153 @@ clean: src/CMakeFiles/async.dir/clean
 .PHONY : clean
 
 #=============================================================================
-# Directory level rules for directory samples
+# Directory level rules for directory googletest
 
 # Convenience name for "all" pass in the directory.
-samples/all: samples/CMakeFiles/sample.dir/all
+googletest/all: googletest/CMakeFiles/gtest_main.dir/all
+googletest/all: googletest/CMakeFiles/gtest.dir/all
 
-.PHONY : samples/all
+.PHONY : googletest/all
 
 # Convenience name for "clean" pass in the directory.
-samples/clean: samples/CMakeFiles/sample.dir/clean
+googletest/clean: googletest/CMakeFiles/gtest_main.dir/clean
+googletest/clean: googletest/CMakeFiles/gtest.dir/clean
 
-.PHONY : samples/clean
+.PHONY : googletest/clean
 
 # Convenience name for "preinstall" pass in the directory.
-samples/preinstall:
+googletest/preinstall:
 
-.PHONY : samples/preinstall
+.PHONY : googletest/preinstall
 
 #=============================================================================
-# Target rules for target samples/CMakeFiles/sample.dir
+# Target rules for target googletest/CMakeFiles/gtest_main.dir
 
 # All Build rule for target.
-samples/CMakeFiles/sample.dir/all: src/CMakeFiles/async.dir/all
-	$(MAKE) -f samples/CMakeFiles/sample.dir/build.make samples/CMakeFiles/sample.dir/depend
-	$(MAKE) -f samples/CMakeFiles/sample.dir/build.make samples/CMakeFiles/sample.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wjp/Desktop/workspace/libasync/libasync/build/CMakeFiles --progress-num=4,5 "Built target sample"
-.PHONY : samples/CMakeFiles/sample.dir/all
+googletest/CMakeFiles/gtest_main.dir/all: googletest/CMakeFiles/gtest.dir/all
+	$(MAKE) -f googletest/CMakeFiles/gtest_main.dir/build.make googletest/CMakeFiles/gtest_main.dir/depend
+	$(MAKE) -f googletest/CMakeFiles/gtest_main.dir/build.make googletest/CMakeFiles/gtest_main.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wjp/Desktop/workspace/libasync/libasync/build/CMakeFiles --progress-num=6,7 "Built target gtest_main"
+.PHONY : googletest/CMakeFiles/gtest_main.dir/all
 
 # Include target in all.
-all: samples/CMakeFiles/sample.dir/all
+all: googletest/CMakeFiles/gtest_main.dir/all
 
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-samples/CMakeFiles/sample.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wjp/Desktop/workspace/libasync/libasync/build/CMakeFiles 5
-	$(MAKE) -f CMakeFiles/Makefile2 samples/CMakeFiles/sample.dir/all
+googletest/CMakeFiles/gtest_main.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wjp/Desktop/workspace/libasync/libasync/build/CMakeFiles 4
+	$(MAKE) -f CMakeFiles/Makefile2 googletest/CMakeFiles/gtest_main.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wjp/Desktop/workspace/libasync/libasync/build/CMakeFiles 0
-.PHONY : samples/CMakeFiles/sample.dir/rule
+.PHONY : googletest/CMakeFiles/gtest_main.dir/rule
 
 # Convenience name for target.
-sample: samples/CMakeFiles/sample.dir/rule
+gtest_main: googletest/CMakeFiles/gtest_main.dir/rule
 
-.PHONY : sample
-
-# clean rule for target.
-samples/CMakeFiles/sample.dir/clean:
-	$(MAKE) -f samples/CMakeFiles/sample.dir/build.make samples/CMakeFiles/sample.dir/clean
-.PHONY : samples/CMakeFiles/sample.dir/clean
+.PHONY : gtest_main
 
 # clean rule for target.
-clean: samples/CMakeFiles/sample.dir/clean
+googletest/CMakeFiles/gtest_main.dir/clean:
+	$(MAKE) -f googletest/CMakeFiles/gtest_main.dir/build.make googletest/CMakeFiles/gtest_main.dir/clean
+.PHONY : googletest/CMakeFiles/gtest_main.dir/clean
+
+# clean rule for target.
+clean: googletest/CMakeFiles/gtest_main.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target googletest/CMakeFiles/gtest.dir
+
+# All Build rule for target.
+googletest/CMakeFiles/gtest.dir/all:
+	$(MAKE) -f googletest/CMakeFiles/gtest.dir/build.make googletest/CMakeFiles/gtest.dir/depend
+	$(MAKE) -f googletest/CMakeFiles/gtest.dir/build.make googletest/CMakeFiles/gtest.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wjp/Desktop/workspace/libasync/libasync/build/CMakeFiles --progress-num=4,5 "Built target gtest"
+.PHONY : googletest/CMakeFiles/gtest.dir/all
+
+# Include target in all.
+all: googletest/CMakeFiles/gtest.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+googletest/CMakeFiles/gtest.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wjp/Desktop/workspace/libasync/libasync/build/CMakeFiles 2
+	$(MAKE) -f CMakeFiles/Makefile2 googletest/CMakeFiles/gtest.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wjp/Desktop/workspace/libasync/libasync/build/CMakeFiles 0
+.PHONY : googletest/CMakeFiles/gtest.dir/rule
+
+# Convenience name for target.
+gtest: googletest/CMakeFiles/gtest.dir/rule
+
+.PHONY : gtest
+
+# clean rule for target.
+googletest/CMakeFiles/gtest.dir/clean:
+	$(MAKE) -f googletest/CMakeFiles/gtest.dir/build.make googletest/CMakeFiles/gtest.dir/clean
+.PHONY : googletest/CMakeFiles/gtest.dir/clean
+
+# clean rule for target.
+clean: googletest/CMakeFiles/gtest.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Directory level rules for directory tests
+
+# Convenience name for "all" pass in the directory.
+tests/all: tests/CMakeFiles/tests.dir/all
+
+.PHONY : tests/all
+
+# Convenience name for "clean" pass in the directory.
+tests/clean: tests/CMakeFiles/tests.dir/clean
+
+.PHONY : tests/clean
+
+# Convenience name for "preinstall" pass in the directory.
+tests/preinstall:
+
+.PHONY : tests/preinstall
+
+#=============================================================================
+# Target rules for target tests/CMakeFiles/tests.dir
+
+# All Build rule for target.
+tests/CMakeFiles/tests.dir/all: src/CMakeFiles/async.dir/all
+tests/CMakeFiles/tests.dir/all: googletest/CMakeFiles/gtest_main.dir/all
+tests/CMakeFiles/tests.dir/all: googletest/CMakeFiles/gtest.dir/all
+	$(MAKE) -f tests/CMakeFiles/tests.dir/build.make tests/CMakeFiles/tests.dir/depend
+	$(MAKE) -f tests/CMakeFiles/tests.dir/build.make tests/CMakeFiles/tests.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wjp/Desktop/workspace/libasync/libasync/build/CMakeFiles --progress-num=8,9,10 "Built target tests"
+.PHONY : tests/CMakeFiles/tests.dir/all
+
+# Include target in all.
+all: tests/CMakeFiles/tests.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+tests/CMakeFiles/tests.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wjp/Desktop/workspace/libasync/libasync/build/CMakeFiles 10
+	$(MAKE) -f CMakeFiles/Makefile2 tests/CMakeFiles/tests.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wjp/Desktop/workspace/libasync/libasync/build/CMakeFiles 0
+.PHONY : tests/CMakeFiles/tests.dir/rule
+
+# Convenience name for target.
+tests: tests/CMakeFiles/tests.dir/rule
+
+.PHONY : tests
+
+# clean rule for target.
+tests/CMakeFiles/tests.dir/clean:
+	$(MAKE) -f tests/CMakeFiles/tests.dir/build.make tests/CMakeFiles/tests.dir/clean
+.PHONY : tests/CMakeFiles/tests.dir/clean
+
+# clean rule for target.
+clean: tests/CMakeFiles/tests.dir/clean
 
 .PHONY : clean
 
