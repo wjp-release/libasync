@@ -25,12 +25,13 @@
 
 #pragma once
 
-#include "interfaces.h"
+#include "Common.h"
+#include "Task.h"
 
 namespace wjp {
 
-	//get_value, set_value, wait
-	class future : public task {
+	//std::any get()
+	class Future : public Task {
 
 	};
 }

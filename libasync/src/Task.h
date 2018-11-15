@@ -25,12 +25,17 @@
 
 #pragma once
 
-// see github.com/wjp-release/pact
+#include "Common.h"
 
 namespace wjp {
 
-	class Pact {
-
-
+	class Task : public Runnable {
+    public:
+		virtual void cancel(bool allow_interrupt) = 0;
+		virtual bool is_canceled() = 0;
+		virtual bool is_finished() = 0;
+		virtual void wait() = 0;
+		virtual void wait(std::chrono::milliseconds timeout) = 0;
+		virtual ~task() {}
 	};
 }

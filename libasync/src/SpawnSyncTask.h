@@ -25,45 +25,13 @@
 
 #pragma once
 
-#include <memory>
-#include <chrono>
-#include <list>
+#include "Common.h"
+#include "Future.h"
 
 namespace wjp {
 
-	class runnable {
-	public:
-		virtual void run() = 0;
-		virtual ~runnable() {}
+	class SpawnSyncTask : public Future {
+		
 	};
-
-	class task : public runnable {
-	public:
-		virtual void cancel(bool allow_interrupt) = 0;
-		virtual bool is_canceled() = 0;
-		virtual bool is_finished() = 0;
-		virtual void wait() = 0;
-		virtual void wait(std::chrono::milliseconds timeout) = 0;
-		virtual ~task() {}
-	};
-
-	class provider {
-	public:
-		virtual ~provider() {}
-		// stop accepting new tasks, but process queued tasks
-		virtual void shutdown() = 0;
-		// shutdown, interrupt executing tasks, clear queued tasks, return them 
-		virtual std::shared_ptr<runnable> stop() = 0;
-		virtual bool is_shutdown() = 0;
-		virtual bool is_terminiated() = 0;
-		virtual bool wait_till_terminated(std::chrono::milliseconds timeout) = 0;
-		virtual std::shared_ptr<task> run(std::shared_ptr<runnable>) = 0;  
-		virtual std::list<std::shared_ptr<task>> all(std::list<std::shared_ptr<runnable>>) = 0;
-		// the returned task will wait for the first runnable to finish successfully
-		virtual std::shared_ptr<task> any(std::list<std::shared_ptr<runnable>>) = 0;
-
-	};
-
-
-
 }
+

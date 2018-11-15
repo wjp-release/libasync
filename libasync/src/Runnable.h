@@ -25,12 +25,15 @@
 
 #pragma once
 
-// see github.com/wjp-release/pact
+#include "Common.h"
 
 namespace wjp {
 
-	class Pact {
-
-
+	// Any class that implements Runnable can be submitted to a ThreadPool. 
+	class Runnable {
+	public:
+		virtual void run() = 0;
+		virtual ~runnable() {}
 	};
+
 }

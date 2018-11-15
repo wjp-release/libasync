@@ -25,12 +25,14 @@
 
 #pragma once
 
-// see github.com/wjp-release/pact
+#include "Common.h"
+#include "SpawnSyncTask.h"
 
 namespace wjp {
 
-	class Pact {
-
-
+	// A CountDown is a task that the user does not intend to wait for. The parent task will block until count decreased to 0. 
+	class CountDown : public SpawnSyncTask {
+		
 	};
 }
+

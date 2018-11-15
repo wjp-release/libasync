@@ -25,20 +25,23 @@
 
 #pragma once
 
-#include <functional>
-#include "interfaces.h"
+#include "Common.h"
 
 namespace wjp {
 
-	static inline int duh()
-	{
-		return 2;
-	}
-
-	class worksteal_pool : public provider {
-
-
+	class ThreadPool {
+	public:
+		virtual ~ThreadPool() {}
+		// stop accepting new tasks, but process queued tasks
+		virtual void shutdown() = 0;
+		// shutdown, interrupt executing tasks, clear queued tasks, return them 
+		virtual std::shared_ptr<runnable> stop() = 0;
+		virtual bool is_shutdown() = 0;
+		virtual bool is_terminiated() = 0;
+		virtual bool wait_till_terminated(std::chrono::milliseconds timeout) = 0;
+		virtual std::shared_ptr<task> run(std::shared_ptr<runnable>) = 0;  
+		virtual std::list<std::shared_ptr<task>> all(std::list<std::shared_ptr<runnable>>) = 0;
+		// the returned task will wait for the first runnable to finish successfully
+		virtual std::shared_ptr<task> any(std::list<std::shared_ptr<runnable>>) = 0;
 	};
-
 }
-

@@ -25,12 +25,14 @@
 
 #pragma once
 
-// see github.com/wjp-release/pact
+#include "Common.h"
 
 namespace wjp {
 
-	class Pact {
+	class SpawnSyncPool : public ThreadPool {
 
 
 	};
+
 }
+

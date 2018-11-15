@@ -25,12 +25,13 @@
 
 #pragma once
 
-#include "interfaces.h"
+#include "Common.h"
+#include "SpawnSyncTask.h"
 
 namespace wjp {
 
 	// promise.then().then() 
-	class promise : public task {
+	class Promise : public SpawnSyncTask {
 
 	};
 }
