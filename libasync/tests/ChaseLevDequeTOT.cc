@@ -1,5 +1,7 @@
 #include "gtest/gtest.h"
 #include "ChaseLevDeque.h"
+#include <thread>
+#include <set>
 using namespace wjp;
 
 struct A{
@@ -13,11 +15,13 @@ protected:
 	virtual ~ChaseLevDequeTOT() {}
 	virtual void SetUp() {
 		q=new ChaseLevDeque<A>(3);
+		count=0;
 	}
 	virtual void TearDown() {
 		delete q;
 	}
 	ChaseLevDeque<A>* 		q;
+	std::atomic<int> 		count;  // how many are stolen
 };
 
 TEST_F(ChaseLevDequeTOT, SingleThreadSituationA) {
@@ -98,8 +102,26 @@ TEST_F(ChaseLevDequeTOT, SingleThreadSituationInt) {
 	EXPECT_EQ(*x, 4);
 }
 
-TEST_F(ChaseLevDequeTOT, MultiThreadSituationA) {
-	int i = 1;
-	EXPECT_EQ(1, i);
+TEST_F(ChaseLevDequeTOT, StealerRace) {
+	for(int i=1;i<=100;i++){
+		q->push(std::make_shared<A>(std::to_string(i)));
+	}	
+	std::set<int> set;
+	for(int i=0;i<10;i++){
+		std::thread([this,&set]{
+			int value=0;
+			while(true){
+				auto x=q->steal();
+				if(x==nullptr) break;
+				count++;
+				int tmp=std::stoi(x->x);
+				set.insert(tmp);
+				std::cout<<x->x<<",";
+				EXPECT_TRUE(tmp>value && tmp<=100 &&tmp>0);
+			}
+		}).detach();
+	}
+	EXPECT_EQ(count, 100);
+	EXPECT_EQ(set.size(), 100);
 }
 

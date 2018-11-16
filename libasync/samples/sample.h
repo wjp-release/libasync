@@ -25,4 +25,41 @@
 
 #pragma once
 
-#include "worksteal_pool.h"
+namespace wjp{
+
+    static inline void deque_sample(){
+        // T must be
+        struct A{
+            A(const std::string& str):x(str){}
+            std::string x;
+        };
+
+        ChaseLevDeque<A>* q=new ChaseLevDeque<A>(4);  
+        for(int i=1;i<=100;i++){
+            q->push(std::make_shared<A>(std::to_string(i)));
+            std::cout<<">>> ";
+            q->print();
+        }	
+        delete q;
+        // std::set<int> set;
+        // int count=0;
+        // for(int i=0;i<10;i++){
+        //     std::thread([q, &count,&set]{
+        //         int value=0;
+        //         while(true){
+        //             auto x=q->steal();
+        //             if(x==nullptr) break;
+        //             count++;
+        //             int tmp=std::stoi(x->x);
+        //             set.insert(tmp);
+        //             std::cout<<x->x<<",";
+        //         }
+        //     }).join();
+        // }
+        // std::cout<<"count="<<count<<", set size="<<set.size()<<std::endl;
+    
+    
+    }
+
+
+}

@@ -78,27 +78,16 @@ edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
 
-# Special rule for the target test
-test:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
-	/opt/local/bin/ctest --force-new-ctest-process $(ARGS)
-.PHONY : test
-
-# Special rule for the target test
-test/fast: test
-
-.PHONY : test/fast
-
 # The main all target
 all: cmake_check_build_system
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(CMAKE_COMMAND) -E cmake_progress_start /Users/wjp/Desktop/workspace/libasync/libasync/build/CMakeFiles /Users/wjp/Desktop/workspace/libasync/libasync/build/tests/CMakeFiles/progress.marks
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f CMakeFiles/Makefile2 tests/all
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(CMAKE_COMMAND) -E cmake_progress_start /Users/wjp/Desktop/workspace/libasync/libasync/build/CMakeFiles /Users/wjp/Desktop/workspace/libasync/libasync/build/samples/CMakeFiles/progress.marks
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f CMakeFiles/Makefile2 samples/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wjp/Desktop/workspace/libasync/libasync/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f CMakeFiles/Makefile2 tests/clean
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f CMakeFiles/Makefile2 samples/clean
 .PHONY : clean
 
 # The main clean target
@@ -108,12 +97,12 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f CMakeFiles/Makefile2 tests/preinstall
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f CMakeFiles/Makefile2 samples/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f CMakeFiles/Makefile2 tests/preinstall
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f CMakeFiles/Makefile2 samples/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
@@ -122,73 +111,46 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-tests/CMakeFiles/tests.dir/rule:
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f CMakeFiles/Makefile2 tests/CMakeFiles/tests.dir/rule
-.PHONY : tests/CMakeFiles/tests.dir/rule
+samples/CMakeFiles/sample.dir/rule:
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f CMakeFiles/Makefile2 samples/CMakeFiles/sample.dir/rule
+.PHONY : samples/CMakeFiles/sample.dir/rule
 
 # Convenience name for target.
-tests: tests/CMakeFiles/tests.dir/rule
+sample: samples/CMakeFiles/sample.dir/rule
 
-.PHONY : tests
+.PHONY : sample
 
 # fast build rule for target.
-tests/fast:
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f tests/CMakeFiles/tests.dir/build.make tests/CMakeFiles/tests.dir/build
-.PHONY : tests/fast
+sample/fast:
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f samples/CMakeFiles/sample.dir/build.make samples/CMakeFiles/sample.dir/build
+.PHONY : sample/fast
 
-ChaseLevDequeTOT.o: ChaseLevDequeTOT.cc.o
+sample.o: sample.cc.o
 
-.PHONY : ChaseLevDequeTOT.o
-
-# target to build an object file
-ChaseLevDequeTOT.cc.o:
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f tests/CMakeFiles/tests.dir/build.make tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.o
-.PHONY : ChaseLevDequeTOT.cc.o
-
-ChaseLevDequeTOT.i: ChaseLevDequeTOT.cc.i
-
-.PHONY : ChaseLevDequeTOT.i
-
-# target to preprocess a source file
-ChaseLevDequeTOT.cc.i:
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f tests/CMakeFiles/tests.dir/build.make tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.i
-.PHONY : ChaseLevDequeTOT.cc.i
-
-ChaseLevDequeTOT.s: ChaseLevDequeTOT.cc.s
-
-.PHONY : ChaseLevDequeTOT.s
-
-# target to generate assembly for a file
-ChaseLevDequeTOT.cc.s:
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f tests/CMakeFiles/tests.dir/build.make tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.s
-.PHONY : ChaseLevDequeTOT.cc.s
-
-SystemIntegrationTOT.o: SystemIntegrationTOT.cc.o
-
-.PHONY : SystemIntegrationTOT.o
+.PHONY : sample.o
 
 # target to build an object file
-SystemIntegrationTOT.cc.o:
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f tests/CMakeFiles/tests.dir/build.make tests/CMakeFiles/tests.dir/SystemIntegrationTOT.cc.o
-.PHONY : SystemIntegrationTOT.cc.o
+sample.cc.o:
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f samples/CMakeFiles/sample.dir/build.make samples/CMakeFiles/sample.dir/sample.cc.o
+.PHONY : sample.cc.o
 
-SystemIntegrationTOT.i: SystemIntegrationTOT.cc.i
+sample.i: sample.cc.i
 
-.PHONY : SystemIntegrationTOT.i
+.PHONY : sample.i
 
 # target to preprocess a source file
-SystemIntegrationTOT.cc.i:
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f tests/CMakeFiles/tests.dir/build.make tests/CMakeFiles/tests.dir/SystemIntegrationTOT.cc.i
-.PHONY : SystemIntegrationTOT.cc.i
+sample.cc.i:
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f samples/CMakeFiles/sample.dir/build.make samples/CMakeFiles/sample.dir/sample.cc.i
+.PHONY : sample.cc.i
 
-SystemIntegrationTOT.s: SystemIntegrationTOT.cc.s
+sample.s: sample.cc.s
 
-.PHONY : SystemIntegrationTOT.s
+.PHONY : sample.s
 
 # target to generate assembly for a file
-SystemIntegrationTOT.cc.s:
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f tests/CMakeFiles/tests.dir/build.make tests/CMakeFiles/tests.dir/SystemIntegrationTOT.cc.s
-.PHONY : SystemIntegrationTOT.cc.s
+sample.cc.s:
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f samples/CMakeFiles/sample.dir/build.make samples/CMakeFiles/sample.dir/sample.cc.s
+.PHONY : sample.cc.s
 
 # Help Target
 help:
@@ -198,14 +160,10 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... test"
-	@echo "... tests"
-	@echo "... ChaseLevDequeTOT.o"
-	@echo "... ChaseLevDequeTOT.i"
-	@echo "... ChaseLevDequeTOT.s"
-	@echo "... SystemIntegrationTOT.o"
-	@echo "... SystemIntegrationTOT.i"
-	@echo "... SystemIntegrationTOT.s"
+	@echo "... sample"
+	@echo "... sample.o"
+	@echo "... sample.i"
+	@echo "... sample.s"
 .PHONY : help
 
 

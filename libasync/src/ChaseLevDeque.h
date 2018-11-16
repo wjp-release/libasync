@@ -30,6 +30,8 @@
 
 //#include <optional>
 
+// An C++ implementation of optimized version of Chase-Lev Work Stealing Deque.
+
 // see https://www.dre.vanderbilt.edu/~schmidt/PDF/work-stealing-dequeue.pdf
 // and https://www.di.ens.fr/~zappa/readings/ppopp13.pdf
 
@@ -41,16 +43,27 @@ template<typename T>
 class ChaseLevDeque
 {
 public:
-    // Initial capacity must be power of 2.
-    ChaseLevDeque(int log2capacity=13)  : array(new SharedPointerArray(1<<log2capacity)),
-                                top(1<<(log2capacity-1)), bottom(1<<(log2capacity-1))
+    // ChaseLevDeque takes log2(capacity) as argument to guarantee that its capacity is power of 2. 
+    ChaseLevDeque(int log2capacity=13)  : top(1<<(log2capacity-1)), bottom(1<<(log2capacity-1)),
+                                        array(new SharedPointerArray(1<<log2capacity))
     {}
-    // Note that shared_ptr supports atomic operations since C++11 until C++20.
     struct SharedPointerArray{
-        SharedPointerArray(uint64_t cap) : buffer(new std::shared_ptr<T>[1<<cap]), capacity(cap) {}
-        ~SharedPointerArray(){delete[]buffer;}
+        //Uses placement new to create shared_ptr in given buffer.
+        SharedPointerArray(uint64_t cap) :
+            buffer(reinterpret_cast<std::shared_ptr<T>*>(new char[sizeof(std::shared_ptr<T>)*cap])), 
+            capacity(cap) {
+            for(int i=0;i<capacity;i++){ 
+                new(reinterpret_cast<char*>(&buffer[i])) std::shared_ptr<T>{nullptr}; 
+            }
+        }
+        ~SharedPointerArray(){
+            for(int i=0;i<capacity;i++){
+                buffer[i].~shared_ptr(); // destruct placement newed objects explicitly
+            }
+            delete [] reinterpret_cast<char*>(buffer);
+        }
         std::shared_ptr<T>*     buffer;     // should be replaced by std::atomic<std::shared_ptr> in C++20
-        std::atomic<uint64_t>   capacity;   // power of 2, grow at rate of *2 each time, init: 2^13(8K), max: 2^26(64M)
+        std::atomic<uint64_t>   capacity;     // power of 2, grow at rate of *2 each time, init: 2^13(8K), max: 2^26(64M)
         std::shared_ptr<T>&     at(uint64_t index)
         {
             return buffer[index%capacity];
@@ -136,11 +149,5 @@ private:
     std::atomic<uint64_t>               bottom;
     std::atomic<SharedPointerArray*>    array;
 };
-
-
-
-
-
-
 
 }
