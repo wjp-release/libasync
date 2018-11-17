@@ -1,5 +1,7 @@
 #include "gtest/gtest.h"
 #include "Common.h"
+#include "Utils.h"
+
 using namespace wjp;
 class test_todo : public ::testing::Test {
 protected:

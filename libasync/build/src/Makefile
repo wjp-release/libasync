@@ -78,6 +78,17 @@ edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
 
+# Special rule for the target test
+test:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
+	/opt/local/bin/ctest --force-new-ctest-process $(ARGS)
+.PHONY : test
+
+# Special rule for the target test
+test/fast: test
+
+.PHONY : test/fast
+
 # The main all target
 all: cmake_check_build_system
 	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(CMAKE_COMMAND) -E cmake_progress_start /Users/wjp/Desktop/workspace/libasync/libasync/build/CMakeFiles /Users/wjp/Desktop/workspace/libasync/libasync/build/src/CMakeFiles/progress.marks
@@ -179,6 +190,33 @@ SpawnSyncPool.cc.s:
 	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f src/CMakeFiles/async.dir/build.make src/CMakeFiles/async.dir/SpawnSyncPool.cc.s
 .PHONY : SpawnSyncPool.cc.s
 
+Util.o: Util.cc.o
+
+.PHONY : Util.o
+
+# target to build an object file
+Util.cc.o:
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f src/CMakeFiles/async.dir/build.make src/CMakeFiles/async.dir/Util.cc.o
+.PHONY : Util.cc.o
+
+Util.i: Util.cc.i
+
+.PHONY : Util.i
+
+# target to preprocess a source file
+Util.cc.i:
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f src/CMakeFiles/async.dir/build.make src/CMakeFiles/async.dir/Util.cc.i
+.PHONY : Util.cc.i
+
+Util.s: Util.cc.s
+
+.PHONY : Util.s
+
+# target to generate assembly for a file
+Util.cc.s:
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f src/CMakeFiles/async.dir/build.make src/CMakeFiles/async.dir/Util.cc.s
+.PHONY : Util.cc.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -187,6 +225,7 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
+	@echo "... test"
 	@echo "... async"
 	@echo "... FixedPool.o"
 	@echo "... FixedPool.i"
@@ -194,6 +233,9 @@ help:
 	@echo "... SpawnSyncPool.o"
 	@echo "... SpawnSyncPool.i"
 	@echo "... SpawnSyncPool.s"
+	@echo "... Util.o"
+	@echo "... Util.i"
+	@echo "... Util.s"
 .PHONY : help
 
 

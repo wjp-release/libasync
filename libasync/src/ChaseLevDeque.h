@@ -64,13 +64,12 @@ public:
         }
         std::shared_ptr<T>*     buffer;     // should be replaced by std::atomic<std::shared_ptr> in C++20
         std::atomic<uint64_t>   capacity;     // power of 2, grow at rate of *2 each time, init: 2^13(8K), max: 2^26(64M)
-        std::shared_ptr<T>&     at(uint64_t index)
-        {
+        std::shared_ptr<T>&     at(uint64_t index){
             return buffer[index%capacity];
         }
     };
     // Shows some internal stats for debugging.
-    void print(){
+    void                                print(){
         auto arr = array.load(std::memory_order_relaxed);
         std::cout<<"size="<<arr->capacity.load()<<", top="<<top.load()<<", bottom="<<bottom.load()<<std::endl;
         std::cout<<"[top ... bottom]: ";

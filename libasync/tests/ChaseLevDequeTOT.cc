@@ -2,6 +2,9 @@
 #include "ChaseLevDeque.h"
 #include <thread>
 #include <set>
+#include <mutex>
+#include "Utils.h"
+
 using namespace wjp;
 
 struct A{
@@ -106,22 +109,31 @@ TEST_F(ChaseLevDequeTOT, StealerRace) {
 	for(int i=1;i<=100;i++){
 		q->push(std::make_shared<A>(std::to_string(i)));
 	}	
-	std::set<int> set;
+	std::vector<std::future<std::string>> tasks;
 	for(int i=0;i<10;i++){
-		std::thread([this,&set]{
+		tasks.emplace_back(std::async(std::launch::async, [this, i]{
 			int value=0;
-			while(true){
+			std::string res="thread"+std::to_string(i)+": ";
+			for(int k=0;k<100;k++){
 				auto x=q->steal();
-				if(x==nullptr) break;
+				if(x==nullptr){
+					sleep(randint<1000,3000>());
+					continue;
+				}
+				sleep(randint<3000,4000>());
 				count++;
 				int tmp=std::stoi(x->x);
-				set.insert(tmp);
-				std::cout<<x->x<<",";
+				res+=x->x+",";
 				EXPECT_TRUE(tmp>value && tmp<=100 &&tmp>0);
 			}
-		}).detach();
+			return res;
+		}));
 	}
+	for(int i=0;i<tasks.size();i++)
+    {
+        std::cout<<tasks[i].get()<<std::endl;
+    }
+
 	EXPECT_EQ(count, 100);
-	EXPECT_EQ(set.size(), 100);
 }
 

@@ -10,3 +10,5 @@ src/CMakeFiles/async.dir/SpawnSyncPool.cc.o: ../src/SpawnSyncPool.h
 src/CMakeFiles/async.dir/SpawnSyncPool.cc.o: ../src/Task.h
 src/CMakeFiles/async.dir/SpawnSyncPool.cc.o: ../src/ThreadPool.h
 
+src/CMakeFiles/async.dir/Util.cc.o: ../src/Util.cc
+

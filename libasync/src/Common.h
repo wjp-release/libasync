@@ -27,6 +27,9 @@
 
 // Every non-trivial header in libasync should include this file.
 
+#define WJP_VERSION 1
+#define WJP_DEBUG
+
 #include <cstdint>
 #include <atomic>
 #include <memory>
@@ -35,8 +38,13 @@
 #include <functional>
 #include <chrono>
 #include <list>
+#include <ctime>
+#include <ratio>
+#include <random>
+#include <thread>
+#include <mutex>
+#include <future>
 
 namespace wjp{
-
 
 }

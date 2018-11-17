@@ -1,0 +1,24 @@
+dist: trusty
+sudo: false
+language: cpp
+
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+      - llvm-toolchain-trusty-6.0
+    packages:
+      - g++-8
+      - clang-6.0
+
+before_install:
+  - pip install --user cpp-coveralls
+
+script:
+  - cd libasync
+  - CXX=/usr/bin/g++-8 CC=/usr/bin/gcc-8 cmake -test=ON .
+  - cmake --build . 
+  - ./tests/tests
+
+after_success:
+  - coveralls --root . -E ".*gtest.*" -E ".*CMakeFiles.*" 

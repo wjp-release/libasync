@@ -10,3 +10,5 @@ src/CMakeFiles/async.dir/SpawnSyncPool.cc.o
  /Users/wjp/Desktop/workspace/libasync/libasync/src/SpawnSyncPool.h
  /Users/wjp/Desktop/workspace/libasync/libasync/src/Task.h
  /Users/wjp/Desktop/workspace/libasync/libasync/src/ThreadPool.h
+src/CMakeFiles/async.dir/Util.cc.o
+ /Users/wjp/Desktop/workspace/libasync/libasync/src/Util.cc
