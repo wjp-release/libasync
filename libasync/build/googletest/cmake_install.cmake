@@ -1,4 +1,4 @@
-# Install script for directory: /Users/wjp/Desktop/workspace/libasync/libasync/samples
+# Install script for directory: /Users/wjp/Desktop/workspace/libasync/libasync/googletest
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

@@ -3,12 +3,14 @@
 
 src/CMakeFiles/async.dir/FixedPool.cc.o: ../src/FixedPool.cc
 
+src/CMakeFiles/async.dir/SpawnSyncPool.cc.o: .././src/interface/Cancellable.h
+src/CMakeFiles/async.dir/SpawnSyncPool.cc.o: .././src/interface/Runnable.h
+src/CMakeFiles/async.dir/SpawnSyncPool.cc.o: .././src/interface/Task.h
+src/CMakeFiles/async.dir/SpawnSyncPool.cc.o: .././src/interface/ThreadPool.h
+src/CMakeFiles/async.dir/SpawnSyncPool.cc.o: .././src/interface/Waitable.h
 src/CMakeFiles/async.dir/SpawnSyncPool.cc.o: ../src/Common.h
-src/CMakeFiles/async.dir/SpawnSyncPool.cc.o: ../src/Runnable.h
 src/CMakeFiles/async.dir/SpawnSyncPool.cc.o: ../src/SpawnSyncPool.cc
 src/CMakeFiles/async.dir/SpawnSyncPool.cc.o: ../src/SpawnSyncPool.h
-src/CMakeFiles/async.dir/SpawnSyncPool.cc.o: ../src/Task.h
-src/CMakeFiles/async.dir/SpawnSyncPool.cc.o: ../src/ThreadPool.h
 
 src/CMakeFiles/async.dir/Utils.cc.o: ../src/Common.h
 src/CMakeFiles/async.dir/Utils.cc.o: ../src/Utils.cc

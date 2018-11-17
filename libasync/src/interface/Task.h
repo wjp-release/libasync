@@ -31,6 +31,7 @@
 #include "Waitable.h"
 
 namespace wjp {
+	class ThreadPool;
 	// A task is a proxy object shared between ThreadPool and ThreadPool user. 
 	// Aside from being runnable, it should be cancellable and waitable.
 	class Task : public Runnable, public Cancellable, public Waitable {

@@ -56,6 +56,17 @@ CMAKE_BINARY_DIR = /Users/wjp/Desktop/workspace/libasync/libasync/build
 #=============================================================================
 # Targets provided globally by CMake.
 
+# Special rule for the target test
+test:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
+	/opt/local/bin/ctest --force-new-ctest-process $(ARGS)
+.PHONY : test
+
+# Special rule for the target test
+test/fast: test
+
+.PHONY : test/fast
+
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
@@ -78,27 +89,16 @@ edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
 
-# Special rule for the target test
-test:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
-	/opt/local/bin/ctest --force-new-ctest-process $(ARGS)
-.PHONY : test
-
-# Special rule for the target test
-test/fast: test
-
-.PHONY : test/fast
-
 # The main all target
 all: cmake_check_build_system
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(CMAKE_COMMAND) -E cmake_progress_start /Users/wjp/Desktop/workspace/libasync/libasync/build/CMakeFiles /Users/wjp/Desktop/workspace/libasync/libasync/build/src/CMakeFiles/progress.marks
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f CMakeFiles/Makefile2 src/all
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(CMAKE_COMMAND) -E cmake_progress_start /Users/wjp/Desktop/workspace/libasync/libasync/build/CMakeFiles /Users/wjp/Desktop/workspace/libasync/libasync/build/googletest/CMakeFiles/progress.marks
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f CMakeFiles/Makefile2 googletest/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wjp/Desktop/workspace/libasync/libasync/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f CMakeFiles/Makefile2 src/clean
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f CMakeFiles/Makefile2 googletest/clean
 .PHONY : clean
 
 # The main clean target
@@ -108,12 +108,12 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f CMakeFiles/Makefile2 src/preinstall
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f CMakeFiles/Makefile2 googletest/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f CMakeFiles/Makefile2 src/preinstall
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f CMakeFiles/Makefile2 googletest/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
@@ -122,100 +122,88 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-src/CMakeFiles/async.dir/rule:
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/async.dir/rule
-.PHONY : src/CMakeFiles/async.dir/rule
+googletest/CMakeFiles/gtest_main.dir/rule:
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f CMakeFiles/Makefile2 googletest/CMakeFiles/gtest_main.dir/rule
+.PHONY : googletest/CMakeFiles/gtest_main.dir/rule
 
 # Convenience name for target.
-async: src/CMakeFiles/async.dir/rule
+gtest_main: googletest/CMakeFiles/gtest_main.dir/rule
 
-.PHONY : async
+.PHONY : gtest_main
 
 # fast build rule for target.
-async/fast:
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f src/CMakeFiles/async.dir/build.make src/CMakeFiles/async.dir/build
-.PHONY : async/fast
+gtest_main/fast:
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f googletest/CMakeFiles/gtest_main.dir/build.make googletest/CMakeFiles/gtest_main.dir/build
+.PHONY : gtest_main/fast
 
-FixedPool.o: FixedPool.cc.o
+# Convenience name for target.
+googletest/CMakeFiles/gtest.dir/rule:
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f CMakeFiles/Makefile2 googletest/CMakeFiles/gtest.dir/rule
+.PHONY : googletest/CMakeFiles/gtest.dir/rule
 
-.PHONY : FixedPool.o
+# Convenience name for target.
+gtest: googletest/CMakeFiles/gtest.dir/rule
 
-# target to build an object file
-FixedPool.cc.o:
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f src/CMakeFiles/async.dir/build.make src/CMakeFiles/async.dir/FixedPool.cc.o
-.PHONY : FixedPool.cc.o
+.PHONY : gtest
 
-FixedPool.i: FixedPool.cc.i
+# fast build rule for target.
+gtest/fast:
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f googletest/CMakeFiles/gtest.dir/build.make googletest/CMakeFiles/gtest.dir/build
+.PHONY : gtest/fast
 
-.PHONY : FixedPool.i
+src/gtest-all.o: src/gtest-all.cc.o
 
-# target to preprocess a source file
-FixedPool.cc.i:
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f src/CMakeFiles/async.dir/build.make src/CMakeFiles/async.dir/FixedPool.cc.i
-.PHONY : FixedPool.cc.i
-
-FixedPool.s: FixedPool.cc.s
-
-.PHONY : FixedPool.s
-
-# target to generate assembly for a file
-FixedPool.cc.s:
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f src/CMakeFiles/async.dir/build.make src/CMakeFiles/async.dir/FixedPool.cc.s
-.PHONY : FixedPool.cc.s
-
-SpawnSyncPool.o: SpawnSyncPool.cc.o
-
-.PHONY : SpawnSyncPool.o
+.PHONY : src/gtest-all.o
 
 # target to build an object file
-SpawnSyncPool.cc.o:
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f src/CMakeFiles/async.dir/build.make src/CMakeFiles/async.dir/SpawnSyncPool.cc.o
-.PHONY : SpawnSyncPool.cc.o
+src/gtest-all.cc.o:
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f googletest/CMakeFiles/gtest.dir/build.make googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.o
+.PHONY : src/gtest-all.cc.o
 
-SpawnSyncPool.i: SpawnSyncPool.cc.i
+src/gtest-all.i: src/gtest-all.cc.i
 
-.PHONY : SpawnSyncPool.i
+.PHONY : src/gtest-all.i
 
 # target to preprocess a source file
-SpawnSyncPool.cc.i:
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f src/CMakeFiles/async.dir/build.make src/CMakeFiles/async.dir/SpawnSyncPool.cc.i
-.PHONY : SpawnSyncPool.cc.i
+src/gtest-all.cc.i:
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f googletest/CMakeFiles/gtest.dir/build.make googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.i
+.PHONY : src/gtest-all.cc.i
 
-SpawnSyncPool.s: SpawnSyncPool.cc.s
+src/gtest-all.s: src/gtest-all.cc.s
 
-.PHONY : SpawnSyncPool.s
+.PHONY : src/gtest-all.s
 
 # target to generate assembly for a file
-SpawnSyncPool.cc.s:
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f src/CMakeFiles/async.dir/build.make src/CMakeFiles/async.dir/SpawnSyncPool.cc.s
-.PHONY : SpawnSyncPool.cc.s
+src/gtest-all.cc.s:
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f googletest/CMakeFiles/gtest.dir/build.make googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.s
+.PHONY : src/gtest-all.cc.s
 
-Utils.o: Utils.cc.o
+src/gtest_main.o: src/gtest_main.cc.o
 
-.PHONY : Utils.o
+.PHONY : src/gtest_main.o
 
 # target to build an object file
-Utils.cc.o:
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f src/CMakeFiles/async.dir/build.make src/CMakeFiles/async.dir/Utils.cc.o
-.PHONY : Utils.cc.o
+src/gtest_main.cc.o:
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f googletest/CMakeFiles/gtest_main.dir/build.make googletest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o
+.PHONY : src/gtest_main.cc.o
 
-Utils.i: Utils.cc.i
+src/gtest_main.i: src/gtest_main.cc.i
 
-.PHONY : Utils.i
+.PHONY : src/gtest_main.i
 
 # target to preprocess a source file
-Utils.cc.i:
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f src/CMakeFiles/async.dir/build.make src/CMakeFiles/async.dir/Utils.cc.i
-.PHONY : Utils.cc.i
+src/gtest_main.cc.i:
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f googletest/CMakeFiles/gtest_main.dir/build.make googletest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.i
+.PHONY : src/gtest_main.cc.i
 
-Utils.s: Utils.cc.s
+src/gtest_main.s: src/gtest_main.cc.s
 
-.PHONY : Utils.s
+.PHONY : src/gtest_main.s
 
 # target to generate assembly for a file
-Utils.cc.s:
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f src/CMakeFiles/async.dir/build.make src/CMakeFiles/async.dir/Utils.cc.s
-.PHONY : Utils.cc.s
+src/gtest_main.cc.s:
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f googletest/CMakeFiles/gtest_main.dir/build.make googletest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.s
+.PHONY : src/gtest_main.cc.s
 
 # Help Target
 help:
@@ -223,19 +211,17 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... test"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... test"
-	@echo "... async"
-	@echo "... FixedPool.o"
-	@echo "... FixedPool.i"
-	@echo "... FixedPool.s"
-	@echo "... SpawnSyncPool.o"
-	@echo "... SpawnSyncPool.i"
-	@echo "... SpawnSyncPool.s"
-	@echo "... Utils.o"
-	@echo "... Utils.i"
-	@echo "... Utils.s"
+	@echo "... gtest_main"
+	@echo "... gtest"
+	@echo "... src/gtest-all.o"
+	@echo "... src/gtest-all.i"
+	@echo "... src/gtest-all.s"
+	@echo "... src/gtest_main.o"
+	@echo "... src/gtest_main.i"
+	@echo "... src/gtest_main.s"
 .PHONY : help
 
 
