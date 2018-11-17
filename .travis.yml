@@ -19,10 +19,10 @@ script:
   - ls
   - cd build
   - rm -rf *
-  - CXX=/usr/bin/g++-8 CC=/usr/bin/gcc-8 cmake -test=ON ..
+  - CXX=/usr/bin/g++-8 CC=/usr/bin/gcc-8 cmake -DCMAKE_BUILD_TYPE=Debug -Dtest=ON ..
   - ls
-  - cmake --build -test=ON ..
-  - ./build/tests/tests
+  - cmake --build ..
+  - ./tests/tests
 
 after_success:
   - coveralls --root . -E ".*gtest.*" -E ".*CMakeFiles.*" 
