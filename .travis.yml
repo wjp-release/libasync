@@ -16,11 +16,11 @@ before_install:
 
 script:
   - cd libasync
-  - mkdir build
+  - ls
   - cd build
   - CXX=/usr/bin/g++-8 CC=/usr/bin/gcc-8 cmake -test=ON ..
   - ls
-  - make
+  - cmake --build -test=ON ..
   - ./build/tests/tests
 
 after_success:

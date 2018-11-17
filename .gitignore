@@ -1,7 +1,6 @@
 # Prerequisites
 *.d
 
-./libasync/build/*
 .vs/*
 
 # Compiled Object files
