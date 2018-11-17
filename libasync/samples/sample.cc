@@ -29,11 +29,13 @@
 #include <set>
 #include <thread>
 #include "sample.h"
+#include <Utils.h>
 
 using namespace wjp;
 int main()
 {
 	deque_sample();
-	std::cin.get();
+	sleep(3000);
+	//std::cin.get();
 	return 0;
 }

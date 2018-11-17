@@ -80,14 +80,14 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(CMAKE_COMMAND) -E cmake_progress_start /Users/wjp/Desktop/workspace/libasync/libasync/build/CMakeFiles /Users/wjp/Desktop/workspace/libasync/libasync/build/src/CMakeFiles/progress.marks
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f CMakeFiles/Makefile2 src/all
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(CMAKE_COMMAND) -E cmake_progress_start /Users/wjp/Desktop/workspace/libasync/libasync/build/CMakeFiles /Users/wjp/Desktop/workspace/libasync/libasync/build/samples/CMakeFiles/progress.marks
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f CMakeFiles/Makefile2 samples/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wjp/Desktop/workspace/libasync/libasync/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f CMakeFiles/Makefile2 src/clean
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f CMakeFiles/Makefile2 samples/clean
 .PHONY : clean
 
 # The main clean target
@@ -97,12 +97,12 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f CMakeFiles/Makefile2 src/preinstall
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f CMakeFiles/Makefile2 samples/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f CMakeFiles/Makefile2 src/preinstall
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f CMakeFiles/Makefile2 samples/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
@@ -111,100 +111,46 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-src/CMakeFiles/async.dir/rule:
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/async.dir/rule
-.PHONY : src/CMakeFiles/async.dir/rule
+samples/CMakeFiles/sample.dir/rule:
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f CMakeFiles/Makefile2 samples/CMakeFiles/sample.dir/rule
+.PHONY : samples/CMakeFiles/sample.dir/rule
 
 # Convenience name for target.
-async: src/CMakeFiles/async.dir/rule
+sample: samples/CMakeFiles/sample.dir/rule
 
-.PHONY : async
+.PHONY : sample
 
 # fast build rule for target.
-async/fast:
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f src/CMakeFiles/async.dir/build.make src/CMakeFiles/async.dir/build
-.PHONY : async/fast
+sample/fast:
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f samples/CMakeFiles/sample.dir/build.make samples/CMakeFiles/sample.dir/build
+.PHONY : sample/fast
 
-FixedPool.o: FixedPool.cc.o
+sample.o: sample.cc.o
 
-.PHONY : FixedPool.o
-
-# target to build an object file
-FixedPool.cc.o:
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f src/CMakeFiles/async.dir/build.make src/CMakeFiles/async.dir/FixedPool.cc.o
-.PHONY : FixedPool.cc.o
-
-FixedPool.i: FixedPool.cc.i
-
-.PHONY : FixedPool.i
-
-# target to preprocess a source file
-FixedPool.cc.i:
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f src/CMakeFiles/async.dir/build.make src/CMakeFiles/async.dir/FixedPool.cc.i
-.PHONY : FixedPool.cc.i
-
-FixedPool.s: FixedPool.cc.s
-
-.PHONY : FixedPool.s
-
-# target to generate assembly for a file
-FixedPool.cc.s:
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f src/CMakeFiles/async.dir/build.make src/CMakeFiles/async.dir/FixedPool.cc.s
-.PHONY : FixedPool.cc.s
-
-SpawnSyncPool.o: SpawnSyncPool.cc.o
-
-.PHONY : SpawnSyncPool.o
+.PHONY : sample.o
 
 # target to build an object file
-SpawnSyncPool.cc.o:
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f src/CMakeFiles/async.dir/build.make src/CMakeFiles/async.dir/SpawnSyncPool.cc.o
-.PHONY : SpawnSyncPool.cc.o
+sample.cc.o:
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f samples/CMakeFiles/sample.dir/build.make samples/CMakeFiles/sample.dir/sample.cc.o
+.PHONY : sample.cc.o
 
-SpawnSyncPool.i: SpawnSyncPool.cc.i
+sample.i: sample.cc.i
 
-.PHONY : SpawnSyncPool.i
-
-# target to preprocess a source file
-SpawnSyncPool.cc.i:
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f src/CMakeFiles/async.dir/build.make src/CMakeFiles/async.dir/SpawnSyncPool.cc.i
-.PHONY : SpawnSyncPool.cc.i
-
-SpawnSyncPool.s: SpawnSyncPool.cc.s
-
-.PHONY : SpawnSyncPool.s
-
-# target to generate assembly for a file
-SpawnSyncPool.cc.s:
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f src/CMakeFiles/async.dir/build.make src/CMakeFiles/async.dir/SpawnSyncPool.cc.s
-.PHONY : SpawnSyncPool.cc.s
-
-Utils.o: Utils.cc.o
-
-.PHONY : Utils.o
-
-# target to build an object file
-Utils.cc.o:
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f src/CMakeFiles/async.dir/build.make src/CMakeFiles/async.dir/Utils.cc.o
-.PHONY : Utils.cc.o
-
-Utils.i: Utils.cc.i
-
-.PHONY : Utils.i
+.PHONY : sample.i
 
 # target to preprocess a source file
-Utils.cc.i:
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f src/CMakeFiles/async.dir/build.make src/CMakeFiles/async.dir/Utils.cc.i
-.PHONY : Utils.cc.i
+sample.cc.i:
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f samples/CMakeFiles/sample.dir/build.make samples/CMakeFiles/sample.dir/sample.cc.i
+.PHONY : sample.cc.i
 
-Utils.s: Utils.cc.s
+sample.s: sample.cc.s
 
-.PHONY : Utils.s
+.PHONY : sample.s
 
 # target to generate assembly for a file
-Utils.cc.s:
-	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f src/CMakeFiles/async.dir/build.make src/CMakeFiles/async.dir/Utils.cc.s
-.PHONY : Utils.cc.s
+sample.cc.s:
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f samples/CMakeFiles/sample.dir/build.make samples/CMakeFiles/sample.dir/sample.cc.s
+.PHONY : sample.cc.s
 
 # Help Target
 help:
@@ -214,16 +160,10 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... async"
-	@echo "... FixedPool.o"
-	@echo "... FixedPool.i"
-	@echo "... FixedPool.s"
-	@echo "... SpawnSyncPool.o"
-	@echo "... SpawnSyncPool.i"
-	@echo "... SpawnSyncPool.s"
-	@echo "... Utils.o"
-	@echo "... Utils.i"
-	@echo "... Utils.s"
+	@echo "... sample"
+	@echo "... sample.o"
+	@echo "... sample.i"
+	@echo "... sample.s"
 .PHONY : help
 
 
