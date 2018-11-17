@@ -1,0 +1,647 @@
+        -:    0:Source:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/system_error
+        -:    0:Graph:/Users/wjp/Desktop/workspace/libasync/libasync/build/tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.gcno
+        -:    0:Data:/Users/wjp/Desktop/workspace/libasync/libasync/build/tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.gcda
+        -:    0:Runs:2
+        -:    0:Programs:1
+        -:    1:// -*- C++ -*-
+        -:    2://===---------------------------- system_error ----------------------------===//
+        -:    3://
+        -:    4://                     The LLVM Compiler Infrastructure
+        -:    5://
+        -:    6:// This file is dual licensed under the MIT and the University of Illinois Open
+        -:    7:// Source Licenses. See LICENSE.TXT for details.
+        -:    8://
+        -:    9://===----------------------------------------------------------------------===//
+        -:   10:
+        -:   11:#ifndef _LIBCPP_SYSTEM_ERROR
+        -:   12:#define _LIBCPP_SYSTEM_ERROR
+        -:   13:
+        -:   14:/*
+        -:   15:    system_error synopsis
+        -:   16:
+        -:   17:namespace std
+        -:   18:{
+        -:   19:
+        -:   20:class error_category
+        -:   21:{
+        -:   22:public:
+        -:   23:    virtual ~error_category() noexcept;
+        -:   24:
+        -:   25:    constexpr error_category();
+        -:   26:    error_category(const error_category&) = delete;
+        -:   27:    error_category& operator=(const error_category&) = delete;
+        -:   28:
+        -:   29:    virtual const char* name() const noexcept = 0;
+        -:   30:    virtual error_condition default_error_condition(int ev) const noexcept;
+        -:   31:    virtual bool equivalent(int code, const error_condition& condition) const noexcept;
+        -:   32:    virtual bool equivalent(const error_code& code, int condition) const noexcept;
+        -:   33:    virtual string message(int ev) const = 0;
+        -:   34:
+        -:   35:    bool operator==(const error_category& rhs) const noexcept;
+        -:   36:    bool operator!=(const error_category& rhs) const noexcept;
+        -:   37:    bool operator<(const error_category& rhs) const noexcept;
+        -:   38:};
+        -:   39:
+        -:   40:const error_category& generic_category() noexcept;
+        -:   41:const error_category& system_category() noexcept;
+        -:   42:
+        -:   43:template <class T> struct is_error_code_enum
+        -:   44:    : public false_type {};
+        -:   45:
+        -:   46:template <class T> struct is_error_condition_enum
+        -:   47:    : public false_type {};
+        -:   48:
+        -:   49:class error_code
+        -:   50:{
+        -:   51:public:
+        -:   52:    // constructors:
+        -:   53:    error_code() noexcept;
+        -:   54:    error_code(int val, const error_category& cat) noexcept;
+        -:   55:    template <class ErrorCodeEnum>
+        -:   56:        error_code(ErrorCodeEnum e) noexcept;
+        -:   57:
+        -:   58:    // modifiers:
+        -:   59:    void assign(int val, const error_category& cat) noexcept;
+        -:   60:    template <class ErrorCodeEnum>
+        -:   61:        error_code& operator=(ErrorCodeEnum e) noexcept;
+        -:   62:    void clear() noexcept;
+        -:   63:
+        -:   64:    // observers:
+        -:   65:    int value() const noexcept;
+        -:   66:    const error_category& category() const noexcept;
+        -:   67:    error_condition default_error_condition() const noexcept;
+        -:   68:    string message() const;
+        -:   69:    explicit operator bool() const noexcept;
+        -:   70:};
+        -:   71:
+        -:   72:// non-member functions:
+        -:   73:bool operator<(const error_code& lhs, const error_code& rhs) noexcept;
+        -:   74:template <class charT, class traits>
+        -:   75:    basic_ostream<charT,traits>&
+        -:   76:    operator<<(basic_ostream<charT,traits>& os, const error_code& ec);
+        -:   77:
+        -:   78:class error_condition
+        -:   79:{
+        -:   80:public:
+        -:   81:    // constructors:
+        -:   82:    error_condition() noexcept;
+        -:   83:    error_condition(int val, const error_category& cat) noexcept;
+        -:   84:    template <class ErrorConditionEnum>
+        -:   85:        error_condition(ErrorConditionEnum e) noexcept;
+        -:   86:
+        -:   87:    // modifiers:
+        -:   88:    void assign(int val, const error_category& cat) noexcept;
+        -:   89:    template <class ErrorConditionEnum>
+        -:   90:        error_condition& operator=(ErrorConditionEnum e) noexcept;
+        -:   91:    void clear() noexcept;
+        -:   92:
+        -:   93:    // observers:
+        -:   94:    int value() const noexcept;
+        -:   95:    const error_category& category() const noexcept;
+        -:   96:    string message() const noexcept;
+        -:   97:    explicit operator bool() const noexcept;
+        -:   98:};
+        -:   99:
+        -:  100:bool operator<(const error_condition& lhs, const error_condition& rhs) noexcept;
+        -:  101:
+        -:  102:class system_error
+        -:  103:    : public runtime_error
+        -:  104:{
+        -:  105:public:
+        -:  106:    system_error(error_code ec, const string& what_arg);
+        -:  107:    system_error(error_code ec, const char* what_arg);
+        -:  108:    system_error(error_code ec);
+        -:  109:    system_error(int ev, const error_category& ecat, const string& what_arg);
+        -:  110:    system_error(int ev, const error_category& ecat, const char* what_arg);
+        -:  111:    system_error(int ev, const error_category& ecat);
+        -:  112:
+        -:  113:    const error_code& code() const noexcept;
+        -:  114:    const char* what() const noexcept;
+        -:  115:};
+        -:  116:
+        -:  117:enum class errc
+        -:  118:{
+        -:  119:    address_family_not_supported,       // EAFNOSUPPORT
+        -:  120:    address_in_use,                     // EADDRINUSE
+        -:  121:    address_not_available,              // EADDRNOTAVAIL
+        -:  122:    already_connected,                  // EISCONN
+        -:  123:    argument_list_too_long,             // E2BIG
+        -:  124:    argument_out_of_domain,             // EDOM
+        -:  125:    bad_address,                        // EFAULT
+        -:  126:    bad_file_descriptor,                // EBADF
+        -:  127:    bad_message,                        // EBADMSG
+        -:  128:    broken_pipe,                        // EPIPE
+        -:  129:    connection_aborted,                 // ECONNABORTED
+        -:  130:    connection_already_in_progress,     // EALREADY
+        -:  131:    connection_refused,                 // ECONNREFUSED
+        -:  132:    connection_reset,                   // ECONNRESET
+        -:  133:    cross_device_link,                  // EXDEV
+        -:  134:    destination_address_required,       // EDESTADDRREQ
+        -:  135:    device_or_resource_busy,            // EBUSY
+        -:  136:    directory_not_empty,                // ENOTEMPTY
+        -:  137:    executable_format_error,            // ENOEXEC
+        -:  138:    file_exists,                        // EEXIST
+        -:  139:    file_too_large,                     // EFBIG
+        -:  140:    filename_too_long,                  // ENAMETOOLONG
+        -:  141:    function_not_supported,             // ENOSYS
+        -:  142:    host_unreachable,                   // EHOSTUNREACH
+        -:  143:    identifier_removed,                 // EIDRM
+        -:  144:    illegal_byte_sequence,              // EILSEQ
+        -:  145:    inappropriate_io_control_operation, // ENOTTY
+        -:  146:    interrupted,                        // EINTR
+        -:  147:    invalid_argument,                   // EINVAL
+        -:  148:    invalid_seek,                       // ESPIPE
+        -:  149:    io_error,                           // EIO
+        -:  150:    is_a_directory,                     // EISDIR
+        -:  151:    message_size,                       // EMSGSIZE
+        -:  152:    network_down,                       // ENETDOWN
+        -:  153:    network_reset,                      // ENETRESET
+        -:  154:    network_unreachable,                // ENETUNREACH
+        -:  155:    no_buffer_space,                    // ENOBUFS
+        -:  156:    no_child_process,                   // ECHILD
+        -:  157:    no_link,                            // ENOLINK
+        -:  158:    no_lock_available,                  // ENOLCK
+        -:  159:    no_message_available,               // ENODATA
+        -:  160:    no_message,                         // ENOMSG
+        -:  161:    no_protocol_option,                 // ENOPROTOOPT
+        -:  162:    no_space_on_device,                 // ENOSPC
+        -:  163:    no_stream_resources,                // ENOSR
+        -:  164:    no_such_device_or_address,          // ENXIO
+        -:  165:    no_such_device,                     // ENODEV
+        -:  166:    no_such_file_or_directory,          // ENOENT
+        -:  167:    no_such_process,                    // ESRCH
+        -:  168:    not_a_directory,                    // ENOTDIR
+        -:  169:    not_a_socket,                       // ENOTSOCK
+        -:  170:    not_a_stream,                       // ENOSTR
+        -:  171:    not_connected,                      // ENOTCONN
+        -:  172:    not_enough_memory,                  // ENOMEM
+        -:  173:    not_supported,                      // ENOTSUP
+        -:  174:    operation_canceled,                 // ECANCELED
+        -:  175:    operation_in_progress,              // EINPROGRESS
+        -:  176:    operation_not_permitted,            // EPERM
+        -:  177:    operation_not_supported,            // EOPNOTSUPP
+        -:  178:    operation_would_block,              // EWOULDBLOCK
+        -:  179:    owner_dead,                         // EOWNERDEAD
+        -:  180:    permission_denied,                  // EACCES
+        -:  181:    protocol_error,                     // EPROTO
+        -:  182:    protocol_not_supported,             // EPROTONOSUPPORT
+        -:  183:    read_only_file_system,              // EROFS
+        -:  184:    resource_deadlock_would_occur,      // EDEADLK
+        -:  185:    resource_unavailable_try_again,     // EAGAIN
+        -:  186:    result_out_of_range,                // ERANGE
+        -:  187:    state_not_recoverable,              // ENOTRECOVERABLE
+        -:  188:    stream_timeout,                     // ETIME
+        -:  189:    text_file_busy,                     // ETXTBSY
+        -:  190:    timed_out,                          // ETIMEDOUT
+        -:  191:    too_many_files_open_in_system,      // ENFILE
+        -:  192:    too_many_files_open,                // EMFILE
+        -:  193:    too_many_links,                     // EMLINK
+        -:  194:    too_many_symbolic_link_levels,      // ELOOP
+        -:  195:    value_too_large,                    // EOVERFLOW
+        -:  196:    wrong_protocol_type                 // EPROTOTYPE
+        -:  197:};
+        -:  198:
+        -:  199:template <> struct is_error_condition_enum<errc>
+        -:  200:    : true_type { }
+        -:  201:
+        -:  202:error_code make_error_code(errc e) noexcept;
+        -:  203:error_condition make_error_condition(errc e) noexcept;
+        -:  204:
+        -:  205:// Comparison operators:
+        -:  206:bool operator==(const error_code& lhs, const error_code& rhs) noexcept;
+        -:  207:bool operator==(const error_code& lhs, const error_condition& rhs) noexcept;
+        -:  208:bool operator==(const error_condition& lhs, const error_code& rhs) noexcept;
+        -:  209:bool operator==(const error_condition& lhs, const error_condition& rhs) noexcept;
+        -:  210:bool operator!=(const error_code& lhs, const error_code& rhs) noexcept;
+        -:  211:bool operator!=(const error_code& lhs, const error_condition& rhs) noexcept;
+        -:  212:bool operator!=(const error_condition& lhs, const error_code& rhs) noexcept;
+        -:  213:bool operator!=(const error_condition& lhs, const error_condition& rhs) noexcept;
+        -:  214:
+        -:  215:template <> struct hash<std::error_code>;
+        -:  216:
+        -:  217:}  // std
+        -:  218:
+        -:  219:*/
+        -:  220:
+        -:  221:#include <__config>
+        -:  222:#include <cerrno>
+        -:  223:#include <type_traits>
+        -:  224:#include <stdexcept>
+        -:  225:#include <__functional_base>
+        -:  226:
+        -:  227:#if !defined(_LIBCPP_HAS_NO_PRAGMA_SYSTEM_HEADER)
+        -:  228:#pragma GCC system_header
+        -:  229:#endif
+        -:  230:
+        -:  231:_LIBCPP_BEGIN_NAMESPACE_STD
+        -:  232:
+        -:  233:// is_error_code_enum
+        -:  234:
+        -:  235:template <class _Tp>
+        -:  236:struct _LIBCPP_TYPE_VIS_ONLY is_error_code_enum
+        -:  237:    : public false_type {};
+        -:  238:
+        -:  239:// is_error_condition_enum
+        -:  240:
+        -:  241:template <class _Tp>
+        -:  242:struct _LIBCPP_TYPE_VIS_ONLY is_error_condition_enum
+        -:  243:    : public false_type {};
+        -:  244:
+        -:  245:// Some error codes are not present on all platforms, so we provide equivalents
+        -:  246:// for them:
+        -:  247:
+        -:  248://enum class errc
+        -:  249:_LIBCPP_DECLARE_STRONG_ENUM(errc)
+        -:  250:{
+        -:  251:    address_family_not_supported        = EAFNOSUPPORT,
+        -:  252:    address_in_use                      = EADDRINUSE,
+        -:  253:    address_not_available               = EADDRNOTAVAIL,
+        -:  254:    already_connected                   = EISCONN,
+        -:  255:    argument_list_too_long              = E2BIG,
+        -:  256:    argument_out_of_domain              = EDOM,
+        -:  257:    bad_address                         = EFAULT,
+        -:  258:    bad_file_descriptor                 = EBADF,
+        -:  259:    bad_message                         = EBADMSG,
+        -:  260:    broken_pipe                         = EPIPE,
+        -:  261:    connection_aborted                  = ECONNABORTED,
+        -:  262:    connection_already_in_progress      = EALREADY,
+        -:  263:    connection_refused                  = ECONNREFUSED,
+        -:  264:    connection_reset                    = ECONNRESET,
+        -:  265:    cross_device_link                   = EXDEV,
+        -:  266:    destination_address_required        = EDESTADDRREQ,
+        -:  267:    device_or_resource_busy             = EBUSY,
+        -:  268:    directory_not_empty                 = ENOTEMPTY,
+        -:  269:    executable_format_error             = ENOEXEC,
+        -:  270:    file_exists                         = EEXIST,
+        -:  271:    file_too_large                      = EFBIG,
+        -:  272:    filename_too_long                   = ENAMETOOLONG,
+        -:  273:    function_not_supported              = ENOSYS,
+        -:  274:    host_unreachable                    = EHOSTUNREACH,
+        -:  275:    identifier_removed                  = EIDRM,
+        -:  276:    illegal_byte_sequence               = EILSEQ,
+        -:  277:    inappropriate_io_control_operation  = ENOTTY,
+        -:  278:    interrupted                         = EINTR,
+        -:  279:    invalid_argument                    = EINVAL,
+        -:  280:    invalid_seek                        = ESPIPE,
+        -:  281:    io_error                            = EIO,
+        -:  282:    is_a_directory                      = EISDIR,
+        -:  283:    message_size                        = EMSGSIZE,
+        -:  284:    network_down                        = ENETDOWN,
+        -:  285:    network_reset                       = ENETRESET,
+        -:  286:    network_unreachable                 = ENETUNREACH,
+        -:  287:    no_buffer_space                     = ENOBUFS,
+        -:  288:    no_child_process                    = ECHILD,
+        -:  289:    no_link                             = ENOLINK,
+        -:  290:    no_lock_available                   = ENOLCK,
+        -:  291:#ifdef ENODATA
+        -:  292:    no_message_available                = ENODATA,
+        -:  293:#else
+        -:  294:    no_message_available                = ENOMSG,
+        -:  295:#endif
+        -:  296:    no_message                          = ENOMSG,
+        -:  297:    no_protocol_option                  = ENOPROTOOPT,
+        -:  298:    no_space_on_device                  = ENOSPC,
+        -:  299:#ifdef ENOSR
+        -:  300:    no_stream_resources                 = ENOSR,
+        -:  301:#else
+        -:  302:    no_stream_resources                 = ENOMEM,
+        -:  303:#endif
+        -:  304:    no_such_device_or_address           = ENXIO,
+        -:  305:    no_such_device                      = ENODEV,
+        -:  306:    no_such_file_or_directory           = ENOENT,
+        -:  307:    no_such_process                     = ESRCH,
+        -:  308:    not_a_directory                     = ENOTDIR,
+        -:  309:    not_a_socket                        = ENOTSOCK,
+        -:  310:#ifdef ENOSTR
+        -:  311:    not_a_stream                        = ENOSTR,
+        -:  312:#else
+        -:  313:    not_a_stream                        = EINVAL,
+        -:  314:#endif
+        -:  315:    not_connected                       = ENOTCONN,
+        -:  316:    not_enough_memory                   = ENOMEM,
+        -:  317:    not_supported                       = ENOTSUP,
+        -:  318:    operation_canceled                  = ECANCELED,
+        -:  319:    operation_in_progress               = EINPROGRESS,
+        -:  320:    operation_not_permitted             = EPERM,
+        -:  321:    operation_not_supported             = EOPNOTSUPP,
+        -:  322:    operation_would_block               = EWOULDBLOCK,
+        -:  323:    owner_dead                          = EOWNERDEAD,
+        -:  324:    permission_denied                   = EACCES,
+        -:  325:    protocol_error                      = EPROTO,
+        -:  326:    protocol_not_supported              = EPROTONOSUPPORT,
+        -:  327:    read_only_file_system               = EROFS,
+        -:  328:    resource_deadlock_would_occur       = EDEADLK,
+        -:  329:    resource_unavailable_try_again      = EAGAIN,
+        -:  330:    result_out_of_range                 = ERANGE,
+        -:  331:    state_not_recoverable               = ENOTRECOVERABLE,
+        -:  332:#ifdef ETIME
+        -:  333:    stream_timeout                      = ETIME,
+        -:  334:#else
+        -:  335:    stream_timeout                      = ETIMEDOUT,
+        -:  336:#endif
+        -:  337:    text_file_busy                      = ETXTBSY,
+        -:  338:    timed_out                           = ETIMEDOUT,
+        -:  339:    too_many_files_open_in_system       = ENFILE,
+        -:  340:    too_many_files_open                 = EMFILE,
+        -:  341:    too_many_links                      = EMLINK,
+        -:  342:    too_many_symbolic_link_levels       = ELOOP,
+        -:  343:    value_too_large                     = EOVERFLOW,
+        -:  344:    wrong_protocol_type                 = EPROTOTYPE
+        -:  345:};
+        -:  346:_LIBCPP_DECLARE_STRONG_ENUM_EPILOG(errc)
+        -:  347:
+        -:  348:template <>
+        -:  349:struct _LIBCPP_TYPE_VIS_ONLY is_error_condition_enum<errc>
+        -:  350:    : true_type { };
+        -:  351:
+        -:  352:#ifdef _LIBCPP_HAS_NO_STRONG_ENUMS
+        -:  353:template <>
+        -:  354:struct _LIBCPP_TYPE_VIS_ONLY is_error_condition_enum<errc::__lx>
+        -:  355:    : true_type { };
+        -:  356:#endif
+        -:  357:
+        -:  358:class _LIBCPP_TYPE_VIS error_condition;
+        -:  359:class _LIBCPP_TYPE_VIS error_code;
+        -:  360:
+        -:  361:// class error_category
+        -:  362:
+        -:  363:class _LIBCPP_HIDDEN __do_message;
+        -:  364:
+        -:  365:class _LIBCPP_TYPE_VIS error_category
+        -:  366:{
+        -:  367:public:
+        -:  368:    virtual ~error_category() _NOEXCEPT;
+        -:  369:
+        -:  370:#ifdef _LIBCPP_BUILDING_SYSTEM_ERROR
+        -:  371:    error_category() _NOEXCEPT;
+        -:  372:#else
+        -:  373:    _LIBCPP_ALWAYS_INLINE
+        -:  374:    _LIBCPP_CONSTEXPR_AFTER_CXX11 error_category() _NOEXCEPT _LIBCPP_DEFAULT;
+        -:  375:#endif
+        -:  376:private:
+        -:  377:    error_category(const error_category&);// = delete;
+        -:  378:    error_category& operator=(const error_category&);// = delete;
+        -:  379:
+        -:  380:public:
+        -:  381:    virtual const char* name() const _NOEXCEPT = 0;
+        -:  382:    virtual error_condition default_error_condition(int __ev) const _NOEXCEPT;
+        -:  383:    virtual bool equivalent(int __code, const error_condition& __condition) const _NOEXCEPT;
+        -:  384:    virtual bool equivalent(const error_code& __code, int __condition) const _NOEXCEPT;
+        -:  385:    virtual string message(int __ev) const = 0;
+        -:  386:
+        -:  387:    _LIBCPP_ALWAYS_INLINE
+        -:  388:    bool operator==(const error_category& __rhs) const _NOEXCEPT {return this == &__rhs;}
+        -:  389:
+        -:  390:    _LIBCPP_ALWAYS_INLINE
+        -:  391:    bool operator!=(const error_category& __rhs) const _NOEXCEPT {return !(*this == __rhs);}
+        -:  392:
+        -:  393:    _LIBCPP_ALWAYS_INLINE
+        -:  394:    bool operator< (const error_category& __rhs) const _NOEXCEPT {return this < &__rhs;}
+        -:  395:
+        -:  396:    friend class _LIBCPP_HIDDEN __do_message;
+        -:  397:};
+        -:  398:
+        -:  399:class _LIBCPP_HIDDEN __do_message
+        -:  400:    : public error_category
+        -:  401:{
+        -:  402:public:
+        -:  403:    virtual string message(int ev) const;
+        -:  404:};
+        -:  405:
+        -:  406:_LIBCPP_FUNC_VIS const error_category& generic_category() _NOEXCEPT;
+        -:  407:_LIBCPP_FUNC_VIS const error_category& system_category() _NOEXCEPT;
+        -:  408:
+        -:  409:class _LIBCPP_TYPE_VIS error_condition
+        -:  410:{
+        -:  411:    int __val_;
+        -:  412:    const error_category* __cat_;
+        -:  413:public:
+        -:  414:    _LIBCPP_ALWAYS_INLINE
+        -:  415:    error_condition() _NOEXCEPT : __val_(0), __cat_(&generic_category()) {}
+        -:  416:
+        -:  417:    _LIBCPP_ALWAYS_INLINE
+        -:  418:    error_condition(int __val, const error_category& __cat) _NOEXCEPT
+        -:  419:        : __val_(__val), __cat_(&__cat) {}
+        -:  420:
+        -:  421:    template <class _Ep>
+        -:  422:        _LIBCPP_ALWAYS_INLINE
+        -:  423:        error_condition(_Ep __e,
+        -:  424:              typename enable_if<is_error_condition_enum<_Ep>::value>::type* = 0
+        -:  425:                                                                     ) _NOEXCEPT
+        -:  426:            {*this = make_error_condition(__e);}
+        -:  427:
+        -:  428:    _LIBCPP_ALWAYS_INLINE
+        -:  429:    void assign(int __val, const error_category& __cat) _NOEXCEPT
+        -:  430:    {
+        -:  431:        __val_ = __val;
+        -:  432:        __cat_ = &__cat;
+        -:  433:    }
+        -:  434:
+        -:  435:    template <class _Ep>
+        -:  436:        _LIBCPP_ALWAYS_INLINE
+        -:  437:        typename enable_if
+        -:  438:        <
+        -:  439:            is_error_condition_enum<_Ep>::value,
+        -:  440:            error_condition&
+        -:  441:        >::type
+        -:  442:        operator=(_Ep __e) _NOEXCEPT
+        -:  443:            {*this = make_error_condition(__e); return *this;}
+        -:  444:
+        -:  445:    _LIBCPP_ALWAYS_INLINE
+        -:  446:    void clear() _NOEXCEPT
+        -:  447:    {
+        -:  448:        __val_ = 0;
+        -:  449:        __cat_ = &generic_category();
+        -:  450:    }
+        -:  451:
+        -:  452:    _LIBCPP_ALWAYS_INLINE
+        -:  453:    int value() const _NOEXCEPT {return __val_;}
+        -:  454:
+        -:  455:    _LIBCPP_ALWAYS_INLINE
+        -:  456:    const error_category& category() const _NOEXCEPT {return *__cat_;}
+        -:  457:    string message() const;
+        -:  458:
+        -:  459:    _LIBCPP_ALWAYS_INLINE
+        -:  460:        _LIBCPP_EXPLICIT
+        -:  461:        operator bool() const _NOEXCEPT {return __val_ != 0;}
+        -:  462:};
+        -:  463:
+        -:  464:inline _LIBCPP_INLINE_VISIBILITY
+        -:  465:error_condition
+        -:  466:make_error_condition(errc __e) _NOEXCEPT
+        -:  467:{
+        -:  468:    return error_condition(static_cast<int>(__e), generic_category());
+        -:  469:}
+        -:  470:
+        -:  471:inline _LIBCPP_INLINE_VISIBILITY
+        -:  472:bool
+        -:  473:operator<(const error_condition& __x, const error_condition& __y) _NOEXCEPT
+        -:  474:{
+        -:  475:    return __x.category() < __y.category()
+        -:  476:        || (__x.category() == __y.category() && __x.value() < __y.value());
+        -:  477:}
+        -:  478:
+        -:  479:// error_code
+        -:  480:
+        -:  481:class _LIBCPP_TYPE_VIS error_code
+        -:  482:{
+        -:  483:    int __val_;
+        -:  484:    const error_category* __cat_;
+        -:  485:public:
+        -:  486:    _LIBCPP_ALWAYS_INLINE
+        -:  487:    error_code() _NOEXCEPT : __val_(0), __cat_(&system_category()) {}
+        -:  488:
+        -:  489:    _LIBCPP_ALWAYS_INLINE
+        -:  490:    error_code(int __val, const error_category& __cat) _NOEXCEPT
+    #####:  491:        : __val_(__val), __cat_(&__cat) {}
+        -:  492:
+        -:  493:    template <class _Ep>
+        -:  494:        _LIBCPP_ALWAYS_INLINE
+        -:  495:        error_code(_Ep __e,
+        -:  496:                   typename enable_if<is_error_code_enum<_Ep>::value>::type* = 0
+        -:  497:                                                                     ) _NOEXCEPT
+        -:  498:            {*this = make_error_code(__e);}
+        -:  499:
+        -:  500:    _LIBCPP_ALWAYS_INLINE
+        -:  501:    void assign(int __val, const error_category& __cat) _NOEXCEPT
+        -:  502:    {
+        -:  503:        __val_ = __val;
+        -:  504:        __cat_ = &__cat;
+        -:  505:    }
+        -:  506:
+        -:  507:    template <class _Ep>
+        -:  508:        _LIBCPP_ALWAYS_INLINE
+        -:  509:        typename enable_if
+        -:  510:        <
+        -:  511:            is_error_code_enum<_Ep>::value,
+        -:  512:            error_code&
+        -:  513:        >::type
+        -:  514:        operator=(_Ep __e) _NOEXCEPT
+        -:  515:            {*this = make_error_code(__e); return *this;}
+        -:  516:
+        -:  517:    _LIBCPP_ALWAYS_INLINE
+        -:  518:    void clear() _NOEXCEPT
+        -:  519:    {
+        -:  520:        __val_ = 0;
+        -:  521:        __cat_ = &system_category();
+        -:  522:    }
+        -:  523:
+        -:  524:    _LIBCPP_ALWAYS_INLINE
+        -:  525:    int value() const _NOEXCEPT {return __val_;}
+        -:  526:
+        -:  527:    _LIBCPP_ALWAYS_INLINE
+        -:  528:    const error_category& category() const _NOEXCEPT {return *__cat_;}
+        -:  529:
+        -:  530:    _LIBCPP_ALWAYS_INLINE
+        -:  531:    error_condition default_error_condition() const _NOEXCEPT
+        -:  532:        {return __cat_->default_error_condition(__val_);}
+        -:  533:
+        -:  534:    string message() const;
+        -:  535:
+        -:  536:    _LIBCPP_ALWAYS_INLINE
+        -:  537:        _LIBCPP_EXPLICIT
+        -:  538:        operator bool() const _NOEXCEPT {return __val_ != 0;}
+        -:  539:};
+        -:  540:
+        -:  541:inline _LIBCPP_INLINE_VISIBILITY
+        -:  542:error_code
+        -:  543:make_error_code(errc __e) _NOEXCEPT
+        -:  544:{
+        -:  545:    return error_code(static_cast<int>(__e), generic_category());
+        -:  546:}
+        -:  547:
+        -:  548:inline _LIBCPP_INLINE_VISIBILITY
+        -:  549:bool
+        -:  550:operator<(const error_code& __x, const error_code& __y) _NOEXCEPT
+        -:  551:{
+        -:  552:    return __x.category() < __y.category()
+        -:  553:        || (__x.category() == __y.category() && __x.value() < __y.value());
+        -:  554:}
+        -:  555:
+        -:  556:inline _LIBCPP_INLINE_VISIBILITY
+        -:  557:bool
+        -:  558:operator==(const error_code& __x, const error_code& __y) _NOEXCEPT
+        -:  559:{
+        -:  560:    return __x.category() == __y.category() && __x.value() == __y.value();
+        -:  561:}
+        -:  562:
+        -:  563:inline _LIBCPP_INLINE_VISIBILITY
+        -:  564:bool
+        -:  565:operator==(const error_code& __x, const error_condition& __y) _NOEXCEPT
+        -:  566:{
+        -:  567:    return __x.category().equivalent(__x.value(), __y)
+        -:  568:        || __y.category().equivalent(__x, __y.value());
+        -:  569:}
+        -:  570:
+        -:  571:inline _LIBCPP_INLINE_VISIBILITY
+        -:  572:bool
+        -:  573:operator==(const error_condition& __x, const error_code& __y) _NOEXCEPT
+        -:  574:{
+        -:  575:    return __y == __x;
+        -:  576:}
+        -:  577:
+        -:  578:inline _LIBCPP_INLINE_VISIBILITY
+        -:  579:bool
+        -:  580:operator==(const error_condition& __x, const error_condition& __y) _NOEXCEPT
+        -:  581:{
+        -:  582:    return __x.category() == __y.category() && __x.value() == __y.value();
+        -:  583:}
+        -:  584:
+        -:  585:inline _LIBCPP_INLINE_VISIBILITY
+        -:  586:bool
+        -:  587:operator!=(const error_code& __x, const error_code& __y) _NOEXCEPT
+        -:  588:{return !(__x == __y);}
+        -:  589:
+        -:  590:inline _LIBCPP_INLINE_VISIBILITY
+        -:  591:bool
+        -:  592:operator!=(const error_code& __x, const error_condition& __y) _NOEXCEPT
+        -:  593:{return !(__x == __y);}
+        -:  594:
+        -:  595:inline _LIBCPP_INLINE_VISIBILITY
+        -:  596:bool
+        -:  597:operator!=(const error_condition& __x, const error_code& __y) _NOEXCEPT
+        -:  598:{return !(__x == __y);}
+        -:  599:
+        -:  600:inline _LIBCPP_INLINE_VISIBILITY
+        -:  601:bool
+        -:  602:operator!=(const error_condition& __x, const error_condition& __y) _NOEXCEPT
+        -:  603:{return !(__x == __y);}
+        -:  604:
+        -:  605:template <>
+        -:  606:struct _LIBCPP_TYPE_VIS_ONLY hash<error_code>
+        -:  607:    : public unary_function<error_code, size_t>
+        -:  608:{
+        -:  609:    _LIBCPP_INLINE_VISIBILITY
+        -:  610:    size_t operator()(const error_code& __ec) const _NOEXCEPT
+        -:  611:    {
+        -:  612:        return static_cast<size_t>(__ec.value());
+        -:  613:    }
+        -:  614:};
+        -:  615:
+        -:  616:// system_error
+        -:  617:
+        -:  618:class _LIBCPP_TYPE_VIS system_error
+        -:  619:    : public runtime_error
+        -:  620:{
+        -:  621:    error_code __ec_;
+        -:  622:public:
+        -:  623:    system_error(error_code __ec, const string& __what_arg);
+        -:  624:    system_error(error_code __ec, const char* __what_arg);
+        -:  625:    system_error(error_code __ec);
+        -:  626:    system_error(int __ev, const error_category& __ecat, const string& __what_arg);
+        -:  627:    system_error(int __ev, const error_category& __ecat, const char* __what_arg);
+        -:  628:    system_error(int __ev, const error_category& __ecat);
+        -:  629:    ~system_error() _NOEXCEPT;
+        -:  630:
+        -:  631:    _LIBCPP_ALWAYS_INLINE
+        -:  632:    const error_code& code() const _NOEXCEPT {return __ec_;}
+        -:  633:
+        -:  634:private:
+        -:  635:    static string __init(const error_code&, string);
+        -:  636:};
+        -:  637:
+        -:  638:_LIBCPP_FUNC_VIS void __throw_system_error(int ev, const char* what_arg);
+        -:  639:
+        -:  640:_LIBCPP_END_NAMESPACE_STD
+        -:  641:
+        -:  642:#endif  // _LIBCPP_SYSTEM_ERROR

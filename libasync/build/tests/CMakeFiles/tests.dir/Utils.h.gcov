@@ -1,0 +1,61 @@
+        -:    0:Source:/Users/wjp/Desktop/workspace/libasync/libasync/./src/Utils.h
+        -:    0:Graph:/Users/wjp/Desktop/workspace/libasync/libasync/build/tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.gcno
+        -:    0:Data:/Users/wjp/Desktop/workspace/libasync/libasync/build/tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.gcda
+        -:    0:Runs:2
+        -:    0:Programs:1
+        -:    1:/*
+        -:    2:* MIT License
+        -:    3:*
+        -:    4:* Copyright (c) 2018 jipeng wu
+        -:    5:* <recvfromsockaddr at gmail dot com>
+        -:    6:*
+        -:    7:* Permission is hereby granted, free of charge, to any person obtaining a copy
+        -:    8:* of this software and associated documentation files (the "Software"), to deal
+        -:    9:* in the Software without restriction, including without limitation the rights
+        -:   10:* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        -:   11:* copies of the Software, and to permit persons to whom the Software is
+        -:   12:* furnished to do so, subject to the following conditions:
+        -:   13:*
+        -:   14:* The above copyright notice and this permission notice shall be included in all
+        -:   15:* copies or substantial portions of the Software.
+        -:   16:*
+        -:   17:* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        -:   18:* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        -:   19:* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        -:   20:* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        -:   21:* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        -:   22:* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        -:   23:* SOFTWARE.
+        -:   24:*/
+        -:   25:
+        -:   26:#pragma once
+        -:   27:
+        -:   28:#include "Common.h"
+        -:   29:
+        -:   30:namespace wjp{
+        -:   31:    using days = std::chrono::duration<int, std::ratio<3600*24,1>>;
+        -:   32:    using time_point = std::chrono::high_resolution_clock::time_point;
+        -:   33:
+        -:   34:    static inline void              sleep(int ms)
+        -:   35:    {
+     1865:   36:        std::this_thread::sleep_for(std::chrono::milliseconds(ms));
+     1865:   37:    }
+        -:   38:
+        -:   39:    static inline time_point        now()
+        -:   40:    {
+        -:   41:        return std::chrono::high_resolution_clock::now();
+        -:   42:    }
+        -:   43:    
+        -:   44:    
+        -:   45:    template <int MIN, int MAX>
+        -:   46:    static int                      randint(){
+     3865:   47:        static std::uniform_int_distribution<unsigned> u(0,9);
+     1911:   48:        static std::default_random_engine e(time(0));
+     1846:   49:        return u(e);
+    #####:   50:    }
+        -:   51:
+        -:   52:
+        -:   53:
+        -:   54:
+        -:   55:
+        -:   56:}

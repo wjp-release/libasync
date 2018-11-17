@@ -25,4 +25,5 @@ script:
   - ./tests/tests
 
 after_success:
-  - coveralls --root . -E ".*gtest.*" -E ".*CMakeFiles.*" 
+  - cd ../..
+  - coveralls --root ./libasync/build -E ".*gtest.*" -E ".*CMakeFiles.*" 

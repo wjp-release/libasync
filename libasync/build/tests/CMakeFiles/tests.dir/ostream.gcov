@@ -1,0 +1,1120 @@
+        -:    0:Source:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/ostream
+        -:    0:Graph:/Users/wjp/Desktop/workspace/libasync/libasync/build/tests/CMakeFiles/tests.dir/SystemIntegrationTOT.cc.gcno
+        -:    0:Data:/Users/wjp/Desktop/workspace/libasync/libasync/build/tests/CMakeFiles/tests.dir/SystemIntegrationTOT.cc.gcda
+        -:    0:Runs:2
+        -:    0:Programs:1
+        -:    1:// -*- C++ -*-
+        -:    2://===-------------------------- ostream -----------------------------------===//
+        -:    3://
+        -:    4://                     The LLVM Compiler Infrastructure
+        -:    5://
+        -:    6:// This file is dual licensed under the MIT and the University of Illinois Open
+        -:    7:// Source Licenses. See LICENSE.TXT for details.
+        -:    8://
+        -:    9://===----------------------------------------------------------------------===//
+        -:   10:
+        -:   11:#ifndef _LIBCPP_OSTREAM
+        -:   12:#define _LIBCPP_OSTREAM
+        -:   13:
+        -:   14:/*
+        -:   15:    ostream synopsis
+        -:   16:
+        -:   17:template <class charT, class traits = char_traits<charT> >
+        -:   18:class basic_ostream
+        -:   19:    : virtual public basic_ios<charT,traits>
+        -:   20:{
+        -:   21:public:
+        -:   22:    // types (inherited from basic_ios (27.5.4)):
+        -:   23:    typedef charT                          char_type;
+        -:   24:    typedef traits                         traits_type;
+        -:   25:    typedef typename traits_type::int_type int_type;
+        -:   26:    typedef typename traits_type::pos_type pos_type;
+        -:   27:    typedef typename traits_type::off_type off_type;
+        -:   28:
+        -:   29:    // 27.7.2.2 Constructor/destructor:
+        -:   30:    explicit basic_ostream(basic_streambuf<char_type,traits>* sb);
+        -:   31:    basic_ostream(basic_ostream&& rhs);
+        -:   32:    virtual ~basic_ostream();
+        -:   33:
+        -:   34:    // 27.7.2.3 Assign/swap
+        -:   35:    basic_ostream& operator=(const basic_ostream& rhs) = delete; // C++14
+        -:   36:    basic_ostream& operator=(basic_ostream&& rhs);
+        -:   37:    void swap(basic_ostream& rhs);
+        -:   38:
+        -:   39:    // 27.7.2.4 Prefix/suffix:
+        -:   40:    class sentry;
+        -:   41:
+        -:   42:    // 27.7.2.6 Formatted output:
+        -:   43:    basic_ostream& operator<<(basic_ostream& (*pf)(basic_ostream&));
+        -:   44:    basic_ostream& operator<<(basic_ios<charT, traits>& (*pf)(basic_ios<charT,traits>&));
+        -:   45:    basic_ostream& operator<<(ios_base& (*pf)(ios_base&));
+        -:   46:    basic_ostream& operator<<(bool n);
+        -:   47:    basic_ostream& operator<<(short n);
+        -:   48:    basic_ostream& operator<<(unsigned short n);
+        -:   49:    basic_ostream& operator<<(int n);
+        -:   50:    basic_ostream& operator<<(unsigned int n);
+        -:   51:    basic_ostream& operator<<(long n);
+        -:   52:    basic_ostream& operator<<(unsigned long n);
+        -:   53:    basic_ostream& operator<<(long long n);
+        -:   54:    basic_ostream& operator<<(unsigned long long n);
+        -:   55:    basic_ostream& operator<<(float f);
+        -:   56:    basic_ostream& operator<<(double f);
+        -:   57:    basic_ostream& operator<<(long double f);
+        -:   58:    basic_ostream& operator<<(const void* p);
+        -:   59:    basic_ostream& operator<<(basic_streambuf<char_type,traits>* sb);
+        -:   60:
+        -:   61:    // 27.7.2.7 Unformatted output:
+        -:   62:    basic_ostream& put(char_type c);
+        -:   63:    basic_ostream& write(const char_type* s, streamsize n);
+        -:   64:    basic_ostream& flush();
+        -:   65:
+        -:   66:    // 27.7.2.5 seeks:
+        -:   67:    pos_type tellp();
+        -:   68:    basic_ostream& seekp(pos_type);
+        -:   69:    basic_ostream& seekp(off_type, ios_base::seekdir);
+        -:   70:protected:
+        -:   71:    basic_ostream(const basic_ostream& rhs) = delete;
+        -:   72:    basic_ostream(basic_ostream&& rhs);
+        -:   73:    // 27.7.3.3 Assign/swap
+        -:   74:    basic_ostream& operator=(basic_ostream& rhs) = delete;
+        -:   75:    basic_ostream& operator=(const basic_ostream&& rhs);
+        -:   76:    void swap(basic_ostream& rhs);
+        -:   77:};
+        -:   78:
+        -:   79:// 27.7.2.6.4 character inserters
+        -:   80:
+        -:   81:template<class charT, class traits>
+        -:   82:  basic_ostream<charT,traits>& operator<<(basic_ostream<charT,traits>&, charT);
+        -:   83:
+        -:   84:template<class charT, class traits>
+        -:   85:  basic_ostream<charT,traits>& operator<<(basic_ostream<charT,traits>&, char);
+        -:   86:
+        -:   87:template<class traits>
+        -:   88:  basic_ostream<char,traits>& operator<<(basic_ostream<char,traits>&, char);
+        -:   89:
+        -:   90:// signed and unsigned
+        -:   91:
+        -:   92:template<class traits>
+        -:   93:  basic_ostream<char,traits>& operator<<(basic_ostream<char,traits>&, signed char);
+        -:   94:
+        -:   95:template<class traits>
+        -:   96:  basic_ostream<char,traits>& operator<<(basic_ostream<char,traits>&, unsigned char);
+        -:   97:
+        -:   98:// NTBS
+        -:   99:template<class charT, class traits>
+        -:  100:  basic_ostream<charT,traits>& operator<<(basic_ostream<charT,traits>&, const charT*);
+        -:  101:
+        -:  102:template<class charT, class traits>
+        -:  103:  basic_ostream<charT,traits>& operator<<(basic_ostream<charT,traits>&, const char*);
+        -:  104:
+        -:  105:template<class traits>
+        -:  106:  basic_ostream<char,traits>& operator<<(basic_ostream<char,traits>&, const char*);
+        -:  107:
+        -:  108:// signed and unsigned
+        -:  109:template<class traits>
+        -:  110:basic_ostream<char,traits>& operator<<(basic_ostream<char,traits>&, const signed char*);
+        -:  111:
+        -:  112:template<class traits>
+        -:  113:  basic_ostream<char,traits>& operator<<(basic_ostream<char,traits>&, const unsigned char*);
+        -:  114:
+        -:  115:// swap:
+        -:  116:template <class charT, class traits>
+        -:  117:  void swap(basic_ostream<charT, traits>& x, basic_ostream<charT, traits>& y);
+        -:  118:
+        -:  119:template <class charT, class traits>
+        -:  120:  basic_ostream<charT,traits>& endl(basic_ostream<charT,traits>& os);
+        -:  121:
+        -:  122:template <class charT, class traits>
+        -:  123:  basic_ostream<charT,traits>& ends(basic_ostream<charT,traits>& os);
+        -:  124:
+        -:  125:template <class charT, class traits>
+        -:  126:  basic_ostream<charT,traits>& flush(basic_ostream<charT,traits>& os);
+        -:  127:
+        -:  128:// rvalue stream insertion
+        -:  129:template <class charT, class traits, class T>
+        -:  130:  basic_ostream<charT, traits>&
+        -:  131:  operator<<(basic_ostream<charT, traits>&& os, const T& x);
+        -:  132:
+        -:  133:}  // std
+        -:  134:
+        -:  135:*/
+        -:  136:
+        -:  137:#include <__config>
+        -:  138:#include <ios>
+        -:  139:#include <streambuf>
+        -:  140:#include <locale>
+        -:  141:#include <iterator>
+        -:  142:#include <bitset>
+        -:  143:
+        -:  144:#if !defined(_LIBCPP_HAS_NO_PRAGMA_SYSTEM_HEADER)
+        -:  145:#pragma GCC system_header
+        -:  146:#endif
+        -:  147:
+        -:  148:_LIBCPP_BEGIN_NAMESPACE_STD
+        -:  149:
+        -:  150:template <class _CharT, class _Traits>
+        -:  151:class _LIBCPP_TYPE_VIS_ONLY basic_ostream
+        -:  152:    : virtual public basic_ios<_CharT, _Traits>
+        -:  153:{
+        -:  154:public:
+        -:  155:    // types (inherited from basic_ios (27.5.4)):
+        -:  156:    typedef _CharT                         char_type;
+        -:  157:    typedef _Traits                        traits_type;
+        -:  158:    typedef typename traits_type::int_type int_type;
+        -:  159:    typedef typename traits_type::pos_type pos_type;
+        -:  160:    typedef typename traits_type::off_type off_type;
+        -:  161:
+        -:  162:    // 27.7.2.2 Constructor/destructor:
+        -:  163:    explicit basic_ostream(basic_streambuf<char_type, traits_type>* __sb);
+        -:  164:    virtual ~basic_ostream();
+        -:  165:protected:
+        -:  166:#ifndef _LIBCPP_HAS_NO_RVALUE_REFERENCES
+        -:  167:    _LIBCPP_INLINE_VISIBILITY
+        -:  168:    basic_ostream(basic_ostream&& __rhs);
+        -:  169:#endif
+        -:  170:
+        -:  171:    // 27.7.2.3 Assign/swap
+        -:  172:#ifndef _LIBCPP_HAS_NO_RVALUE_REFERENCES
+        -:  173:    _LIBCPP_INLINE_VISIBILITY
+        -:  174:    basic_ostream& operator=(basic_ostream&& __rhs);
+        -:  175:#endif
+        -:  176:    void swap(basic_ostream& __rhs);
+        -:  177:
+        -:  178:#ifndef _LIBCPP_HAS_NO_DELETED_FUNCTIONS
+        -:  179:    basic_ostream           (const basic_ostream& __rhs) = delete;
+        -:  180:    basic_ostream& operator=(const basic_ostream& __rhs) = delete;
+        -:  181:#else
+        -:  182:    basic_ostream           (const basic_ostream& __rhs); // not defined
+        -:  183:    basic_ostream& operator=(const basic_ostream& __rhs); // not defined
+        -:  184:#endif
+        -:  185:public:
+        -:  186:
+        -:  187:    // 27.7.2.4 Prefix/suffix:
+        -:  188:    class _LIBCPP_TYPE_VIS_ONLY sentry;
+        -:  189:
+        -:  190:    // 27.7.2.6 Formatted output:
+        -:  191:    basic_ostream& operator<<(basic_ostream& (*__pf)(basic_ostream&));
+        -:  192:    basic_ostream& operator<<(basic_ios<char_type, traits_type>&
+        -:  193:                              (*__pf)(basic_ios<char_type,traits_type>&));
+        -:  194:    basic_ostream& operator<<(ios_base& (*__pf)(ios_base&));
+        -:  195:    basic_ostream& operator<<(bool __n);
+        -:  196:    basic_ostream& operator<<(short __n);
+        -:  197:    basic_ostream& operator<<(unsigned short __n);
+        -:  198:    basic_ostream& operator<<(int __n);
+        -:  199:    basic_ostream& operator<<(unsigned int __n);
+        -:  200:    basic_ostream& operator<<(long __n);
+        -:  201:    basic_ostream& operator<<(unsigned long __n);
+        -:  202:    basic_ostream& operator<<(long long __n);
+        -:  203:    basic_ostream& operator<<(unsigned long long __n);
+        -:  204:    basic_ostream& operator<<(float __f);
+        -:  205:    basic_ostream& operator<<(double __f);
+        -:  206:    basic_ostream& operator<<(long double __f);
+        -:  207:    basic_ostream& operator<<(const void* __p);
+        -:  208:    basic_ostream& operator<<(basic_streambuf<char_type, traits_type>* __sb);
+        -:  209:
+        -:  210:    // 27.7.2.7 Unformatted output:
+        -:  211:    basic_ostream& put(char_type __c);
+        -:  212:    basic_ostream& write(const char_type* __s, streamsize __n);
+        -:  213:    basic_ostream& flush();
+        -:  214:
+        -:  215:    // 27.7.2.5 seeks:
+        -:  216:    pos_type tellp();
+        -:  217:    basic_ostream& seekp(pos_type __pos);
+        -:  218:    basic_ostream& seekp(off_type __off, ios_base::seekdir __dir);
+        -:  219:
+        -:  220:protected:
+        -:  221:    _LIBCPP_ALWAYS_INLINE
+    #####:  222:    basic_ostream() {}  // extension, intentially does not initialize
+        -:  223:};
+        -:  224:
+        -:  225:template <class _CharT, class _Traits>
+        -:  226:class _LIBCPP_TYPE_VIS_ONLY basic_ostream<_CharT, _Traits>::sentry
+        -:  227:{
+        -:  228:    bool __ok_;
+        -:  229:    basic_ostream<_CharT, _Traits>& __os_;
+        -:  230:
+        -:  231:    sentry(const sentry&); // = delete;
+        -:  232:    sentry& operator=(const sentry&); // = delete;
+        -:  233:
+        -:  234:public:
+        -:  235:    explicit sentry(basic_ostream<_CharT, _Traits>& __os);
+        -:  236:    ~sentry();
+        -:  237:
+        -:  238:    _LIBCPP_ALWAYS_INLINE
+        -:  239:        _LIBCPP_EXPLICIT
+        -:  240:        operator bool() const {return __ok_;}
+        -:  241:};
+        -:  242:
+        -:  243:template <class _CharT, class _Traits>
+        -:  244:basic_ostream<_CharT, _Traits>::sentry::sentry(basic_ostream<_CharT, _Traits>& __os)
+        -:  245:    : __ok_(false),
+        -:  246:      __os_(__os)
+        -:  247:{
+        -:  248:    if (__os.good())
+        -:  249:    {
+        -:  250:        if (__os.tie())
+        -:  251:            __os.tie()->flush();
+        -:  252:        __ok_ = true;
+        -:  253:    }
+        -:  254:}
+        -:  255:
+        -:  256:template <class _CharT, class _Traits>
+        -:  257:basic_ostream<_CharT, _Traits>::sentry::~sentry()
+        -:  258:{
+        -:  259:    if (__os_.rdbuf() && __os_.good() && (__os_.flags() & ios_base::unitbuf)
+        -:  260:                      && !uncaught_exception())
+        -:  261:    {
+        -:  262:#ifndef _LIBCPP_NO_EXCEPTIONS
+        -:  263:        try
+        -:  264:        {
+        -:  265:#endif  // _LIBCPP_NO_EXCEPTIONS
+        -:  266:            if (__os_.rdbuf()->pubsync() == -1)
+        -:  267:                __os_.setstate(ios_base::badbit);
+        -:  268:#ifndef _LIBCPP_NO_EXCEPTIONS
+        -:  269:        }
+        -:  270:        catch (...)
+        -:  271:        {
+        -:  272:        }
+        -:  273:#endif  // _LIBCPP_NO_EXCEPTIONS
+        -:  274:    }
+        -:  275:}
+        -:  276:
+        -:  277:template <class _CharT, class _Traits>
+        -:  278:inline _LIBCPP_INLINE_VISIBILITY
+        -:  279:basic_ostream<_CharT, _Traits>::basic_ostream(basic_streambuf<char_type, traits_type>* __sb)
+        -:  280:{
+        -:  281:    this->init(__sb);
+        -:  282:}
+        -:  283:
+        -:  284:#ifndef _LIBCPP_HAS_NO_RVALUE_REFERENCES
+        -:  285:
+        -:  286:template <class _CharT, class _Traits>
+        -:  287:inline _LIBCPP_INLINE_VISIBILITY
+        -:  288:basic_ostream<_CharT, _Traits>::basic_ostream(basic_ostream&& __rhs)
+        -:  289:{
+        -:  290:    this->move(__rhs);
+        -:  291:}
+        -:  292:
+        -:  293:template <class _CharT, class _Traits>
+        -:  294:inline _LIBCPP_INLINE_VISIBILITY
+        -:  295:basic_ostream<_CharT, _Traits>&
+        -:  296:basic_ostream<_CharT, _Traits>::operator=(basic_ostream&& __rhs)
+        -:  297:{
+        -:  298:    swap(__rhs);
+        -:  299:    return *this;
+        -:  300:}
+        -:  301:
+        -:  302:#endif  // _LIBCPP_HAS_NO_RVALUE_REFERENCES
+        -:  303:
+        -:  304:template <class _CharT, class _Traits>
+        -:  305:basic_ostream<_CharT, _Traits>::~basic_ostream()
+        -:  306:{
+        -:  307:}
+        -:  308:
+        -:  309:template <class _CharT, class _Traits>
+        -:  310:inline _LIBCPP_INLINE_VISIBILITY
+        -:  311:void
+        -:  312:basic_ostream<_CharT, _Traits>::swap(basic_ostream& __rhs)
+        -:  313:{
+        -:  314:    basic_ios<char_type, traits_type>::swap(__rhs);
+        -:  315:}
+        -:  316:
+        -:  317:template <class _CharT, class _Traits>
+        -:  318:inline _LIBCPP_INLINE_VISIBILITY
+        -:  319:basic_ostream<_CharT, _Traits>&
+        -:  320:basic_ostream<_CharT, _Traits>::operator<<(basic_ostream& (*__pf)(basic_ostream&))
+        -:  321:{
+        -:  322:    return __pf(*this);
+        -:  323:}
+        -:  324:
+        -:  325:template <class _CharT, class _Traits>
+        -:  326:inline _LIBCPP_INLINE_VISIBILITY
+        -:  327:basic_ostream<_CharT, _Traits>&
+        -:  328:basic_ostream<_CharT, _Traits>::operator<<(basic_ios<char_type, traits_type>&
+        -:  329:                                           (*__pf)(basic_ios<char_type,traits_type>&))
+        -:  330:{
+        -:  331:    __pf(*this);
+        -:  332:    return *this;
+        -:  333:}
+        -:  334:
+        -:  335:template <class _CharT, class _Traits>
+        -:  336:inline _LIBCPP_INLINE_VISIBILITY
+        -:  337:basic_ostream<_CharT, _Traits>&
+        -:  338:basic_ostream<_CharT, _Traits>::operator<<(ios_base& (*__pf)(ios_base&))
+        -:  339:{
+        -:  340:    __pf(*this);
+        -:  341:    return *this;
+        -:  342:}
+        -:  343:
+        -:  344:template <class _CharT, class _Traits>
+        -:  345:basic_ostream<_CharT, _Traits>&
+        -:  346:basic_ostream<_CharT, _Traits>::operator<<(basic_streambuf<char_type, traits_type>* __sb)
+        -:  347:{
+        -:  348:#ifndef _LIBCPP_NO_EXCEPTIONS
+        -:  349:    try
+        -:  350:    {
+        -:  351:#endif  // _LIBCPP_NO_EXCEPTIONS
+        -:  352:        sentry __s(*this);
+        -:  353:        if (__s)
+        -:  354:        {
+        -:  355:            if (__sb)
+        -:  356:            {
+        -:  357:#ifndef _LIBCPP_NO_EXCEPTIONS
+        -:  358:                try
+        -:  359:                {
+        -:  360:#endif  // _LIBCPP_NO_EXCEPTIONS
+        -:  361:                    typedef istreambuf_iterator<_CharT, _Traits> _Ip;
+        -:  362:                    typedef ostreambuf_iterator<_CharT, _Traits> _Op;
+        -:  363:                    _Ip __i(__sb);
+        -:  364:                    _Ip __eof;
+        -:  365:                    _Op __o(*this);
+        -:  366:                    size_t __c = 0;
+        -:  367:                    for (; __i != __eof; ++__i, ++__o, ++__c)
+        -:  368:                    {
+        -:  369:                        *__o = *__i;
+        -:  370:                        if (__o.failed())
+        -:  371:                            break;
+        -:  372:                    }
+        -:  373:                    if (__c == 0)
+        -:  374:                        this->setstate(ios_base::failbit);
+        -:  375:#ifndef _LIBCPP_NO_EXCEPTIONS
+        -:  376:                }
+        -:  377:                catch (...)
+        -:  378:                {
+        -:  379:                    this->__set_failbit_and_consider_rethrow();
+        -:  380:                }
+        -:  381:#endif  // _LIBCPP_NO_EXCEPTIONS
+        -:  382:            }
+        -:  383:            else
+        -:  384:                this->setstate(ios_base::badbit);
+        -:  385:        }
+        -:  386:#ifndef _LIBCPP_NO_EXCEPTIONS
+        -:  387:    }
+        -:  388:    catch (...)
+        -:  389:    {
+        -:  390:        this->__set_badbit_and_consider_rethrow();
+        -:  391:    }
+        -:  392:#endif  // _LIBCPP_NO_EXCEPTIONS
+        -:  393:    return *this;
+        -:  394:}
+        -:  395:
+        -:  396:template <class _CharT, class _Traits>
+        -:  397:basic_ostream<_CharT, _Traits>&
+        -:  398:basic_ostream<_CharT, _Traits>::operator<<(bool __n)
+        -:  399:{
+        -:  400:#ifndef _LIBCPP_NO_EXCEPTIONS
+        -:  401:    try
+        -:  402:    {
+        -:  403:#endif  // _LIBCPP_NO_EXCEPTIONS
+        -:  404:        sentry __s(*this);
+        -:  405:        if (__s)
+        -:  406:        {
+        -:  407:            typedef num_put<char_type, ostreambuf_iterator<char_type, traits_type> > _Fp;
+        -:  408:            const _Fp& __f = use_facet<_Fp>(this->getloc());
+        -:  409:            if (__f.put(*this, *this, this->fill(), __n).failed())
+        -:  410:                this->setstate(ios_base::badbit | ios_base::failbit);
+        -:  411:        }
+        -:  412:#ifndef _LIBCPP_NO_EXCEPTIONS
+        -:  413:    }
+        -:  414:    catch (...)
+        -:  415:    {
+        -:  416:        this->__set_badbit_and_consider_rethrow();
+        -:  417:    }
+        -:  418:#endif  // _LIBCPP_NO_EXCEPTIONS
+        -:  419:    return *this;
+        -:  420:}
+        -:  421:
+        -:  422:template <class _CharT, class _Traits>
+        -:  423:basic_ostream<_CharT, _Traits>&
+        -:  424:basic_ostream<_CharT, _Traits>::operator<<(short __n)
+        -:  425:{
+        -:  426:#ifndef _LIBCPP_NO_EXCEPTIONS
+        -:  427:    try
+        -:  428:    {
+        -:  429:#endif  // _LIBCPP_NO_EXCEPTIONS
+        -:  430:        sentry __s(*this);
+        -:  431:        if (__s)
+        -:  432:        {
+        -:  433:            ios_base::fmtflags __flags = ios_base::flags() & ios_base::basefield;
+        -:  434:            typedef num_put<char_type, ostreambuf_iterator<char_type, traits_type> > _Fp;
+        -:  435:            const _Fp& __f = use_facet<_Fp>(this->getloc());
+        -:  436:            if (__f.put(*this, *this, this->fill(),
+        -:  437:                        __flags == ios_base::oct || __flags == ios_base::hex ?
+        -:  438:                        static_cast<long>(static_cast<unsigned short>(__n))  :
+        -:  439:                        static_cast<long>(__n)).failed())
+        -:  440:                this->setstate(ios_base::badbit | ios_base::failbit);
+        -:  441:        }
+        -:  442:#ifndef _LIBCPP_NO_EXCEPTIONS
+        -:  443:    }
+        -:  444:    catch (...)
+        -:  445:    {
+        -:  446:        this->__set_badbit_and_consider_rethrow();
+        -:  447:    }
+        -:  448:#endif  // _LIBCPP_NO_EXCEPTIONS
+        -:  449:    return *this;
+        -:  450:}
+        -:  451:
+        -:  452:template <class _CharT, class _Traits>
+        -:  453:basic_ostream<_CharT, _Traits>&
+        -:  454:basic_ostream<_CharT, _Traits>::operator<<(unsigned short __n)
+        -:  455:{
+        -:  456:#ifndef _LIBCPP_NO_EXCEPTIONS
+        -:  457:    try
+        -:  458:    {
+        -:  459:#endif  // _LIBCPP_NO_EXCEPTIONS
+        -:  460:        sentry __s(*this);
+        -:  461:        if (__s)
+        -:  462:        {
+        -:  463:            typedef num_put<char_type, ostreambuf_iterator<char_type, traits_type> > _Fp;
+        -:  464:            const _Fp& __f = use_facet<_Fp>(this->getloc());
+        -:  465:            if (__f.put(*this, *this, this->fill(), static_cast<unsigned long>(__n)).failed())
+        -:  466:                this->setstate(ios_base::badbit | ios_base::failbit);
+        -:  467:        }
+        -:  468:#ifndef _LIBCPP_NO_EXCEPTIONS
+        -:  469:    }
+        -:  470:    catch (...)
+        -:  471:    {
+        -:  472:        this->__set_badbit_and_consider_rethrow();
+        -:  473:    }
+        -:  474:#endif  // _LIBCPP_NO_EXCEPTIONS
+        -:  475:    return *this;
+        -:  476:}
+        -:  477:
+        -:  478:template <class _CharT, class _Traits>
+        -:  479:basic_ostream<_CharT, _Traits>&
+        -:  480:basic_ostream<_CharT, _Traits>::operator<<(int __n)
+        -:  481:{
+        -:  482:#ifndef _LIBCPP_NO_EXCEPTIONS
+        -:  483:    try
+        -:  484:    {
+        -:  485:#endif  // _LIBCPP_NO_EXCEPTIONS
+        -:  486:        sentry __s(*this);
+        -:  487:        if (__s)
+        -:  488:        {
+        -:  489:            ios_base::fmtflags __flags = ios_base::flags() & ios_base::basefield;
+        -:  490:            typedef num_put<char_type, ostreambuf_iterator<char_type, traits_type> > _Fp;
+        -:  491:            const _Fp& __f = use_facet<_Fp>(this->getloc());
+        -:  492:            if (__f.put(*this, *this, this->fill(),
+        -:  493:                        __flags == ios_base::oct || __flags == ios_base::hex ?
+        -:  494:                        static_cast<long>(static_cast<unsigned int>(__n))  :
+        -:  495:                        static_cast<long>(__n)).failed())
+        -:  496:                this->setstate(ios_base::badbit | ios_base::failbit);
+        -:  497:        }
+        -:  498:#ifndef _LIBCPP_NO_EXCEPTIONS
+        -:  499:    }
+        -:  500:    catch (...)
+        -:  501:    {
+        -:  502:        this->__set_badbit_and_consider_rethrow();
+        -:  503:    }
+        -:  504:#endif  // _LIBCPP_NO_EXCEPTIONS
+        -:  505:    return *this;
+        -:  506:}
+        -:  507:
+        -:  508:template <class _CharT, class _Traits>
+        -:  509:basic_ostream<_CharT, _Traits>&
+        -:  510:basic_ostream<_CharT, _Traits>::operator<<(unsigned int __n)
+        -:  511:{
+        -:  512:#ifndef _LIBCPP_NO_EXCEPTIONS
+        -:  513:    try
+        -:  514:    {
+        -:  515:#endif  // _LIBCPP_NO_EXCEPTIONS
+        -:  516:        sentry __s(*this);
+        -:  517:        if (__s)
+        -:  518:        {
+        -:  519:            typedef num_put<char_type, ostreambuf_iterator<char_type, traits_type> > _Fp;
+        -:  520:            const _Fp& __f = use_facet<_Fp>(this->getloc());
+        -:  521:            if (__f.put(*this, *this, this->fill(), static_cast<unsigned long>(__n)).failed())
+        -:  522:                this->setstate(ios_base::badbit | ios_base::failbit);
+        -:  523:        }
+        -:  524:#ifndef _LIBCPP_NO_EXCEPTIONS
+        -:  525:    }
+        -:  526:    catch (...)
+        -:  527:    {
+        -:  528:        this->__set_badbit_and_consider_rethrow();
+        -:  529:    }
+        -:  530:#endif  // _LIBCPP_NO_EXCEPTIONS
+        -:  531:    return *this;
+        -:  532:}
+        -:  533:
+        -:  534:template <class _CharT, class _Traits>
+        -:  535:basic_ostream<_CharT, _Traits>&
+        -:  536:basic_ostream<_CharT, _Traits>::operator<<(long __n)
+        -:  537:{
+        -:  538:#ifndef _LIBCPP_NO_EXCEPTIONS
+        -:  539:    try
+        -:  540:    {
+        -:  541:#endif  // _LIBCPP_NO_EXCEPTIONS
+        -:  542:        sentry __s(*this);
+        -:  543:        if (__s)
+        -:  544:        {
+        -:  545:            typedef num_put<char_type, ostreambuf_iterator<char_type, traits_type> > _Fp;
+        -:  546:            const _Fp& __f = use_facet<_Fp>(this->getloc());
+        -:  547:            if (__f.put(*this, *this, this->fill(), __n).failed())
+        -:  548:                this->setstate(ios_base::badbit | ios_base::failbit);
+        -:  549:        }
+        -:  550:#ifndef _LIBCPP_NO_EXCEPTIONS
+        -:  551:    }
+        -:  552:    catch (...)
+        -:  553:    {
+        -:  554:        this->__set_badbit_and_consider_rethrow();
+        -:  555:    }
+        -:  556:#endif  // _LIBCPP_NO_EXCEPTIONS
+        -:  557:    return *this;
+        -:  558:}
+        -:  559:
+        -:  560:template <class _CharT, class _Traits>
+        -:  561:basic_ostream<_CharT, _Traits>&
+        -:  562:basic_ostream<_CharT, _Traits>::operator<<(unsigned long __n)
+        -:  563:{
+        -:  564:#ifndef _LIBCPP_NO_EXCEPTIONS
+        -:  565:    try
+        -:  566:    {
+        -:  567:#endif  // _LIBCPP_NO_EXCEPTIONS
+        -:  568:        sentry __s(*this);
+        -:  569:        if (__s)
+        -:  570:        {
+        -:  571:            typedef num_put<char_type, ostreambuf_iterator<char_type, traits_type> > _Fp;
+        -:  572:            const _Fp& __f = use_facet<_Fp>(this->getloc());
+        -:  573:            if (__f.put(*this, *this, this->fill(), __n).failed())
+        -:  574:                this->setstate(ios_base::badbit | ios_base::failbit);
+        -:  575:        }
+        -:  576:#ifndef _LIBCPP_NO_EXCEPTIONS
+        -:  577:    }
+        -:  578:    catch (...)
+        -:  579:    {
+        -:  580:        this->__set_badbit_and_consider_rethrow();
+        -:  581:    }
+        -:  582:#endif  // _LIBCPP_NO_EXCEPTIONS
+        -:  583:    return *this;
+        -:  584:}
+        -:  585:
+        -:  586:template <class _CharT, class _Traits>
+        -:  587:basic_ostream<_CharT, _Traits>&
+        -:  588:basic_ostream<_CharT, _Traits>::operator<<(long long __n)
+        -:  589:{
+        -:  590:#ifndef _LIBCPP_NO_EXCEPTIONS
+        -:  591:    try
+        -:  592:    {
+        -:  593:#endif  // _LIBCPP_NO_EXCEPTIONS
+        -:  594:        sentry __s(*this);
+        -:  595:        if (__s)
+        -:  596:        {
+        -:  597:            typedef num_put<char_type, ostreambuf_iterator<char_type, traits_type> > _Fp;
+        -:  598:            const _Fp& __f = use_facet<_Fp>(this->getloc());
+        -:  599:            if (__f.put(*this, *this, this->fill(), __n).failed())
+        -:  600:                this->setstate(ios_base::badbit | ios_base::failbit);
+        -:  601:        }
+        -:  602:#ifndef _LIBCPP_NO_EXCEPTIONS
+        -:  603:    }
+        -:  604:    catch (...)
+        -:  605:    {
+        -:  606:        this->__set_badbit_and_consider_rethrow();
+        -:  607:    }
+        -:  608:#endif  // _LIBCPP_NO_EXCEPTIONS
+        -:  609:    return *this;
+        -:  610:}
+        -:  611:
+        -:  612:template <class _CharT, class _Traits>
+        -:  613:basic_ostream<_CharT, _Traits>&
+        -:  614:basic_ostream<_CharT, _Traits>::operator<<(unsigned long long __n)
+        -:  615:{
+        -:  616:#ifndef _LIBCPP_NO_EXCEPTIONS
+        -:  617:    try
+        -:  618:    {
+        -:  619:#endif  // _LIBCPP_NO_EXCEPTIONS
+        -:  620:        sentry __s(*this);
+        -:  621:        if (__s)
+        -:  622:        {
+        -:  623:            typedef num_put<char_type, ostreambuf_iterator<char_type, traits_type> > _Fp;
+        -:  624:            const _Fp& __f = use_facet<_Fp>(this->getloc());
+        -:  625:            if (__f.put(*this, *this, this->fill(), __n).failed())
+        -:  626:                this->setstate(ios_base::badbit | ios_base::failbit);
+        -:  627:        }
+        -:  628:#ifndef _LIBCPP_NO_EXCEPTIONS
+        -:  629:    }
+        -:  630:    catch (...)
+        -:  631:    {
+        -:  632:        this->__set_badbit_and_consider_rethrow();
+        -:  633:    }
+        -:  634:#endif  // _LIBCPP_NO_EXCEPTIONS
+        -:  635:    return *this;
+        -:  636:}
+        -:  637:
+        -:  638:template <class _CharT, class _Traits>
+        -:  639:basic_ostream<_CharT, _Traits>&
+        -:  640:basic_ostream<_CharT, _Traits>::operator<<(float __n)
+        -:  641:{
+        -:  642:#ifndef _LIBCPP_NO_EXCEPTIONS
+        -:  643:    try
+        -:  644:    {
+        -:  645:#endif  // _LIBCPP_NO_EXCEPTIONS
+        -:  646:        sentry __s(*this);
+        -:  647:        if (__s)
+        -:  648:        {
+        -:  649:            typedef num_put<char_type, ostreambuf_iterator<char_type, traits_type> > _Fp;
+        -:  650:            const _Fp& __f = use_facet<_Fp>(this->getloc());
+        -:  651:            if (__f.put(*this, *this, this->fill(), static_cast<double>(__n)).failed())
+        -:  652:                this->setstate(ios_base::badbit | ios_base::failbit);
+        -:  653:        }
+        -:  654:#ifndef _LIBCPP_NO_EXCEPTIONS
+        -:  655:    }
+        -:  656:    catch (...)
+        -:  657:    {
+        -:  658:        this->__set_badbit_and_consider_rethrow();
+        -:  659:    }
+        -:  660:#endif  // _LIBCPP_NO_EXCEPTIONS
+        -:  661:    return *this;
+        -:  662:}
+        -:  663:
+        -:  664:template <class _CharT, class _Traits>
+        -:  665:basic_ostream<_CharT, _Traits>&
+        -:  666:basic_ostream<_CharT, _Traits>::operator<<(double __n)
+        -:  667:{
+        -:  668:#ifndef _LIBCPP_NO_EXCEPTIONS
+        -:  669:    try
+        -:  670:    {
+        -:  671:#endif  // _LIBCPP_NO_EXCEPTIONS
+        -:  672:        sentry __s(*this);
+        -:  673:        if (__s)
+        -:  674:        {
+        -:  675:            typedef num_put<char_type, ostreambuf_iterator<char_type, traits_type> > _Fp;
+        -:  676:            const _Fp& __f = use_facet<_Fp>(this->getloc());
+        -:  677:            if (__f.put(*this, *this, this->fill(), __n).failed())
+        -:  678:                this->setstate(ios_base::badbit | ios_base::failbit);
+        -:  679:        }
+        -:  680:#ifndef _LIBCPP_NO_EXCEPTIONS
+        -:  681:    }
+        -:  682:    catch (...)
+        -:  683:    {
+        -:  684:        this->__set_badbit_and_consider_rethrow();
+        -:  685:    }
+        -:  686:#endif  // _LIBCPP_NO_EXCEPTIONS
+        -:  687:    return *this;
+        -:  688:}
+        -:  689:
+        -:  690:template <class _CharT, class _Traits>
+        -:  691:basic_ostream<_CharT, _Traits>&
+        -:  692:basic_ostream<_CharT, _Traits>::operator<<(long double __n)
+        -:  693:{
+        -:  694:#ifndef _LIBCPP_NO_EXCEPTIONS
+        -:  695:    try
+        -:  696:    {
+        -:  697:#endif  // _LIBCPP_NO_EXCEPTIONS
+        -:  698:        sentry __s(*this);
+        -:  699:        if (__s)
+        -:  700:        {
+        -:  701:            typedef num_put<char_type, ostreambuf_iterator<char_type, traits_type> > _Fp;
+        -:  702:            const _Fp& __f = use_facet<_Fp>(this->getloc());
+        -:  703:            if (__f.put(*this, *this, this->fill(), __n).failed())
+        -:  704:                this->setstate(ios_base::badbit | ios_base::failbit);
+        -:  705:        }
+        -:  706:#ifndef _LIBCPP_NO_EXCEPTIONS
+        -:  707:    }
+        -:  708:    catch (...)
+        -:  709:    {
+        -:  710:        this->__set_badbit_and_consider_rethrow();
+        -:  711:    }
+        -:  712:#endif  // _LIBCPP_NO_EXCEPTIONS
+        -:  713:    return *this;
+        -:  714:}
+        -:  715:
+        -:  716:template <class _CharT, class _Traits>
+        -:  717:basic_ostream<_CharT, _Traits>&
+        -:  718:basic_ostream<_CharT, _Traits>::operator<<(const void* __n)
+        -:  719:{
+        -:  720:#ifndef _LIBCPP_NO_EXCEPTIONS
+        -:  721:    try
+        -:  722:    {
+        -:  723:#endif  // _LIBCPP_NO_EXCEPTIONS
+        -:  724:        sentry __s(*this);
+        -:  725:        if (__s)
+        -:  726:        {
+        -:  727:            typedef num_put<char_type, ostreambuf_iterator<char_type, traits_type> > _Fp;
+        -:  728:            const _Fp& __f = use_facet<_Fp>(this->getloc());
+        -:  729:            if (__f.put(*this, *this, this->fill(), __n).failed())
+        -:  730:                this->setstate(ios_base::badbit | ios_base::failbit);
+        -:  731:        }
+        -:  732:#ifndef _LIBCPP_NO_EXCEPTIONS
+        -:  733:    }
+        -:  734:    catch (...)
+        -:  735:    {
+        -:  736:        this->__set_badbit_and_consider_rethrow();
+        -:  737:    }
+        -:  738:#endif  // _LIBCPP_NO_EXCEPTIONS
+        -:  739:    return *this;
+        -:  740:}
+        -:  741:
+        -:  742:template<class _CharT, class _Traits>
+        -:  743:basic_ostream<_CharT, _Traits>&
+        -:  744:__put_character_sequence(basic_ostream<_CharT, _Traits>& __os,
+        -:  745:                          const _CharT* __str, size_t __len)
+        -:  746:{
+        -:  747:#ifndef _LIBCPP_NO_EXCEPTIONS
+        -:  748:    try
+        -:  749:    {
+        -:  750:#endif  // _LIBCPP_NO_EXCEPTIONS
+        -:  751:        typename basic_ostream<_CharT, _Traits>::sentry __s(__os);
+        -:  752:        if (__s)
+        -:  753:        {
+        -:  754:            typedef ostreambuf_iterator<_CharT, _Traits> _Ip;
+        -:  755:            if (__pad_and_output(_Ip(__os),
+        -:  756:                                 __str,
+        -:  757:                                 (__os.flags() & ios_base::adjustfield) == ios_base::left ?
+        -:  758:                                     __str + __len :
+        -:  759:                                     __str,
+        -:  760:                                 __str + __len,
+        -:  761:                                 __os,
+        -:  762:                                 __os.fill()).failed())
+        -:  763:                __os.setstate(ios_base::badbit | ios_base::failbit);
+        -:  764:        }
+        -:  765:#ifndef _LIBCPP_NO_EXCEPTIONS
+        -:  766:    }
+        -:  767:    catch (...)
+        -:  768:    {
+        -:  769:        __os.__set_badbit_and_consider_rethrow();
+        -:  770:    }
+        -:  771:#endif  // _LIBCPP_NO_EXCEPTIONS
+        -:  772:    return __os;
+        -:  773:}
+        -:  774:
+        -:  775:
+        -:  776:template<class _CharT, class _Traits>
+        -:  777:basic_ostream<_CharT, _Traits>&
+        -:  778:operator<<(basic_ostream<_CharT, _Traits>& __os, _CharT __c)
+        -:  779:{
+        -:  780:    return _VSTD::__put_character_sequence(__os, &__c, 1);
+        -:  781:}
+        -:  782:
+        -:  783:template<class _CharT, class _Traits>
+        -:  784:basic_ostream<_CharT, _Traits>&
+        -:  785:operator<<(basic_ostream<_CharT, _Traits>& __os, char __cn)
+        -:  786:{
+        -:  787:#ifndef _LIBCPP_NO_EXCEPTIONS
+        -:  788:    try
+        -:  789:    {
+        -:  790:#endif  // _LIBCPP_NO_EXCEPTIONS
+        -:  791:        typename basic_ostream<_CharT, _Traits>::sentry __s(__os);
+        -:  792:        if (__s)
+        -:  793:        {
+        -:  794:            _CharT __c = __os.widen(__cn);
+        -:  795:            typedef ostreambuf_iterator<_CharT, _Traits> _Ip;
+        -:  796:            if (__pad_and_output(_Ip(__os),
+        -:  797:                                 &__c,
+        -:  798:                                 (__os.flags() & ios_base::adjustfield) == ios_base::left ?
+        -:  799:                                     &__c + 1 :
+        -:  800:                                     &__c,
+        -:  801:                                 &__c + 1,
+        -:  802:                                 __os,
+        -:  803:                                 __os.fill()).failed())
+        -:  804:                __os.setstate(ios_base::badbit | ios_base::failbit);
+        -:  805:        }
+        -:  806:#ifndef _LIBCPP_NO_EXCEPTIONS
+        -:  807:    }
+        -:  808:    catch (...)
+        -:  809:    {
+        -:  810:        __os.__set_badbit_and_consider_rethrow();
+        -:  811:    }
+        -:  812:#endif  // _LIBCPP_NO_EXCEPTIONS
+        -:  813:    return __os;
+        -:  814:}
+        -:  815:
+        -:  816:template<class _Traits>
+        -:  817:basic_ostream<char, _Traits>&
+        -:  818:operator<<(basic_ostream<char, _Traits>& __os, char __c)
+        -:  819:{
+        -:  820:    return _VSTD::__put_character_sequence(__os, &__c, 1);
+        -:  821:}
+        -:  822:
+        -:  823:template<class _Traits>
+        -:  824:basic_ostream<char, _Traits>&
+        -:  825:operator<<(basic_ostream<char, _Traits>& __os, signed char __c)
+        -:  826:{
+        -:  827:    return _VSTD::__put_character_sequence(__os, (char *) &__c, 1);
+        -:  828:}
+        -:  829:
+        -:  830:template<class _Traits>
+        -:  831:basic_ostream<char, _Traits>&
+        -:  832:operator<<(basic_ostream<char, _Traits>& __os, unsigned char __c)
+        -:  833:{
+        -:  834:    return _VSTD::__put_character_sequence(__os, (char *) &__c, 1);
+        -:  835:}
+        -:  836:
+        -:  837:template<class _CharT, class _Traits>
+        -:  838:basic_ostream<_CharT, _Traits>&
+        -:  839:operator<<(basic_ostream<_CharT, _Traits>& __os, const _CharT* __str)
+        -:  840:{
+        -:  841:    return _VSTD::__put_character_sequence(__os, __str, _Traits::length(__str));
+        -:  842:}
+        -:  843:
+        -:  844:template<class _CharT, class _Traits>
+        -:  845:basic_ostream<_CharT, _Traits>&
+        -:  846:operator<<(basic_ostream<_CharT, _Traits>& __os, const char* __strn)
+        -:  847:{
+        -:  848:#ifndef _LIBCPP_NO_EXCEPTIONS
+        -:  849:    try
+        -:  850:    {
+        -:  851:#endif  // _LIBCPP_NO_EXCEPTIONS
+        -:  852:        typename basic_ostream<_CharT, _Traits>::sentry __s(__os);
+        -:  853:        if (__s)
+        -:  854:        {
+        -:  855:            typedef ostreambuf_iterator<_CharT, _Traits> _Ip;
+        -:  856:            size_t __len = char_traits<char>::length(__strn);
+        -:  857:            const int __bs = 100;
+        -:  858:            _CharT __wbb[__bs];
+        -:  859:            _CharT* __wb = __wbb;
+        -:  860:            unique_ptr<_CharT, void(*)(void*)> __h(0, free);
+        -:  861:            if (__len > __bs)
+        -:  862:            {
+        -:  863:                __wb = (_CharT*)malloc(__len*sizeof(_CharT));
+        -:  864:                if (__wb == 0)
+        -:  865:                    __throw_bad_alloc();
+        -:  866:                __h.reset(__wb);
+        -:  867:            }
+        -:  868:            for (_CharT* __p = __wb; *__strn != '\0'; ++__strn, ++__p)
+        -:  869:                *__p = __os.widen(*__strn);
+        -:  870:            if (__pad_and_output(_Ip(__os),
+        -:  871:                                 __wb,
+        -:  872:                                 (__os.flags() & ios_base::adjustfield) == ios_base::left ?
+        -:  873:                                     __wb + __len :
+        -:  874:                                     __wb,
+        -:  875:                                 __wb + __len,
+        -:  876:                                 __os,
+        -:  877:                                 __os.fill()).failed())
+        -:  878:                __os.setstate(ios_base::badbit | ios_base::failbit);
+        -:  879:        }
+        -:  880:#ifndef _LIBCPP_NO_EXCEPTIONS
+        -:  881:    }
+        -:  882:    catch (...)
+        -:  883:    {
+        -:  884:        __os.__set_badbit_and_consider_rethrow();
+        -:  885:    }
+        -:  886:#endif  // _LIBCPP_NO_EXCEPTIONS
+        -:  887:    return __os;
+        -:  888:}
+        -:  889:
+        -:  890:template<class _Traits>
+        -:  891:basic_ostream<char, _Traits>&
+        -:  892:operator<<(basic_ostream<char, _Traits>& __os, const char* __str)
+        -:  893:{
+        -:  894:    return _VSTD::__put_character_sequence(__os, __str, _Traits::length(__str));
+        -:  895:}
+        -:  896:
+        -:  897:template<class _Traits>
+        -:  898:basic_ostream<char, _Traits>&
+        -:  899:operator<<(basic_ostream<char, _Traits>& __os, const signed char* __str)
+        -:  900:{
+        -:  901:    const char *__s = (const char *) __str;
+        -:  902:    return _VSTD::__put_character_sequence(__os, __s, _Traits::length(__s));
+        -:  903:}
+        -:  904:
+        -:  905:template<class _Traits>
+        -:  906:basic_ostream<char, _Traits>&
+        -:  907:operator<<(basic_ostream<char, _Traits>& __os, const unsigned char* __str)
+        -:  908:{
+        -:  909:    const char *__s = (const char *) __str;
+        -:  910:    return _VSTD::__put_character_sequence(__os, __s, _Traits::length(__s));
+        -:  911:}
+        -:  912:
+        -:  913:template <class _CharT, class _Traits>
+        -:  914:basic_ostream<_CharT, _Traits>&
+        -:  915:basic_ostream<_CharT, _Traits>::put(char_type __c)
+        -:  916:{
+        -:  917:#ifndef _LIBCPP_NO_EXCEPTIONS
+        -:  918:    try
+        -:  919:    {
+        -:  920:#endif  // _LIBCPP_NO_EXCEPTIONS
+        -:  921:        sentry __s(*this);
+        -:  922:        if (__s)
+        -:  923:        {
+        -:  924:            typedef ostreambuf_iterator<_CharT, _Traits> _Op;
+        -:  925:            _Op __o(*this);
+        -:  926:            *__o = __c;
+        -:  927:            if (__o.failed())
+        -:  928:                this->setstate(ios_base::badbit);
+        -:  929:        }
+        -:  930:#ifndef _LIBCPP_NO_EXCEPTIONS
+        -:  931:    }
+        -:  932:    catch (...)
+        -:  933:    {
+        -:  934:        this->__set_badbit_and_consider_rethrow();
+        -:  935:    }
+        -:  936:#endif  // _LIBCPP_NO_EXCEPTIONS
+        -:  937:    return *this;
+        -:  938:}
+        -:  939:
+        -:  940:template <class _CharT, class _Traits>
+        -:  941:basic_ostream<_CharT, _Traits>&
+        -:  942:basic_ostream<_CharT, _Traits>::write(const char_type* __s, streamsize __n)
+        -:  943:{
+        -:  944:#ifndef _LIBCPP_NO_EXCEPTIONS
+        -:  945:    try
+        -:  946:    {
+        -:  947:#endif  // _LIBCPP_NO_EXCEPTIONS
+        -:  948:        sentry __sen(*this);
+        -:  949:        if (__sen && __n)
+        -:  950:        {
+        -:  951:            if (this->rdbuf()->sputn(__s, __n) != __n)
+        -:  952:                this->setstate(ios_base::badbit);
+        -:  953:        }
+        -:  954:#ifndef _LIBCPP_NO_EXCEPTIONS
+        -:  955:    }
+        -:  956:    catch (...)
+        -:  957:    {
+        -:  958:        this->__set_badbit_and_consider_rethrow();
+        -:  959:    }
+        -:  960:#endif  // _LIBCPP_NO_EXCEPTIONS
+        -:  961:    return *this;
+        -:  962:}
+        -:  963:
+        -:  964:template <class _CharT, class _Traits>
+        -:  965:basic_ostream<_CharT, _Traits>&
+        -:  966:basic_ostream<_CharT, _Traits>::flush()
+        -:  967:{
+        -:  968:#ifndef _LIBCPP_NO_EXCEPTIONS
+        -:  969:    try
+        -:  970:    {
+        -:  971:#endif  // _LIBCPP_NO_EXCEPTIONS
+        -:  972:        if (this->rdbuf())
+        -:  973:        {
+        -:  974:            sentry __s(*this);
+        -:  975:            if (__s)
+        -:  976:            {
+        -:  977:                if (this->rdbuf()->pubsync() == -1)
+        -:  978:                    this->setstate(ios_base::badbit);
+        -:  979:            }
+        -:  980:        }
+        -:  981:#ifndef _LIBCPP_NO_EXCEPTIONS
+        -:  982:    }
+        -:  983:    catch (...)
+        -:  984:    {
+        -:  985:        this->__set_badbit_and_consider_rethrow();
+        -:  986:    }
+        -:  987:#endif  // _LIBCPP_NO_EXCEPTIONS
+        -:  988:    return *this;
+        -:  989:}
+        -:  990:
+        -:  991:template <class _CharT, class _Traits>
+        -:  992:inline _LIBCPP_INLINE_VISIBILITY
+        -:  993:typename basic_ostream<_CharT, _Traits>::pos_type
+        -:  994:basic_ostream<_CharT, _Traits>::tellp()
+        -:  995:{
+        -:  996:    if (this->fail())
+        -:  997:        return pos_type(-1);
+        -:  998:    return this->rdbuf()->pubseekoff(0, ios_base::cur, ios_base::out);
+        -:  999:}
+        -: 1000:
+        -: 1001:template <class _CharT, class _Traits>
+        -: 1002:inline _LIBCPP_INLINE_VISIBILITY
+        -: 1003:basic_ostream<_CharT, _Traits>&
+        -: 1004:basic_ostream<_CharT, _Traits>::seekp(pos_type __pos)
+        -: 1005:{
+        -: 1006:    sentry __s(*this);
+        -: 1007:    if (!this->fail())
+        -: 1008:    {
+        -: 1009:        if (this->rdbuf()->pubseekpos(__pos, ios_base::out) == pos_type(-1))
+        -: 1010:            this->setstate(ios_base::failbit);
+        -: 1011:    }
+        -: 1012:    return *this;
+        -: 1013:}
+        -: 1014:
+        -: 1015:template <class _CharT, class _Traits>
+        -: 1016:inline _LIBCPP_INLINE_VISIBILITY
+        -: 1017:basic_ostream<_CharT, _Traits>&
+        -: 1018:basic_ostream<_CharT, _Traits>::seekp(off_type __off, ios_base::seekdir __dir)
+        -: 1019:{
+        -: 1020:    sentry __s(*this);
+        -: 1021:    if (!this->fail())
+        -: 1022:    {
+        -: 1023:        if (this->rdbuf()->pubseekoff(__off, __dir, ios_base::out) == pos_type(-1))
+        -: 1024:            this->setstate(ios_base::failbit);
+        -: 1025:    }
+        -: 1026:    return *this;
+        -: 1027:}
+        -: 1028:
+        -: 1029:template <class _CharT, class _Traits>
+        -: 1030:inline _LIBCPP_INLINE_VISIBILITY
+        -: 1031:basic_ostream<_CharT, _Traits>&
+        -: 1032:endl(basic_ostream<_CharT, _Traits>& __os)
+        -: 1033:{
+        -: 1034:    __os.put(__os.widen('\n'));
+        -: 1035:    __os.flush();
+        -: 1036:    return __os;
+        -: 1037:}
+        -: 1038:
+        -: 1039:template <class _CharT, class _Traits>
+        -: 1040:inline _LIBCPP_INLINE_VISIBILITY
+        -: 1041:basic_ostream<_CharT, _Traits>&
+        -: 1042:ends(basic_ostream<_CharT, _Traits>& __os)
+        -: 1043:{
+        -: 1044:    __os.put(_CharT());
+        -: 1045:    return __os;
+        -: 1046:}
+        -: 1047:
+        -: 1048:template <class _CharT, class _Traits>
+        -: 1049:inline _LIBCPP_INLINE_VISIBILITY
+        -: 1050:basic_ostream<_CharT, _Traits>&
+        -: 1051:flush(basic_ostream<_CharT, _Traits>& __os)
+        -: 1052:{
+        -: 1053:    __os.flush();
+        -: 1054:    return __os;
+        -: 1055:}
+        -: 1056:
+        -: 1057:#ifndef _LIBCPP_HAS_NO_RVALUE_REFERENCES
+        -: 1058:
+        -: 1059:template <class _Stream, class _Tp>
+        -: 1060:inline _LIBCPP_INLINE_VISIBILITY
+        -: 1061:typename enable_if
+        -: 1062:<
+        -: 1063:    !is_lvalue_reference<_Stream>::value &&
+        -: 1064:    is_base_of<ios_base, _Stream>::value,
+        -: 1065:    _Stream&&
+        -: 1066:>::type
+        -: 1067:operator<<(_Stream&& __os, const _Tp& __x)
+        -: 1068:{
+        -: 1069:    __os << __x;
+        -: 1070:    return _VSTD::move(__os);
+        -: 1071:}
+        -: 1072:
+        -: 1073:#endif  // _LIBCPP_HAS_NO_RVALUE_REFERENCES
+        -: 1074:
+        -: 1075:template<class _CharT, class _Traits, class _Allocator>
+        -: 1076:basic_ostream<_CharT, _Traits>&
+        -: 1077:operator<<(basic_ostream<_CharT, _Traits>& __os,
+        -: 1078:           const basic_string<_CharT, _Traits, _Allocator>& __str)
+        -: 1079:{
+        -: 1080:    return _VSTD::__put_character_sequence(__os, __str.data(), __str.size());
+        -: 1081:}
+        -: 1082:
+        -: 1083:template <class _CharT, class _Traits>
+        -: 1084:inline _LIBCPP_INLINE_VISIBILITY
+        -: 1085:basic_ostream<_CharT, _Traits>&
+        -: 1086:operator<<(basic_ostream<_CharT, _Traits>& __os, const error_code& __ec)
+        -: 1087:{
+        -: 1088:    return __os << __ec.category().name() << ':' << __ec.value();
+        -: 1089:}
+        -: 1090:
+        -: 1091:template<class _CharT, class _Traits, class _Yp>
+        -: 1092:inline _LIBCPP_INLINE_VISIBILITY
+        -: 1093:basic_ostream<_CharT, _Traits>&
+        -: 1094:operator<<(basic_ostream<_CharT, _Traits>& __os, shared_ptr<_Yp> const& __p)
+        -: 1095:{
+        -: 1096:    return __os << __p.get();
+        -: 1097:}
+        -: 1098:
+        -: 1099:template <class _CharT, class _Traits, size_t _Size>
+        -: 1100:basic_ostream<_CharT, _Traits>&
+        -: 1101:operator<<(basic_ostream<_CharT, _Traits>& __os, const bitset<_Size>& __x)
+        -: 1102:{
+        -: 1103:    return __os << __x.template to_string<_CharT, _Traits>
+        -: 1104:                        (use_facet<ctype<_CharT> >(__os.getloc()).widen('0'),
+        -: 1105:                         use_facet<ctype<_CharT> >(__os.getloc()).widen('1'));
+        -: 1106:}
+        -: 1107:
+        -: 1108:#ifndef _LIBCPP_AVAILABILITY_NO_STREAMS_EXTERN_TEMPLATE
+        -: 1109:_LIBCPP_EXTERN_TEMPLATE(class _LIBCPP_TYPE_VIS basic_ostream<char>)
+        -: 1110:_LIBCPP_EXTERN_TEMPLATE(class _LIBCPP_TYPE_VIS basic_ostream<wchar_t>)
+        -: 1111:#endif
+        -: 1112:
+        -: 1113:_LIBCPP_END_NAMESPACE_STD
+        -: 1114:
+        -: 1115:#endif  // _LIBCPP_OSTREAM
