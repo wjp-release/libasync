@@ -16,9 +16,12 @@ before_install:
 
 script:
   - cd libasync
-  - CXX=/usr/bin/g++-8 CC=/usr/bin/gcc-8 cmake -test=ON .
-  - cmake --build . 
-  - ./tests/tests
+  - mkdir build
+  - cd build
+  - CXX=/usr/bin/g++-8 CC=/usr/bin/gcc-8 cmake -test=ON ..
+  - ls
+  - make
+  - ./build/tests/tests
 
 after_success:
   - coveralls --root . -E ".*gtest.*" -E ".*CMakeFiles.*" 
