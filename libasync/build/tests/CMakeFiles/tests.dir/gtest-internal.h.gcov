@@ -1,8 +1,8 @@
         -:    0:Source:/Users/wjp/Desktop/workspace/libasync/libasync/googletest/include/gtest/internal/gtest-internal.h
         -:    0:Graph:/Users/wjp/Desktop/workspace/libasync/libasync/build/tests/CMakeFiles/tests.dir/SystemIntegrationTOT.cc.gcno
-        -:    0:Data:/Users/wjp/Desktop/workspace/libasync/libasync/build/tests/CMakeFiles/tests.dir/SystemIntegrationTOT.cc.gcda
-        -:    0:Runs:2
-        -:    0:Programs:1
+        -:    0:Data:-
+        -:    0:Runs:0
+        -:    0:Programs:0
         -:    1:// Copyright 2005, Google Inc.
         -:    2:// All rights reserved.
         -:    3://
@@ -442,7 +442,7 @@
         -:  437:  // TypeIdHelper<T>::dummy_ variable for each T used to instantiate
         -:  438:  // the template.  Therefore, the address of dummy_ is guaranteed to
         -:  439:  // be unique.
-       12:  440:  return &(TypeIdHelper<T>::dummy_);
+    #####:  440:  return &(TypeIdHelper<T>::dummy_);
         -:  441:}
         -:  442:
         -:  443:// Returns the type ID of ::testing::Test.  Always call this instead
@@ -472,9 +472,9 @@
         -:  467:// This class provides implementation of TeastFactoryBase interface.
         -:  468:// It is used in TEST and TEST_F macros.
         -:  469:template <class TestClass>
-       30:  470:class TestFactoryImpl : public TestFactoryBase {
+    #####:  470:class TestFactoryImpl : public TestFactoryBase {
         -:  471: public:
-       12:  472:  virtual Test* CreateTest() { return new TestClass; }
+    #####:  472:  virtual Test* CreateTest() { return new TestClass; }
         -:  473:};
         -:  474:
         -:  475:#if GTEST_OS_WINDOWS

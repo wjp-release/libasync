@@ -1,8 +1,8 @@
         -:    0:Source:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/random
         -:    0:Graph:/Users/wjp/Desktop/workspace/libasync/libasync/build/tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.gcno
-        -:    0:Data:/Users/wjp/Desktop/workspace/libasync/libasync/build/tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.gcda
-        -:    0:Runs:2
-        -:    0:Programs:1
+        -:    0:Data:-
+        -:    0:Runs:0
+        -:    0:Programs:0
         -:    1:// -*- C++ -*-
         -:    2://===--------------------------- random -----------------------------------===//
         -:    3://
@@ -1765,15 +1765,15 @@
         -: 1760:    _LIBCPP_INLINE_VISIBILITY
         -: 1761:    static result_type next(result_type __x)
         -: 1762:    {
-     3099: 1763:        const result_type __a = static_cast<result_type>(_Ap);
-     3099: 1764:        const result_type __m = static_cast<result_type>(_Mp);
+    #####: 1763:        const result_type __a = static_cast<result_type>(_Ap);
+    #####: 1764:        const result_type __m = static_cast<result_type>(_Mp);
         -: 1765:        // Schrage's algorithm
-     3099: 1766:        const result_type __q = __m / __a;
-     3099: 1767:        const result_type __r = __m % __a;
-     3099: 1768:        const result_type __t0 = __a * (__x % __q);
-     3099: 1769:        const result_type __t1 = __r * (__x / __q);
-     3099: 1770:        __x = __t0 + (__t0 < __t1) * __m - __t1;
-     3099: 1771:        return __x;
+    #####: 1766:        const result_type __q = __m / __a;
+    #####: 1767:        const result_type __r = __m % __a;
+    #####: 1768:        const result_type __t0 = __a * (__x % __q);
+    #####: 1769:        const result_type __t1 = __r * (__x / __q);
+    #####: 1770:        __x = __t0 + (__t0 < __t1) * __m - __t1;
+    #####: 1771:        return __x;
         -: 1772:    }
         -: 1773:};
         -: 1774:
@@ -1857,7 +1857,7 @@
         -: 1852:    static _LIBCPP_CONSTEXPR const result_type increment = __c;
         -: 1853:    static _LIBCPP_CONSTEXPR const result_type modulus = __m;
         -: 1854:    _LIBCPP_INLINE_VISIBILITY
-     5959: 1855:    static _LIBCPP_CONSTEXPR result_type min() {return _Min;}
+    #####: 1855:    static _LIBCPP_CONSTEXPR result_type min() {return _Min;}
         -: 1856:    _LIBCPP_INLINE_VISIBILITY
         -: 1857:    static _LIBCPP_CONSTEXPR result_type max() {return _Max;}
         -: 1858:    static _LIBCPP_CONSTEXPR const result_type default_seed = 1u;
@@ -1865,7 +1865,7 @@
         -: 1860:    // constructors and seeding functions
         -: 1861:    _LIBCPP_INLINE_VISIBILITY
         -: 1862:    explicit linear_congruential_engine(result_type __s = default_seed)
-        8: 1863:        {seed(__s);}
+    #####: 1863:        {seed(__s);}
         -: 1864:    template<class _Sseq>
         -: 1865:        _LIBCPP_INLINE_VISIBILITY
         -: 1866:        explicit linear_congruential_engine(_Sseq& __q,
@@ -1873,8 +1873,8 @@
         -: 1868:        {seed(__q);}
         -: 1869:    _LIBCPP_INLINE_VISIBILITY
         -: 1870:    void seed(result_type __s = default_seed)
-        4: 1871:        {seed(integral_constant<bool, __m == 0>(),
-        8: 1872:              integral_constant<bool, __c == 0>(), __s);}
+    #####: 1871:        {seed(integral_constant<bool, __m == 0>(),
+    #####: 1872:              integral_constant<bool, __c == 0>(), __s);}
         -: 1873:    template<class _Sseq>
         -: 1874:        _LIBCPP_INLINE_VISIBILITY
         -: 1875:        typename enable_if
@@ -1890,7 +1890,7 @@
         -: 1885:    // generating functions
         -: 1886:    _LIBCPP_INLINE_VISIBILITY
         -: 1887:    result_type operator()()
-     3095: 1888:        {return __x_ = static_cast<result_type>(__lce_ta<__a, __c, __m, _Mp>::next(__x_));}
+    #####: 1888:        {return __x_ = static_cast<result_type>(__lce_ta<__a, __c, __m, _Mp>::next(__x_));}
         -: 1889:    _LIBCPP_INLINE_VISIBILITY
         -: 1890:    void discard(unsigned long long __z) {for (; __z; --__z) operator()();}
         -: 1891:
@@ -1910,8 +1910,8 @@
         -: 1905:    _LIBCPP_INLINE_VISIBILITY
         -: 1906:    void seed(true_type, false_type, result_type __s) {__x_ = __s;}
         -: 1907:    _LIBCPP_INLINE_VISIBILITY
-       12: 1908:    void seed(false_type, true_type, result_type __s) {__x_ = __s % __m == 0 ?
-        8: 1909:                                                                 1 : __s % __m;}
+    #####: 1908:    void seed(false_type, true_type, result_type __s) {__x_ = __s % __m == 0 ?
+    #####: 1909:                                                                 1 : __s % __m;}
         -: 1910:    _LIBCPP_INLINE_VISIBILITY
         -: 1911:    void seed(false_type, false_type, result_type __s) {__x_ = __s % __m;}
         -: 1912:

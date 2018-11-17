@@ -1,5 +1,5 @@
 #!/bin/bash
 
 cd build
-cmake -Dtest=ON ..
+cmake -DCMAKE_BUILD_TYPE=Debug -Dtest=ON ..
 make

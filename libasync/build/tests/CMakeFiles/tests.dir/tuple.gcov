@@ -1,8 +1,8 @@
         -:    0:Source:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/tuple
         -:    0:Graph:/Users/wjp/Desktop/workspace/libasync/libasync/build/tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.gcno
-        -:    0:Data:/Users/wjp/Desktop/workspace/libasync/libasync/build/tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.gcda
-        -:    0:Runs:2
-        -:    0:Programs:1
+        -:    0:Data:-
+        -:    0:Runs:0
+        -:    0:Programs:0
         -:    1:// -*- C++ -*-
         -:    2://===--------------------------- tuple ------------------------------------===//
         -:    3://
@@ -222,7 +222,7 @@
         -:  217:            >
         -:  218:        _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX11
         -:  219:        explicit __tuple_leaf(_Tp&& __t) _NOEXCEPT_((is_nothrow_constructible<_Hp, _Tp>::value))
-      524:  220:            : value(_VSTD::forward<_Tp>(__t))
+    #####:  220:            : value(_VSTD::forward<_Tp>(__t))
         -:  221:        {static_assert(!is_reference<_Hp>::value ||
         -:  222:                       (is_lvalue_reference<_Hp>::value &&
         -:  223:                        (is_lvalue_reference<_Tp>::value ||
@@ -233,7 +233,7 @@
         -:  228:                                >::value)) ||
         -:  229:                        (is_rvalue_reference<_Hp>::value &&
         -:  230:                         !is_lvalue_reference<_Tp>::value),
-      524:  231:       "Attempted to construct a reference element in a tuple with an rvalue");}
+    #####:  231:       "Attempted to construct a reference element in a tuple with an rvalue");}
         -:  232:
         -:  233:    template <class _Tp, class _Alloc>
         -:  234:        _LIBCPP_INLINE_VISIBILITY
@@ -296,7 +296,7 @@
         -:  291:        return 0;
         -:  292:    }
         -:  293:
-      524:  294:    _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX11       _Hp& get()       _NOEXCEPT {return value;}
+    #####:  294:    _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX11       _Hp& get()       _NOEXCEPT {return value;}
         -:  295:    _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX11 const _Hp& get() const _NOEXCEPT {return value;}
         -:  296:};
         -:  297:
@@ -413,9 +413,9 @@
         -:  408:                     _Up&&... __u)
         -:  409:                     _NOEXCEPT_((__all<is_nothrow_constructible<_Tf, _Up>::value...>::value &&
         -:  410:                                 __all<is_nothrow_default_constructible<_Tl>::value...>::value)) :
-      524:  411:            __tuple_leaf<_Uf, _Tf>(_VSTD::forward<_Up>(__u))...,
+    #####:  411:            __tuple_leaf<_Uf, _Tf>(_VSTD::forward<_Up>(__u))...,
         -:  412:            __tuple_leaf<_Ul, _Tl>()...
-     1532:  413:            {}
+    #####:  413:            {}
         -:  414:
         -:  415:    template <class _Alloc, size_t ..._Uf, class ..._Tf,
         -:  416:              size_t ..._Ul, class ..._Tl, class ..._Up>
@@ -523,12 +523,12 @@
         -:  518:
         -:  519:    _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR_AFTER_CXX11
         -:  520:    explicit tuple(const _Tp& ... __t) _NOEXCEPT_((__all<is_nothrow_copy_constructible<_Tp>::value...>::value)) 
-      512:  521:        : base_(typename __make_tuple_indices<sizeof...(_Tp)>::type(),
+    #####:  521:        : base_(typename __make_tuple_indices<sizeof...(_Tp)>::type(),
         -:  522:                typename __make_tuple_types<tuple, sizeof...(_Tp)>::type(),
         -:  523:                typename __make_tuple_indices<0>::type(),
         -:  524:                typename __make_tuple_types<tuple, 0>::type(),
-      256:  525:                __t...
-      512:  526:               ) {}
+    #####:  525:                __t...
+    #####:  526:               ) {}
         -:  527:
         -:  528:    template <class _Alloc>
         -:  529:      _LIBCPP_INLINE_VISIBILITY
@@ -573,11 +573,11 @@
         -:  568:                    _Up...
         -:  569:                >::value
         -:  570:            ))
-      496:  571:            : base_(typename __make_tuple_indices<sizeof...(_Up)>::type(),
+    #####:  571:            : base_(typename __make_tuple_indices<sizeof...(_Up)>::type(),
         -:  572:                    typename __make_tuple_types<tuple, sizeof...(_Up)>::type(),
         -:  573:                    typename __make_tuple_indices<sizeof...(_Tp), sizeof...(_Up)>::type(),
         -:  574:                    typename __make_tuple_types<tuple, sizeof...(_Tp), sizeof...(_Up)>::type(),
-      744:  575:                    _VSTD::forward<_Up>(__u)...) {}
+    #####:  575:                    _VSTD::forward<_Up>(__u)...) {}
         -:  576:
         -:  577:    template <class ..._Up,
         -:  578:              typename enable_if
@@ -749,7 +749,7 @@
         -:  744:get(tuple<_Tp...>& __t) _NOEXCEPT
         -:  745:{
         -:  746:    typedef typename tuple_element<_Ip, tuple<_Tp...> >::type type;
-      524:  747:    return static_cast<__tuple_leaf<_Ip, type>&>(__t.base_).get();
+    #####:  747:    return static_cast<__tuple_leaf<_Ip, type>&>(__t.base_).get();
         -:  748:}
         -:  749:
         -:  750:template <size_t _Ip, class ..._Tp>
@@ -880,7 +880,7 @@
         -:  875:tuple<_Tp&&...>
         -:  876:forward_as_tuple(_Tp&&... __t) _NOEXCEPT
         -:  877:{
-      464:  878:    return tuple<_Tp&&...>(_VSTD::forward<_Tp>(__t)...);
+    #####:  878:    return tuple<_Tp&&...>(_VSTD::forward<_Tp>(__t)...);
         -:  879:}
         -:  880:
         -:  881:template <size_t _Ip>

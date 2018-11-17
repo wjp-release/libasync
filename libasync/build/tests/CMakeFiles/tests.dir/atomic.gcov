@@ -1,8 +1,8 @@
         -:    0:Source:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/atomic
         -:    0:Graph:/Users/wjp/Desktop/workspace/libasync/libasync/build/tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.gcno
-        -:    0:Data:/Users/wjp/Desktop/workspace/libasync/libasync/build/tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.gcda
-        -:    0:Runs:2
-        -:    0:Programs:1
+        -:    0:Data:-
+        -:    0:Runs:0
+        -:    0:Programs:0
         -:    1:// -*- C++ -*-
         -:    2://===--------------------------- atomic -----------------------------------===//
         -:    3://
@@ -844,17 +844,17 @@
         -:  839:        {__c11_atomic_store(&__a_, __d, __m);}
         -:  840:    _LIBCPP_INLINE_VISIBILITY
         -:  841:    void store(_Tp __d, memory_order __m = memory_order_seq_cst) _NOEXCEPT
-      804:  842:        {__c11_atomic_store(&__a_, __d, __m);}
+    #####:  842:        {__c11_atomic_store(&__a_, __d, __m);}
         -:  843:    _LIBCPP_INLINE_VISIBILITY
         -:  844:    _Tp load(memory_order __m = memory_order_seq_cst) const volatile _NOEXCEPT
         -:  845:        {return __c11_atomic_load(&__a_, __m);}
         -:  846:    _LIBCPP_INLINE_VISIBILITY
         -:  847:    _Tp load(memory_order __m = memory_order_seq_cst) const _NOEXCEPT
-    21192:  848:        {return __c11_atomic_load(&__a_, __m);}
+    #####:  848:        {return __c11_atomic_load(&__a_, __m);}
         -:  849:    _LIBCPP_INLINE_VISIBILITY
         -:  850:    operator _Tp() const volatile _NOEXCEPT {return load();}
         -:  851:    _LIBCPP_INLINE_VISIBILITY
-     2094:  852:    operator _Tp() const _NOEXCEPT          {return load();}
+    #####:  852:    operator _Tp() const _NOEXCEPT          {return load();}
         -:  853:    _LIBCPP_INLINE_VISIBILITY
         -:  854:    _Tp exchange(_Tp __d, memory_order __m = memory_order_seq_cst) volatile _NOEXCEPT
         -:  855:        {return __c11_atomic_exchange(&__a_, __d, __m);}
@@ -876,7 +876,7 @@
         -:  871:    _LIBCPP_INLINE_VISIBILITY
         -:  872:    bool compare_exchange_strong(_Tp& __e, _Tp __d,
         -:  873:                                 memory_order __s, memory_order __f) _NOEXCEPT
-     1532:  874:        {return __c11_atomic_compare_exchange_strong(&__a_, &__e, __d, __s, __f);}
+    #####:  874:        {return __c11_atomic_compare_exchange_strong(&__a_, &__e, __d, __s, __f);}
         -:  875:    _LIBCPP_INLINE_VISIBILITY
         -:  876:    bool compare_exchange_weak(_Tp& __e, _Tp __d,
         -:  877:                              memory_order __m = memory_order_seq_cst) volatile _NOEXCEPT
@@ -902,7 +902,7 @@
         -:  897:#endif // _LIBCPP_HAS_NO_DEFAULTED_FUNCTIONS
         -:  898:
         -:  899:    _LIBCPP_INLINE_VISIBILITY
-       42:  900:    _LIBCPP_CONSTEXPR __atomic_base(_Tp __d) _NOEXCEPT : __a_(__d) {}
+    #####:  900:    _LIBCPP_CONSTEXPR __atomic_base(_Tp __d) _NOEXCEPT : __a_(__d) {}
         -:  901:#ifndef _LIBCPP_HAS_NO_DELETED_FUNCTIONS
         -:  902:    __atomic_base(const __atomic_base&) = delete;
         -:  903:    __atomic_base& operator=(const __atomic_base&) = delete;
@@ -925,14 +925,14 @@
         -:  920:    _LIBCPP_INLINE_VISIBILITY
         -:  921:    __atomic_base() _NOEXCEPT _LIBCPP_DEFAULT
         -:  922:    _LIBCPP_INLINE_VISIBILITY
-       34:  923:    _LIBCPP_CONSTEXPR __atomic_base(_Tp __d) _NOEXCEPT : __base(__d) {}
+    #####:  923:    _LIBCPP_CONSTEXPR __atomic_base(_Tp __d) _NOEXCEPT : __base(__d) {}
         -:  924:
         -:  925:    _LIBCPP_INLINE_VISIBILITY
         -:  926:    _Tp fetch_add(_Tp __op, memory_order __m = memory_order_seq_cst) volatile _NOEXCEPT
         -:  927:        {return __c11_atomic_fetch_add(&this->__a_, __op, __m);}
         -:  928:    _LIBCPP_INLINE_VISIBILITY
         -:  929:    _Tp fetch_add(_Tp __op, memory_order __m = memory_order_seq_cst) _NOEXCEPT
-      584:  930:        {return __c11_atomic_fetch_add(&this->__a_, __op, __m);}
+    #####:  930:        {return __c11_atomic_fetch_add(&this->__a_, __op, __m);}
         -:  931:    _LIBCPP_INLINE_VISIBILITY
         -:  932:    _Tp fetch_sub(_Tp __op, memory_order __m = memory_order_seq_cst) volatile _NOEXCEPT
         -:  933:        {return __c11_atomic_fetch_sub(&this->__a_, __op, __m);}
@@ -961,7 +961,7 @@
         -:  956:    _LIBCPP_INLINE_VISIBILITY
         -:  957:    _Tp operator++(int) volatile _NOEXCEPT      {return fetch_add(_Tp(1));}
         -:  958:    _LIBCPP_INLINE_VISIBILITY
-      198:  959:    _Tp operator++(int) _NOEXCEPT               {return fetch_add(_Tp(1));}
+    #####:  959:    _Tp operator++(int) _NOEXCEPT               {return fetch_add(_Tp(1));}
         -:  960:    _LIBCPP_INLINE_VISIBILITY
         -:  961:    _Tp operator--(int) volatile _NOEXCEPT      {return fetch_sub(_Tp(1));}
         -:  962:    _LIBCPP_INLINE_VISIBILITY
@@ -1006,14 +1006,14 @@
         -: 1001:    _LIBCPP_INLINE_VISIBILITY
         -: 1002:    atomic() _NOEXCEPT _LIBCPP_DEFAULT
         -: 1003:    _LIBCPP_INLINE_VISIBILITY
-       68: 1004:    _LIBCPP_CONSTEXPR atomic(_Tp __d) _NOEXCEPT : __base(__d) {}
+    #####: 1004:    _LIBCPP_CONSTEXPR atomic(_Tp __d) _NOEXCEPT : __base(__d) {}
         -: 1005:
         -: 1006:    _LIBCPP_INLINE_VISIBILITY
         -: 1007:    _Tp operator=(_Tp __d) volatile _NOEXCEPT
         -: 1008:        {__base::store(__d); return __d;}
         -: 1009:    _LIBCPP_INLINE_VISIBILITY
         -: 1010:    _Tp operator=(_Tp __d) _NOEXCEPT
-        6: 1011:        {__base::store(__d); return __d;}
+    #####: 1011:        {__base::store(__d); return __d;}
         -: 1012:};
         -: 1013:
         -: 1014:// atomic<T*>
@@ -1026,7 +1026,7 @@
         -: 1021:    _LIBCPP_INLINE_VISIBILITY
         -: 1022:    atomic() _NOEXCEPT _LIBCPP_DEFAULT
         -: 1023:    _LIBCPP_INLINE_VISIBILITY
-       16: 1024:    _LIBCPP_CONSTEXPR atomic(_Tp* __d) _NOEXCEPT : __base(__d) {}
+    #####: 1024:    _LIBCPP_CONSTEXPR atomic(_Tp* __d) _NOEXCEPT : __base(__d) {}
         -: 1025:
         -: 1026:    _LIBCPP_INLINE_VISIBILITY
         -: 1027:    _Tp* operator=(_Tp* __d) volatile _NOEXCEPT
@@ -1728,8 +1728,8 @@
         -: 1723:void
         -: 1724:atomic_thread_fence(memory_order __m) _NOEXCEPT
         -: 1725:{
-     6230: 1726:    __c11_atomic_thread_fence(__m);
-     2219: 1727:}
+    #####: 1726:    __c11_atomic_thread_fence(__m);
+    #####: 1727:}
         -: 1728:
         -: 1729:inline _LIBCPP_INLINE_VISIBILITY
         -: 1730:void

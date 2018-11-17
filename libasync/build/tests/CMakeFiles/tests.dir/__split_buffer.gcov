@@ -1,8 +1,8 @@
         -:    0:Source:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__split_buffer
         -:    0:Graph:/Users/wjp/Desktop/workspace/libasync/libasync/build/tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.gcno
-        -:    0:Data:/Users/wjp/Desktop/workspace/libasync/libasync/build/tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.gcda
-        -:    0:Runs:2
-        -:    0:Programs:1
+        -:    0:Data:-
+        -:    0:Runs:0
+        -:    0:Programs:0
         -:    1:// -*- C++ -*-
         -:    2:#ifndef _LIBCPP_SPLIT_BUFFER
         -:    3:#define _LIBCPP_SPLIT_BUFFER
@@ -56,10 +56,10 @@
         -:   51:    typedef typename add_lvalue_reference<allocator_type>::type __alloc_ref;
         -:   52:    typedef typename add_lvalue_reference<allocator_type>::type __alloc_const_ref;
         -:   53:
-       48:   54:    _LIBCPP_INLINE_VISIBILITY __alloc_rr&           __alloc() _NOEXCEPT         {return __end_cap_.second();}
+    #####:   54:    _LIBCPP_INLINE_VISIBILITY __alloc_rr&           __alloc() _NOEXCEPT         {return __end_cap_.second();}
         -:   55:    _LIBCPP_INLINE_VISIBILITY const __alloc_rr&     __alloc() const _NOEXCEPT   {return __end_cap_.second();}
-       20:   56:    _LIBCPP_INLINE_VISIBILITY pointer&              __end_cap() _NOEXCEPT       {return __end_cap_.first();}
-        8:   57:    _LIBCPP_INLINE_VISIBILITY const pointer&        __end_cap() const _NOEXCEPT {return __end_cap_.first();}
+    #####:   56:    _LIBCPP_INLINE_VISIBILITY pointer&              __end_cap() _NOEXCEPT       {return __end_cap_.first();}
+    #####:   57:    _LIBCPP_INLINE_VISIBILITY const pointer&        __end_cap() const _NOEXCEPT {return __end_cap_.first();}
         -:   58:
         -:   59:    _LIBCPP_INLINE_VISIBILITY
         -:   60:    __split_buffer()
@@ -88,10 +88,10 @@
         -:   83:
         -:   84:    _LIBCPP_INLINE_VISIBILITY
         -:   85:    void clear() _NOEXCEPT
-       10:   86:        {__destruct_at_end(__begin_);}
+    #####:   86:        {__destruct_at_end(__begin_);}
         -:   87:    _LIBCPP_INLINE_VISIBILITY size_type size() const {return static_cast<size_type>(__end_ - __begin_);}
         -:   88:    _LIBCPP_INLINE_VISIBILITY bool empty()     const {return __end_ == __begin_;}
-        8:   89:    _LIBCPP_INLINE_VISIBILITY size_type capacity() const {return static_cast<size_type>(__end_cap() - __first_);}
+    #####:   89:    _LIBCPP_INLINE_VISIBILITY size_type capacity() const {return static_cast<size_type>(__end_cap() - __first_);}
         -:   90:    _LIBCPP_INLINE_VISIBILITY size_type __front_spare() const {return static_cast<size_type>(__begin_ - __first_);}
         -:   91:    _LIBCPP_INLINE_VISIBILITY size_type __back_spare() const {return static_cast<size_type>(__end_cap() - __end_);}
         -:   92:
@@ -143,7 +143,7 @@
         -:  138:
         -:  139:    _LIBCPP_INLINE_VISIBILITY
         -:  140:    void __destruct_at_end(pointer __new_last) _NOEXCEPT
-       10:  141:        {__destruct_at_end(__new_last, false_type());}
+    #####:  141:        {__destruct_at_end(__new_last, false_type());}
         -:  142:    _LIBCPP_INLINE_VISIBILITY
         -:  143:        void __destruct_at_end(pointer __new_last, false_type) _NOEXCEPT;
         -:  144:    _LIBCPP_INLINE_VISIBILITY
@@ -297,9 +297,9 @@
         -:  292:void
         -:  293:__split_buffer<_Tp, _Allocator>::__destruct_at_end(pointer __new_last, false_type) _NOEXCEPT
         -:  294:{
-       80:  295:    while (__new_last != __end_)
-       30:  296:        __alloc_traits::destroy(__alloc(), __to_raw_pointer(--__end_));
-       10:  297:}
+    #####:  295:    while (__new_last != __end_)
+    #####:  296:        __alloc_traits::destroy(__alloc(), __to_raw_pointer(--__end_));
+    #####:  297:}
         -:  298:
         -:  299:template <class _Tp, class _Allocator>
         -:  300:inline _LIBCPP_INLINE_VISIBILITY
@@ -311,12 +311,12 @@
         -:  306:
         -:  307:template <class _Tp, class _Allocator>
         -:  308:__split_buffer<_Tp, _Allocator>::__split_buffer(size_type __cap, size_type __start, __alloc_rr& __a)
-       10:  309:    : __end_cap_(nullptr, __a)
-       20:  310:{
-       30:  311:    __first_ = __cap != 0 ? __alloc_traits::allocate(__alloc(), __cap) : nullptr;
-       10:  312:    __begin_ = __end_ = __first_ + __start;
-       10:  313:    __end_cap() = __first_ + __cap;
-       20:  314:}
+    #####:  309:    : __end_cap_(nullptr, __a)
+    #####:  310:{
+    #####:  311:    __first_ = __cap != 0 ? __alloc_traits::allocate(__alloc(), __cap) : nullptr;
+    #####:  312:    __begin_ = __end_ = __first_ + __start;
+    #####:  313:    __end_cap() = __first_ + __cap;
+    #####:  314:}
         -:  315:
         -:  316:template <class _Tp, class _Allocator>
         -:  317:inline
@@ -342,11 +342,11 @@
         -:  337:
         -:  338:template <class _Tp, class _Allocator>
         -:  339:__split_buffer<_Tp, _Allocator>::~__split_buffer()
-       10:  340:{
-       10:  341:    clear();
-       10:  342:    if (__first_)
-       16:  343:        __alloc_traits::deallocate(__alloc(), __first_, capacity());
-       20:  344:}
+    #####:  340:{
+    #####:  341:    clear();
+    #####:  342:    if (__first_)
+    #####:  343:        __alloc_traits::deallocate(__alloc(), __first_, capacity());
+    #####:  344:}
         -:  345:
         -:  346:#ifndef _LIBCPP_HAS_NO_RVALUE_REFERENCES
         -:  347:

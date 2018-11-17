@@ -1,8 +1,8 @@
         -:    0:Source:/Users/wjp/Desktop/workspace/libasync/libasync/./src/ChaseLevDeque.h
         -:    0:Graph:/Users/wjp/Desktop/workspace/libasync/libasync/build/tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.gcno
-        -:    0:Data:/Users/wjp/Desktop/workspace/libasync/libasync/build/tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.gcda
-        -:    0:Runs:2
-        -:    0:Programs:1
+        -:    0:Data:-
+        -:    0:Runs:0
+        -:    0:Programs:0
         -:    1:/*
         -:    2:* MIT License
         -:    3:*
@@ -49,28 +49,28 @@
         -:   44:{
         -:   45:public:
         -:   46:    // ChaseLevDeque takes log2(capacity) as argument to guarantee that its capacity is power of 2. 
-        8:   47:    ChaseLevDeque(int log2capacity=13)  : top(1<<(log2capacity-1)), bottom(1<<(log2capacity-1)),
-       16:   48:                                        array(new SharedPointerArray(1<<log2capacity))
-       16:   49:    {}
+    #####:   47:    ChaseLevDeque(int log2capacity=13)  : top(1<<(log2capacity-1)), bottom(1<<(log2capacity-1)),
+    #####:   48:                                        array(new SharedPointerArray(1<<log2capacity))
+    #####:   49:    {}
         -:   50:    struct SharedPointerArray{
         -:   51:        //Uses placement new to create shared_ptr in given buffer.
         -:   52:        SharedPointerArray(uint64_t cap) :
-       18:   53:            buffer(reinterpret_cast<std::shared_ptr<T>*>(new char[sizeof(std::shared_ptr<T>)*cap])), 
-       36:   54:            capacity(cap) {
-     1172:   55:            for(int i=0;i<capacity;i++){ 
-      568:   56:                new(reinterpret_cast<char*>(&buffer[i])) std::shared_ptr<T>{nullptr}; 
-      568:   57:            }
-       36:   58:        }
-       10:   59:        ~SharedPointerArray(){
-      532:   60:            for(int i=0;i<capacity;i++){
-      256:   61:                buffer[i].~shared_ptr(); // destruct placement newed objects explicitly
-      256:   62:            }
-       20:   63:            delete [] reinterpret_cast<char*>(buffer);
-       20:   64:        }
+    #####:   53:            buffer(reinterpret_cast<std::shared_ptr<T>*>(new char[sizeof(std::shared_ptr<T>)*cap])), 
+    #####:   54:            capacity(cap) {
+    #####:   55:            for(int i=0;i<capacity;i++){ 
+    #####:   56:                new(reinterpret_cast<char*>(&buffer[i])) std::shared_ptr<T>{nullptr}; 
+    #####:   57:            }
+    #####:   58:        }
+    #####:   59:        ~SharedPointerArray(){
+    #####:   60:            for(int i=0;i<capacity;i++){
+    #####:   61:                buffer[i].~shared_ptr(); // destruct placement newed objects explicitly
+    #####:   62:            }
+    #####:   63:            delete [] reinterpret_cast<char*>(buffer);
+    #####:   64:        }
         -:   65:        std::shared_ptr<T>*     buffer;     // should be replaced by std::atomic<std::shared_ptr> in C++20
         -:   66:        std::atomic<uint64_t>   capacity;     // power of 2, grow at rate of *2 each time, init: 2^13(8K), max: 2^26(64M)
         -:   67:        std::shared_ptr<T>&     at(uint64_t index){
-      996:   68:            return buffer[index%capacity];
+    #####:   68:            return buffer[index%capacity];
         -:   69:        }
         -:   70:    };
         -:   71:    // Shows some internal stats for debugging.
@@ -86,68 +86,68 @@
         -:   81:    }
         -:   82:    // Tries to take a recently pushed task. It should only be called from the owning thread.
         -:   83:    std::shared_ptr<T>                  take() {
-       14:   84:        auto b=bottom.load(std::memory_order_relaxed)-1;
-       14:   85:        auto a=array.load(std::memory_order_relaxed);
-       14:   86:        bottom.store(b,std::memory_order_relaxed);
-       14:   87:        std::atomic_thread_fence(std::memory_order_seq_cst);
-       14:   88:        auto t=top.load(std::memory_order_relaxed);
-       14:   89:        std::shared_ptr<T> x;
-       14:   90:        if (t <= b) { 
-       36:   91:            x = std::atomic_load_explicit(&a->at(b), std::memory_order_relaxed);
-       12:   92:            if (t == b) { // race against stealers for the last element
-        2:   93:                if(!top.compare_exchange_strong(t,t+1,std::memory_order_seq_cst, std::memory_order_relaxed)){
+    #####:   84:        auto b=bottom.load(std::memory_order_relaxed)-1;
+    #####:   85:        auto a=array.load(std::memory_order_relaxed);
+    #####:   86:        bottom.store(b,std::memory_order_relaxed);
+    #####:   87:        std::atomic_thread_fence(std::memory_order_seq_cst);
+    #####:   88:        auto t=top.load(std::memory_order_relaxed);
+    #####:   89:        std::shared_ptr<T> x;
+    #####:   90:        if (t <= b) { 
+    #####:   91:            x = std::atomic_load_explicit(&a->at(b), std::memory_order_relaxed);
+    #####:   92:            if (t == b) { // race against stealers for the last element
+    #####:   93:                if(!top.compare_exchange_strong(t,t+1,std::memory_order_seq_cst, std::memory_order_relaxed)){
     #####:   94:                    x=nullptr;
     #####:   95:                }
-        2:   96:                bottom.store(b+1, std::memory_order_relaxed);
-        2:   97:            }
-       12:   98:        } else { // empty
-        2:   99:            x=nullptr;
-        2:  100:            bottom.store(b+1, std::memory_order_relaxed);
+    #####:   96:                bottom.store(b+1, std::memory_order_relaxed);
+    #####:   97:            }
+    #####:   98:        } else { // empty
+    #####:   99:            x=nullptr;
+    #####:  100:            bottom.store(b+1, std::memory_order_relaxed);
         -:  101:        }
-       14:  102:        return x;
-       28:  103:    }
+    #####:  102:        return x;
+    #####:  103:    }
         -:  104:    // Pushes a task to bottom. It should only be called from the owning thread.
         -:  105:    void                                push(std::shared_ptr<T> x) {
-      234:  106:        auto b = bottom.load(std::memory_order_relaxed);
-      234:  107:        auto t = top.load(std::memory_order_relaxed);
-      234:  108:        auto a = array.load(std::memory_order_relaxed);
-      234:  109:        if (b - t > a->capacity - 1) { // full
-       10:  110:            grow();
-       10:  111:            a = array.load(std::memory_order_relaxed);
-       10:  112:        }
-      468:  113:        std::atomic_store_explicit(&a->at(b), x, std::memory_order_relaxed);
-      234:  114:        std::atomic_thread_fence(std::memory_order_release);
-      234:  115:        bottom.store(b+1, std::memory_order_relaxed);
-      234:  116:    }
+    #####:  106:        auto b = bottom.load(std::memory_order_relaxed);
+    #####:  107:        auto t = top.load(std::memory_order_relaxed);
+    #####:  108:        auto a = array.load(std::memory_order_relaxed);
+    #####:  109:        if (b - t > a->capacity - 1) { // full
+    #####:  110:            grow();
+    #####:  111:            a = array.load(std::memory_order_relaxed);
+    #####:  112:        }
+    #####:  113:        std::atomic_store_explicit(&a->at(b), x, std::memory_order_relaxed);
+    #####:  114:        std::atomic_thread_fence(std::memory_order_release);
+    #####:  115:        bottom.store(b+1, std::memory_order_relaxed);
+    #####:  116:    }
         -:  117:    // Tries to steal the oldest task at top from the deque. It can be called from any thread, usually a stealer.
         -:  118:    std::shared_ptr<T>                  steal() {
-     1763:  119:        auto t = top.load(std::memory_order_acquire);
-     1763:  120:        std::atomic_thread_fence(std::memory_order_seq_cst);
-     1763:  121:        auto b = bottom.load(std::memory_order_acquire);
-     1763:  122:        std::shared_ptr<T> x = nullptr;
-     1763:  123:        if (t < b) { 
-      235:  124:            auto a = array.load(std::memory_order_consume);  
-      731:  125:            x = std::atomic_load_explicit(&a->at(t), std::memory_order_relaxed);
-      249:  126:            if (!top.compare_exchange_strong(t, t + 1, std::memory_order_seq_cst, std::memory_order_relaxed)){
-       27:  127:                return nullptr; 
+    #####:  119:        auto t = top.load(std::memory_order_acquire);
+    #####:  120:        std::atomic_thread_fence(std::memory_order_seq_cst);
+    #####:  121:        auto b = bottom.load(std::memory_order_acquire);
+    #####:  122:        std::shared_ptr<T> x = nullptr;
+    #####:  123:        if (t < b) { 
+    #####:  124:            auto a = array.load(std::memory_order_consume);  
+    #####:  125:            x = std::atomic_load_explicit(&a->at(t), std::memory_order_relaxed);
+    #####:  126:            if (!top.compare_exchange_strong(t, t + 1, std::memory_order_seq_cst, std::memory_order_relaxed)){
+    #####:  127:                return nullptr; 
         -:  128:            }
-      222:  129:        }
-     1665:  130:        return x;
-     1789:  131:    }
+    #####:  129:        }
+    #####:  130:        return x;
+    #####:  131:    }
         -:  132:protected:
         -:  133:    // Doubles the underlying array's size. It is called when the deque becomes full.
         -:  134:    void                                grow(){
-       10:  135:        auto old_arr = array.load(std::memory_order_relaxed);
-       10:  136:        uint64_t new_capacity=old_arr->capacity<<1;
-       10:  137:        AutoDelete<SharedPointerArray> delguard{old_arr}; //must declare variable name here, otherwise old_arr would be destroyed early
-       30:  138:        auto new_arr=new SharedPointerArray(new_capacity);
-      532:  139:        for(uint64_t i=top.load(std::memory_order_relaxed);i<bottom.load(std::memory_order_relaxed);i++)  
+    #####:  135:        auto old_arr = array.load(std::memory_order_relaxed);
+    #####:  136:        uint64_t new_capacity=old_arr->capacity<<1;
+    #####:  137:        AutoDelete<SharedPointerArray> delguard{old_arr}; //must declare variable name here, otherwise old_arr would be destroyed early
+    #####:  138:        auto new_arr=new SharedPointerArray(new_capacity);
+    #####:  139:        for(uint64_t i=top.load(std::memory_order_relaxed);i<bottom.load(std::memory_order_relaxed);i++)  
         -:  140:        {
-      512:  141:            auto x = std::atomic_load_explicit(&old_arr->at(i), std::memory_order_relaxed);
-      768:  142:            std::atomic_store_explicit(&new_arr->at(i), x, std::memory_order_relaxed);
-      256:  143:        }
-       10:  144:        array.store(new_arr, std::memory_order_relaxed);
-       10:  145:    }
+    #####:  141:            auto x = std::atomic_load_explicit(&old_arr->at(i), std::memory_order_relaxed);
+    #####:  142:            std::atomic_store_explicit(&new_arr->at(i), x, std::memory_order_relaxed);
+    #####:  143:        }
+    #####:  144:        array.store(new_arr, std::memory_order_relaxed);
+    #####:  145:    }
         -:  146:private:
         -:  147:    std::atomic<uint64_t>               top;
         -:  148:    std::atomic<uint64_t>               bottom;

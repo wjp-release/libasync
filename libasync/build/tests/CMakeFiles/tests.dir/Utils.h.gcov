@@ -1,8 +1,8 @@
         -:    0:Source:/Users/wjp/Desktop/workspace/libasync/libasync/./src/Utils.h
         -:    0:Graph:/Users/wjp/Desktop/workspace/libasync/libasync/build/tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.gcno
-        -:    0:Data:/Users/wjp/Desktop/workspace/libasync/libasync/build/tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.gcda
-        -:    0:Runs:2
-        -:    0:Programs:1
+        -:    0:Data:-
+        -:    0:Runs:0
+        -:    0:Programs:0
         -:    1:/*
         -:    2:* MIT License
         -:    3:*
@@ -38,8 +38,8 @@
         -:   33:
         -:   34:    static inline void              sleep(int ms)
         -:   35:    {
-     1865:   36:        std::this_thread::sleep_for(std::chrono::milliseconds(ms));
-     1865:   37:    }
+    #####:   36:        std::this_thread::sleep_for(std::chrono::milliseconds(ms));
+    #####:   37:    }
         -:   38:
         -:   39:    static inline time_point        now()
         -:   40:    {
@@ -49,9 +49,9 @@
         -:   44:    
         -:   45:    template <int MIN, int MAX>
         -:   46:    static int                      randint(){
-     3865:   47:        static std::uniform_int_distribution<unsigned> u(0,9);
-     1911:   48:        static std::default_random_engine e(time(0));
-     1846:   49:        return u(e);
+    #####:   47:        static std::uniform_int_distribution<unsigned> u(0,9);
+    #####:   48:        static std::default_random_engine e(time(0));
+    #####:   49:        return u(e);
     #####:   50:    }
         -:   51:
         -:   52:

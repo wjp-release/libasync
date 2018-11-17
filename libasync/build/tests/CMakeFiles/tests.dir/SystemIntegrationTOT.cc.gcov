@@ -1,8 +1,8 @@
         -:    0:Source:/Users/wjp/Desktop/workspace/libasync/libasync/tests/SystemIntegrationTOT.cc
         -:    0:Graph:/Users/wjp/Desktop/workspace/libasync/libasync/build/tests/CMakeFiles/tests.dir/SystemIntegrationTOT.cc.gcno
-        -:    0:Data:/Users/wjp/Desktop/workspace/libasync/libasync/build/tests/CMakeFiles/tests.dir/SystemIntegrationTOT.cc.gcda
-        -:    0:Runs:2
-        -:    0:Programs:1
+        -:    0:Data:-
+        -:    0:Runs:0
+        -:    0:Programs:0
         -:    1:#include "gtest/gtest.h"
         -:    2:#include "Common.h"
         -:    3:#include "Utils.h"
@@ -10,40 +10,40 @@
         -:    5:using namespace wjp;
         -:    6:class test_todo : public ::testing::Test {
         -:    7:protected:
-        6:    8:	test_todo() {
+    #####:    8:	test_todo() {
         -:    9:
-        6:   10:	}
+    #####:   10:	}
     #####:   11:	virtual ~test_todo() {
         -:   12:
-        6:   13:	}
+    #####:   13:	}
         -:   14:	virtual void SetUp() {
         -:   15:
         -:   16:
-        6:   17:	}
+    #####:   17:	}
         -:   18:	virtual void TearDown() {
         -:   19:
-        6:   20:	}
+    #####:   20:	}
         -:   21:};
         -:   22:
         -:   23:
         -:   24:// testcase: test_todo
         -:   25:// testname: ctor
-       24:   26:TEST_F(test_todo, ctor) {
-        2:   27:	int i = 1;
-        8:   28:	EXPECT_EQ(1, i);
-        2:   29:}
+    #####:   26:TEST_F(test_todo, ctor) {
+    #####:   27:	int i = 1;
+    #####:   28:	EXPECT_EQ(1, i);
+    #####:   29:}
         -:   30:
         -:   31:// testcase: test_todo
         -:   32:// testname: then
-       24:   33:TEST_F(test_todo, then) {
-        2:   34:	int i = 1;
-        8:   35:	EXPECT_EQ(1, i);
-        2:   36:}
+    #####:   33:TEST_F(test_todo, then) {
+    #####:   34:	int i = 1;
+    #####:   35:	EXPECT_EQ(1, i);
+    #####:   36:}
         -:   37:
         -:   38:// testcase: test_todo
         -:   39:// testname: operator_eq
-       24:   40:TEST_F(test_todo, operator_eq) {
-        2:   41:	int i = 1;
-        8:   42:	EXPECT_EQ(1, i);
-        2:   43:}
+    #####:   40:TEST_F(test_todo, operator_eq) {
+    #####:   41:	int i = 1;
+    #####:   42:	EXPECT_EQ(1, i);
+    #####:   43:}
         -:   44:

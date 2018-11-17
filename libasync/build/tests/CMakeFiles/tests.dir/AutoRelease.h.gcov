@@ -1,8 +1,8 @@
         -:    0:Source:/Users/wjp/Desktop/workspace/libasync/libasync/./src/AutoRelease.h
         -:    0:Graph:/Users/wjp/Desktop/workspace/libasync/libasync/build/tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.gcno
-        -:    0:Data:/Users/wjp/Desktop/workspace/libasync/libasync/build/tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.gcda
-        -:    0:Runs:2
-        -:    0:Programs:1
+        -:    0:Data:-
+        -:    0:Runs:0
+        -:    0:Programs:0
         -:    1:/*
         -:    2:* MIT License
         -:    3:*
@@ -36,10 +36,10 @@
         -:   31:template <typename T>
         -:   32:class AutoDelete{
         -:   33:public:
-       20:   34:    AutoDelete(T*arr):arr(arr){}
-       10:   35:    ~AutoDelete(){
-       20:   36:        delete arr;
-       20:   37:    }
+    #####:   34:    AutoDelete(T*arr):arr(arr){}
+    #####:   35:    ~AutoDelete(){
+    #####:   36:        delete arr;
+    #####:   37:    }
         -:   38:private:
         -:   39:    T* arr;
         -:   40:};

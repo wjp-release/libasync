@@ -1,8 +1,8 @@
         -:    0:Source:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/exception
         -:    0:Graph:/Users/wjp/Desktop/workspace/libasync/libasync/build/tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.gcno
-        -:    0:Data:/Users/wjp/Desktop/workspace/libasync/libasync/build/tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.gcda
-        -:    0:Runs:2
-        -:    0:Programs:1
+        -:    0:Data:-
+        -:    0:Runs:0
+        -:    0:Programs:0
         -:    1:// -*- C++ -*-
         -:    2://===-------------------------- exception ---------------------------------===//
         -:    3://
@@ -132,8 +132,8 @@
         -:  127:{
         -:  128:    void* __ptr_;
         -:  129:public:
-       40:  130:    _LIBCPP_INLINE_VISIBILITY exception_ptr() _NOEXCEPT : __ptr_() {}
-       79:  131:    _LIBCPP_INLINE_VISIBILITY exception_ptr(nullptr_t) _NOEXCEPT : __ptr_() {}
+    #####:  130:    _LIBCPP_INLINE_VISIBILITY exception_ptr() _NOEXCEPT : __ptr_() {}
+    #####:  131:    _LIBCPP_INLINE_VISIBILITY exception_ptr(nullptr_t) _NOEXCEPT : __ptr_() {}
         -:  132:    exception_ptr(const exception_ptr&) _NOEXCEPT;
         -:  133:    exception_ptr& operator=(const exception_ptr&) _NOEXCEPT;
         -:  134:    ~exception_ptr() _NOEXCEPT;
@@ -144,10 +144,10 @@
         -:  139:
         -:  140:    friend _LIBCPP_INLINE_VISIBILITY
         -:  141:    bool operator==(const exception_ptr& __x, const exception_ptr& __y) _NOEXCEPT
-       40:  142:        {return __x.__ptr_ == __y.__ptr_;}
+    #####:  142:        {return __x.__ptr_ == __y.__ptr_;}
         -:  143:    friend _LIBCPP_INLINE_VISIBILITY
         -:  144:    bool operator!=(const exception_ptr& __x, const exception_ptr& __y) _NOEXCEPT
-       39:  145:        {return !(__x == __y);}
+    #####:  145:        {return !(__x == __y);}
         -:  146:
         -:  147:    friend _LIBCPP_FUNC_VIS exception_ptr current_exception() _NOEXCEPT;
         -:  148:    friend _LIBCPP_FUNC_VIS void rethrow_exception(exception_ptr);

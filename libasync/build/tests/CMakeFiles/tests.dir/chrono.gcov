@@ -1,8 +1,8 @@
         -:    0:Source:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/chrono
         -:    0:Graph:/Users/wjp/Desktop/workspace/libasync/libasync/build/tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.gcno
-        -:    0:Data:/Users/wjp/Desktop/workspace/libasync/libasync/build/tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.gcda
-        -:    0:Runs:2
-        -:    0:Programs:1
+        -:    0:Data:-
+        -:    0:Runs:0
+        -:    0:Programs:0
         -:    1:// -*- C++ -*-
         -:    2://===---------------------------- chrono ----------------------------------===//
         -:    3://
@@ -340,7 +340,7 @@
         -:  335:    _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR
         -:  336:    _ToDuration operator()(const _FromDuration& __fd) const
         -:  337:    {
-     1744:  338:        return _ToDuration(static_cast<typename _ToDuration::rep>(__fd.count()));
+    #####:  338:        return _ToDuration(static_cast<typename _ToDuration::rep>(__fd.count()));
         -:  339:    }
         -:  340:};
         -:  341:
@@ -363,8 +363,8 @@
         -:  358:    _ToDuration operator()(const _FromDuration& __fd) const
         -:  359:    {
         -:  360:        typedef typename common_type<typename _ToDuration::rep, typename _FromDuration::rep, intmax_t>::type _Ct;
-     5055:  361:        return _ToDuration(static_cast<typename _ToDuration::rep>(
-     5055:  362:                           static_cast<_Ct>(__fd.count()) * static_cast<_Ct>(_Period::num)));
+    #####:  361:        return _ToDuration(static_cast<typename _ToDuration::rep>(
+    #####:  362:                           static_cast<_Ct>(__fd.count()) * static_cast<_Ct>(_Period::num)));
         -:  363:    }
         -:  364:};
         -:  365:
@@ -391,7 +391,7 @@
         -:  386:>::type
         -:  387:duration_cast(const duration<_Rep, _Period>& __fd)
         -:  388:{
-     6848:  389:    return __duration_cast<duration<_Rep, _Period>, _ToDuration>()(__fd);
+    #####:  389:    return __duration_cast<duration<_Rep, _Period>, _ToDuration>()(__fd);
         -:  390:}
         -:  391:
         -:  392:template <class _Rep>
@@ -401,7 +401,7 @@
         -:  396:struct _LIBCPP_TYPE_VIS_ONLY duration_values
         -:  397:{
         -:  398:public:
-     3601:  399:    _LIBCPP_INLINE_VISIBILITY static _LIBCPP_CONSTEXPR _Rep zero() {return _Rep(0);}
+    #####:  399:    _LIBCPP_INLINE_VISIBILITY static _LIBCPP_CONSTEXPR _Rep zero() {return _Rep(0);}
     #####:  400:    _LIBCPP_INLINE_VISIBILITY static _LIBCPP_CONSTEXPR _Rep max()  {return numeric_limits<_Rep>::max();}
         -:  401:    _LIBCPP_INLINE_VISIBILITY static _LIBCPP_CONSTEXPR _Rep min()  {return numeric_limits<_Rep>::lowest();}
         -:  402:};
@@ -468,7 +468,7 @@
         -:  463:               (treat_as_floating_point<rep>::value ||
         -:  464:               !treat_as_floating_point<_Rep2>::value)
         -:  465:            >::type* = 0)
-    21136:  466:                : __rep_(__r) {}
+    #####:  466:                : __rep_(__r) {}
         -:  467:
         -:  468:    // conversions
         -:  469:    template <class _Rep2, class _Period2>
@@ -481,11 +481,11 @@
         -:  476:                (__no_overflow<_Period2, period>::type::den == 1 &&
         -:  477:                 !treat_as_floating_point<_Rep2>::value))
         -:  478:            >::type* = 0)
-    10488:  479:                : __rep_(_VSTD::chrono::duration_cast<duration>(__d).count()) {}
+    #####:  479:                : __rep_(_VSTD::chrono::duration_cast<duration>(__d).count()) {}
         -:  480:
         -:  481:    // observer
         -:  482:
-    23134:  483:    _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR rep count() const {return __rep_;}
+    #####:  483:    _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR rep count() const {return __rep_;}
         -:  484:
         -:  485:    // arithmetic
         -:  486:
@@ -506,7 +506,7 @@
         -:  501:
         -:  502:    // special values
         -:  503:
-     3621:  504:    _LIBCPP_INLINE_VISIBILITY static _LIBCPP_CONSTEXPR duration zero() {return duration(duration_values<rep>::zero());}
+    #####:  504:    _LIBCPP_INLINE_VISIBILITY static _LIBCPP_CONSTEXPR duration zero() {return duration(duration_values<rep>::zero());}
         -:  505:    _LIBCPP_INLINE_VISIBILITY static _LIBCPP_CONSTEXPR duration min()  {return duration(duration_values<rep>::min());}
     #####:  506:    _LIBCPP_INLINE_VISIBILITY static _LIBCPP_CONSTEXPR duration max()  {return duration(duration_values<rep>::max());}
         -:  507:};
@@ -568,7 +568,7 @@
         -:  563:    bool operator()(const _LhsDuration& __lhs, const _RhsDuration& __rhs) const
         -:  564:        {
         -:  565:            typedef typename common_type<_LhsDuration, _RhsDuration>::type _Ct;
-     3426:  566:            return _Ct(__lhs).count() < _Ct(__rhs).count();
+    #####:  566:            return _Ct(__lhs).count() < _Ct(__rhs).count();
         -:  567:        }
         -:  568:};
         -:  569:
@@ -577,7 +577,7 @@
         -:  572:{
         -:  573:    _LIBCPP_INLINE_VISIBILITY _LIBCPP_CONSTEXPR
         -:  574:    bool operator()(const _LhsDuration& __lhs, const _LhsDuration& __rhs) const
-     1886:  575:        {return __lhs.count() < __rhs.count();}
+    #####:  575:        {return __lhs.count() < __rhs.count();}
         -:  576:};
         -:  577:
         -:  578:template <class _Rep1, class _Period1, class _Rep2, class _Period2>
@@ -586,7 +586,7 @@
         -:  581:bool
         -:  582:operator< (const duration<_Rep1, _Period1>& __lhs, const duration<_Rep2, _Period2>& __rhs)
         -:  583:{
-     5370:  584:    return __duration_lt<duration<_Rep1, _Period1>, duration<_Rep2, _Period2> >()(__lhs, __rhs);
+    #####:  584:    return __duration_lt<duration<_Rep1, _Period1>, duration<_Rep2, _Period2> >()(__lhs, __rhs);
         -:  585:}
         -:  586:
         -:  587:// Duration >
@@ -597,7 +597,7 @@
         -:  592:bool
         -:  593:operator> (const duration<_Rep1, _Period1>& __lhs, const duration<_Rep2, _Period2>& __rhs)
         -:  594:{
-     1851:  595:    return __rhs < __lhs;
+    #####:  595:    return __rhs < __lhs;
         -:  596:}
         -:  597:
         -:  598:// Duration <=

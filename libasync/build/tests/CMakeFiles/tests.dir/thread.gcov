@@ -1,8 +1,8 @@
         -:    0:Source:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/thread
         -:    0:Graph:/Users/wjp/Desktop/workspace/libasync/libasync/build/tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.gcno
-        -:    0:Data:/Users/wjp/Desktop/workspace/libasync/libasync/build/tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.gcda
-        -:    0:Runs:2
-        -:    0:Programs:1
+        -:    0:Data:-
+        -:    0:Runs:0
+        -:    0:Programs:0
         -:    1:// -*- C++ -*-
         -:    2://===--------------------------- thread -----------------------------------===//
         -:    3://
@@ -160,7 +160,7 @@
         -:  155:    ~__thread_specific_ptr();
         -:  156:
         -:  157:    _LIBCPP_INLINE_VISIBILITY
-       20:  158:    pointer get() const {return static_cast<_Tp*>(pthread_getspecific(__key_));}
+    #####:  158:    pointer get() const {return static_cast<_Tp*>(pthread_getspecific(__key_));}
         -:  159:    _LIBCPP_INLINE_VISIBILITY
         -:  160:    pointer operator*() const {return *get();}
         -:  161:    _LIBCPP_INLINE_VISIBILITY
@@ -209,10 +209,10 @@
         -:  204:void
         -:  205:__thread_specific_ptr<_Tp>::reset(pointer __p)
         -:  206:{
-       20:  207:    pointer __p_old = get();
-       20:  208:    pthread_setspecific(__key_, __p);
-       20:  209:    delete __p_old;
-       20:  210:}
+    #####:  207:    pointer __p_old = get();
+    #####:  208:    pthread_setspecific(__key_, __p);
+    #####:  209:    delete __p_old;
+    #####:  210:}
         -:  211:
         -:  212:class _LIBCPP_TYPE_VIS thread;
         -:  213:class _LIBCPP_TYPE_VIS __thread_id;
@@ -349,34 +349,34 @@
         -:  344:void
         -:  345:__thread_execute(tuple<_Fp, _Args...>& __t, __tuple_indices<_Indices...>)
         -:  346:{
-       20:  347:    __invoke(_VSTD::move(_VSTD::get<0>(__t)), _VSTD::move(_VSTD::get<_Indices>(__t))...);
-       20:  348:}
+    #####:  347:    __invoke(_VSTD::move(_VSTD::get<0>(__t)), _VSTD::move(_VSTD::get<_Indices>(__t))...);
+    #####:  348:}
         -:  349:
         -:  350:template <class _Fp>
         -:  351:void*
         -:  352:__thread_proxy(void* __vp)
         -:  353:{
-       38:  354:    __thread_local_data().reset(new __thread_struct);
-       19:  355:    std::unique_ptr<_Fp> __p(static_cast<_Fp*>(__vp));
+    #####:  354:    __thread_local_data().reset(new __thread_struct);
+    #####:  355:    std::unique_ptr<_Fp> __p(static_cast<_Fp*>(__vp));
         -:  356:    typedef typename __make_tuple_indices<tuple_size<_Fp>::value, 1>::type _Index;
-       38:  357:    __thread_execute(*__p, _Index());
+    #####:  357:    __thread_execute(*__p, _Index());
         -:  358:    return nullptr;
-       19:  359:}
+    #####:  359:}
         -:  360:
         -:  361:template <class _Fp, class ..._Args,
         -:  362:          class
         -:  363:         >
         -:  364:thread::thread(_Fp&& __f, _Args&&... __args)
-       20:  365:{
+    #####:  365:{
         -:  366:    typedef tuple<typename decay<_Fp>::type, typename decay<_Args>::type...> _Gp;
-       60:  367:    _VSTD::unique_ptr<_Gp> __p(new _Gp(__decay_copy(_VSTD::forward<_Fp>(__f)),
-       40:  368:                                __decay_copy(_VSTD::forward<_Args>(__args))...));
-       40:  369:    int __ec = pthread_create(&__t_, 0, &__thread_proxy<_Gp>, __p.get());
-       20:  370:    if (__ec == 0)
-       20:  371:        __p.release();
+    #####:  367:    _VSTD::unique_ptr<_Gp> __p(new _Gp(__decay_copy(_VSTD::forward<_Fp>(__f)),
+    #####:  368:                                __decay_copy(_VSTD::forward<_Args>(__args))...));
+    #####:  369:    int __ec = pthread_create(&__t_, 0, &__thread_proxy<_Gp>, __p.get());
+    #####:  370:    if (__ec == 0)
+    #####:  371:        __p.release();
         -:  372:    else
     #####:  373:        __throw_system_error(__ec, "thread constructor failed");
-       40:  374:}
+    #####:  374:}
         -:  375:
         -:  376:#else  // _LIBCPP_HAS_NO_VARIADICS
         -:  377:
@@ -431,21 +431,21 @@
         -:  426:sleep_for(const chrono::duration<_Rep, _Period>& __d)
         -:  427:{
         -:  428:    using namespace chrono;
-     1923:  429:    if (__d > duration<_Rep, _Period>::zero())
+    #####:  429:    if (__d > duration<_Rep, _Period>::zero())
         -:  430:    {
         -:  431:        _LIBCPP_CONSTEXPR duration<long double> _Max = nanoseconds::max();
         -:  432:        nanoseconds __ns;
-     1792:  433:        if (__d < _Max)
+    #####:  433:        if (__d < _Max)
         -:  434:        {
-     1783:  435:            __ns = duration_cast<nanoseconds>(__d);
-     1783:  436:            if (__ns < __d)
+    #####:  435:            __ns = duration_cast<nanoseconds>(__d);
+    #####:  436:            if (__ns < __d)
     #####:  437:                ++__ns;
-     1779:  438:        }
+    #####:  438:        }
         -:  439:        else
     #####:  440:            __ns = nanoseconds::max();
-     1782:  441:        sleep_for(__ns);
-     1782:  442:    }
-     1630:  443:}
+    #####:  441:        sleep_for(__ns);
+    #####:  442:    }
+    #####:  443:}
         -:  444:
         -:  445:template <class _Clock, class _Duration>
         -:  446:void

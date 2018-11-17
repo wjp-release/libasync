@@ -1,8 +1,8 @@
         -:    0:Source:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/future
         -:    0:Graph:/Users/wjp/Desktop/workspace/libasync/libasync/build/tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.gcno
-        -:    0:Data:/Users/wjp/Desktop/workspace/libasync/libasync/build/tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.gcda
-        -:    0:Runs:2
-        -:    0:Programs:1
+        -:    0:Data:-
+        -:    0:Runs:0
+        -:    0:Programs:0
         -:    1:// -*- C++ -*-
         -:    2://===--------------------------- future -----------------------------------===//
         -:    3://
@@ -517,7 +517,7 @@
         -:  512:    virtual ~future_error() _NOEXCEPT;
         -:  513:};
         -:  514:
-       20:  515:class _LIBCPP_TYPE_VIS _LIBCPP_AVAILABILITY_FUTURE __assoc_sub_state
+    #####:  515:class _LIBCPP_TYPE_VIS _LIBCPP_AVAILABILITY_FUTURE __assoc_sub_state
         -:  516:    : public __shared_count
         -:  517:{
         -:  518:protected:
@@ -538,20 +538,20 @@
         -:  533:    };
         -:  534:
         -:  535:    _LIBCPP_INLINE_VISIBILITY
-       40:  536:    __assoc_sub_state() : __state_(0) {}
+    #####:  536:    __assoc_sub_state() : __state_(0) {}
         -:  537:
         -:  538:    _LIBCPP_INLINE_VISIBILITY
         -:  539:    bool __has_value() const
-       97:  540:        {return (__state_ & __constructed) || (__exception_ != nullptr);}
+    #####:  540:        {return (__state_ & __constructed) || (__exception_ != nullptr);}
         -:  541:
         -:  542:    _LIBCPP_INLINE_VISIBILITY
         -:  543:    void __set_future_attached()
         -:  544:    {
-       20:  545:        lock_guard<mutex> __lk(__mut_);
-       20:  546:        __state_ |= __future_attached;
-       20:  547:    }
+    #####:  545:        lock_guard<mutex> __lk(__mut_);
+    #####:  546:        __state_ |= __future_attached;
+    #####:  547:    }
         -:  548:    _LIBCPP_INLINE_VISIBILITY
-       20:  549:    bool __has_future_attached() const {return (__state_ & __future_attached) != 0;}
+    #####:  549:    bool __has_future_attached() const {return (__state_ & __future_attached) != 0;}
         -:  550:
         -:  551:    _LIBCPP_INLINE_VISIBILITY
     #####:  552:    void __set_deferred() {__state_ |= deferred;}
@@ -603,7 +603,7 @@
         -:  598:}
         -:  599:
         -:  600:template <class _Rp>
-       40:  601:class _LIBCPP_AVAILABILITY_FUTURE __assoc_state
+    #####:  601:class _LIBCPP_AVAILABILITY_FUTURE __assoc_state
         -:  602:    : public __assoc_sub_state
         -:  603:{
         -:  604:    typedef __assoc_sub_state base;
@@ -636,10 +636,10 @@
         -:  631:void
         -:  632:__assoc_state<_Rp>::__on_zero_shared() _NOEXCEPT
         -:  633:{
-       20:  634:    if (this->__state_ & base::__constructed)
-       20:  635:        reinterpret_cast<_Rp*>(&__value_)->~_Rp();
-       40:  636:    delete this;
-       20:  637:}
+    #####:  634:    if (this->__state_ & base::__constructed)
+    #####:  635:        reinterpret_cast<_Rp*>(&__value_)->~_Rp();
+    #####:  636:    delete this;
+    #####:  637:}
         -:  638:
         -:  639:template <class _Rp>
         -:  640:template <class _Arg>
@@ -651,15 +651,15 @@
         -:  646:__assoc_state<_Rp>::set_value(_Arg& __arg)
         -:  647:#endif
         -:  648:{
-       19:  649:    unique_lock<mutex> __lk(this->__mut_);
+    #####:  649:    unique_lock<mutex> __lk(this->__mut_);
         -:  650:#ifndef _LIBCPP_NO_EXCEPTIONS
-       38:  651:    if (this->__has_value())
+    #####:  651:    if (this->__has_value())
     #####:  652:        throw future_error(make_error_code(future_errc::promise_already_satisfied));
         -:  653:#endif
-       19:  654:    ::new(&__value_) _Rp(_VSTD::forward<_Arg>(__arg));
-       19:  655:    this->__state_ |= base::__constructed | base::ready;
-       19:  656:    __cv_.notify_all();
-       19:  657:}
+    #####:  654:    ::new(&__value_) _Rp(_VSTD::forward<_Arg>(__arg));
+    #####:  655:    this->__state_ |= base::__constructed | base::ready;
+    #####:  656:    __cv_.notify_all();
+    #####:  657:}
         -:  658:
         -:  659:template <class _Rp>
         -:  660:template <class _Arg>
@@ -684,12 +684,12 @@
         -:  679:_Rp
         -:  680:__assoc_state<_Rp>::move()
         -:  681:{
-       20:  682:    unique_lock<mutex> __lk(this->__mut_);
-       20:  683:    this->__sub_wait(__lk);
-       20:  684:    if (this->__exception_ != nullptr)
+    #####:  682:    unique_lock<mutex> __lk(this->__mut_);
+    #####:  683:    this->__sub_wait(__lk);
+    #####:  684:    if (this->__exception_ != nullptr)
     #####:  685:        rethrow_exception(this->__exception_);
-       20:  686:    return _VSTD::move(*reinterpret_cast<_Rp*>(&__value_));
-       20:  687:}
+    #####:  686:    return _VSTD::move(*reinterpret_cast<_Rp*>(&__value_));
+    #####:  687:}
         -:  688:
         -:  689:template <class _Rp>
         -:  690:typename add_lvalue_reference<_Rp>::type
@@ -942,7 +942,7 @@
         -:  937:}
         -:  938:
         -:  939:template <class _Rp, class _Fp>
-       60:  940:class _LIBCPP_AVAILABILITY_FUTURE __async_assoc_state
+    #####:  940:class _LIBCPP_AVAILABILITY_FUTURE __async_assoc_state
         -:  941:    : public __assoc_state<_Rp>
         -:  942:{
         -:  943:    typedef __assoc_state<_Rp> base;
@@ -953,7 +953,7 @@
         -:  948:public:
         -:  949:#ifndef _LIBCPP_HAS_NO_RVALUE_REFERENCES
         -:  950:    _LIBCPP_INLINE_VISIBILITY
-       20:  951:    explicit __async_assoc_state(_Fp&& __f);
+    #####:  951:    explicit __async_assoc_state(_Fp&& __f);
         -:  952:#endif
         -:  953:
         -:  954:    virtual void __execute();
@@ -964,9 +964,9 @@
         -:  959:template <class _Rp, class _Fp>
         -:  960:inline
         -:  961:__async_assoc_state<_Rp, _Fp>::__async_assoc_state(_Fp&& __f)
-       20:  962:    : __func_(_VSTD::forward<_Fp>(__f))
-       60:  963:{
-       40:  964:}
+    #####:  962:    : __func_(_VSTD::forward<_Fp>(__f))
+    #####:  963:{
+    #####:  964:}
         -:  965:
         -:  966:#endif  // _LIBCPP_HAS_NO_RVALUE_REFERENCES
         -:  967:
@@ -978,23 +978,23 @@
         -:  973:    try
         -:  974:    {
         -:  975:#endif  // _LIBCPP_NO_EXCEPTIONS
-       41:  976:        this->set_value(__func_());
+    #####:  976:        this->set_value(__func_());
         -:  977:#ifndef _LIBCPP_NO_EXCEPTIONS
-       20:  978:    }
+    #####:  978:    }
         -:  979:    catch (...)
         -:  980:    {
     #####:  981:        this->set_exception(current_exception());
     #####:  982:    }
         -:  983:#endif  // _LIBCPP_NO_EXCEPTIONS
-       19:  984:}
+    #####:  984:}
         -:  985:
         -:  986:template <class _Rp, class _Fp>
         -:  987:void
         -:  988:__async_assoc_state<_Rp, _Fp>::__on_zero_shared() _NOEXCEPT
         -:  989:{
-       20:  990:    this->wait();
-       20:  991:    base::__on_zero_shared();
-       20:  992:}
+    #####:  990:    this->wait();
+    #####:  991:    base::__on_zero_shared();
+    #####:  992:}
         -:  993:
         -:  994:template <class _Fp>
         -:  995:class _LIBCPP_AVAILABILITY_FUTURE __async_assoc_state<void, _Fp>
@@ -1103,7 +1103,7 @@
         -: 1098:#ifndef _LIBCPP_HAS_NO_RVALUE_REFERENCES
         -: 1099:    _LIBCPP_INLINE_VISIBILITY
         -: 1100:    future(future&& __rhs) _NOEXCEPT
-      100: 1101:        : __state_(__rhs.__state_) {__rhs.__state_ = nullptr;}
+    #####: 1101:        : __state_(__rhs.__state_) {__rhs.__state_ = nullptr;}
         -: 1102:    future(const future&) = delete;
         -: 1103:    future& operator=(const future&) = delete;
         -: 1104:    _LIBCPP_INLINE_VISIBILITY
@@ -1148,37 +1148,37 @@
         -: 1143:
         -: 1144:template <class _Rp>
         -: 1145:future<_Rp>::future(__assoc_state<_Rp>* __state)
-       20: 1146:    : __state_(__state)
-       20: 1147:{
+    #####: 1146:    : __state_(__state)
+    #####: 1147:{
         -: 1148:#ifndef _LIBCPP_NO_EXCEPTIONS
-       20: 1149:    if (__state_->__has_future_attached())
+    #####: 1149:    if (__state_->__has_future_attached())
     #####: 1150:        throw future_error(make_error_code(future_errc::future_already_retrieved));
         -: 1151:#endif
-       20: 1152:    __state_->__add_shared();
-       20: 1153:    __state_->__set_future_attached();
-       40: 1154:}
+    #####: 1152:    __state_->__add_shared();
+    #####: 1153:    __state_->__set_future_attached();
+    #####: 1154:}
         -: 1155:
         -: 1156:struct __release_shared_count
         -: 1157:{
-       40: 1158:    void operator()(__shared_count* p) {p->__release_shared();}
+    #####: 1158:    void operator()(__shared_count* p) {p->__release_shared();}
         -: 1159:};
         -: 1160:
         -: 1161:template <class _Rp>
         -: 1162:future<_Rp>::~future()
-       70: 1163:{
-       70: 1164:    if (__state_)
+    #####: 1163:{
+    #####: 1164:    if (__state_)
     #####: 1165:        __state_->__release_shared();
-      140: 1166:}
+    #####: 1166:}
         -: 1167:
         -: 1168:template <class _Rp>
         -: 1169:_Rp
         -: 1170:future<_Rp>::get()
         -: 1171:{
-       20: 1172:    unique_ptr<__shared_count, __release_shared_count> __(__state_);
-       20: 1173:    __assoc_state<_Rp>* __s = __state_;
-       20: 1174:    __state_ = nullptr;
-       20: 1175:    return __s->move();
-       20: 1176:}
+    #####: 1172:    unique_ptr<__shared_count, __release_shared_count> __(__state_);
+    #####: 1173:    __assoc_state<_Rp>* __s = __state_;
+    #####: 1174:    __state_ = nullptr;
+    #####: 1175:    return __s->move();
+    #####: 1176:}
         -: 1177:
         -: 1178:template <class _Rp>
         -: 1179:class _LIBCPP_TYPE_VIS_ONLY _LIBCPP_AVAILABILITY_FUTURE future<_Rp&>
@@ -2320,10 +2320,10 @@
         -: 2315:#endif
         -: 2316:{
         -: 2317:    unique_ptr<__async_assoc_state<_Rp, _Fp>, __release_shared_count>
-       40: 2318:        __h(new __async_assoc_state<_Rp, _Fp>(_VSTD::forward<_Fp>(__f)));
-       60: 2319:    _VSTD::thread(&__async_assoc_state<_Rp, _Fp>::__execute, __h.get()).detach();
-       20: 2320:    return future<_Rp>(__h.get());
-       20: 2321:}
+    #####: 2318:        __h(new __async_assoc_state<_Rp, _Fp>(_VSTD::forward<_Fp>(__f)));
+    #####: 2319:    _VSTD::thread(&__async_assoc_state<_Rp, _Fp>::__execute, __h.get()).detach();
+    #####: 2320:    return future<_Rp>(__h.get());
+    #####: 2321:}
         -: 2322:
         -: 2323:template <class _Fp, class... _Args>
         -: 2324:class __async_func
@@ -2335,27 +2335,27 @@
         -: 2330:
         -: 2331:    _LIBCPP_INLINE_VISIBILITY
         -: 2332:    explicit __async_func(_Fp&& __f, _Args&&... __args)
-       40: 2333:        : __f_(_VSTD::move(__f), _VSTD::move(__args)...) {}
+    #####: 2333:        : __f_(_VSTD::move(__f), _VSTD::move(__args)...) {}
         -: 2334:
         -: 2335:    _LIBCPP_INLINE_VISIBILITY
-       40: 2336:    __async_func(__async_func&& __f) : __f_(_VSTD::move(__f.__f_)) {}
+    #####: 2336:    __async_func(__async_func&& __f) : __f_(_VSTD::move(__f.__f_)) {}
         -: 2337:
         -: 2338:    _Rp operator()()
         -: 2339:    {
         -: 2340:        typedef typename __make_tuple_indices<1+sizeof...(_Args), 1>::type _Index;
-       20: 2341:        return __execute(_Index());
+    #####: 2341:        return __execute(_Index());
         -: 2342:    }
         -: 2343:private:
         -: 2344:    template <size_t ..._Indices>
         -: 2345:    _Rp
         -: 2346:    __execute(__tuple_indices<_Indices...>)
         -: 2347:    {
-       20: 2348:        return __invoke(_VSTD::move(_VSTD::get<0>(__f_)), _VSTD::move(_VSTD::get<_Indices>(__f_))...);
+    #####: 2348:        return __invoke(_VSTD::move(_VSTD::get<0>(__f_)), _VSTD::move(_VSTD::get<_Indices>(__f_))...);
         -: 2349:    }
         -: 2350:};
         -: 2351:
         -: 2352:inline _LIBCPP_INLINE_VISIBILITY bool __does_policy_contain(launch __policy, launch __value )
-       20: 2353:{ return (int(__policy) & int(__value)) != 0; }
+    #####: 2353:{ return (int(__policy) & int(__value)) != 0; }
         -: 2354:
         -: 2355:template <class _Fp, class... _Args>
         -: 2356:future<typename __invoke_of<typename decay<_Fp>::type, typename decay<_Args>::type...>::type>
@@ -2368,8 +2368,8 @@
         -: 2363:    try
         -: 2364:    {
         -: 2365:#endif
-       40: 2366:        if (__does_policy_contain(__policy, launch::async))
-       80: 2367:        return _VSTD::__make_async_assoc_state<_Rp>(_BF(__decay_copy(_VSTD::forward<_Fp>(__f)),
+    #####: 2366:        if (__does_policy_contain(__policy, launch::async))
+    #####: 2367:        return _VSTD::__make_async_assoc_state<_Rp>(_BF(__decay_copy(_VSTD::forward<_Fp>(__f)),
         -: 2368:                                                     __decay_copy(_VSTD::forward<_Args>(__args))...));
         -: 2369:#ifndef _LIBCPP_NO_EXCEPTIONS
     #####: 2370:    }
@@ -2380,7 +2380,7 @@
     #####: 2375:        return _VSTD::__make_deferred_assoc_state<_Rp>(_BF(__decay_copy(_VSTD::forward<_Fp>(__f)),
         -: 2376:                                                        __decay_copy(_VSTD::forward<_Args>(__args))...));
     #####: 2377:    return future<_Rp>{};
-       20: 2378:}
+    #####: 2378:}
         -: 2379:
         -: 2380:template <class _Fp, class... _Args>
         -: 2381:inline _LIBCPP_INLINE_VISIBILITY

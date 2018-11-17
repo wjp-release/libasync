@@ -6,13 +6,11 @@ addons:
   apt:
     sources:
       - ubuntu-toolchain-r-test
-      - llvm-toolchain-trusty-6.0
     packages:
       - g++-8
-      - clang-6.0
 
-before_install:
-  - pip install --user cpp-coveralls
+#before_install:
+#  - pip install --user cpp-coveralls
 
 script:
   - cd libasync
@@ -24,6 +22,6 @@ script:
   - cmake --build .
   - ./tests/tests
 
-after_success:
-  - cd ../..
-  - coveralls --root ./libasync/build -E ".*gtest.*" -E ".*CMakeFiles.*" 
+#after_success:
+ # - cd ../..
+ # - coveralls --root ./libasync/build -E ".*gtest.*" -E ".*CMakeFiles.*" 
