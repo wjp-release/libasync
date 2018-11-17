@@ -52,12 +52,12 @@ public:
         SharedPointerArray(uint64_t cap) :
             buffer(reinterpret_cast<std::shared_ptr<T>*>(new char[sizeof(std::shared_ptr<T>)*cap])), 
             capacity(cap) {
-            for(int i=0;i<capacity;i++){ 
+            for(uint64_t i=0;i<capacity;i++){ 
                 new(reinterpret_cast<char*>(&buffer[i])) std::shared_ptr<T>{nullptr}; 
             }
         }
         ~SharedPointerArray(){
-            for(int i=0;i<capacity;i++){
+            for(uint64_t i=0;i<capacity;i++){
                 buffer[i].~shared_ptr(); // destruct placement newed objects explicitly
             }
             delete [] reinterpret_cast<char*>(buffer);
