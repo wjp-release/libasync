@@ -18,6 +18,7 @@ script:
   - cd libasync
   - ls
   - cd build
+  - rm -rf *
   - CXX=/usr/bin/g++-8 CC=/usr/bin/gcc-8 cmake -test=ON ..
   - ls
   - cmake --build -test=ON ..
