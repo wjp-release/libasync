@@ -11,11 +11,11 @@ configuration:
 
 before_build:
     - cd ./libasync
+    - cmake -G "Visual Studio 15 2017 Win64" -Dtest=ON .
     - dir
-    - cmake -G "Visual Studio 15 2017 Win64" .
 
 build:
   project: $(APPVEYOR_BUILD_FOLDER)\libasync\$(APPVEYOR_PROJECT_NAME).sln
 
 test_script:
-  - '%APPVEYOR_BUILD_FOLDER%\%CONFIGURATION%\tests\tests.exe'
+  - '%APPVEYOR_BUILD_FOLDER%\%CONFIGURATION%\tests\Release\tests.exe'
