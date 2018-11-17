@@ -8,11 +8,12 @@ project(libasync)
 set(CMAKE_CXX_STANDARD 17)
 
 if(UNIX)
-	set(CMAKE_CXX_FLAGS "-fPIC")
+	set(CMAKE_CXX_FLAGS "-std=c++17 -fPIC")
 	set(CMAKE_C_FKAGS "-fPIC")
 	SET(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS} -O0 -Wall -g2 -ggdb")
 	SET(CMAKE_CXX_FLAGS_RELEASE "$ENV{CXXFLAGS} -O3 -Wall")
 endif()
+
 
 if(MSVC)
 	set(CMAKE_CXX_FLAGS "/W4")

@@ -94,9 +94,9 @@ tests_EXTERNAL_OBJECTS =
 tests/tests: tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.o
 tests/tests: tests/CMakeFiles/tests.dir/SystemIntegrationTOT.cc.o
 tests/tests: tests/CMakeFiles/tests.dir/build.make
-tests/tests: lib/libgtest_main.a
+tests/tests: lib/libgtest_maind.a
 tests/tests: src/libasync.a
-tests/tests: lib/libgtest.a
+tests/tests: lib/libgtestd.a
 tests/tests: tests/CMakeFiles/tests.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/wjp/Desktop/workspace/libasync/libasync/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable tests"
 	cd /Users/wjp/Desktop/workspace/libasync/libasync/build/tests && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/tests.dir/link.txt --verbose=$(VERBOSE)
