@@ -25,23 +25,17 @@
 
 #pragma once
 
-namespace wjp{
+#include "Common.h"
+#include "Runnable.h"
+#include "Cancellable.h"
+#include "Waitable.h"
 
-    static inline void deque_sample(){
-        // T must be
-        struct A{
-            A(const std::string& str):x(str){}
-            std::string x;
-        };
-
-        ChaseLevDeque<A>* q=new ChaseLevDeque<A>(4);  
-        for(int i=1;i<=100;i++){
-            q->push(std::make_shared<A>(std::to_string(i)));
-            std::cout<<">>> ";
-            q->print();
-        }	
-        delete q;
-    }
-
-
+namespace wjp {
+	// A task is a proxy object shared between ThreadPool and ThreadPool user. 
+	// Aside from being runnable, it should be cancellable and waitable.
+	class Task : public Runnable, public Cancellable, public Waitable {
+    public:
+		virtual void submit(ThreadPool&)=0; 
+		virtual ~Task() {}
+	};
 }

@@ -26,17 +26,15 @@
 #pragma once
 
 #include "Common.h"
-#include "Runnable.h"
 
 namespace wjp {
 
-	class Task : public Runnable {
-    public:
-		virtual void cancel(bool allow_interrupt) = 0;
+	// A cancellable procedure can be cancelled.
+	class Cancellable {
+	public:
+		virtual void cancel() = 0;
 		virtual bool is_canceled() = 0;
-		virtual bool is_finished() = 0;
-		virtual void wait() = 0;
-		virtual void wait(std::chrono::milliseconds timeout) = 0;
-		virtual ~Task() {}
+		virtual ~Cancellable() {}
 	};
+
 }

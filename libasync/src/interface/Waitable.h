@@ -25,23 +25,17 @@
 
 #pragma once
 
-namespace wjp{
+#include "Common.h"
 
-    static inline void deque_sample(){
-        // T must be
-        struct A{
-            A(const std::string& str):x(str){}
-            std::string x;
-        };
+namespace wjp {
 
-        ChaseLevDeque<A>* q=new ChaseLevDeque<A>(4);  
-        for(int i=1;i<=100;i++){
-            q->push(std::make_shared<A>(std::to_string(i)));
-            std::cout<<">>> ";
-            q->print();
-        }	
-        delete q;
-    }
-
+	// wait() will block the calling thread until the waitable procedure completed
+	class Waitable {
+	public:
+		virtual void wait() = 0;
+		virtual void wait(std::chrono::milliseconds timeout) = 0;
+		virtual bool is_finished() = 0;  
+		virtual ~Waitable() {}
+	};
 
 }

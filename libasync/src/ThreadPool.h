@@ -31,6 +31,7 @@
 
 namespace wjp {
 
+	// Abstract Thread Pool
 	class ThreadPool {
 	protected:
 		int state;

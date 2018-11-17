@@ -25,12 +25,11 @@
 
 #pragma once
 
-#include <functional>
-#include "interfaces.h"
+#include "ThreadPool.h"
 
 namespace wjp {
 
-	class workshare_pool : public provider {
+	class FixedPool : public ThreadPool {
 
 	};
 }
