@@ -29,9 +29,12 @@
 #include "ThreadPool.h"
 
 namespace wjp {
-
+	class SpawnSyncTask;
 	class SpawnSyncPool : public ThreadPool {
+	public:
 
+	protected:
+		virtual void cancel(std::shared_ptr<SpawnSyncTask>);  
 
 	};
 

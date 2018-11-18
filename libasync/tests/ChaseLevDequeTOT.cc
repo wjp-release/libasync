@@ -133,7 +133,7 @@ TEST_F(ChaseLevDequeTOT, StealerRace) {
     {
         std::cout<<tasks[i].get()<<std::endl;
     }
-
+	sleep(3000);
 	EXPECT_EQ(count, 100);
 }
 

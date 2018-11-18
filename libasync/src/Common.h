@@ -44,6 +44,8 @@
 #include <thread>
 #include <mutex>
 #include <future>
+#include <stdexcept>
+#include <exception>
 
 namespace wjp{
 

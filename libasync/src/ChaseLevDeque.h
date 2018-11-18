@@ -28,16 +28,14 @@
 #include "Common.h"
 #include "AutoRelease.h"
 
-//#include <optional>
-
-// An C++ implementation of optimized version of Chase-Lev Work Stealing Deque.
+// An optimized version of Chase-Lev Work Stealing Deque.
 
 // see https://www.dre.vanderbilt.edu/~schmidt/PDF/work-stealing-dequeue.pdf
 // and https://www.di.ens.fr/~zappa/readings/ppopp13.pdf
 
+
 namespace wjp{
 
-// T is the type of a task
 // Tasks are stored in std::shared_ptr<T>  
 template<typename T>
 class ChaseLevDeque
@@ -80,7 +78,7 @@ public:
         std::cout<<std::endl;
     }
     // Tries to take a recently pushed task. It should only be called from the owning thread.
-    std::shared_ptr<T>                  take() {
+    std::shared_ptr<T>					take() {
         auto b=bottom.load(std::memory_order_relaxed)-1;
         auto a=array.load(std::memory_order_relaxed);
         bottom.store(b,std::memory_order_relaxed);

@@ -25,6 +25,8 @@
 
 #pragma once
 
+#include <any>
+
 namespace wjp{
 
     static inline void deque_sample(){
@@ -42,6 +44,15 @@ namespace wjp{
         }	
         delete q;
     }
+
+	
+
+
+	static inline void 	cpplatest() {
+		std::any a = 1;
+		std::cout << std::any_cast<int>(a) << std::endl;
+	}
+
 
 
 }

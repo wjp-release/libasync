@@ -23,52 +23,25 @@
  * SOFTWARE.
  */
 
-#pragma once
-
-#include "Common.h"
-#include "Task.h"
-#include <any>
-#include <optional>
+#include "SpawnSyncTask.h"
+#include "SpawnSyncPool.h"
 
 namespace wjp {
 
-	class Future : public Task {
-	public:
-		template<typename T>
-		std::optional<T> try_to_get_now() {
-			if (value.has_value() && value.type() == typeid(T)) {
-				return std::any_cast<T>(value);
-			}else {
-				return {};
-			}
-		}
+	void SpawnSyncTask::cancel()
+	{
+		state[0] = true;
+		pool->cancel(shared_from_this());
+	}
+	
+	void SpawnSyncTask::wait() override
+	{
 
-		// Wait and return the result value
-		template<typename T>
-		std::optional<T> try_to_get() noexcept {
-			try {
-				this->wait();
-			}catch (...) {
-				return {};
-			}
-			return try_to_get_now<T>();
-		}
+	}
 
-		// Wait and return the result value, might throw interrupted/execution exceptions
-		template<typename T>
-		std::optional<T> get() {
-			this->wait(); 
-			return try_to_get_now<T>();
-		}
+	void SpawnSyncTask::wait(std::chrono::milliseconds timeout) override
+	{
 
-		template<typename T>
-		void set_value(T val) {
-			value = val;
-		}
+	}
 
-		virtual ~Future() {}
-	private;
-		std::any value;
-	};
 }
-

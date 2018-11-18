@@ -26,11 +26,10 @@
 #pragma once
 
 #include "Common.h"
-#include "Task.h"
-#include "Runnable.h"
 
 namespace wjp {
-
+	class Task;
+	class Runnable;
 	class ThreadPool {
 	protected:
 		int state;

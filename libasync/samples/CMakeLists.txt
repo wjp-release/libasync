@@ -1,3 +1,5 @@
 aux_source_directory(. DIRSRCS)
 add_executable(sample ${DIRSRCS})
 target_link_libraries(sample async)
+set_property(TARGET sample PROPERTY CXX_STANDARD 17)
+set_property(TARGET sample PROPERTY CXX_STANDARD_REQUIRED ON)

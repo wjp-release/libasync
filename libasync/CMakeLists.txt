@@ -16,6 +16,7 @@ endif()
 
 
 if(MSVC)
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /std:c++17")
 	set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 	set(CMAKE_CXX_FLAGS "/W4")
 endif()
@@ -29,6 +30,8 @@ if(test STREQUAL "ON")
     add_subdirectory(googletest) 
     enable_testing()
     add_subdirectory(tests)
+	add_subdirectory(samples) 
 else()
-    add_subdirectory(samples)
+    # todo£ºif test=OFF, libasync should be built production mode
+	# to  
 endif()

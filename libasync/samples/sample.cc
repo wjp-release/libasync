@@ -34,8 +34,8 @@
 using namespace wjp;
 int main()
 {
-	deque_sample();
+	cpplatest();
+
 	sleep(3000);
-	//std::cin.get();
 	return 0;
 }
