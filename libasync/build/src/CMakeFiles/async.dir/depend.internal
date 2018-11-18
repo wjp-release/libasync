@@ -4,14 +4,21 @@
 src/CMakeFiles/async.dir/FixedPool.cc.o
  /Users/wjp/Desktop/workspace/libasync/libasync/src/FixedPool.cc
 src/CMakeFiles/async.dir/SpawnSyncPool.cc.o
+ .././src/interface/ThreadPool.h
+ /Users/wjp/Desktop/workspace/libasync/libasync/src/Common.h
+ /Users/wjp/Desktop/workspace/libasync/libasync/src/SpawnSyncPool.cc
+ /Users/wjp/Desktop/workspace/libasync/libasync/src/SpawnSyncPool.h
+src/CMakeFiles/async.dir/SpawnSyncTask.cc.o
  .././src/interface/Cancellable.h
  .././src/interface/Runnable.h
  .././src/interface/Task.h
  .././src/interface/ThreadPool.h
  .././src/interface/Waitable.h
  /Users/wjp/Desktop/workspace/libasync/libasync/src/Common.h
- /Users/wjp/Desktop/workspace/libasync/libasync/src/SpawnSyncPool.cc
+ /Users/wjp/Desktop/workspace/libasync/libasync/src/Future.h
  /Users/wjp/Desktop/workspace/libasync/libasync/src/SpawnSyncPool.h
+ /Users/wjp/Desktop/workspace/libasync/libasync/src/SpawnSyncTask.cc
+ /Users/wjp/Desktop/workspace/libasync/libasync/src/SpawnSyncTask.h
 src/CMakeFiles/async.dir/Utils.cc.o
  /Users/wjp/Desktop/workspace/libasync/libasync/src/Common.h
  /Users/wjp/Desktop/workspace/libasync/libasync/src/Utils.cc

@@ -34,7 +34,7 @@
 using namespace wjp;
 int main()
 {
-	test();
+	cpplatest();
 
 	sleep(3000);
 	return 0;

@@ -6,6 +6,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_CXX
   "/Users/wjp/Desktop/workspace/libasync/libasync/src/FixedPool.cc" "/Users/wjp/Desktop/workspace/libasync/libasync/build/src/CMakeFiles/async.dir/FixedPool.cc.o"
   "/Users/wjp/Desktop/workspace/libasync/libasync/src/SpawnSyncPool.cc" "/Users/wjp/Desktop/workspace/libasync/libasync/build/src/CMakeFiles/async.dir/SpawnSyncPool.cc.o"
+  "/Users/wjp/Desktop/workspace/libasync/libasync/src/SpawnSyncTask.cc" "/Users/wjp/Desktop/workspace/libasync/libasync/build/src/CMakeFiles/async.dir/SpawnSyncTask.cc.o"
   "/Users/wjp/Desktop/workspace/libasync/libasync/src/Utils.cc" "/Users/wjp/Desktop/workspace/libasync/libasync/build/src/CMakeFiles/async.dir/Utils.cc.o"
   )
 set(CMAKE_CXX_COMPILER_ID "AppleClang")

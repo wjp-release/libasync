@@ -190,6 +190,33 @@ SpawnSyncPool.cc.s:
 	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f src/CMakeFiles/async.dir/build.make src/CMakeFiles/async.dir/SpawnSyncPool.cc.s
 .PHONY : SpawnSyncPool.cc.s
 
+SpawnSyncTask.o: SpawnSyncTask.cc.o
+
+.PHONY : SpawnSyncTask.o
+
+# target to build an object file
+SpawnSyncTask.cc.o:
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f src/CMakeFiles/async.dir/build.make src/CMakeFiles/async.dir/SpawnSyncTask.cc.o
+.PHONY : SpawnSyncTask.cc.o
+
+SpawnSyncTask.i: SpawnSyncTask.cc.i
+
+.PHONY : SpawnSyncTask.i
+
+# target to preprocess a source file
+SpawnSyncTask.cc.i:
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f src/CMakeFiles/async.dir/build.make src/CMakeFiles/async.dir/SpawnSyncTask.cc.i
+.PHONY : SpawnSyncTask.cc.i
+
+SpawnSyncTask.s: SpawnSyncTask.cc.s
+
+.PHONY : SpawnSyncTask.s
+
+# target to generate assembly for a file
+SpawnSyncTask.cc.s:
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f src/CMakeFiles/async.dir/build.make src/CMakeFiles/async.dir/SpawnSyncTask.cc.s
+.PHONY : SpawnSyncTask.cc.s
+
 Utils.o: Utils.cc.o
 
 .PHONY : Utils.o
@@ -233,6 +260,9 @@ help:
 	@echo "... SpawnSyncPool.o"
 	@echo "... SpawnSyncPool.i"
 	@echo "... SpawnSyncPool.s"
+	@echo "... SpawnSyncTask.o"
+	@echo "... SpawnSyncTask.i"
+	@echo "... SpawnSyncTask.s"
 	@echo "... Utils.o"
 	@echo "... Utils.i"
 	@echo "... Utils.s"

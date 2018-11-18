@@ -36,8 +36,6 @@ namespace wjp {
 	class SpawnSyncTask : public Future {
 	public:
 		friend class SpawnSyncPool;
-
-		virtual void run() = 0;
 		// Tells pool to cancel itself, though the task has no control when it will be actually released
 		virtual void cancel() override;
 		// Wait until it 

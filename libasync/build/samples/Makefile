@@ -91,14 +91,14 @@ test/fast: test
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wjp/Desktop/workspace/libasync/libasync/build/CMakeFiles /Users/wjp/Desktop/workspace/libasync/libasync/build/CMakeFiles/progress.marks
-	$(MAKE) -f CMakeFiles/Makefile2 all
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(CMAKE_COMMAND) -E cmake_progress_start /Users/wjp/Desktop/workspace/libasync/libasync/build/CMakeFiles /Users/wjp/Desktop/workspace/libasync/libasync/build/samples/CMakeFiles/progress.marks
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f CMakeFiles/Makefile2 samples/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wjp/Desktop/workspace/libasync/libasync/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	$(MAKE) -f CMakeFiles/Makefile2 clean
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f CMakeFiles/Makefile2 samples/clean
 .PHONY : clean
 
 # The main clean target
@@ -108,83 +108,60 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	$(MAKE) -f CMakeFiles/Makefile2 preinstall
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f CMakeFiles/Makefile2 samples/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	$(MAKE) -f CMakeFiles/Makefile2 preinstall
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f CMakeFiles/Makefile2 samples/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	$(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
-#=============================================================================
-# Target rules for targets named async
+# Convenience name for target.
+samples/CMakeFiles/sample.dir/rule:
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f CMakeFiles/Makefile2 samples/CMakeFiles/sample.dir/rule
+.PHONY : samples/CMakeFiles/sample.dir/rule
 
-# Build rule for target.
-async: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 async
-.PHONY : async
+# Convenience name for target.
+sample: samples/CMakeFiles/sample.dir/rule
 
-# fast build rule for target.
-async/fast:
-	$(MAKE) -f src/CMakeFiles/async.dir/build.make src/CMakeFiles/async.dir/build
-.PHONY : async/fast
-
-#=============================================================================
-# Target rules for targets named gtest_main
-
-# Build rule for target.
-gtest_main: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 gtest_main
-.PHONY : gtest_main
-
-# fast build rule for target.
-gtest_main/fast:
-	$(MAKE) -f googletest/CMakeFiles/gtest_main.dir/build.make googletest/CMakeFiles/gtest_main.dir/build
-.PHONY : gtest_main/fast
-
-#=============================================================================
-# Target rules for targets named gtest
-
-# Build rule for target.
-gtest: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 gtest
-.PHONY : gtest
-
-# fast build rule for target.
-gtest/fast:
-	$(MAKE) -f googletest/CMakeFiles/gtest.dir/build.make googletest/CMakeFiles/gtest.dir/build
-.PHONY : gtest/fast
-
-#=============================================================================
-# Target rules for targets named tests
-
-# Build rule for target.
-tests: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 tests
-.PHONY : tests
-
-# fast build rule for target.
-tests/fast:
-	$(MAKE) -f tests/CMakeFiles/tests.dir/build.make tests/CMakeFiles/tests.dir/build
-.PHONY : tests/fast
-
-#=============================================================================
-# Target rules for targets named sample
-
-# Build rule for target.
-sample: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 sample
 .PHONY : sample
 
 # fast build rule for target.
 sample/fast:
-	$(MAKE) -f samples/CMakeFiles/sample.dir/build.make samples/CMakeFiles/sample.dir/build
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f samples/CMakeFiles/sample.dir/build.make samples/CMakeFiles/sample.dir/build
 .PHONY : sample/fast
+
+sample.o: sample.cc.o
+
+.PHONY : sample.o
+
+# target to build an object file
+sample.cc.o:
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f samples/CMakeFiles/sample.dir/build.make samples/CMakeFiles/sample.dir/sample.cc.o
+.PHONY : sample.cc.o
+
+sample.i: sample.cc.i
+
+.PHONY : sample.i
+
+# target to preprocess a source file
+sample.cc.i:
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f samples/CMakeFiles/sample.dir/build.make samples/CMakeFiles/sample.dir/sample.cc.i
+.PHONY : sample.cc.i
+
+sample.s: sample.cc.s
+
+.PHONY : sample.s
+
+# target to generate assembly for a file
+sample.cc.s:
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(MAKE) -f samples/CMakeFiles/sample.dir/build.make samples/CMakeFiles/sample.dir/sample.cc.s
+.PHONY : sample.cc.s
 
 # Help Target
 help:
@@ -195,11 +172,10 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... test"
-	@echo "... async"
-	@echo "... gtest_main"
-	@echo "... gtest"
-	@echo "... tests"
 	@echo "... sample"
+	@echo "... sample.o"
+	@echo "... sample.i"
+	@echo "... sample.s"
 .PHONY : help
 
 
@@ -211,6 +187,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	$(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /Users/wjp/Desktop/workspace/libasync/libasync/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

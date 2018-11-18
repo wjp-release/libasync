@@ -15,6 +15,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "CMakeFiles/feature_tests.cxx"
   "../googletest/CMakeLists.txt"
   "../googletest/cmake/internal_utils.cmake"
+  "../samples/CMakeLists.txt"
   "../src/CMakeLists.txt"
   "../tests/CMakeLists.txt"
   "/opt/local/share/cmake-3.12/Modules/CMakeCCompiler.cmake.in"
@@ -131,6 +132,7 @@ set(CMAKE_MAKEFILE_PRODUCTS
   "src/CMakeFiles/CMakeDirectoryInformation.cmake"
   "googletest/CMakeFiles/CMakeDirectoryInformation.cmake"
   "tests/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "samples/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
@@ -139,4 +141,5 @@ set(CMAKE_DEPEND_INFO_FILES
   "googletest/CMakeFiles/gtest_main.dir/DependInfo.cmake"
   "googletest/CMakeFiles/gtest.dir/DependInfo.cmake"
   "tests/CMakeFiles/tests.dir/DependInfo.cmake"
+  "samples/CMakeFiles/sample.dir/DependInfo.cmake"
   )

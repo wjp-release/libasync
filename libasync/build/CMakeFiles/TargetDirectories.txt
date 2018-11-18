@@ -14,3 +14,7 @@
 /Users/wjp/Desktop/workspace/libasync/libasync/build/tests/CMakeFiles/edit_cache.dir
 /Users/wjp/Desktop/workspace/libasync/libasync/build/tests/CMakeFiles/test.dir
 /Users/wjp/Desktop/workspace/libasync/libasync/build/tests/CMakeFiles/tests.dir
+/Users/wjp/Desktop/workspace/libasync/libasync/build/samples/CMakeFiles/rebuild_cache.dir
+/Users/wjp/Desktop/workspace/libasync/libasync/build/samples/CMakeFiles/edit_cache.dir
+/Users/wjp/Desktop/workspace/libasync/libasync/build/samples/CMakeFiles/test.dir
+/Users/wjp/Desktop/workspace/libasync/libasync/build/samples/CMakeFiles/sample.dir
