@@ -35,7 +35,7 @@ namespace wjp {
 	class ThreadPool;
 	// A task is a proxy object shared between ThreadPool and ThreadPool user. 
 	// Aside from being runnable, it should be cancellable and waitable.
-	class Task : public Runnable, public Cancellable, public Waitable, std::enable_shared_from_this<Task> {
+	class Task : public Runnable, public Cancellable, public Waitable, public std::enable_shared_from_this<Task> {
     public:
 		virtual void submit(ThreadPool&pool) {
 			pool.run(shared_from_this());

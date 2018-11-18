@@ -67,7 +67,7 @@ namespace wjp {
 		}
 
 		virtual ~Future() {}
-	private;
+	private:
 		std::any value;
 	};
 }

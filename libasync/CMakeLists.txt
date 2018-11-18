@@ -18,7 +18,7 @@ endif()
 if(MSVC)
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /std:c++17")
 	set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-	set(CMAKE_CXX_FLAGS "/W4")
+	set(CMAKE_CXX_FLAGS "/W4 /EHsc")
 endif()
 
 include_directories(./src/interface)

@@ -31,15 +31,16 @@ namespace wjp {
 	void SpawnSyncTask::cancel()
 	{
 		state[0] = true;
-		pool->cancel(shared_from_this());
+		if(auto pool_shared=pool.lock())
+			pool_shared->cancel(shared_from_this());
 	}
 	
-	void SpawnSyncTask::wait() override
+	void SpawnSyncTask::wait() 
 	{
 
 	}
 
-	void SpawnSyncTask::wait(std::chrono::milliseconds timeout) override
+	void SpawnSyncTask::wait(std::chrono::milliseconds timeout) 
 	{
 
 	}

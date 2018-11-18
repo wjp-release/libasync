@@ -32,9 +32,9 @@ namespace wjp {
 	class SpawnSyncTask;
 	class SpawnSyncPool : public ThreadPool {
 	public:
-
+		friend class SpawnSyncTask;
 	protected:
-		virtual void cancel(std::shared_ptr<SpawnSyncTask>);  
+		virtual void cancel(std::shared_ptr<Task>);  
 
 	};
 

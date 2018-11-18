@@ -2,7 +2,7 @@
 
 namespace wjp{
 
-	void SpawnSyncPool::cancel(std::shared_ptr<SpawnSyncTask> task)
+	void SpawnSyncPool::cancel(std::shared_ptr<Task> task)
 	{
 		//todo
 	}

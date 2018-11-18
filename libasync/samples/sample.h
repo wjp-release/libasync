@@ -26,6 +26,7 @@
 #pragma once
 
 #include <any>
+#include <SpawnSyncTask.h>
 
 namespace wjp{
 
@@ -53,6 +54,10 @@ namespace wjp{
 		std::cout << std::any_cast<int>(a) << std::endl;
 	}
 
+	
+	static inline void test() {
+
+	}
 
 
 }
