@@ -16,6 +16,7 @@ endif()
 
 
 if(MSVC)
+	set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 	set(CMAKE_CXX_FLAGS "/W4")
 endif()
 
