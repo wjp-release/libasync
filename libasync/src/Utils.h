@@ -27,6 +27,8 @@
 
 #include "Common.h"
 
+// Time, Random and other utilities
+
 namespace wjp{
     using days = std::chrono::duration<int, std::ratio<3600*24,1>>;
     using time_point = std::chrono::high_resolution_clock::time_point;
@@ -41,7 +43,33 @@ namespace wjp{
         return std::chrono::high_resolution_clock::now();
     }
     
-    
+    static inline int64_t duration_ms_count(time_point start, time_point end)
+    {
+        return std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+    }
+
+    static inline auto duration_ms(time_point start, time_point end)
+    {
+        return std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+    }
+
+    static inline int64_t ms_elapsed_count(time_point start)
+    {
+        return std::chrono::duration_cast<std::chrono::milliseconds>(now() - start).count();
+    }
+
+    static inline auto ms_elapsed(time_point start)
+    {
+        return std::chrono::duration_cast<std::chrono::milliseconds>(now() - start);
+    }
+
+
+    // Hasher still has small chance to collide. So don't use hashed id as the unique id. Use it to pick a worker randomly.
+    static std::size_t current_thread_hashed_id()
+    {
+        return std::hash<std::thread::id>{}(std::this_thread::get_id());
+    }
+
     template <int MIN, int MAX>
     static int                      randint(){
         static std::uniform_int_distribution<unsigned> u(0,9);

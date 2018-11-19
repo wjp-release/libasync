@@ -31,18 +31,40 @@ namespace wjp {
 	void SpawnSyncTask::cancel()
 	{
 		state[0] = true;
-		if(auto pool_shared=pool.lock())
-			pool_shared->cancel(shared_from_this());
+		if(auto worker_shared=worker.lock())
+			worker_shared->cancel(shared_from_this());
 	}
 	
 	void SpawnSyncTask::wait() 
 	{
-
+		// todo permission check
+		help_outsider_wait(); 
+		std::unique_lock<std::mutex> lk(mtx);
+		condition_finished.wait(lk, [this]{return is_finished();});
 	}
 
 	void SpawnSyncTask::wait(std::chrono::milliseconds timeout) 
 	{
+		// todo permission check
+		help_outsider_wait(); 
+		std::unique_lock<std::mutex> lk(mtx);
+		condition_finished.wait_for(lk, timeout, [this]{return is_finished();});
+	}
 
+	void SpawnSyncTask::sync()
+	{
+
+	}
+
+	void SpawnSyncTask::spawn()
+	{
+
+	}
+
+	// Why don't you run the task by yourself if you have time waiting here?
+	void help_outsider_wait()
+	{
+		// try to undo submit
 	}
 
 }

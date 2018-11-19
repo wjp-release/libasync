@@ -36,26 +36,39 @@ namespace wjp {
 	class SpawnSyncTask : public Future {
 	public:
 		friend class SpawnSyncPool;
-		// Tells pool to cancel itself, though the task has no control when it will be actually released
+		friend class SpawnSyncWorker;
+		
+		// Default constructor should be called by ThreadPool users. The task is created as a specialization of Runnable. Calling submit() will bind this task with a worker and put it into the worker's submission task queue. 
+		SpawnSyncTask() {}
+
+		// The Constructor that constructs from worker should be called worker thread. This constructor guarantees that weak_ptr to worker is properly set.
+		SpawnSyncTask(std::shared_ptr<SpawnSyncWorker> worker) : worker(worker){}
+		
+		// Task methods
 		virtual void cancel() override;
-		// Wait until it 
-		virtual void wait() override;
-
+		virtual void wait() override; // Should be called by non-worker thread. Seeks help_outsider_wait's help before actual condition wait. 
 		virtual void wait(std::chrono::milliseconds timeout) override;
+		virtual bool is_canceled() override {return state[0];}
+		virtual bool is_finished() override {return state[1];}
+		virtual void finish() override {state[1]=true;}
 
-		virtual bool is_canceled() override
-		{
-			return state[0];
-		}
+		// SpawnSyncTask methods
+		// Tries to run(), catch exception, finish with proper status.
+		virtual void exec()=0; 
+		
+		// Should be called by worker thread only. It tries take back the task and execute it directly before calling worker's wait_to_sync() to actually wait.
+		void sync();
 
-		virtual bool is_finished() override
-		{
-			return state[1]; 
-		}
+		// Should be called by worker thread only.
+		void spawn();
+
 	private:
-		std::weak_ptr<SpawnSyncPool> pool;
+		// Tries to exploit idle non-worker thread that waits for this task to directly execute it.
+		void help_outsider_wait();
 		std::weak_ptr<SpawnSyncWorker> worker;
 		std::bitset<2> state; // is_canceled, is_finished
+		std::condition_variable condition_finished;
+		std::mutex mtx;
 	};
 }
 

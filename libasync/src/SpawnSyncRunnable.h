@@ -26,30 +26,16 @@
 #pragma once
 
 #include "Common.h"
-#include "ThreadPool.h"
+#include "SpawnSyncTask.h"
+namespace wjp{
 
-namespace wjp {
-	class SpawnSyncTask;
-	class SpawnSyncWorker;
-	class SpawnSyncPool : public ThreadPool {
+	// A SpawnSyncTask constructed from a Runnable
+	class SpawnSyncRunnable : public SpawnSyncTask {
 	public:
-		friend class SpawnSyncTask;
-		SpawnSyncPool();
-		// Overrided functions from ThreadPool
-		virtual void shutdown()override;
-		virtual std::list<std::shared_ptr<Runnable>> stop()override;
-		virtual void on_stopped()override;
-		virtual bool wait_till_terminated(std::chrono::milliseconds timeout)override;
-		// If called from owning worker thread, push; otherwise, push_from_outsider. Convert Runnable to SpawnSyncTask. 
-		virtual std::shared_ptr<Task> run(std::shared_ptr<Runnable>)override;  
-	protected:
-		void push_from_outsider(std::shared_ptr<SpawnSyncTask>);
-		void wait_till_every_tasks_has_terminated();
-		bool every_tasks_has_terminated();
-		void activate_idle_worker_if_necessary(); 
+		SpawnSyncRunnable(std::shared_ptr<Runnable> runnable);
+		virtual void exec() override;
 	private:
-		std::vector<std::shared_ptr<SpawnSyncWorker>> workers;
+		std::shared_ptr<Runnable> runnable;
 	};
-
 }
 

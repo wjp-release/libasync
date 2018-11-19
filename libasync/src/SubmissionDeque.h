@@ -25,31 +25,20 @@
 
 #pragma once
 
-// Every non-trivial header in libasync should include this file.
+#include "Common.h"
+#include "AutoRelease.h"
 
-#define WJP_VERSION 1
-#define WJP_DEBUG
-
-#include <cstdint>
-#include <atomic>
-#include <memory>
-#include <iostream>
-#include <string>
-#include <functional>
-#include <chrono>
-#include <list>
-#include <ctime>
-#include <ratio>
-#include <random>
-#include <thread>
-#include <mutex>
-#include <future>
-#include <stdexcept>
-#include <exception>
-#include <condition_variable>
-
-using namespace std::chrono_literals;  //100ms == std::chrono::milliseconds{100}, since c++14
+// 
 
 namespace wjp{
+
+template<typename T>
+class SubmissionDeque
+{
+public:
+
+private:
+
+};
 
 }

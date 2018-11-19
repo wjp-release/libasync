@@ -35,6 +35,8 @@ namespace wjp {
 		virtual void wait() = 0;
 		virtual void wait(std::chrono::milliseconds timeout) = 0;
 		virtual bool is_finished() = 0;  
+		// Should be called by finisher to mark waitable as finished  after it's actually finished
+		virtual void finish() =0; 
 		virtual ~Waitable() {}
 	};
 
