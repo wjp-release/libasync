@@ -1,4 +1,6 @@
 #include "SpawnSyncWorker.h"
+#include "SpawnSyncPool.h"
+#include "SpawnSyncTask.h"
 
 namespace wjp{
 	SpawnSyncWorker::SpawnSyncWorker(SpawnSyncPool&pool) : pool(pool)

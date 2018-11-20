@@ -25,6 +25,7 @@
 
 #include "SpawnSyncTask.h"
 #include "SpawnSyncPool.h"
+#include "SpawnSyncWorker.h"
 
 namespace wjp {
 

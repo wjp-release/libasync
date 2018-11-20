@@ -1,9 +1,11 @@
 #include "SpawnSyncPool.h"
+#include "SpawnSyncWorker.h"
+#include "SpawnSyncTask.h"
 
 namespace wjp{
 	SpawnSyncPool::SpawnSyncPool(){
 		auto nr_cpus = std::thread::hardware_concurrency();
-		queues.reserve(nr_cpus*2); 
+		workers.reserve(nr_cpus*2); 
 	}
 
 	void SpawnSyncPool::shutdown()

@@ -29,6 +29,7 @@
 #include "Task.h"
 #include "ChaseLevDeque.h"
 #include "SubmissionDeque.h"
+#include "Utils.h"
 
 /*
 	Each worker maintains:
@@ -94,11 +95,11 @@ namespace wjp {
 		SubmissionDeque<SpawnSyncTask> submission_task_queue;
 		bool is_shutdown = false;
 		bool is_stalling = false;
-		std::optional<time_point> became_idle = std::nullopt;
-		std::thead worker_thread;
+		std::optional<wjp::time_point> became_idle = std::nullopt;
+		std::thread worker_thread;
 		std::condition_variable condition_stall;
 		std::mutex mtx;
-		constexpr uint64_t idle_timeout = 10000; // A task can stay idle for at most 10 seconds, then it will stall.
+		static constexpr uint64_t idle_timeout = 10000; // A task can stay idle for at most 10 seconds, then it will stall.
 
 	};
 

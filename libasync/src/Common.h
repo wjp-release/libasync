@@ -47,6 +47,7 @@
 #include <stdexcept>
 #include <exception>
 #include <condition_variable>
+#include <optional>
 
 using namespace std::chrono_literals;  //100ms == std::chrono::milliseconds{100}, since c++14
 
