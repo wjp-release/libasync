@@ -36,29 +36,62 @@ namespace wjp {
 			worker_shared->cancel(shared_from_this());
 	}
 	
-	void SpawnSyncTask::wait() 
+	bool SpawnSyncTask::is_canceled() 
 	{
-		// todo permission check
-		help_outsider_wait(); 
-		std::unique_lock<std::mutex> lk(mtx);
-		condition_finished.wait(lk, [this]{return is_finished();});
+		return state[0];
+	}
+	
+	bool SpawnSyncTask::is_finished() 
+	{
+		return state[1];
+	}
+	
+	void SpawnSyncTask::finish() 
+	{
+		state[1]=true;
 	}
 
+	void SpawnSyncTask::wait() 
+	{
+		if(is_run_by_worker_thread()){
+			sync();  
+		}else{
+			help_outsider_wait(); 
+			std::unique_lock<std::mutex> lk(mtx);
+			condition_finished.wait(lk, [this]{return is_finished();});
+		}
+	}
+
+	// Must be called from non-worker thread
 	void SpawnSyncTask::wait(std::chrono::milliseconds timeout) 
 	{
-		// todo permission check
-		help_outsider_wait(); 
-		std::unique_lock<std::mutex> lk(mtx);
-		condition_finished.wait_for(lk, timeout, [this]{return is_finished();});
+		if(is_run_by_worker_thread()){
+			sync(timeout);
+		}else{
+			help_outsider_wait(); 
+			std::unique_lock<std::mutex> lk(mtx);
+			condition_finished.wait_for(lk, timeout, [this]{return is_finished();});
+		}
 	}
 
 	void SpawnSyncTask::sync()
 	{
+		
+		
+	}
+
+
+	void SpawnSyncTask::sync(std::chrono::milliseconds timeout)
+	{
+		// todo permission check, worker-only
+
 
 	}
 
 	void SpawnSyncTask::spawn()
-	{
+	{		
+		// todo permission check, worker-only
+
 
 	}
 

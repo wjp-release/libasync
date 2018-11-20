@@ -28,12 +28,12 @@
 #include "Common.h"
 #include "AutoRelease.h"
 
-// 
+// Support push 
 
 namespace wjp{
 
 template<typename T>
-class SubmissionDeque
+class SubmissionBuffer
 {
 public:
 

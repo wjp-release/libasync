@@ -34,31 +34,25 @@ namespace wjp {
 	class SpawnSyncPool {
 		friend class SpawnSyncTask;
 	public:
-		SpawnSyncPool();
-		virtual ~SpawnSyncPool() {}
 		enum ThreadPoolState : int{
 			RUNNING		= 0, // Accept new tasks and process queued tasks
 			SHUTDOWN	= 1, // Stop accepting new tasks, but process queued tasks
 			STOPPING	= 2, // Stop processing queued tasks, and tear down in-progress tasks
 			STOPPED		= 3, // Already stopped, running on_stopped hook method
-			TERMINATED	= 4, // tidy() has completed
+			TERMINATED	= 4, // on_stopped() has completed
 		};
-		bool 											is_shutdown(){
-			return state==SHUTDOWN;
-		}
-		bool 											is_terminiated(){
-			return state==TERMINATED;
-		}
-	 	int 											get_state(){
-			return state;
-		}
-		// Overrided functions from ThreadPool
-		virtual void shutdown();
-		virtual std::list<std::shared_ptr<Runnable>> stop();
-		virtual void on_stopped();
-		virtual bool wait_till_terminated(std::chrono::milliseconds timeout);
+		SpawnSyncPool();
+		~SpawnSyncPool() {}
+		bool is_shutdown();
+		bool is_terminiated();
+	 	int get_state();
+		void shutdown();
+		std::list<std::shared_ptr<Runnable>> stop();
+		void on_stopped();
+		bool wait_till_terminated(std::chrono::milliseconds timeout);
 		// If called from owning worker thread, push; otherwise, push_from_outsider. Convert Runnable to SpawnSyncTask. 
-		virtual std::shared_ptr<Task> run(std::shared_ptr<Runnable>);  
+		std::shared_ptr<SpawnSyncTask> run(std::shared_ptr<Runnable>);  
+		// to add template method: invoke Callable
 	protected:
 		void push_from_outsider(std::shared_ptr<SpawnSyncTask>);
 		void wait_till_every_tasks_has_terminated();

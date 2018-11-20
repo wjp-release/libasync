@@ -28,7 +28,7 @@
 #include "Common.h"
 #include "Task.h"
 #include "ChaseLevDeque.h"
-#include "SubmissionDeque.h"
+#include "SubmissionBuffer.h"
 #include "TimeUtilities.h"
 
 /*
@@ -92,7 +92,7 @@ namespace wjp {
 		void execute_stolen_tasks();
 		SpawnSyncPool& pool; 
 		ChaseLevDeque<SpawnSyncTask> local_task_queue;
-		SubmissionDeque<SpawnSyncTask> submission_task_queue;
+		SubmissionBuffer<SpawnSyncTask> submission_task_queue;
 		bool is_shutdown = false;
 		bool is_stalling = false;
 		std::optional<wjp::time_point> became_idle = std::nullopt;

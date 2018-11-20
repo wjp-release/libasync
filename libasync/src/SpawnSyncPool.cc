@@ -7,6 +7,15 @@ namespace wjp{
 		auto nr_cpus = std::thread::hardware_concurrency();
 		workers.reserve(nr_cpus*2); 
 	}
+	bool SpawnSyncPool::is_shutdown(){
+		return state==SHUTDOWN;
+	}
+	bool SpawnSyncPool::is_terminiated(){
+		return state==TERMINATED;
+	}
+	int SpawnSyncPool::get_state(){
+		return state;
+	}
 
 	void SpawnSyncPool::shutdown()
 	{
@@ -28,7 +37,7 @@ namespace wjp{
 
 	}
 
-	std::shared_ptr<Task> SpawnSyncPool::run(std::shared_ptr<Runnable>)
+	std::shared_ptr<SpawnSyncTask> SpawnSyncPool::run(std::shared_ptr<Runnable>)
 	{
 		
 	}
