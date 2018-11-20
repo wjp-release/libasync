@@ -26,28 +26,46 @@
 #pragma once
 
 #include "Common.h"
-#include "ThreadPool.h"
+#include "Task.h"
 
 namespace wjp {
 	class SpawnSyncTask;
 	class SpawnSyncWorker;
-	class SpawnSyncPool : public ThreadPool {
-	public:
+	class SpawnSyncPool {
 		friend class SpawnSyncTask;
+	public:
 		SpawnSyncPool();
+		virtual ~SpawnSyncPool() {}
+		enum ThreadPoolState : int{
+			RUNNING		= 0, // Accept new tasks and process queued tasks
+			SHUTDOWN	= 1, // Stop accepting new tasks, but process queued tasks
+			STOPPING	= 2, // Stop processing queued tasks, and tear down in-progress tasks
+			STOPPED		= 3, // Already stopped, running on_stopped hook method
+			TERMINATED	= 4, // tidy() has completed
+		};
+		bool 											is_shutdown(){
+			return state==SHUTDOWN;
+		}
+		bool 											is_terminiated(){
+			return state==TERMINATED;
+		}
+	 	int 											get_state(){
+			return state;
+		}
 		// Overrided functions from ThreadPool
-		virtual void shutdown()override;
-		virtual std::list<std::shared_ptr<Runnable>> stop()override;
-		virtual void on_stopped()override;
-		virtual bool wait_till_terminated(std::chrono::milliseconds timeout)override;
+		virtual void shutdown();
+		virtual std::list<std::shared_ptr<Runnable>> stop();
+		virtual void on_stopped();
+		virtual bool wait_till_terminated(std::chrono::milliseconds timeout);
 		// If called from owning worker thread, push; otherwise, push_from_outsider. Convert Runnable to SpawnSyncTask. 
-		virtual std::shared_ptr<Task> run(std::shared_ptr<Runnable>)override;  
+		virtual std::shared_ptr<Task> run(std::shared_ptr<Runnable>);  
 	protected:
 		void push_from_outsider(std::shared_ptr<SpawnSyncTask>);
 		void wait_till_every_tasks_has_terminated();
 		bool every_tasks_has_terminated();
 		void activate_idle_worker_if_necessary(); 
 	private:
+		int state;
 		std::vector<std::shared_ptr<SpawnSyncWorker>> workers;
 	};
 

@@ -103,37 +103,31 @@ build cmake_object_order_depends_target_async: phony || src/CMakeFiles/async.dir
 build src/CMakeFiles/async.dir/FixedPool.cc.o: CXX_COMPILER__async ../src/FixedPool.cc || cmake_object_order_depends_target_async
   DEP_FILE = src/CMakeFiles/async.dir/FixedPool.cc.o.d
   FLAGS = -std=c++17 -fPIC  -O0 -Wall -g2 -ggdb -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk   -std=gnu++1z
-  INCLUDES = -I.././src/interface -I.././src
+  INCLUDES = -I.././src/utils -I.././src
   OBJECT_DIR = src/CMakeFiles/async.dir
   OBJECT_FILE_DIR = src/CMakeFiles/async.dir
 build src/CMakeFiles/async.dir/SpawnSyncPool.cc.o: CXX_COMPILER__async ../src/SpawnSyncPool.cc || cmake_object_order_depends_target_async
   DEP_FILE = src/CMakeFiles/async.dir/SpawnSyncPool.cc.o.d
   FLAGS = -std=c++17 -fPIC  -O0 -Wall -g2 -ggdb -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk   -std=gnu++1z
-  INCLUDES = -I.././src/interface -I.././src
+  INCLUDES = -I.././src/utils -I.././src
   OBJECT_DIR = src/CMakeFiles/async.dir
   OBJECT_FILE_DIR = src/CMakeFiles/async.dir
 build src/CMakeFiles/async.dir/SpawnSyncRunnable.cc.o: CXX_COMPILER__async ../src/SpawnSyncRunnable.cc || cmake_object_order_depends_target_async
   DEP_FILE = src/CMakeFiles/async.dir/SpawnSyncRunnable.cc.o.d
   FLAGS = -std=c++17 -fPIC  -O0 -Wall -g2 -ggdb -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk   -std=gnu++1z
-  INCLUDES = -I.././src/interface -I.././src
+  INCLUDES = -I.././src/utils -I.././src
   OBJECT_DIR = src/CMakeFiles/async.dir
   OBJECT_FILE_DIR = src/CMakeFiles/async.dir
 build src/CMakeFiles/async.dir/SpawnSyncTask.cc.o: CXX_COMPILER__async ../src/SpawnSyncTask.cc || cmake_object_order_depends_target_async
   DEP_FILE = src/CMakeFiles/async.dir/SpawnSyncTask.cc.o.d
   FLAGS = -std=c++17 -fPIC  -O0 -Wall -g2 -ggdb -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk   -std=gnu++1z
-  INCLUDES = -I.././src/interface -I.././src
+  INCLUDES = -I.././src/utils -I.././src
   OBJECT_DIR = src/CMakeFiles/async.dir
   OBJECT_FILE_DIR = src/CMakeFiles/async.dir
 build src/CMakeFiles/async.dir/SpawnSyncWorker.cc.o: CXX_COMPILER__async ../src/SpawnSyncWorker.cc || cmake_object_order_depends_target_async
   DEP_FILE = src/CMakeFiles/async.dir/SpawnSyncWorker.cc.o.d
   FLAGS = -std=c++17 -fPIC  -O0 -Wall -g2 -ggdb -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk   -std=gnu++1z
-  INCLUDES = -I.././src/interface -I.././src
-  OBJECT_DIR = src/CMakeFiles/async.dir
-  OBJECT_FILE_DIR = src/CMakeFiles/async.dir
-build src/CMakeFiles/async.dir/Utils.cc.o: CXX_COMPILER__async ../src/Utils.cc || cmake_object_order_depends_target_async
-  DEP_FILE = src/CMakeFiles/async.dir/Utils.cc.o.d
-  FLAGS = -std=c++17 -fPIC  -O0 -Wall -g2 -ggdb -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk   -std=gnu++1z
-  INCLUDES = -I.././src/interface -I.././src
+  INCLUDES = -I.././src/utils -I.././src
   OBJECT_DIR = src/CMakeFiles/async.dir
   OBJECT_FILE_DIR = src/CMakeFiles/async.dir
 
@@ -144,7 +138,7 @@ build src/CMakeFiles/async.dir/Utils.cc.o: CXX_COMPILER__async ../src/Utils.cc |
 #############################################
 # Link the static library src/libasync.a
 
-build src/libasync.a: CXX_STATIC_LIBRARY_LINKER__async src/CMakeFiles/async.dir/FixedPool.cc.o src/CMakeFiles/async.dir/SpawnSyncPool.cc.o src/CMakeFiles/async.dir/SpawnSyncRunnable.cc.o src/CMakeFiles/async.dir/SpawnSyncTask.cc.o src/CMakeFiles/async.dir/SpawnSyncWorker.cc.o src/CMakeFiles/async.dir/Utils.cc.o
+build src/libasync.a: CXX_STATIC_LIBRARY_LINKER__async src/CMakeFiles/async.dir/FixedPool.cc.o src/CMakeFiles/async.dir/SpawnSyncPool.cc.o src/CMakeFiles/async.dir/SpawnSyncRunnable.cc.o src/CMakeFiles/async.dir/SpawnSyncTask.cc.o src/CMakeFiles/async.dir/SpawnSyncWorker.cc.o
   ARCH_FLAGS = -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk
   LANGUAGE_COMPILE_FLAGS = -std=c++17 -fPIC  -O0 -Wall -g2 -ggdb
   OBJECT_DIR = src/CMakeFiles/async.dir
@@ -197,7 +191,7 @@ build cmake_object_order_depends_target_gtest_main: phony || cmake_object_order_
 build googletest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o: CXX_COMPILER__gtest_main ../googletest/src/gtest_main.cc || cmake_object_order_depends_target_gtest_main
   DEP_FILE = googletest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o.d
   FLAGS = -std=c++17 -fPIC  -O0 -Wall -g2 -ggdb -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk    -DGTEST_HAS_PTHREAD=1   -std=gnu++1z
-  INCLUDES = -I.././src/interface -I.././src -isystem ../googletest/include -isystem ../googletest
+  INCLUDES = -I.././src/utils -I.././src -isystem ../googletest/include -isystem ../googletest
   OBJECT_DIR = googletest/CMakeFiles/gtest_main.dir
   OBJECT_FILE_DIR = googletest/CMakeFiles/gtest_main.dir/src
 
@@ -227,7 +221,7 @@ build cmake_object_order_depends_target_gtest: phony || googletest/CMakeFiles/gt
 build googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.o: CXX_COMPILER__gtest ../googletest/src/gtest-all.cc || cmake_object_order_depends_target_gtest
   DEP_FILE = googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.o.d
   FLAGS = -std=c++17 -fPIC  -O0 -Wall -g2 -ggdb -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk    -DGTEST_HAS_PTHREAD=1   -std=gnu++1z
-  INCLUDES = -I.././src/interface -I.././src -I../googletest/include -I../googletest
+  INCLUDES = -I.././src/utils -I.././src -I../googletest/include -I../googletest
   OBJECT_DIR = googletest/CMakeFiles/gtest.dir
   OBJECT_FILE_DIR = googletest/CMakeFiles/gtest.dir/src
 
@@ -291,13 +285,13 @@ build cmake_object_order_depends_target_tests: phony || cmake_object_order_depen
 build tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.o: CXX_COMPILER__tests ../tests/ChaseLevDequeTOT.cc || cmake_object_order_depends_target_tests
   DEP_FILE = tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.o.d
   FLAGS = -std=c++17 -fPIC  -O0 -Wall -g2 -ggdb -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk   -std=gnu++1z
-  INCLUDES = -I.././src/interface -I.././src -isystem ../googletest/include -isystem ../googletest
+  INCLUDES = -I.././src/utils -I.././src -isystem ../googletest/include -isystem ../googletest
   OBJECT_DIR = tests/CMakeFiles/tests.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
 build tests/CMakeFiles/tests.dir/SystemIntegrationTOT.cc.o: CXX_COMPILER__tests ../tests/SystemIntegrationTOT.cc || cmake_object_order_depends_target_tests
   DEP_FILE = tests/CMakeFiles/tests.dir/SystemIntegrationTOT.cc.o.d
   FLAGS = -std=c++17 -fPIC  -O0 -Wall -g2 -ggdb -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk   -std=gnu++1z
-  INCLUDES = -I.././src/interface -I.././src -isystem ../googletest/include -isystem ../googletest
+  INCLUDES = -I.././src/utils -I.././src -isystem ../googletest/include -isystem ../googletest
   OBJECT_DIR = tests/CMakeFiles/tests.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
 
@@ -362,7 +356,7 @@ build cmake_object_order_depends_target_sample: phony || cmake_object_order_depe
 build samples/CMakeFiles/sample.dir/sample.cc.o: CXX_COMPILER__sample ../samples/sample.cc || cmake_object_order_depends_target_sample
   DEP_FILE = samples/CMakeFiles/sample.dir/sample.cc.o.d
   FLAGS = -std=c++17 -fPIC  -O0 -Wall -g2 -ggdb -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk   -std=gnu++1z
-  INCLUDES = -I.././src/interface -I.././src
+  INCLUDES = -I.././src/utils -I.././src
   OBJECT_DIR = samples/CMakeFiles/sample.dir
   OBJECT_FILE_DIR = samples/CMakeFiles/sample.dir
 

@@ -26,14 +26,13 @@
 #pragma once
 
 #include "Common.h"
-#include "Future.h"
-#include "ThreadPool.h"
+#include "Task.h"
 #include <bitset>
 
 namespace wjp {
 	class SpawnSyncPool;
 	class SpawnSyncWorker;
-	class SpawnSyncTask : public Future {
+	class SpawnSyncTask : public Task {
 	public:
 		friend class SpawnSyncPool;
 		friend class SpawnSyncWorker;

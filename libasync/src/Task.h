@@ -26,38 +26,21 @@
 #pragma once
 
 #include "Common.h"
+#include "Runnable.h"
 
 namespace wjp {
-	class Task;
-	class Runnable;
-	class ThreadPool {
-	protected:
-		int state;
-	public:
-		virtual ~ThreadPool() {}
-		enum ThreadPoolState : int{
-			RUNNING		= 0, // Accept new tasks and process queued tasks
-			SHUTDOWN	= 1, // Stop accepting new tasks, but process queued tasks
-			STOPPING	= 2, // Stop processing queued tasks, and tear down in-progress tasks
-			STOPPED		= 3, // Already stopped, running on_stopped hook method
-			TERMINATED	= 4, // tidy() has completed
-		};
-		bool 											is_shutdown(){
-			return state==SHUTDOWN;
-		}
-		bool 											is_terminiated(){
-			return state==TERMINATED;
-		}
-	 	int 											get_state(){
-			return state;
-		}
-		// RUNNING-->SHUTDOWN, stop accepting new tasks, but process queued tasks
-		virtual void 									shutdown() = 0;
-		// SHUTDOWN-->STOPPING, return untouched runnables
-		virtual std::list<std::shared_ptr<Runnable>>	stop() = 0;
-		// Called upon STOPPED, do some final clean-ups.
-		virtual void 									on_stopped() = 0;
-		virtual bool 									wait_till_terminated(std::chrono::milliseconds timeout) = 0;
-		virtual std::shared_ptr<Task> 					run(std::shared_ptr<Runnable>) = 0;  
+	// A task is a proxy object shared between ThreadPool and ThreadPool user. 
+	// Aside from being runnable, it should be cancellable and waitable.
+	class Task : public Runnable, public std::enable_shared_from_this<Task> {
+    public:
+		virtual void wait() = 0;
+		virtual void wait(std::chrono::milliseconds timeout) = 0;
+		virtual bool is_finished() = 0;  
+		// Should be called by finisher to mark waitable as finished  after it's actually finished
+		virtual void finish() =0; 
+		virtual void cancel() = 0;
+		virtual bool is_canceled() = 0;
+
+		virtual ~Task() {}
 	};
 }
