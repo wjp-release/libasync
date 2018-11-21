@@ -23,19 +23,43 @@
  * SOFTWARE.
  */
 
-#include <iostream>
-#include <cassert>
-#include "ChaseLevDeque.h"
-#include <set>
+#pragma once
+
+#include <memory>
 #include <thread>
-#include "Internal.h"
-#include "sample.h"
+#include <vector>
 
-using namespace wjp;
-int main()
-{
-	cpplatest();
+namespace wjp {
 
-	sleep(3000);
-	return 0;
+	class FixedThreadPool {
+		static int recommended_nr_thread(){
+			return std::thread::hardware_concurrency()*2+1;
+		}
+
+		template <class Function, class... Args >
+		FixedThreadPool(int nr_threads, Function&& f, Args&&... args){
+			for(int i=0; i<nr_threads; i++){
+				threads.emplace_back(std::forward<Function>(f), std::forward<Args>(args)...);
+			}
+		}
+
+		template <class Function, class... Args >
+		void execute(Function&& f, Args&&... args)
+		{
+			
+		}
+
+        ~FixedThreadPool() {
+			shutdown=true;
+			for(auto& t : threads){
+				t.join();
+			}
+        }
+
+    private:
+		bool shutdown = false;
+		std::vector<std::thread> threads {};
+	};
+
 }
+

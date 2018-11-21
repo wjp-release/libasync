@@ -25,7 +25,9 @@
 
 #pragma once
 
-#include "Common.h"
+#include <memory>
+#include <atomic>
+#include <iostream>
 #include "AutoRelease.h"
 
 // An optimized version of Chase-Lev Work Stealing Deque.
@@ -36,14 +38,15 @@
 
 namespace wjp{
 
-// Tasks are stored in std::shared_ptr<T>  
-template<typename T>
+// Tasks are stored in std::shared_ptr<T> 
+template <class T>
 class ChaseLevDeque
 {
 public:
     // ChaseLevDeque takes log2(capacity) as argument to guarantee that its capacity is power of 2. 
-    ChaseLevDeque(int log2capacity=13)  : top((uint64_t)1<<(log2capacity-1)), bottom((uint64_t)1<<(log2capacity-1)),
-                                        array(new SharedPointerArray((uint64_t)1<<log2capacity))
+    ChaseLevDeque(int log2capacity=13)  :   top((uint64_t)1<<(log2capacity-1)), 
+                                            bottom((uint64_t)1<<(log2capacity-1)),
+                                            array(new SharedPointerArray((uint64_t)1<<log2capacity))
     {}
     struct SharedPointerArray{
         //Uses placement new to create shared_ptr in given buffer.
@@ -56,12 +59,12 @@ public:
         }
         ~SharedPointerArray(){
             for(uint64_t i=0;i<capacity;i++){
-                buffer[i].~shared_ptr(); // destruct placement newed objects explicitly
+                buffer[i].~shared_ptr(); 
             }
             delete [] reinterpret_cast<char*>(buffer);
         }
-        std::shared_ptr<T>*     buffer;     // should be replaced by std::atomic<std::shared_ptr> in C++20
-        std::atomic<uint64_t>   capacity;     // power of 2, grow at rate of *2 each time, init: 2^13(8K), max: 2^26(64M)
+        std::shared_ptr<T>*     buffer;   
+        std::atomic<uint64_t>   capacity;     
         std::shared_ptr<T>&     at(uint64_t index){
             return buffer[index%capacity];
         }
@@ -87,13 +90,13 @@ public:
         std::shared_ptr<T> x;
         if (t <= b) { 
             x = std::atomic_load_explicit(&a->at(b), std::memory_order_relaxed);
-            if (t == b) { // race against stealers for the last element
+            if (t == b) { 
                 if(!top.compare_exchange_strong(t,t+1,std::memory_order_seq_cst, std::memory_order_relaxed)){
                     x=nullptr;
                 }
                 bottom.store(b+1, std::memory_order_relaxed);
             }
-        } else { // empty
+        } else { 
             x=nullptr;
             bottom.store(b+1, std::memory_order_relaxed);
         }
@@ -112,7 +115,7 @@ public:
         std::atomic_thread_fence(std::memory_order_release);
         bottom.store(b+1, std::memory_order_relaxed);
     }
-    // Tries to steal the oldest task at top from the deque. It can be called from any thread, usually a stealer.
+    // Tries to steal the oldest task. It can be called from any thread, usually a stealer.
     std::shared_ptr<T>                  steal() {
         auto t = top.load(std::memory_order_acquire);
         std::atomic_thread_fence(std::memory_order_seq_cst);
@@ -132,7 +135,7 @@ protected:
     void                                grow(){
         auto old_arr = array.load(std::memory_order_relaxed);
         uint64_t new_capacity=old_arr->capacity<<1;
-        AutoDelete<SharedPointerArray> delguard{old_arr}; //must declare variable name here, otherwise old_arr would be destroyed early
+        AutoDelete<SharedPointerArray> delguard{old_arr}; 
         auto new_arr=new SharedPointerArray(new_capacity);
         for(uint64_t i=top.load(std::memory_order_relaxed);i<bottom.load(std::memory_order_relaxed);i++)  
         {

@@ -1,14 +1,14 @@
 #include "gtest/gtest.h"
 #include "Common.h"
-#include "LibAsync.h"
+#include "Internal.h"
 
 using namespace wjp;
-class test_todo : public ::testing::Test {
+class SystemIntegration : public ::testing::Test {
 protected:
-	test_todo() {
+	SystemIntegration() {
 
 	}
-	virtual ~test_todo() {
+	virtual ~SystemIntegration() {
 
 	}
 	virtual void SetUp() {
@@ -21,24 +21,9 @@ protected:
 };
 
 
-// testcase: test_todo
-// testname: ctor
-TEST_F(test_todo, ctor) {
+TEST_F(SystemIntegration, ExampleOfSpawnSync) {
 	int i = 1;
 	EXPECT_EQ(1, i);
 }
 
-// testcase: test_todo
-// testname: then
-TEST_F(test_todo, then) {
-	int i = 1;
-	EXPECT_EQ(1, i);
-}
-
-// testcase: test_todo
-// testname: operator_eq
-TEST_F(test_todo, operator_eq) {
-	int i = 1;
-	EXPECT_EQ(1, i);
-}
 

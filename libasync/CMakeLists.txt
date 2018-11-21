@@ -60,6 +60,7 @@ if(MSVC)
 endif()
 
 include_directories(./src/utils)
+include_directories(./src/spawnsync)
 include_directories(./src)
 link_directories(./src)
 add_subdirectory(./src)

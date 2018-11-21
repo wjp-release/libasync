@@ -5,6 +5,10 @@
 /Users/wjp/Desktop/workspace/libasync/libasync/build/src/CMakeFiles/edit_cache.dir
 /Users/wjp/Desktop/workspace/libasync/libasync/build/src/CMakeFiles/test.dir
 /Users/wjp/Desktop/workspace/libasync/libasync/build/src/CMakeFiles/async.dir
+/Users/wjp/Desktop/workspace/libasync/libasync/build/src/spawnsync/CMakeFiles/rebuild_cache.dir
+/Users/wjp/Desktop/workspace/libasync/libasync/build/src/spawnsync/CMakeFiles/edit_cache.dir
+/Users/wjp/Desktop/workspace/libasync/libasync/build/src/spawnsync/CMakeFiles/test.dir
+/Users/wjp/Desktop/workspace/libasync/libasync/build/src/spawnsync/CMakeFiles/spawnsync.dir
 /Users/wjp/Desktop/workspace/libasync/libasync/build/googletest/CMakeFiles/test.dir
 /Users/wjp/Desktop/workspace/libasync/libasync/build/googletest/CMakeFiles/rebuild_cache.dir
 /Users/wjp/Desktop/workspace/libasync/libasync/build/googletest/CMakeFiles/edit_cache.dir

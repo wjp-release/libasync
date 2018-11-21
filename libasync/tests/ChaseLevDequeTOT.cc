@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "LibAsync.h"
+#include "Internal.h"
 #include "ChaseLevDeque.h"
 #include <thread>
 #include <set>
@@ -133,7 +133,7 @@ TEST_F(ChaseLevDequeTOT, StealerRace) {
     {
         std::cout<<tasks[i].get()<<std::endl;
     }
-	sleep(3000);
+	sleep(300);
 	EXPECT_EQ(count, 100);
 }
 

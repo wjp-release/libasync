@@ -25,20 +25,41 @@
 
 #pragma once
 
-#include "Common.h"
-#include "AutoRelease.h"
-
-// Support push 
+#include <list>
+#include <mutex>
+#include <algorithm>
+#include <memory>
 
 namespace wjp{
 
-template<typename T>
+template <class T>
 class SubmissionBuffer
 {
 public:
-
+    // Pushes a task to back.
+    void submit(std::shared_ptr<T> task){
+        std::lock_guard<std::mutex> lk(mtx);
+        task_list.push_back(task);
+    }
+    // Tries to remove a task, usually called when caller wants to run the task locally.
+    bool withdraw(std::shared_ptr<T> task){
+        std::lock_guard<std::mutex> lk(mtx); 
+        auto it=std::find(task_list.begin(), task_list.end(), task);
+        if(it==task_list.end()) return false;
+        task_list.erase(it);
+        return true;
+    }
+    // Tries to steal an oldest task at front.
+    std::shared_ptr<T> steal(){
+        std::lock_guard<std::mutex> lk(mtx); 
+        if(task_list.empty()) return nullptr;
+        auto task_ptr=task_list.front();
+        task_list.pop_front();
+        return task_ptr;
+    }
 private:
-
+    std::list<std::shared_ptr<T>> task_list;
+    mutable std::mutex mtx;
 };
 
 }

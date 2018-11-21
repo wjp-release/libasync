@@ -23,19 +23,50 @@
  * SOFTWARE.
  */
 
-#include <iostream>
-#include <cassert>
-#include "ChaseLevDeque.h"
-#include <set>
-#include <thread>
-#include "Internal.h"
-#include "sample.h"
+#pragma once
 
-using namespace wjp;
-int main()
-{
-	cpplatest();
+#include <functional>
 
-	sleep(3000);
-	return 0;
+namespace wjp {
+
+// Universal Callable
+template< class R>
+class Callable{
+public:
+	// Constructors
+	Callable(){}
+	template< class F, class... Args >
+	Callable(F&& f, Args&&... args ){
+		std::cout<<"ctor F Args\n";
+		callable_function = std::bind(std::forward<F>(f), std::forward<Args>(args)...);
+	}
+	// Operators
+	R operator()(){
+		return callable_function();
+	}
+	Callable& operator=( std::nullptr_t ){
+						std::cout<<"= null\n";
+
+		callable_function=nullptr;
+		return *this;
+	}
+	Callable<R>& operator=( Callable<R>&& other ){
+						std::cout<<"= rvalue\n";
+
+		callable_function=std::move(other.callable_function);
+		return *this;
+	}
+	Callable& operator=(const Callable& other ){
+				std::cout<<"= lvalue\n";
+		callable_function=other.callable_function;
+		return *this;
+	}	
+	explicit operator bool() const noexcept{
+		return (bool)callable_function;
+	}
+private:
+	std::function<R()> callable_function;
+};
+
 }
+

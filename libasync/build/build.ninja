@@ -103,31 +103,31 @@ build cmake_object_order_depends_target_async: phony || src/CMakeFiles/async.dir
 build src/CMakeFiles/async.dir/FixedPool.cc.o: CXX_COMPILER__async ../src/FixedPool.cc || cmake_object_order_depends_target_async
   DEP_FILE = src/CMakeFiles/async.dir/FixedPool.cc.o.d
   FLAGS = -std=c++17 -fPIC  -O0 -Wall -g2 -ggdb -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk   -std=gnu++1z
-  INCLUDES = -I.././src/utils -I.././src
+  INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src
   OBJECT_DIR = src/CMakeFiles/async.dir
   OBJECT_FILE_DIR = src/CMakeFiles/async.dir
 build src/CMakeFiles/async.dir/SpawnSyncPool.cc.o: CXX_COMPILER__async ../src/SpawnSyncPool.cc || cmake_object_order_depends_target_async
   DEP_FILE = src/CMakeFiles/async.dir/SpawnSyncPool.cc.o.d
   FLAGS = -std=c++17 -fPIC  -O0 -Wall -g2 -ggdb -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk   -std=gnu++1z
-  INCLUDES = -I.././src/utils -I.././src
+  INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src
   OBJECT_DIR = src/CMakeFiles/async.dir
   OBJECT_FILE_DIR = src/CMakeFiles/async.dir
 build src/CMakeFiles/async.dir/SpawnSyncRunnable.cc.o: CXX_COMPILER__async ../src/SpawnSyncRunnable.cc || cmake_object_order_depends_target_async
   DEP_FILE = src/CMakeFiles/async.dir/SpawnSyncRunnable.cc.o.d
   FLAGS = -std=c++17 -fPIC  -O0 -Wall -g2 -ggdb -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk   -std=gnu++1z
-  INCLUDES = -I.././src/utils -I.././src
+  INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src
   OBJECT_DIR = src/CMakeFiles/async.dir
   OBJECT_FILE_DIR = src/CMakeFiles/async.dir
 build src/CMakeFiles/async.dir/SpawnSyncTask.cc.o: CXX_COMPILER__async ../src/SpawnSyncTask.cc || cmake_object_order_depends_target_async
   DEP_FILE = src/CMakeFiles/async.dir/SpawnSyncTask.cc.o.d
   FLAGS = -std=c++17 -fPIC  -O0 -Wall -g2 -ggdb -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk   -std=gnu++1z
-  INCLUDES = -I.././src/utils -I.././src
+  INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src
   OBJECT_DIR = src/CMakeFiles/async.dir
   OBJECT_FILE_DIR = src/CMakeFiles/async.dir
 build src/CMakeFiles/async.dir/SpawnSyncWorker.cc.o: CXX_COMPILER__async ../src/SpawnSyncWorker.cc || cmake_object_order_depends_target_async
   DEP_FILE = src/CMakeFiles/async.dir/SpawnSyncWorker.cc.o.d
   FLAGS = -std=c++17 -fPIC  -O0 -Wall -g2 -ggdb -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk   -std=gnu++1z
-  INCLUDES = -I.././src/utils -I.././src
+  INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src
   OBJECT_DIR = src/CMakeFiles/async.dir
   OBJECT_FILE_DIR = src/CMakeFiles/async.dir
 
@@ -146,6 +146,70 @@ build src/libasync.a: CXX_STATIC_LIBRARY_LINKER__async src/CMakeFiles/async.dir/
   PRE_LINK = :
   TARGET_FILE = src/libasync.a
   TARGET_PDB = async.a.dbg
+# =============================================================================
+# Write statements declared in CMakeLists.txt:
+# /Users/wjp/Desktop/workspace/libasync/libasync/src/CMakeLists.txt
+# =============================================================================
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build src/spawnsync/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /Users/wjp/Desktop/workspace/libasync/libasync/build/src/spawnsync && /opt/local/bin/cmake -H/Users/wjp/Desktop/workspace/libasync/libasync -B/Users/wjp/Desktop/workspace/libasync/libasync/build
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+build src/spawnsync/rebuild_cache: phony src/spawnsync/CMakeFiles/rebuild_cache.util
+
+#############################################
+# Utility command for edit_cache
+
+build src/spawnsync/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /Users/wjp/Desktop/workspace/libasync/libasync/build/src/spawnsync && /opt/local/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  DESC = No interactive CMake dialog available...
+  restat = 1
+build src/spawnsync/edit_cache: phony src/spawnsync/CMakeFiles/edit_cache.util
+
+#############################################
+# Utility command for test
+
+build src/spawnsync/CMakeFiles/test.util: CUSTOM_COMMAND
+  COMMAND = cd /Users/wjp/Desktop/workspace/libasync/libasync/build/src/spawnsync && /opt/local/bin/ctest --force-new-ctest-process
+  DESC = Running tests...
+  pool = console
+  restat = 1
+build src/spawnsync/test: phony src/spawnsync/CMakeFiles/test.util
+# =============================================================================
+# Object build statements for STATIC_LIBRARY target spawnsync
+
+
+#############################################
+# Order-only phony target for spawnsync
+
+build cmake_object_order_depends_target_spawnsync: phony || src/spawnsync/CMakeFiles/spawnsync.dir
+build src/spawnsync/CMakeFiles/spawnsync.dir/FixedThreadPool.cc.o: CXX_COMPILER__spawnsync ../src/spawnsync/FixedThreadPool.cc || cmake_object_order_depends_target_spawnsync
+  DEP_FILE = src/spawnsync/CMakeFiles/spawnsync.dir/FixedThreadPool.cc.o.d
+  FLAGS = -std=c++17 -fPIC  -O0 -Wall -g2 -ggdb -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk   -std=gnu++1z
+  INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src
+  OBJECT_DIR = src/spawnsync/CMakeFiles/spawnsync.dir
+  OBJECT_FILE_DIR = src/spawnsync/CMakeFiles/spawnsync.dir
+
+# =============================================================================
+# Link build statements for STATIC_LIBRARY target spawnsync
+
+
+#############################################
+# Link the static library src/spawnsync/libspawnsync.a
+
+build src/spawnsync/libspawnsync.a: CXX_STATIC_LIBRARY_LINKER__spawnsync src/spawnsync/CMakeFiles/spawnsync.dir/FixedThreadPool.cc.o
+  ARCH_FLAGS = -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk
+  LANGUAGE_COMPILE_FLAGS = -std=c++17 -fPIC  -O0 -Wall -g2 -ggdb
+  OBJECT_DIR = src/spawnsync/CMakeFiles/spawnsync.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = src/spawnsync/libspawnsync.a
+  TARGET_PDB = spawnsync.a.dbg
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
 # /Users/wjp/Desktop/workspace/libasync/libasync/CMakeLists.txt
@@ -191,7 +255,7 @@ build cmake_object_order_depends_target_gtest_main: phony || cmake_object_order_
 build googletest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o: CXX_COMPILER__gtest_main ../googletest/src/gtest_main.cc || cmake_object_order_depends_target_gtest_main
   DEP_FILE = googletest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o.d
   FLAGS = -std=c++17 -fPIC  -O0 -Wall -g2 -ggdb -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk    -DGTEST_HAS_PTHREAD=1   -std=gnu++1z
-  INCLUDES = -I.././src/utils -I.././src -isystem ../googletest/include -isystem ../googletest
+  INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
   OBJECT_DIR = googletest/CMakeFiles/gtest_main.dir
   OBJECT_FILE_DIR = googletest/CMakeFiles/gtest_main.dir/src
 
@@ -221,7 +285,7 @@ build cmake_object_order_depends_target_gtest: phony || googletest/CMakeFiles/gt
 build googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.o: CXX_COMPILER__gtest ../googletest/src/gtest-all.cc || cmake_object_order_depends_target_gtest
   DEP_FILE = googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.o.d
   FLAGS = -std=c++17 -fPIC  -O0 -Wall -g2 -ggdb -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk    -DGTEST_HAS_PTHREAD=1   -std=gnu++1z
-  INCLUDES = -I.././src/utils -I.././src -I../googletest/include -I../googletest
+  INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src -I../googletest/include -I../googletest
   OBJECT_DIR = googletest/CMakeFiles/gtest.dir
   OBJECT_FILE_DIR = googletest/CMakeFiles/gtest.dir/src
 
@@ -282,16 +346,28 @@ build tests/test: phony tests/CMakeFiles/test.util
 # Order-only phony target for tests
 
 build cmake_object_order_depends_target_tests: phony || cmake_object_order_depends_target_async cmake_object_order_depends_target_gtest cmake_object_order_depends_target_gtest_main
+build tests/CMakeFiles/tests.dir/CallableTOT.cc.o: CXX_COMPILER__tests ../tests/CallableTOT.cc || cmake_object_order_depends_target_tests
+  DEP_FILE = tests/CMakeFiles/tests.dir/CallableTOT.cc.o.d
+  FLAGS = -std=c++17 -fPIC  -O0 -Wall -g2 -ggdb -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk   -std=gnu++1z
+  INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
+  OBJECT_DIR = tests/CMakeFiles/tests.dir
+  OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
 build tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.o: CXX_COMPILER__tests ../tests/ChaseLevDequeTOT.cc || cmake_object_order_depends_target_tests
   DEP_FILE = tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.o.d
   FLAGS = -std=c++17 -fPIC  -O0 -Wall -g2 -ggdb -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk   -std=gnu++1z
-  INCLUDES = -I.././src/utils -I.././src -isystem ../googletest/include -isystem ../googletest
+  INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
+  OBJECT_DIR = tests/CMakeFiles/tests.dir
+  OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
+build tests/CMakeFiles/tests.dir/SubmissionBufferTOT.cc.o: CXX_COMPILER__tests ../tests/SubmissionBufferTOT.cc || cmake_object_order_depends_target_tests
+  DEP_FILE = tests/CMakeFiles/tests.dir/SubmissionBufferTOT.cc.o.d
+  FLAGS = -std=c++17 -fPIC  -O0 -Wall -g2 -ggdb -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk   -std=gnu++1z
+  INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
   OBJECT_DIR = tests/CMakeFiles/tests.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
 build tests/CMakeFiles/tests.dir/SystemIntegrationTOT.cc.o: CXX_COMPILER__tests ../tests/SystemIntegrationTOT.cc || cmake_object_order_depends_target_tests
   DEP_FILE = tests/CMakeFiles/tests.dir/SystemIntegrationTOT.cc.o.d
   FLAGS = -std=c++17 -fPIC  -O0 -Wall -g2 -ggdb -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk   -std=gnu++1z
-  INCLUDES = -I.././src/utils -I.././src -isystem ../googletest/include -isystem ../googletest
+  INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
   OBJECT_DIR = tests/CMakeFiles/tests.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
 
@@ -302,7 +378,7 @@ build tests/CMakeFiles/tests.dir/SystemIntegrationTOT.cc.o: CXX_COMPILER__tests 
 #############################################
 # Link the executable tests/tests
 
-build tests/tests: CXX_EXECUTABLE_LINKER__tests tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.o tests/CMakeFiles/tests.dir/SystemIntegrationTOT.cc.o | lib/libgtest_maind.a src/libasync.a lib/libgtestd.a || lib/libgtest_maind.a lib/libgtestd.a src/libasync.a
+build tests/tests: CXX_EXECUTABLE_LINKER__tests tests/CMakeFiles/tests.dir/CallableTOT.cc.o tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.o tests/CMakeFiles/tests.dir/SubmissionBufferTOT.cc.o tests/CMakeFiles/tests.dir/SystemIntegrationTOT.cc.o | lib/libgtest_maind.a src/libasync.a lib/libgtestd.a || lib/libgtest_maind.a lib/libgtestd.a src/libasync.a
   FLAGS = -std=c++17 -fPIC  -O0 -Wall -g2 -ggdb -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk
   LINK_LIBRARIES = -Wl,-rpath,/Users/wjp/Desktop/workspace/libasync/libasync/./src lib/libgtest_maind.a src/libasync.a lib/libgtestd.a
   LINK_PATH = -L/Users/wjp/Desktop/workspace/libasync/libasync/./src
@@ -356,7 +432,7 @@ build cmake_object_order_depends_target_sample: phony || cmake_object_order_depe
 build samples/CMakeFiles/sample.dir/sample.cc.o: CXX_COMPILER__sample ../samples/sample.cc || cmake_object_order_depends_target_sample
   DEP_FILE = samples/CMakeFiles/sample.dir/sample.cc.o.d
   FLAGS = -std=c++17 -fPIC  -O0 -Wall -g2 -ggdb -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk   -std=gnu++1z
-  INCLUDES = -I.././src/utils -I.././src
+  INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src
   OBJECT_DIR = samples/CMakeFiles/sample.dir
   OBJECT_FILE_DIR = samples/CMakeFiles/sample.dir
 
@@ -385,7 +461,9 @@ build gtest_main: phony lib/libgtest_maind.a
 build libasync.a: phony src/libasync.a
 build libgtest_maind.a: phony lib/libgtest_maind.a
 build libgtestd.a: phony lib/libgtestd.a
+build libspawnsync.a: phony src/spawnsync/libspawnsync.a
 build sample: phony samples/sample
+build spawnsync: phony src/spawnsync/libspawnsync.a
 build tests: phony tests/tests
 # =============================================================================
 # Folder targets.
@@ -408,7 +486,13 @@ build  samples/all: phony sample
 #############################################
 # Folder: /Users/wjp/Desktop/workspace/libasync/libasync/build/src
 
-build  src/all: phony async
+build  src/all: phony async src/spawnsync/all
+# =============================================================================
+
+#############################################
+# Folder: /Users/wjp/Desktop/workspace/libasync/libasync/build/src/spawnsync
+
+build  src/spawnsync/all: phony spawnsync
 # =============================================================================
 
 #############################################
@@ -422,7 +506,7 @@ build  tests/all: phony tests
 #############################################
 # The main all target.
 
-build all: phony src/libasync.a lib/libgtest_maind.a lib/libgtestd.a tests/tests samples/sample
+build all: phony src/libasync.a src/spawnsync/libspawnsync.a lib/libgtest_maind.a lib/libgtestd.a tests/tests samples/sample
 
 #############################################
 # Make the all target the default.
@@ -432,13 +516,13 @@ default all
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | ../CMakeLists.txt ../googletest/CMakeLists.txt ../googletest/cmake/internal_utils.cmake ../samples/CMakeLists.txt ../src/CMakeLists.txt ../tests/CMakeLists.txt /opt/local/share/cmake-3.12/Modules/CMakeCInformation.cmake /opt/local/share/cmake-3.12/Modules/CMakeCXXInformation.cmake /opt/local/share/cmake-3.12/Modules/CMakeCommonLanguageInclude.cmake /opt/local/share/cmake-3.12/Modules/CMakeGenericSystem.cmake /opt/local/share/cmake-3.12/Modules/CMakeInitializeConfigs.cmake /opt/local/share/cmake-3.12/Modules/CMakeLanguageInformation.cmake /opt/local/share/cmake-3.12/Modules/CMakeSystemSpecificInformation.cmake /opt/local/share/cmake-3.12/Modules/CMakeSystemSpecificInitialize.cmake /opt/local/share/cmake-3.12/Modules/CheckIncludeFile.cmake /opt/local/share/cmake-3.12/Modules/CheckLibraryExists.cmake /opt/local/share/cmake-3.12/Modules/CheckSymbolExists.cmake /opt/local/share/cmake-3.12/Modules/Compiler/AppleClang-C.cmake /opt/local/share/cmake-3.12/Modules/Compiler/AppleClang-CXX.cmake /opt/local/share/cmake-3.12/Modules/Compiler/CMakeCommonCompilerMacros.cmake /opt/local/share/cmake-3.12/Modules/Compiler/Clang.cmake /opt/local/share/cmake-3.12/Modules/Compiler/GNU.cmake /opt/local/share/cmake-3.12/Modules/FindPackageHandleStandardArgs.cmake /opt/local/share/cmake-3.12/Modules/FindPackageMessage.cmake /opt/local/share/cmake-3.12/Modules/FindPythonInterp.cmake /opt/local/share/cmake-3.12/Modules/FindThreads.cmake /opt/local/share/cmake-3.12/Modules/Platform/Apple-AppleClang-C.cmake /opt/local/share/cmake-3.12/Modules/Platform/Apple-AppleClang-CXX.cmake /opt/local/share/cmake-3.12/Modules/Platform/Apple-Clang-C.cmake /opt/local/share/cmake-3.12/Modules/Platform/Apple-Clang-CXX.cmake /opt/local/share/cmake-3.12/Modules/Platform/Apple-Clang.cmake /opt/local/share/cmake-3.12/Modules/Platform/Darwin-Initialize.cmake /opt/local/share/cmake-3.12/Modules/Platform/Darwin.cmake /opt/local/share/cmake-3.12/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.12.4/CMakeCCompiler.cmake CMakeFiles/3.12.4/CMakeCXXCompiler.cmake CMakeFiles/3.12.4/CMakeSystem.cmake
+build build.ninja: RERUN_CMAKE | ../CMakeLists.txt ../googletest/CMakeLists.txt ../googletest/cmake/internal_utils.cmake ../samples/CMakeLists.txt ../src/CMakeLists.txt ../src/spawnsync/CMakeLists.txt ../tests/CMakeLists.txt /opt/local/share/cmake-3.12/Modules/CMakeCInformation.cmake /opt/local/share/cmake-3.12/Modules/CMakeCXXInformation.cmake /opt/local/share/cmake-3.12/Modules/CMakeCommonLanguageInclude.cmake /opt/local/share/cmake-3.12/Modules/CMakeGenericSystem.cmake /opt/local/share/cmake-3.12/Modules/CMakeInitializeConfigs.cmake /opt/local/share/cmake-3.12/Modules/CMakeLanguageInformation.cmake /opt/local/share/cmake-3.12/Modules/CMakeSystemSpecificInformation.cmake /opt/local/share/cmake-3.12/Modules/CMakeSystemSpecificInitialize.cmake /opt/local/share/cmake-3.12/Modules/CheckIncludeFile.cmake /opt/local/share/cmake-3.12/Modules/CheckLibraryExists.cmake /opt/local/share/cmake-3.12/Modules/CheckSymbolExists.cmake /opt/local/share/cmake-3.12/Modules/Compiler/AppleClang-C.cmake /opt/local/share/cmake-3.12/Modules/Compiler/AppleClang-CXX.cmake /opt/local/share/cmake-3.12/Modules/Compiler/CMakeCommonCompilerMacros.cmake /opt/local/share/cmake-3.12/Modules/Compiler/Clang.cmake /opt/local/share/cmake-3.12/Modules/Compiler/GNU.cmake /opt/local/share/cmake-3.12/Modules/FindPackageHandleStandardArgs.cmake /opt/local/share/cmake-3.12/Modules/FindPackageMessage.cmake /opt/local/share/cmake-3.12/Modules/FindPythonInterp.cmake /opt/local/share/cmake-3.12/Modules/FindThreads.cmake /opt/local/share/cmake-3.12/Modules/Platform/Apple-AppleClang-C.cmake /opt/local/share/cmake-3.12/Modules/Platform/Apple-AppleClang-CXX.cmake /opt/local/share/cmake-3.12/Modules/Platform/Apple-Clang-C.cmake /opt/local/share/cmake-3.12/Modules/Platform/Apple-Clang-CXX.cmake /opt/local/share/cmake-3.12/Modules/Platform/Apple-Clang.cmake /opt/local/share/cmake-3.12/Modules/Platform/Darwin-Initialize.cmake /opt/local/share/cmake-3.12/Modules/Platform/Darwin.cmake /opt/local/share/cmake-3.12/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.12.4/CMakeCCompiler.cmake CMakeFiles/3.12.4/CMakeCXXCompiler.cmake CMakeFiles/3.12.4/CMakeSystem.cmake
   pool = console
 
 #############################################
 # A missing CMake input file is not an error.
 
-build ../CMakeLists.txt ../googletest/CMakeLists.txt ../googletest/cmake/internal_utils.cmake ../samples/CMakeLists.txt ../src/CMakeLists.txt ../tests/CMakeLists.txt /opt/local/share/cmake-3.12/Modules/CMakeCInformation.cmake /opt/local/share/cmake-3.12/Modules/CMakeCXXInformation.cmake /opt/local/share/cmake-3.12/Modules/CMakeCommonLanguageInclude.cmake /opt/local/share/cmake-3.12/Modules/CMakeGenericSystem.cmake /opt/local/share/cmake-3.12/Modules/CMakeInitializeConfigs.cmake /opt/local/share/cmake-3.12/Modules/CMakeLanguageInformation.cmake /opt/local/share/cmake-3.12/Modules/CMakeSystemSpecificInformation.cmake /opt/local/share/cmake-3.12/Modules/CMakeSystemSpecificInitialize.cmake /opt/local/share/cmake-3.12/Modules/CheckIncludeFile.cmake /opt/local/share/cmake-3.12/Modules/CheckLibraryExists.cmake /opt/local/share/cmake-3.12/Modules/CheckSymbolExists.cmake /opt/local/share/cmake-3.12/Modules/Compiler/AppleClang-C.cmake /opt/local/share/cmake-3.12/Modules/Compiler/AppleClang-CXX.cmake /opt/local/share/cmake-3.12/Modules/Compiler/CMakeCommonCompilerMacros.cmake /opt/local/share/cmake-3.12/Modules/Compiler/Clang.cmake /opt/local/share/cmake-3.12/Modules/Compiler/GNU.cmake /opt/local/share/cmake-3.12/Modules/FindPackageHandleStandardArgs.cmake /opt/local/share/cmake-3.12/Modules/FindPackageMessage.cmake /opt/local/share/cmake-3.12/Modules/FindPythonInterp.cmake /opt/local/share/cmake-3.12/Modules/FindThreads.cmake /opt/local/share/cmake-3.12/Modules/Platform/Apple-AppleClang-C.cmake /opt/local/share/cmake-3.12/Modules/Platform/Apple-AppleClang-CXX.cmake /opt/local/share/cmake-3.12/Modules/Platform/Apple-Clang-C.cmake /opt/local/share/cmake-3.12/Modules/Platform/Apple-Clang-CXX.cmake /opt/local/share/cmake-3.12/Modules/Platform/Apple-Clang.cmake /opt/local/share/cmake-3.12/Modules/Platform/Darwin-Initialize.cmake /opt/local/share/cmake-3.12/Modules/Platform/Darwin.cmake /opt/local/share/cmake-3.12/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.12.4/CMakeCCompiler.cmake CMakeFiles/3.12.4/CMakeCXXCompiler.cmake CMakeFiles/3.12.4/CMakeSystem.cmake: phony
+build ../CMakeLists.txt ../googletest/CMakeLists.txt ../googletest/cmake/internal_utils.cmake ../samples/CMakeLists.txt ../src/CMakeLists.txt ../src/spawnsync/CMakeLists.txt ../tests/CMakeLists.txt /opt/local/share/cmake-3.12/Modules/CMakeCInformation.cmake /opt/local/share/cmake-3.12/Modules/CMakeCXXInformation.cmake /opt/local/share/cmake-3.12/Modules/CMakeCommonLanguageInclude.cmake /opt/local/share/cmake-3.12/Modules/CMakeGenericSystem.cmake /opt/local/share/cmake-3.12/Modules/CMakeInitializeConfigs.cmake /opt/local/share/cmake-3.12/Modules/CMakeLanguageInformation.cmake /opt/local/share/cmake-3.12/Modules/CMakeSystemSpecificInformation.cmake /opt/local/share/cmake-3.12/Modules/CMakeSystemSpecificInitialize.cmake /opt/local/share/cmake-3.12/Modules/CheckIncludeFile.cmake /opt/local/share/cmake-3.12/Modules/CheckLibraryExists.cmake /opt/local/share/cmake-3.12/Modules/CheckSymbolExists.cmake /opt/local/share/cmake-3.12/Modules/Compiler/AppleClang-C.cmake /opt/local/share/cmake-3.12/Modules/Compiler/AppleClang-CXX.cmake /opt/local/share/cmake-3.12/Modules/Compiler/CMakeCommonCompilerMacros.cmake /opt/local/share/cmake-3.12/Modules/Compiler/Clang.cmake /opt/local/share/cmake-3.12/Modules/Compiler/GNU.cmake /opt/local/share/cmake-3.12/Modules/FindPackageHandleStandardArgs.cmake /opt/local/share/cmake-3.12/Modules/FindPackageMessage.cmake /opt/local/share/cmake-3.12/Modules/FindPythonInterp.cmake /opt/local/share/cmake-3.12/Modules/FindThreads.cmake /opt/local/share/cmake-3.12/Modules/Platform/Apple-AppleClang-C.cmake /opt/local/share/cmake-3.12/Modules/Platform/Apple-AppleClang-CXX.cmake /opt/local/share/cmake-3.12/Modules/Platform/Apple-Clang-C.cmake /opt/local/share/cmake-3.12/Modules/Platform/Apple-Clang-CXX.cmake /opt/local/share/cmake-3.12/Modules/Platform/Apple-Clang.cmake /opt/local/share/cmake-3.12/Modules/Platform/Darwin-Initialize.cmake /opt/local/share/cmake-3.12/Modules/Platform/Darwin.cmake /opt/local/share/cmake-3.12/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.12.4/CMakeCCompiler.cmake CMakeFiles/3.12.4/CMakeCXXCompiler.cmake CMakeFiles/3.12.4/CMakeSystem.cmake: phony
 
 #############################################
 # Clean all the built files.

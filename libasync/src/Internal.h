@@ -23,19 +23,15 @@
  * SOFTWARE.
  */
 
-#include <iostream>
-#include <cassert>
+#pragma once
+
+// included by tests or samples
+
+#include "Common.h"
+#include "AutoRelease.h"
+#include "RandomUtilities.h"
+#include "ThreadUtilities.h"
+#include "TimeUtilities.h"
+#include "SubmissionBuffer.h"
 #include "ChaseLevDeque.h"
-#include <set>
-#include <thread>
-#include "Internal.h"
-#include "sample.h"
-
-using namespace wjp;
-int main()
-{
-	cpplatest();
-
-	sleep(3000);
-	return 0;
-}
+#include "Callable.h"

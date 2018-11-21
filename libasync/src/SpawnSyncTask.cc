@@ -76,8 +76,12 @@ namespace wjp {
 
 	void SpawnSyncTask::sync()
 	{
-		
-		
+		if(is_run_by_worker_thread()){
+			
+
+		}else{
+			wait(); 
+		}
 	}
 
 
@@ -96,9 +100,21 @@ namespace wjp {
 	}
 
 	// Why don't you run the task by yourself if you have time waiting here?
-	void help_outsider_wait()
+	void SpawnSyncTask::help_outsider_wait()
 	{
 		// try to undo submit
 	}
+
+
+	bool SpawnSyncTask::is_run_by_worker_thread()
+	{
+		if(auto worker_shared=worker.lock()){
+			if(worker_shared!=nullptr){
+				return std::this_thread::get_id() == worker_shared->worker_thread.get_id();
+			}
+		}
+		return false;			
+	}
+
 
 }

@@ -39,9 +39,6 @@ namespace wjp {
 		
 		// Default constructor should be called by ThreadPool users. The task is created as a specialization of Runnable. 
 		SpawnSyncTask() {}
-
-		// The Constructor that constructs from worker should be called worker thread. This constructor guarantees that weak_ptr to worker is properly set.
-		SpawnSyncTask(std::shared_ptr<SpawnSyncWorker> worker) : worker(worker){}
 		
 		virtual void cancel() override;
 		virtual void wait() override; 
@@ -61,22 +58,13 @@ namespace wjp {
 		void spawn();
 
 	private:
-		bool is_run_by_worker_thread()
-		{
-			if(auto worker_shared=worker.lock()){
-				if(worker_shared!=nullptr){
-					return std::this_thread::get_id() == worker_shared->worker_thread.get_id();
-				}
-			}
-			return false;			
-		}
-
+		bool is_run_by_worker_thread();
 		// Tries to exploit idle non-worker thread that waits for this task to directly execute it.
 		void help_outsider_wait();
 		std::weak_ptr<SpawnSyncWorker> worker;
 		std::bitset<2> state; // is_canceled, is_finished
-		std::condition_variable condition_finished;
-		std::mutex mtx;
+		mutable std::condition_variable condition_finished;
+		mutable std::mutex mtx;
 	};
 }
 
