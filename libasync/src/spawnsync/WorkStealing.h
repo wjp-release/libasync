@@ -25,22 +25,40 @@
 
 #pragma once
 
-#include "Common.h"
+#include "FixedThreadPool.h"
+#include "ChaseLevDeque.h"
 
-// Time, Random and other utilities
+namespace wjp::WorkStealing{
 
-namespace wjp{
+class Scheduler;
 
-    static inline void              sleep(int ms)
+// Thread-local data handle
+class Worker{
+public:
+    Worker(Scheduler& scheduler);
+
+private:
+    Scheduler& scheduler;
+};
+
+extern void thread_func(FixedThreadPool& pool, Worker& worker);
+
+class Scheduler{
+public:
+    // Starts running on creation
+    Scheduler() 
     {
-        std::this_thread::sleep_for(std::chrono::milliseconds(ms));
+        auto nr_threads=FixedThreadPool::recommended_nr_thread();
+        for(int i=0;i<nr_threads;i++){
+            workers.emplace_back(*this);
+        }
+        //pool=std::make_unique<FixedThreadPool>(std::ref(workers), thread_func); 
     }
 
-    // Hasher still has small chance to collide. So don't use hashed id as the unique id. Use it to pick a worker randomly.
-    static inline std::size_t       current_thread_hashed_id()
-    {
-        return std::hash<std::thread::id>{}(std::this_thread::get_id());
-    }
+private:
+    std::unique_ptr<FixedThreadPool> pool;
+    std::vector<Worker> workers{};
+};
 
 
 }

@@ -33,7 +33,7 @@ namespace wjp {
 	protected:
 		int state;
 	public:
-		virtual ~ThreadPool() {}
+		virtual ~FixedPool() {}
 		enum ThreadPoolState : int{
 			RUNNING		= 0, // Accept new tasks and process queued tasks
 			SHUTDOWN	= 1, // Stop accepting new tasks, but process queued tasks

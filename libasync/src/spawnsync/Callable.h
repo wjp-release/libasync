@@ -37,7 +37,6 @@ public:
 	Callable(){}
 	template< class F, class... Args >
 	Callable(F&& f, Args&&... args ){
-		std::cout<<"ctor F Args\n";
 		callable_function = std::bind(std::forward<F>(f), std::forward<Args>(args)...);
 	}
 	// Operators
@@ -45,19 +44,14 @@ public:
 		return callable_function();
 	}
 	Callable& operator=( std::nullptr_t ){
-						std::cout<<"= null\n";
-
 		callable_function=nullptr;
 		return *this;
 	}
 	Callable<R>& operator=( Callable<R>&& other ){
-						std::cout<<"= rvalue\n";
-
 		callable_function=std::move(other.callable_function);
 		return *this;
 	}
 	Callable& operator=(const Callable& other ){
-				std::cout<<"= lvalue\n";
 		callable_function=other.callable_function;
 		return *this;
 	}	

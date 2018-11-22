@@ -1,5 +1,6 @@
 aux_source_directory(. DIRSRCS)
 add_subdirectory(./spawnsync)
-add_library(async ${DIRSRCS} spawnsync)
+add_library(async ${DIRSRCS})
+target_link_libraries(async spawnsync)
 set_property(TARGET async PROPERTY CXX_STANDARD 17)
 set_property(TARGET async PROPERTY CXX_STANDARD_REQUIRED ON)

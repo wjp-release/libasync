@@ -35,3 +35,5 @@
 #include "SubmissionBuffer.h"
 #include "ChaseLevDeque.h"
 #include "Callable.h"
+#include "FixedThreadPool.h"
+#include "WorkStealing.h"

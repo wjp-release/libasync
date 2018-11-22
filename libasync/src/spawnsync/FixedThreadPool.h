@@ -31,7 +31,9 @@
 
 namespace wjp {
 
+	// The supplied function must take FixedThreadPool* as its first argument.
 	class FixedThreadPool {
+	public:
 		static int recommended_nr_thread(){
 			return std::thread::hardware_concurrency()*2+1;
 		}
@@ -39,25 +41,36 @@ namespace wjp {
 		template <class Function, class... Args >
 		FixedThreadPool(int nr_threads, Function&& f, Args&&... args){
 			for(int i=0; i<nr_threads; i++){
-				threads.emplace_back(std::forward<Function>(f), std::forward<Args>(args)...);
+				threads.emplace_back(std::forward<Function>(f), std::ref(*this), std::forward<Args>(args)...);
 			}
 		}
 
-		template <class Function, class... Args >
-		void execute(Function&& f, Args&&... args)
-		{
-			
+		template <class T, class Function, class... Args >
+		FixedThreadPool(std::vector<T>& x, Function&& f, Args&&... args){
+			for(int i=0; i<x.size(); i++){
+				threads.emplace_back(std::forward<Function>(f), std::ref(*this), x[i], std::forward<Args>(args)...);
+			}
 		}
 
         ~FixedThreadPool() {
-			shutdown=true;
 			for(auto& t : threads){
 				t.join();
 			}
         }
 
+		bool contains_me(){
+			auto me=std::this_thread::get_id();
+			for(auto& t: threads){
+				if(me==t.get_id()) return true;
+			}
+			return false;
+		}
+
+		int nr_threads(){
+			return threads.size();
+		}
+
     private:
-		bool shutdown = false;
 		std::vector<std::thread> threads {};
 	};
 

@@ -26,7 +26,6 @@
 #pragma once
 
 #include <any>
-#include <SpawnSyncTask.h>
 
 namespace wjp{
 
