@@ -29,29 +29,31 @@
 
 namespace wjp {
 
-// Universal Callable
+// A copyable wrapper of C++ Callable objects
 template< class R>
 class Callable{
 public:
-	// Constructors
 	Callable(){}
 	template< class F, class... Args >
-	Callable(F&& f, Args&&... args ){
+	void bind(F&& f, Args&&... args ){
 		callable_function = std::bind(std::forward<F>(f), std::forward<Args>(args)...);
 	}
-	// Operators
+	//Kicks it off
 	R operator()(){
 		return callable_function();
 	}
-	Callable& operator=( std::nullptr_t ){
+	Callable(std::nullptr_t):callable_function(nullptr){}
+	Callable(Callable&& other):callable_function(std::move(other.callable_function)){}
+	Callable(const Callable& other ):callable_function(other.callable_function){}	
+	Callable& operator=(std::nullptr_t)noexcept{
 		callable_function=nullptr;
 		return *this;
 	}
-	Callable<R>& operator=( Callable<R>&& other ){
-		callable_function=std::move(other.callable_function);
+	Callable& operator=(Callable&& other)noexcept{
+		callable_function.swap(other.callable_function);
 		return *this;
 	}
-	Callable& operator=(const Callable& other ){
+	Callable& operator=(const Callable& other)noexcept{
 		callable_function=other.callable_function;
 		return *this;
 	}	
