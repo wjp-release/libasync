@@ -23,6 +23,7 @@
 * SOFTWARE.
 */
 
+#include "Async.h"
 
 namespace wjp {
 

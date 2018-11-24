@@ -35,7 +35,13 @@ class Callable{
 public:
 	Callable(){}
 	virtual ~Callable(){}
-	template< class F, class... Args >
+
+	// template< class F, class... Args, class=std::enable_if_t<std::is_invocable<F, Args...>()> >
+	// Callable(F&& f, Args&&... args ){
+	// 	callable_function = std::bind(std::forward<F>(f), std::forward<Args>(args)...);
+	// }
+
+	template< class F, class... Args, class=std::enable_if_t<(std::is_invocable<F, Args...>())> >
 	void bind(F&& f, Args&&... args ){
 		callable_function = std::bind(std::forward<F>(f), std::forward<Args>(args)...);
 	}

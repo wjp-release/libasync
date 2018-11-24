@@ -25,7 +25,7 @@
 
 #pragma once
 
-// Every non-trivial header in libasync should include this file.
+// Convenient includes for tests & samples.
 
 #define WJP_VERSION 1
 #define WJP_DEBUG

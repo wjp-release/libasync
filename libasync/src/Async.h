@@ -25,18 +25,10 @@
 
 #pragma once
 
-// included by tests or samples
-
-#include "Common.h"
-#include "AutoRelease.h"
-#include "RandomUtilities.h"
-#include "ThreadUtilities.h"
-#include "TimeUtilities.h"
-#include "SubmissionBuffer.h"
-#include "ChaseLevDeque.h"
-#include "Callable.h"
-#include "FixedThreadPool.h"
-#include "WorkStealing.h"
-#include "SpawnSyncTask.h"
-#include "Async.h"
 #include "Pipable.h"
+
+namespace wjp{
+
+
+
+}

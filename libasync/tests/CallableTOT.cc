@@ -87,4 +87,3 @@ TEST_F(CallableTOT, MultiArgs) {
 	EXPECT_EQ(x,123);
 }
 
-
