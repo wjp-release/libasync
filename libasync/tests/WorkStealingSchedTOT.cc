@@ -3,7 +3,7 @@
 #include "Internal.h"
 
 using namespace wjp;
-using namespace wjp::WorkStealing;
+
 class WorkStealingSchedTOT : public ::testing::Test {
 protected:
 	WorkStealingSchedTOT() {

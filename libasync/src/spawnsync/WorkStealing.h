@@ -27,8 +27,11 @@
 
 #include "FixedThreadPool.h"
 #include "ChaseLevDeque.h"
+#include "SpawnSyncTask.h"
+#include <memory>
 
-namespace wjp::WorkStealing{
+namespace wjp{
+
 
 class Scheduler;
 
@@ -54,11 +57,16 @@ public:
         }
         //pool=std::make_unique<FixedThreadPool>(std::ref(workers), thread_func); 
     }
-
+    
+    template < class T >
+    std::shared_ptr<SpawnSyncTask<T>> create_task(){
+        return std::make_shared<SpawnSyncTask<T>>(*this);
+    }
 private:
     std::unique_ptr<FixedThreadPool> pool;
     std::vector<Worker> workers{};
 };
+
 
 
 }

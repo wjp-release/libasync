@@ -25,16 +25,34 @@
 
 #pragma once
 
-// included by tests or samples
-
-#include "Common.h"
-#include "AutoRelease.h"
-#include "RandomUtilities.h"
-#include "ThreadUtilities.h"
-#include "TimeUtilities.h"
-#include "SubmissionBuffer.h"
-#include "ChaseLevDeque.h"
 #include "Callable.h"
-#include "FixedThreadPool.h"
-#include "WorkStealing.h"
-#include "SpawnSyncTask.h"
+#include <optional>
+
+namespace wjp {
+
+class Scheduler;
+
+// A copyable wrapper of C++ Callable objects
+template< class R>
+class SpawnSyncTask : public Callable<R>{
+public:
+
+	SpawnSyncTask(Scheduler& sched):scheduler(sched)
+	{}
+	
+	void spawn(){}
+
+	void sync(){}
+
+	std::optional<R> get(){
+		sync();
+		return value;
+	}
+
+private:
+	std::optional<R> value;
+	Scheduler& scheduler;
+};
+
+}
+

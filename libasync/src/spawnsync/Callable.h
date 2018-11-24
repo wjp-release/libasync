@@ -34,6 +34,7 @@ template< class R>
 class Callable{
 public:
 	Callable(){}
+	virtual ~Callable(){}
 	template< class F, class... Args >
 	void bind(F&& f, Args&&... args ){
 		callable_function = std::bind(std::forward<F>(f), std::forward<Args>(args)...);
