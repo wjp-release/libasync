@@ -26,7 +26,7 @@ struct A{
 	std::string x;
 };
 
-TEST_F(SpawnSyncTaskTOT, SS) {
+TEST_F(SpawnSyncTaskTOT, CreateAndCall) {
 	Scheduler sched;
 	struct bee{
 		int operator()(int x, int y, int z){

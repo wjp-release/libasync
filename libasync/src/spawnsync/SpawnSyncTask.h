@@ -32,17 +32,20 @@ namespace wjp {
 
 class Scheduler;
 
-// A copyable wrapper of C++ Callable objects
-template< class R>
+template< class R >
 class SpawnSyncTask : public Callable<R>{
 public:
 
 	SpawnSyncTask(Scheduler& sched):scheduler(sched)
 	{}
 	
-	void spawn(){}
+	void spawn(){
+		
+	}
 
-	void sync(){}
+	void sync(){
+	
+	}
 
 	std::optional<R> get(){
 		sync();
@@ -50,6 +53,10 @@ public:
 	}
 
 private:
+	bool is_called_from_worker_thread()
+	{
+
+	}
 	std::optional<R> value;
 	Scheduler& scheduler;
 };
