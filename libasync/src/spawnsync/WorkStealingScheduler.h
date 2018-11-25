@@ -44,13 +44,13 @@ public:
     WorkStealingScheduler();
 
     template< class R >
-    class SpawnSyncTask : public Callable<R>{
+    class Task : public Callable<R>{
     public:
-        SpawnSyncTask(WorkStealingScheduler& sched):scheduler(sched)
+        Task(WorkStealingScheduler& sched):scheduler(sched)
         {}
 
-        // Note that nullptr_t assignment cannot be inherited, so we need to define it manually. Neither can nullptr_t construtor be inherited, but that makes perfect sense since SpawnSyncTask must have a scheduler reference ever since its construction. 
-        SpawnSyncTask& operator=(std::nullptr_t)noexcept{
+        // Note that nullptr_t assignment cannot be inherited, so we need to define it manually. Neither can nullptr_t construtor be inherited, but that makes perfect sense since Task must have a scheduler reference ever since its construction. 
+        Task& operator=(std::nullptr_t)noexcept{
 		    Callable<R>::operator=(nullptr);
 		    return *this;
 	    }
@@ -74,21 +74,20 @@ public:
 
     private:
         std::optional<R> value;
-        // Every copy/move constructor or assignment operator of Callable<R> is perfectly inherited and implicitly declared in SpawnSyncTask since this class meets all the requirements for the compiler to do so.
+        // Every copy/move constructor or assignment operator of Callable<R> is perfectly inherited and implicitly declared in Task since this class meets all the requirements for the compiler to do so.
         // That's why scheduler has to be wrapped.
         std::reference_wrapper<WorkStealingScheduler> scheduler;
     };
 
     template < class R >
-    std::shared_ptr<SpawnSyncTask<R>> create_task(){
-        return std::make_shared<SpawnSyncTask<R>>(*this);
+    std::shared_ptr<Task<R>> create_task(){
+        return std::make_shared<Task<R>>(*this);
     }
 
 
 private:
     std::unique_ptr<FixedThreadPool<WorkStealingWorker>> pool;
 };
-
 
 
 }

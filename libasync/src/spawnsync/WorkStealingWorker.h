@@ -25,6 +25,8 @@
 
 #pragma once
 
+#include <functional>
+
 namespace wjp{
 
 class WorkStealingScheduler;
@@ -35,7 +37,7 @@ public:
     WorkStealingWorker(WorkStealingScheduler& scheduler);
 
 private:
-    WorkStealingScheduler& scheduler;
+    std::reference_wrapper<WorkStealingScheduler> scheduler;
 };
 
 

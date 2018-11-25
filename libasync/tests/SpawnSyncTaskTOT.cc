@@ -55,7 +55,7 @@ TEST_F(SpawnSyncTaskTOT, Assignment) {
 			},10,20);
 	auto x=t->call();
 	EXPECT_EQ(x, 30);
-	WorkStealingScheduler::SpawnSyncTask copy=*t; //copy construct from t
+	WorkStealingScheduler::Task copy=*t; //copy construct from t
 	EXPECT_EQ(copy(), 30);
 	copy=nullptr; // inherited operator= nullptr
 	EXPECT_FALSE((bool)copy); // inherited operator bool
