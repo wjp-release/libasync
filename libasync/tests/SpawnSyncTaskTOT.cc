@@ -37,7 +37,6 @@ TEST_F(SpawnSyncTaskTOT, SS) {
 	t->bind(bee{}, 1,2,3);
 	auto x= t->call();
 	EXPECT_EQ(x,123);
-
 }
 
 

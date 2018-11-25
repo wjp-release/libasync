@@ -54,3 +54,17 @@
 3446	3644	1543114665	tests/tests	927cdc3b343f440c
 10	3252	1543114742	tests/CMakeFiles/tests.dir/CallableTOT.cc.o	d5b3ad884a7c1ed6
 3252	3426	1543114742	tests/tests	927cdc3b343f440c
+12	2310	1543114808	src/spawnsync/CMakeFiles/spawnsync.dir/WorkStealing.cc.o	d540f0c27134c15e
+2310	2396	1543114808	src/spawnsync/libspawnsync.a	9fab796782e6faae
+13	4016	1543114810	tests/CMakeFiles/tests.dir/AsyncTOT.cc.o	4499af12209503c2
+20	4341	1543114810	tests/CMakeFiles/tests.dir/PipableTOT.cc.o	4568f151c9fea4db
+18	5226	1543114811	tests/CMakeFiles/tests.dir/FixedThreadPoolTOT.cc.o	684b99d8027089f4
+16	6386	1543114812	tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.o	ae7a70f537983594
+4341	8234	1543114814	tests/CMakeFiles/tests.dir/SystemIntegrationTOT.cc.o	6abcf83842acb197
+4016	8473	1543114815	tests/CMakeFiles/tests.dir/SubmissionBufferTOT.cc.o	db99c5504e408f63
+14	8689	1543114815	tests/CMakeFiles/tests.dir/CallableTOT.cc.o	d5b3ad884a7c1ed6
+5226	8802	1543114815	tests/CMakeFiles/tests.dir/WorkStealingSchedTOT.cc.o	60a39186634aee44
+6386	8836	1543114815	samples/CMakeFiles/sample.dir/sample.cc.o	f809cd1b2299b52e
+14	119	1543114840	samples/sample	ef332391c632ea0a
+9	1818	1543114859	tests/CMakeFiles/tests.dir/SpawnSyncTaskTOT.cc.o	6d94c68c5a008275
+1818	1981	1543114859	tests/tests	927cdc3b343f440c

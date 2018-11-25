@@ -29,7 +29,7 @@
 
 namespace wjp {
 
-// Callable is a container of an invocable object and its arguments.
+// Callable is an invocable wrapper of any invocable object and its arguments.
 template< class R>
 class Callable{
 public:
@@ -48,17 +48,16 @@ public:
 		callable_function = std::bind(std::forward<F>(f), std::forward<Args>(args)...);
 	}
 
-
 	//Binds any invocable, including Callables.
 	template< class F, class... Args, class=std::enable_if_t<(std::is_invocable<F, Args...>{})>>
 	void bind(F&& f, Args&&... args ){
 		callable_function = std::bind(std::forward<F>(f), std::forward<Args>(args)...);
 	}
-	//Kicks it off
-	R call(){
+	//Two equivalent methods to kick it off. 
+	R call(){ //Actually looks nicer than operator()() if it is called from a pointer or smart pointer 
 		return callable_function();
 	}
-	R operator()(){
+	R operator()(){  //Makes Callable invocable by c++ standard
 		return callable_function();
 	}
 	Callable(std::nullptr_t):callable_function(nullptr){}
