@@ -46,11 +46,10 @@ public:
     template< class R >
     class SpawnSyncTask : public Callable<R>{
     public:
-
         SpawnSyncTask(WorkStealingScheduler& sched):scheduler(sched)
         {}
 
-        // Note that nullptr_t assignment cannot be inherited, so we need to define it manually. Neither can nullptr_t construtor be inherited, but that makes perfect sense since SpawnSyncTask must have a scheduler reference ever since its construction.
+        // Note that nullptr_t assignment cannot be inherited, so we need to define it manually. Neither can nullptr_t construtor be inherited, but that makes perfect sense since SpawnSyncTask must have a scheduler reference ever since its construction. 
         SpawnSyncTask& operator=(std::nullptr_t)noexcept{
 		    Callable<R>::operator=(nullptr);
 		    return *this;
@@ -75,6 +74,8 @@ public:
 
     private:
         std::optional<R> value;
+        // Every copy/move constructor or assignment operator of Callable<R> is perfectly inherited and implicitly declared in SpawnSyncTask since this class meets all the requirements for the compiler to do so.
+        // That's why scheduler has to be wrapped.
         std::reference_wrapper<WorkStealingScheduler> scheduler;
     };
 
