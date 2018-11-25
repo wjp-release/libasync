@@ -25,9 +25,7 @@
 
 #pragma once
 
-#include "Common.h"
-
-// Time, Random and other utilities
+#include <chrono>
 
 namespace wjp{
 

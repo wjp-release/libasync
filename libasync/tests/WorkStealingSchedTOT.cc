@@ -27,7 +27,7 @@ struct A{
 };
 
 TEST_F(WorkStealingSchedTOT, SS) {
-	Scheduler sched;
+
 }
 
 

@@ -27,7 +27,7 @@ struct A{
 };
 
 TEST_F(SpawnSyncTaskTOT, CreateAndCall) {
-	Scheduler sched;
+	WorkStealingScheduler sched;
 	struct bee{
 		int operator()(int x, int y, int z){
 			return x*100+y*10+z;

@@ -23,19 +23,18 @@
 * SOFTWARE.
 */
 
-#include "WorkStealing.h"
-#include <iostream>
+#pragma once
+
+#include "FixedThreadPool.h"
 
 namespace wjp{
 
-Worker::Worker(Scheduler&scheduler) : scheduler(scheduler){}
+class WorkStealingWorker;
 
-extern void thread_func(FixedThreadPool& pool, Worker& worker){
-    std::cout<<"duh";
+namespace WorkStealingRoutine{
+
+extern void thread_func(FixedThreadPool<WorkStealingWorker>&, WorkStealingWorker&);
 
 }
-
-
-
 
 }

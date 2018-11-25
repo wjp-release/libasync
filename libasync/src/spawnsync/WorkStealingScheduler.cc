@@ -23,18 +23,24 @@
 * SOFTWARE.
 */
 
-#pragma once
-
-#include <random>
+#include "WorkStealingScheduler.h"
+#include <iostream>
 
 namespace wjp{
 
-    template <int MIN, int MAX>
-    int                      randint(){
-        static std::uniform_int_distribution<unsigned> u(0,9);
-        static std::default_random_engine e((unsigned)time(0));
-        return u(e);
+WorkStealingScheduler::WorkStealingScheduler() 
+{
+    std::vector<WorkStealingWorker> workers{};
+    auto nr_threads=recommended_nr_thread();
+    for(int i=0;i<nr_threads;i++){
+        workers.emplace_back(*this);
     }
+    pool=std::make_unique<FixedThreadPool<WorkStealingWorker>>(workers, WorkStealingRoutine::thread_func); 
+}
+
+
+
+
 
 
 }

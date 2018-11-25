@@ -25,11 +25,13 @@
 
 #pragma once
 
-#include "Common.h"
-
-// Time, Random and other utilities
+#include <thread>
+#include <chrono>
 
 namespace wjp{
+    static inline int recommended_nr_thread(){
+        return std::thread::hardware_concurrency()*2+1;
+    }
 
     static inline void              sleep(int ms)
     {

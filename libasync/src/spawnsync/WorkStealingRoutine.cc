@@ -23,49 +23,17 @@
 * SOFTWARE.
 */
 
-#pragma once
+#include "WorkStealingWorker.h"
+#include "WorkStealingRoutine.h"
+#include <iostream>
 
-#include "FixedThreadPool.h"
-#include "ChaseLevDeque.h"
-#include "SpawnSyncTask.h"
-#include <memory>
+namespace wjp::WorkStealingRoutine{
 
-namespace wjp{
+void thread_func(FixedThreadPool<WorkStealingWorker>& pool, WorkStealingWorker& worker){
+
+}
 
 
-class Scheduler;
-
-// Thread-local data handle
-class Worker{
-public:
-    Worker(Scheduler& scheduler);
-
-private:
-    Scheduler& scheduler;
-};
-
-extern void thread_func(FixedThreadPool& pool, Worker& worker);
-
-class Scheduler{
-public:
-    // Starts running on creation
-    Scheduler() 
-    {
-        auto nr_threads=FixedThreadPool::recommended_nr_thread();
-        for(int i=0;i<nr_threads;i++){
-            workers.emplace_back(*this);
-        }
-        //pool=std::make_unique<FixedThreadPool>(std::ref(workers), thread_func); 
-    }
-    
-    template < class T >
-    std::shared_ptr<SpawnSyncTask<T>> create_task(){
-        return std::make_shared<SpawnSyncTask<T>>(*this);
-    }
-private:
-    std::unique_ptr<FixedThreadPool> pool;
-    std::vector<Worker> workers{};
-};
 
 
 

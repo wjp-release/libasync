@@ -25,37 +25,12 @@ struct A{
 	std::string x;
 };
 
-TEST_F(FixedThreadPoolTOT, CreateAndDelete) {
-	A a("123");
-	FixedThreadPool* pool= new FixedThreadPool(4,[](FixedThreadPool&p,A a){
-		for(int i=0;i<10;i++){
-			//std::cout<<i<<": "<<a.x<<", tid="<<std::this_thread::get_id()<<std::endl;
-			//sleep(300);
-			//std::cout<<"in thread: "<<p.contains_me()<<std::endl;
-		}
-	}, a);
-	EXPECT_EQ(4, pool->nr_threads());
-	delete pool;
-}
-
-
-TEST_F(FixedThreadPoolTOT, Nr) {
-	A a("123");
-	FixedThreadPool* pool= new FixedThreadPool(4,[](FixedThreadPool&p){
-		//std::cout<<"in thread: "<<p.contains_me()<<std::endl;
+TEST_F(FixedThreadPoolTOT, Simulation) {
+	std::vector<int> workers{11,22,33,44,55,66}; //Uses int as thread-local handle
+	FixedThreadPool<int>* pool= new FixedThreadPool<int>(workers,[](FixedThreadPool<int>&p, int i){
+		//std::cout<<p.current_thread_index().value_or(9999)<<std::endl;
 	});
-	//std::cout<<pool->nr_threads();
-	EXPECT_FALSE(pool->contains_me());
-	delete pool;
-}
-
-TEST_F(FixedThreadPoolTOT, Vector) {
-	A a("123");
-	std::vector<int> workers{11,22,33,44,55,66};
-	FixedThreadPool* pool= new FixedThreadPool(workers,[](FixedThreadPool&p, int i){
-		std::cout<<"thread: "<<i<<std::endl;
-	});
-	std::cout<<pool->nr_threads();
+	EXPECT_EQ(pool->nr_threads(),6);
 	delete pool;
 }
 

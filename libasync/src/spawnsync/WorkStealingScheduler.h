@@ -25,16 +25,63 @@
 
 #pragma once
 
-#include <random>
+#include <memory>
+#include <optional>
+#include <vector>
+
+#include "FixedThreadPool.h"
+#include "ChaseLevDeque.h"
+#include "Callable.h"
+#include "ThreadUtilities.h"
+#include "WorkStealingWorker.h"
+#include "WorkStealingRoutine.h"
 
 namespace wjp{
 
-    template <int MIN, int MAX>
-    int                      randint(){
-        static std::uniform_int_distribution<unsigned> u(0,9);
-        static std::default_random_engine e((unsigned)time(0));
-        return u(e);
+class WorkStealingScheduler{
+public:
+    // Starts running on creation
+    WorkStealingScheduler();
+
+    template< class R >
+    class SpawnSyncTask : public Callable<R>{
+    public:
+
+        SpawnSyncTask(WorkStealingScheduler& sched):scheduler(sched)
+        {}
+        
+        void spawn(){
+            auto worker=scheduler.pool->current_thread_handle();
+            if(worker){ //Called from a worker thread
+
+            }else{ //Called from an external thread
+
+            }
+        }
+        void sync(){
+        
+        }
+
+        std::optional<R> get(){
+            sync();
+            return value;
+        }
+
+    private:
+        std::optional<R> value;
+        WorkStealingScheduler& scheduler;
+    };
+
+    template < class R >
+    std::shared_ptr<SpawnSyncTask<R>> create_task(){
+        return std::make_shared<SpawnSyncTask<R>>(*this);
     }
+
+
+private:
+    std::unique_ptr<FixedThreadPool<WorkStealingWorker>> pool;
+};
+
 
 
 }

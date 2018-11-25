@@ -25,16 +25,20 @@
 
 #pragma once
 
-#include <random>
-
 namespace wjp{
 
-    template <int MIN, int MAX>
-    int                      randint(){
-        static std::uniform_int_distribution<unsigned> u(0,9);
-        static std::default_random_engine e((unsigned)time(0));
-        return u(e);
-    }
+class WorkStealingScheduler;
+
+// Thread-local data handle
+class WorkStealingWorker{
+public:
+    WorkStealingWorker(WorkStealingScheduler& scheduler);
+
+private:
+    WorkStealingScheduler& scheduler;
+};
+
+
 
 
 }

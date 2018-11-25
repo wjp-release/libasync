@@ -28,28 +28,25 @@
 #include <memory>
 #include <thread>
 #include <vector>
+#include <unordered_map>
+#include <optional>
+#include <iostream>
 
 namespace wjp {
 
-	// The supplied function must take FixedThreadPool* as its first argument.
+	template < class U >   // U is the type of thread local handle.
 	class FixedThreadPool {
 	public:
-		static int recommended_nr_thread(){
-			return std::thread::hardware_concurrency()*2+1;
-		}
 
+		// Constructs from existing thread-local handles of worker threads.
+		// The given function must take FixedThreadPool* as its first argument, and the thread local handle U& as its second argument. The given vector's ownership will be transferred to this object. 
 		template <class Function, class... Args >
-		FixedThreadPool(int nr_threads, Function&& f, Args&&... args){
-			for(int i=0; i<nr_threads; i++){
-				threads.emplace_back(std::forward<Function>(f), std::ref(*this), std::forward<Args>(args)...);
-			}
-		}
-
-		template <class T, class Function, class... Args >
-		FixedThreadPool(std::vector<T>& x, Function&& f, Args&&... args){
+		FixedThreadPool(std::vector<U>& x, Function&& f, Args&&... args){
 			for(int i=0; i<x.size(); i++){
-				threads.emplace_back(std::forward<Function>(f), std::ref(*this), x[i], std::forward<Args>(args)...);
+				threads.emplace_back(std::forward<Function>(f), std::ref(*this), std::ref(x.at(i)), std::forward<Args>(args)...);
+				tid_to_index[threads[i].get_id()]=i;
 			}
+			thread_local_handles.swap(x);
 		}
 
         ~FixedThreadPool() {
@@ -58,12 +55,20 @@ namespace wjp {
 			}
         }
 
-		bool contains_me(){
+		std::optional<int> current_thread_index(){
 			auto me=std::this_thread::get_id();
-			for(auto& t: threads){
-				if(me==t.get_id()) return true;
+			if(tid_to_index.count(me)) return tid_to_index[me];
+			return {};
+		}
+
+
+		std::optional<std::reference_wrapper<U>> current_thread_handle(){
+			auto index=current_thread_index();
+			if(index){
+				return std::ref(thread_local_handles[index.value()]);
+			}else{
+				return {};
 			}
-			return false;
 		}
 
 		int nr_threads(){
@@ -72,6 +77,8 @@ namespace wjp {
 
     private:
 		std::vector<std::thread> threads {};
+		std::vector<U> thread_local_handles {};
+		std::unordered_map<std::thread::id, int> tid_to_index{};
 	};
 
 }
