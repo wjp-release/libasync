@@ -4,12 +4,12 @@
 
 using namespace wjp;
 
-class WorkStealingSchedTOT : public ::testing::Test {
+class WorkStealingSchedulerTOT : public ::testing::Test {
 protected:
-	WorkStealingSchedTOT() {
+	WorkStealingSchedulerTOT() {
 
 	}
-	virtual ~WorkStealingSchedTOT() {
+	virtual ~WorkStealingSchedulerTOT() {
 
 	}
 	virtual void SetUp() {
@@ -26,12 +26,12 @@ struct A{
 	std::string x;
 };
 
-TEST_F(WorkStealingSchedTOT, SS) {
+TEST_F(WorkStealingSchedulerTOT, SS) {
 
 }
 
 
-TEST_F(WorkStealingSchedTOT, SSS) {
+TEST_F(WorkStealingSchedulerTOT, SSS) {
 
 }
 

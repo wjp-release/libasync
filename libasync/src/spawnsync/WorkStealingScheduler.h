@@ -49,9 +49,15 @@ public:
 
         SpawnSyncTask(WorkStealingScheduler& sched):scheduler(sched)
         {}
+
+        // Note that nullptr_t assignment cannot be inherited, so we need to define it manually. Neither can nullptr_t construtor be inherited, but that makes perfect sense since SpawnSyncTask must have a scheduler reference ever since its construction.
+        SpawnSyncTask& operator=(std::nullptr_t)noexcept{
+		    Callable<R>::operator=(nullptr);
+		    return *this;
+	    }
         
         void spawn(){
-            auto worker=scheduler.pool->current_thread_handle();
+            auto worker=scheduler().pool->current_thread_handle();
             if(worker){ //Called from a worker thread
 
             }else{ //Called from an external thread
@@ -69,7 +75,7 @@ public:
 
     private:
         std::optional<R> value;
-        WorkStealingScheduler& scheduler;
+        std::reference_wrapper<WorkStealingScheduler> scheduler;
     };
 
     template < class R >
