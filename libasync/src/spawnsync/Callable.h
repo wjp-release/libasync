@@ -29,23 +29,35 @@
 
 namespace wjp {
 
-// A copyable wrapper of C++ Callable objects
+// Callable is a container of an invocable object and its arguments.
 template< class R>
 class Callable{
 public:
 	Callable(){}
 	virtual ~Callable(){}
 
-	// template< class F, class... Args, class=std::enable_if_t<std::is_invocable<F, Args...>()> >
-	// Callable(F&& f, Args&&... args ){
-	// 	callable_function = std::bind(std::forward<F>(f), std::forward<Args>(args)...);
-	// }
+	//This constructor takes a non-Callable invocable and its arguments as arguments.
+	template< class F, class... Args, 
+		class=std::enable_if_t<(
+			std::is_invocable<F, Args...>{} &&
+			(!std::is_same<F, Callable<R>>{}) &&
+			(!std::is_same<F, Callable<R>&>{}) &&
+			(!std::is_same<F, Callable<R>&&>{}) 
+		)>>
+	Callable(F&& f, Args&&... args ){
+		callable_function = std::bind(std::forward<F>(f), std::forward<Args>(args)...);
+	}
 
-	template< class F, class... Args, class=std::enable_if_t<(std::is_invocable<F, Args...>())> >
+
+	//Binds any invocable, including Callables.
+	template< class F, class... Args, class=std::enable_if_t<(std::is_invocable<F, Args...>{})>>
 	void bind(F&& f, Args&&... args ){
 		callable_function = std::bind(std::forward<F>(f), std::forward<Args>(args)...);
 	}
 	//Kicks it off
+	R call(){
+		return callable_function();
+	}
 	R operator()(){
 		return callable_function();
 	}

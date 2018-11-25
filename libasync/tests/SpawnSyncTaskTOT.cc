@@ -35,7 +35,7 @@ TEST_F(SpawnSyncTaskTOT, SS) {
 	};
 	auto t = sched.create_task<int>();
 	t->bind(bee{}, 1,2,3);
-	auto x= (*t)();
+	auto x= t->call();
 	EXPECT_EQ(x,123);
 
 }

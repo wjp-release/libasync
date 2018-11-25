@@ -26,8 +26,6 @@
 #pragma once
 #include <functional>
 
-// see http://pfultz2.com/blog/2014/09/05/pipable-functions/
-
 namespace wjp{
 
 template<class F>
