@@ -8,16 +8,16 @@ struct A{
 	std::string x;
 };
 
-class AsyncTOT : public ::testing::Test {
+class UtilitiesTOT : public ::testing::Test {
 protected:
-	AsyncTOT() {}
-	virtual ~AsyncTOT() {}
+	UtilitiesTOT() {}
+	virtual ~UtilitiesTOT() {}
 	virtual void SetUp() {}
 	virtual void TearDown() {}
 };
 
 
-TEST_F(AsyncTOT, SS) {
+TEST_F(UtilitiesTOT, SS) {
 
 
 }
@@ -25,7 +25,7 @@ TEST_F(AsyncTOT, SS) {
 
 
 
-TEST_F(AsyncTOT, SSS) {
+TEST_F(UtilitiesTOT, SSS) {
 
 }
 

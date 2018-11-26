@@ -26,10 +26,10 @@
 #pragma once
 
 #include "FixedThreadPool.h"
+#include "WorkStealingWorker.h"
 
 namespace wjp{
 
-class WorkStealingWorker;
 
 namespace WorkStealingRoutine{
 

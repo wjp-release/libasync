@@ -24,6 +24,7 @@
 */
 
 #include "WorkStealingScheduler.h"
+#include "WorkStealingWorker.h"
 #include <iostream>
 
 namespace wjp{
@@ -38,8 +39,20 @@ WorkStealingScheduler::WorkStealingScheduler()
     pool=std::make_unique<FixedThreadPool<WorkStealingWorker>>(workers, WorkStealingRoutine::thread_func); 
 }
 
-
-
+std::reference_wrapper<WorkStealingWorker> WorkStealingScheduler::submit(std::shared_ptr<Task> task)
+{
+    auto worker=pool->current_thread_handle();
+    if(worker){ //Called from a worker thread, push to its deque
+        WorkStealingWorker& w=worker.value().get();
+        w.deque->push(task);
+        return worker.value();
+    }else{ //Called from an external thread, push to a randomly picked worker's submission buffer
+        std::reference_wrapper<WorkStealingWorker> submission_target=pool->randomly_pick_one();
+        WorkStealingWorker& w=submission_target.get();
+        w.buffer->submit(task);
+        return submission_target;
+    }
+}
 
 
 

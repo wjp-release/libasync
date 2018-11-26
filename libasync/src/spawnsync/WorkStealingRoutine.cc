@@ -23,7 +23,6 @@
 * SOFTWARE.
 */
 
-#include "WorkStealingWorker.h"
 #include "WorkStealingRoutine.h"
 #include <iostream>
 

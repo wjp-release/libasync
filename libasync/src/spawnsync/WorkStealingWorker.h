@@ -26,17 +26,19 @@
 #pragma once
 
 #include <functional>
+#include <memory>
+
+#include "ChaseLevDeque.h"
+#include "SubmissionBuffer.h"
+#include "Task.h"
 
 namespace wjp{
-
 class WorkStealingScheduler;
-
 // Thread-local data handle
-class WorkStealingWorker{
-public:
+struct WorkStealingWorker{
     WorkStealingWorker(WorkStealingScheduler& scheduler);
-
-private:
+    std::unique_ptr<ChaseLevDeque<Task>> deque;
+    std::unique_ptr<SubmissionBuffer<Task>> buffer;
     std::reference_wrapper<WorkStealingScheduler> scheduler;
 };
 

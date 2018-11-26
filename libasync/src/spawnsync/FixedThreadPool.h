@@ -32,6 +32,8 @@
 #include <optional>
 #include <iostream>
 
+#include "RandomUtilities.h"
+
 namespace wjp {
 
 	template < class U >   // U is the type of thread local handle.
@@ -69,6 +71,11 @@ namespace wjp {
 			}else{
 				return {};
 			}
+		}
+
+		std::reference_wrapper<U> randomly_pick_one(){
+			int index=randinteger(0, threads.size()-1);
+			return std::ref(thread_local_handles[index]);
 		}
 
 		int nr_threads(){

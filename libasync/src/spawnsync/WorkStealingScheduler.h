@@ -28,60 +28,108 @@
 #include <memory>
 #include <optional>
 #include <vector>
+#include <mutex>
+#include <condition_variable>
 
 #include "FixedThreadPool.h"
 #include "ChaseLevDeque.h"
 #include "Callable.h"
 #include "ThreadUtilities.h"
-#include "WorkStealingWorker.h"
 #include "WorkStealingRoutine.h"
+#include "Task.h"
 
 namespace wjp{
 
+struct WorkStealingWorker;
 class WorkStealingScheduler{
 public:
-    // Starts running on creation
+    // Starts running on creation.
     WorkStealingScheduler();
+    // The reference of WorkStealingWorker is returned as a hint to help cancellation.
+    std::reference_wrapper<WorkStealingWorker> submit(std::shared_ptr<Task>); 
 
     template< class R >
-    class Task : public Callable<R>{
+    class FuturisticTask : public Task, public Callable<R> {
     public:
-        Task(WorkStealingScheduler& sched):scheduler(sched)
+        FuturisticTask(WorkStealingScheduler& sched):scheduler(sched)
         {}
 
-        // Note that nullptr_t assignment cannot be inherited, so we need to define it manually. Neither can nullptr_t construtor be inherited, but that makes perfect sense since Task must have a scheduler reference ever since its construction. 
-        Task& operator=(std::nullptr_t)noexcept{
+        // Note that nullptr_t assignment cannot be inherited, so we need to define it manually. Neither can nullptr_t construtor be inherited, but that makes perfect sense since FuturisticTask must have a scheduler reference ever since its construction. 
+        FuturisticTask& operator=(std::nullptr_t)noexcept{
 		    Callable<R>::operator=(nullptr);
 		    return *this;
 	    }
         
-        void spawn(){
-            auto worker=scheduler().pool->current_thread_handle();
-            if(worker){ //Called from a worker thread
-
-            }else{ //Called from an external thread
-
-            }
+        // Pushes this task to work deque or submission buffer
+        void submit(){
+            std::shared_ptr<Task> task=shared_from_this();
+            scheduler().submit(task);
         }
-        void sync(){
+
+        // Blocks the calling thread until this task finishes
+        virtual void wait() override{ 
+            std::unique_lock<std::mutex> lk(sync.mtx);
+			sync.cv.wait(lk, [this]{return finished;});
+        }
         
+        // Blocks the calling thread until this task finishes or timeout
+        virtual void wait(std::chrono::milliseconds timeout) override{
+            std::unique_lock<std::mutex> lk(sync.mtx);
+			sync.cv.wait_for(lk, timeout, [this]{return finished;});
         }
 
-        std::optional<R> get(){
-            sync();
-            return value;
+        virtual bool is_finished() const noexcept override{
+            return finished;
+        }
+
+        // A future-like interface to get fulfilled value or rejected reason
+        std::optional<R> get(){ 
+            wait();
+            if(reason){
+                 std::rethrow_exception(reason);
+            }
+            return value; // Could be empty if error happens during execution
+        }
+
+        // Does not throw. Get an empty value on failure.
+        std::optional<R> get_quietly(){ 
+            wait();
+            return value; // Could be empty if error happens during execution
+        }
+
+
+        // Set value if the underlying task routine successfully executed. Note that it is not supposed to be called directly by user code. 
+        void execute(){
+            try{
+                value=this->call();
+            }catch(...){
+                reason=std::current_exception();
+            }
+            finished=true;
+            sync.cv.notify_all(); 
         }
 
     private:
-        std::optional<R> value;
-        // Every copy/move constructor or assignment operator of Callable<R> is perfectly inherited and implicitly declared in Task since this class meets all the requirements for the compiler to do so.
-        // That's why scheduler has to be wrapped.
+        bool finished;
+        // Sync is a copy/move constructible & copy/move assignable collection of data members that should not actually be copied or move, e.g., mutex and convars. By doing this trick, the FuturisticTask class can reuse Callable's copy/move constructors and assignment operators.
+        struct Sync{ 
+            Sync(){} 
+            Sync(const Sync& s){} // Do not copy
+            Sync(Sync&& s){} // Do not move
+            Sync& operator=(Sync&& s){return *this;} // Do not move
+            Sync& operator=(const Sync&s){return *this;} // Do not copy
+            mutable std::mutex mtx; 
+            mutable std::condition_variable cv;  // Notified on finished
+        };
+        mutable Sync sync; 
+        std::optional<R> value; // Default: nullopt
+        std::exception_ptr reason; // Default: nullptr
         std::reference_wrapper<WorkStealingScheduler> scheduler;
     };
 
     template < class R >
-    std::shared_ptr<Task<R>> create_task(){
-        return std::make_shared<Task<R>>(*this);
+    std::shared_ptr<FuturisticTask<R>> create_futuristic_task(){
+        return std::make_shared<FuturisticTask<R>>(*this);
     }
 
 

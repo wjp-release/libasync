@@ -116,11 +116,10 @@ TEST_F(ChaseLevDequeTOT, StealerRace) {
 			std::string res="thread"+std::to_string(i)+": ";
 			for(int k=0;k<100;k++){
 				auto x=q->steal();
+				sleep(randint<1,2>());
 				if(x==nullptr){
-					sleep(randint<1000,3000>());
 					continue;
 				}
-				sleep(randint<3000,4000>());
 				count++;
 				int tmp=std::stoi(x->x);
 				res+=x->x+",";
@@ -133,7 +132,6 @@ TEST_F(ChaseLevDequeTOT, StealerRace) {
     {
         std::cout<<tasks[i].get()<<std::endl;
     }
-	sleep(300);
 	EXPECT_EQ(count, 100);
 }
 

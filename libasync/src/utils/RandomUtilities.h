@@ -31,7 +31,13 @@ namespace wjp{
 
     template <int MIN, int MAX>
     int                      randint(){
-        static std::uniform_int_distribution<unsigned> u(0,9);
+        static std::uniform_int_distribution<unsigned> u(MIN,MAX);
+        static std::default_random_engine e((unsigned)time(0));
+        return u(e);
+    }
+
+    static inline int        randinteger(int min, int max){
+        std::uniform_int_distribution<unsigned> u(min,max);
         static std::default_random_engine e((unsigned)time(0));
         return u(e);
     }

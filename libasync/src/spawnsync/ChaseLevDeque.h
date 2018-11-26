@@ -44,7 +44,7 @@ class ChaseLevDeque
 {
 public:
     // ChaseLevDeque takes log2(capacity) as argument to guarantee that its capacity is power of 2. 
-    ChaseLevDeque(int log2capacity=13)  :   top((uint64_t)1<<(log2capacity-1)), 
+    ChaseLevDeque(int log2capacity=10)  :   top((uint64_t)1<<(log2capacity-1)), 
                                             bottom((uint64_t)1<<(log2capacity-1)),
                                             array(new SharedPointerArray((uint64_t)1<<log2capacity))
     {}

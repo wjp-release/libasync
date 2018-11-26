@@ -29,8 +29,10 @@
 
 namespace wjp{
 
-WorkStealingWorker::WorkStealingWorker(WorkStealingScheduler&scheduler) : scheduler(scheduler){
-
+WorkStealingWorker::WorkStealingWorker(WorkStealingScheduler&scheduler) : 
+        scheduler(scheduler), 
+        deque(std::make_unique<ChaseLevDeque<Task>>()), 
+        buffer(std::make_unique<SubmissionBuffer<Task>>()){
 
 }
 
