@@ -29,15 +29,36 @@
 
 namespace wjp{
 
-WorkStealingWorker::WorkStealingWorker(WorkStealingScheduler&scheduler) : 
+    WorkStealingWorker::WorkStealingWorker(WorkStealingScheduler&scheduler) : 
         scheduler(scheduler), 
         deque(std::make_unique<ChaseLevDeque<Task>>()), 
-        buffer(std::make_unique<SubmissionBuffer<Task>>()){
+        buffer(std::make_unique<SubmissionBuffer<Task>>()){}
+    
+    void WorkStealingWorker::push_to_deque(std::shared_ptr<Task> task){
+        std::cout<<"pushed to worker"<<index<<"'s deque.\n";
+        deque->push(task);
+    }
 
-}
+    void WorkStealingWorker::push_to_buffer(std::shared_ptr<Task> task){
+        buffer->submit(task);
+    }
 
-
-
+    void WorkStealingWorker::routine(){
+        auto task=scan_next_task(); //Take a task from local deque or steal one
+        if(task==nullptr){ //Cannot find any task to run, check if it has been idle for too long. 
+            if(!when_idle_begins.has_value()){ //Has always been busy
+                when_idle_begins=now(); //Becomes idle
+            }else{ //Has been idle before
+                if(idle_for_too_long()){ //Idle timeout, seems unnecessary to busy spin any more, should block
+                    block();
+                }
+            }
+        }else{ //Task found
+            std::cout<<"worker"<<index<<" executes a task!"<<std::endl; 
+            when_idle_begins.reset(); //Becomes busy
+            task->execute(); //Finish the task and wake up threads waiting for it.
+        }
+    }
 
 
 }

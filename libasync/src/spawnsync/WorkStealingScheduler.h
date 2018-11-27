@@ -47,6 +47,9 @@ public:
     WorkStealingScheduler();
     // The reference of WorkStealingWorker is returned as a hint to help cancellation.
     std::reference_wrapper<WorkStealingWorker> submit(std::shared_ptr<Task>); 
+    int current_thread_index()const{
+        return pool->current_thread_index().value_or(-1);
+    }
 
     template< class R >
     class FuturisticTask : public Task, public Callable<R> {
@@ -63,7 +66,7 @@ public:
         // Pushes this task to work deque or submission buffer
         void submit(){
             std::shared_ptr<Task> task=shared_from_this();
-            scheduler().submit(task);
+            scheduler.get().submit(task);
         }
 
         // Blocks the calling thread until this task finishes

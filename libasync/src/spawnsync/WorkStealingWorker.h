@@ -42,36 +42,14 @@ class WorkStealingWorker{
 public:
 	constexpr static auto idle_timeout=3s;  
     WorkStealingWorker(WorkStealingScheduler& scheduler);
-
-    void routine(int index_of_me){
-        auto task=scan_next_task(); //Take a task from local deque or steal one
-        if(task==nullptr){ //Cannot find any task to run, check if it has been idle for too long. 
-            if(!when_idle_begins.has_value()){ //Has always been busy
-                when_idle_begins=now(); //Becomes idle
-            }else{ //Has been idle before
-                if(idle_for_too_long()){ //Idle timeout, seems unnecessary to busy spin any more, should block
-                    block();
-                }
-            }
-        }else{ //Task found
-            #ifdef WJPTEST
-            std::cout<<"worker"<<index_of_me<<" executes a task!"<<std::endl; 
-            #endif
-            when_idle_begins.reset(); //Becomes busy
-            task->execute(); //Finish the task and wake up threads waiting for it.
-        }
-    }
-
-    void push_to_deque(std::shared_ptr<Task> task){
-        deque->push(task);
-    }
-    void push_to_buffer(std::shared_ptr<Task> task){
-        buffer->submit(task);
-    }
-
+    void routine();
+    void push_to_deque(std::shared_ptr<Task> task);
+    void push_to_buffer(std::shared_ptr<Task> task);
+    void set_index(int i){index=i;}
 protected:
     void block(){
         //todo!!!! wait
+        std::cout<<"worker"<<index<<" idle!"<<std::endl;
         when_idle_begins.reset(); 
     }
     //Precondition: when_idle_begins has value
@@ -79,10 +57,12 @@ protected:
         return ms_elapsed(when_idle_begins.value())  >  idle_timeout ;
     }
     std::shared_ptr<Task> scan_next_task(){
-        auto task=deque->take();
+        //auto task=deque->take();  //test!
+        auto task=buffer->steal();
         if(task==nullptr){
             return steal_a_task();
         }else{
+            std::cout<<"\nworker"<<index<<" found a task!!\n";
             return task;
         }
     }
@@ -90,7 +70,8 @@ protected:
         //@todo!!!!
         return nullptr;
     }
-private:
+private:    
+    int index=-1;
     std::unique_ptr<ChaseLevDeque<Task>> deque;
     std::unique_ptr<SubmissionBuffer<Task>> buffer;
     std::reference_wrapper<WorkStealingScheduler> scheduler;
