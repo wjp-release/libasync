@@ -46,14 +46,13 @@ std::reference_wrapper<WorkStealingWorker> WorkStealingScheduler::submit(std::sh
     auto worker=pool->current_thread_handle();
     if(worker){ //Called from a worker thread, push to its deque
         WorkStealingWorker& w=worker.value().get();
-        w.deque->push(task);
+        w.push_to_deque(task);
         return worker.value();
     }else{ //Called from an external thread, push to a randomly picked worker's submission buffer
         std::reference_wrapper<WorkStealingWorker> submission_target=pool->randomly_pick_one();
         WorkStealingWorker& w=submission_target.get();
         w.push_to_buffer(task);
         w.push_to_deque(task);  // delete this line, test only!
-        std::cout<<"now we have submitted from an external thread!\n";
         return submission_target;
     }
 }

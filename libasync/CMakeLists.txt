@@ -66,6 +66,7 @@ link_directories(./src)
 add_subdirectory(./src)
 
 if(test STREQUAL "ON")
+		add_compile_definitions(WJPTEST)
     add_subdirectory(googletest) 
     enable_testing()
     add_subdirectory(tests)

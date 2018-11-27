@@ -40,7 +40,7 @@
 
 namespace wjp{
 
-struct WorkStealingWorker;
+class WorkStealingWorker;
 class WorkStealingScheduler{
 public:
     // Starts running on creation.

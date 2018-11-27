@@ -52,12 +52,10 @@ namespace wjp {
 		}
 
         ~FixedThreadPool() {
-			std::cout<<"Start to destroy ThreadPool!\n";
 			terminating=true;  //Thread loop should always check if the pool has terminated
 			for(auto& t : threads){
 				t.join(); 
 			}
-			std::cout<<"ThreadPool Destroyed!\n";
         }
 
 		std::optional<int> current_thread_index()noexcept{
@@ -85,10 +83,7 @@ namespace wjp {
 			return threads.size();
 		}
 
-		bool is_terminating() const noexcept {
-			return terminating;
-		}
-		volatile bool terminating=false;
+		volatile bool terminating=false;  
     private:
 		std::vector<std::thread> threads {};
 		std::vector<U> thread_local_handles {};

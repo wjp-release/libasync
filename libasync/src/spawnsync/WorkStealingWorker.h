@@ -37,15 +37,11 @@
 
 namespace wjp{
 class WorkStealingScheduler;
-// Thread-local data handle
-struct WorkStealingWorker{
+// Thread-local data handle of the worker thead
+class WorkStealingWorker{
+public:
 	constexpr static auto idle_timeout=3s;  
     WorkStealingWorker(WorkStealingScheduler& scheduler);
-    std::unique_ptr<ChaseLevDeque<Task>> deque;
-    std::unique_ptr<SubmissionBuffer<Task>> buffer;
-    std::reference_wrapper<WorkStealingScheduler> scheduler;
-    
-    std::optional<time_point> when_idle_begins; //Busy if empty, idle otherwise. 
 
     void routine(int index_of_me){
         auto task=scan_next_task(); //Take a task from local deque or steal one
@@ -58,7 +54,9 @@ struct WorkStealingWorker{
                 }
             }
         }else{ //Task found
-            std::cout<<"worker"<<index_of_me<<" executes a task!"<<std::endl;
+            #ifdef WJPTEST
+            std::cout<<"worker"<<index_of_me<<" executes a task!"<<std::endl; 
+            #endif
             when_idle_begins.reset(); //Becomes busy
             task->execute(); //Finish the task and wake up threads waiting for it.
         }
@@ -66,16 +64,13 @@ struct WorkStealingWorker{
 
     void push_to_deque(std::shared_ptr<Task> task){
         deque->push(task);
-        std::cout<<"now pushed to deque!\n";
     }
     void push_to_buffer(std::shared_ptr<Task> task){
         buffer->submit(task);
-        std::cout<<"now pushed to buffer!\n";
     }
 
-private:
+protected:
     void block(){
-        std::cout<<"idle timeout, block!\n";
         //todo!!!! wait
         when_idle_begins.reset(); 
     }
@@ -95,8 +90,11 @@ private:
         //@todo!!!!
         return nullptr;
     }
-
-
+private:
+    std::unique_ptr<ChaseLevDeque<Task>> deque;
+    std::unique_ptr<SubmissionBuffer<Task>> buffer;
+    std::reference_wrapper<WorkStealingScheduler> scheduler;
+    std::optional<time_point> when_idle_begins; //Busy if empty, idle otherwise. 
 };
 
 
