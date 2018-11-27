@@ -46,7 +46,7 @@ namespace wjp {
 		FixedThreadPool(std::vector<U>& x, Function&& f, Args&&... args){
 			for(int i=0; i<x.size(); i++){
 				threads.emplace_back(std::forward<Function>(f), std::ref(*this), std::ref(x.at(i)), std::forward<Args>(args)...);
-				tid_to_index[threads[i].get_id()]=i;
+				// tid_to_index[threads[i].get_id()]=i;
 			}
 			thread_local_handles.swap(x);
 		}
@@ -60,13 +60,13 @@ namespace wjp {
 			std::cout<<"ThreadPool Destroyed\n";
         }
 
-		std::optional<int> current_thread_index()const noexcept{
-			auto me=std::this_thread::get_id();
-			if(tid_to_index.count(me)) return tid_to_index.at(me);
-			return {};
-		}
+		// std::optional<int> find_currrent_thread_index()const noexcept{
+		// 	auto me=std::this_thread::get_id();
+		// 	if(tid_to_index.count(me)) return tid_to_index.at(me);
+		// 	return {};
+		// }
 
-		std::optional<int> find_currrent_thread_index()const noexcept{
+		std::optional<int> current_thread_index()const noexcept{
 			auto me=std::this_thread::get_id();
 			for(int i=0;i<threads.size();i++){
 				if(threads[i].get_id()==me)return i;
@@ -99,7 +99,7 @@ namespace wjp {
     private:
 		std::vector<std::thread> threads {};
 		std::vector<U> thread_local_handles {};
-		std::unordered_map<std::thread::id, int> tid_to_index{};
+		//std::unordered_map<std::thread::id, int> tid_to_index{};
 	};
 
 }

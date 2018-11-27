@@ -36,16 +36,15 @@
 #include "TimeUtilities.h"
 
 namespace wjp{
-class WorkStealingScheduler;
+class WorkStealingWorkerPool;
 // Thread-local data handle of the worker thead
 class WorkStealingWorker{
 public:
 	constexpr static auto idle_timeout=3s;  
-    WorkStealingWorker(WorkStealingScheduler& scheduler);
+    WorkStealingWorker(WorkStealingWorkerPool& pool, int index);
     void routine();
     void push_to_deque(std::shared_ptr<Task> task);
     void push_to_buffer(std::shared_ptr<Task> task);
-    void set_index(int i){index=i;}
 protected:
     void block(){
         //todo!!!! wait
@@ -71,10 +70,10 @@ protected:
         return nullptr;
     }
 private:    
-    int index=-1;
+    int index=-2;
     std::unique_ptr<ChaseLevDeque<Task>> deque;
     std::unique_ptr<SubmissionBuffer<Task>> buffer;
-    std::reference_wrapper<WorkStealingScheduler> scheduler;
+    std::reference_wrapper<WorkStealingWorkerPool> pool;
     std::optional<time_point> when_idle_begins; //Busy if empty, idle otherwise. 
 };
 

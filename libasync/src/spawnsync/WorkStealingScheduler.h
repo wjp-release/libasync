@@ -31,11 +31,10 @@
 #include <mutex>
 #include <condition_variable>
 
-#include "FixedThreadPool.h"
+#include "WorkStealingWorkerPool.h"
 #include "ChaseLevDeque.h"
 #include "Callable.h"
 #include "ThreadUtilities.h"
-#include "WorkStealingRoutine.h"
 #include "Task.h"
 
 namespace wjp{
@@ -137,7 +136,7 @@ public:
 
 
 private:
-    std::unique_ptr<FixedThreadPool<WorkStealingWorker>> pool;
+    std::unique_ptr<WorkStealingWorkerPool> pool;
 };
 
 

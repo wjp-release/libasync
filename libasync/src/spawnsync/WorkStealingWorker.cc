@@ -23,14 +23,13 @@
 * SOFTWARE.
 */
 
-#include "WorkStealingScheduler.h"
 #include "WorkStealingWorker.h"
 #include <iostream>
 
 namespace wjp{
 
-    WorkStealingWorker::WorkStealingWorker(WorkStealingScheduler&scheduler) : 
-        scheduler(scheduler), 
+    WorkStealingWorker::WorkStealingWorker(WorkStealingWorkerPool& pool, int index) : 
+        index(index), pool(pool), 
         deque(std::make_unique<ChaseLevDeque<Task>>()), 
         buffer(std::make_unique<SubmissionBuffer<Task>>()){}
     

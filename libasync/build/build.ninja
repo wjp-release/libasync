@@ -164,12 +164,6 @@ build src/spawnsync/test: phony src/spawnsync/CMakeFiles/test.util
 # Order-only phony target for spawnsync
 
 build cmake_object_order_depends_target_spawnsync: phony || src/spawnsync/CMakeFiles/spawnsync.dir
-build src/spawnsync/CMakeFiles/spawnsync.dir/WorkStealingRoutine.cc.o: CXX_COMPILER__spawnsync ../src/spawnsync/WorkStealingRoutine.cc || cmake_object_order_depends_target_spawnsync
-  DEP_FILE = src/spawnsync/CMakeFiles/spawnsync.dir/WorkStealingRoutine.cc.o.d
-  FLAGS = -std=c++17 -fPIC  -O0 -Wall -g2 -ggdb -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk   -std=gnu++1z
-  INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src
-  OBJECT_DIR = src/spawnsync/CMakeFiles/spawnsync.dir
-  OBJECT_FILE_DIR = src/spawnsync/CMakeFiles/spawnsync.dir
 build src/spawnsync/CMakeFiles/spawnsync.dir/WorkStealingScheduler.cc.o: CXX_COMPILER__spawnsync ../src/spawnsync/WorkStealingScheduler.cc || cmake_object_order_depends_target_spawnsync
   DEP_FILE = src/spawnsync/CMakeFiles/spawnsync.dir/WorkStealingScheduler.cc.o.d
   FLAGS = -std=c++17 -fPIC  -O0 -Wall -g2 -ggdb -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk   -std=gnu++1z
@@ -182,6 +176,12 @@ build src/spawnsync/CMakeFiles/spawnsync.dir/WorkStealingWorker.cc.o: CXX_COMPIL
   INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src
   OBJECT_DIR = src/spawnsync/CMakeFiles/spawnsync.dir
   OBJECT_FILE_DIR = src/spawnsync/CMakeFiles/spawnsync.dir
+build src/spawnsync/CMakeFiles/spawnsync.dir/WorkStealingWorkerPool.cc.o: CXX_COMPILER__spawnsync ../src/spawnsync/WorkStealingWorkerPool.cc || cmake_object_order_depends_target_spawnsync
+  DEP_FILE = src/spawnsync/CMakeFiles/spawnsync.dir/WorkStealingWorkerPool.cc.o.d
+  FLAGS = -std=c++17 -fPIC  -O0 -Wall -g2 -ggdb -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk   -std=gnu++1z
+  INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src
+  OBJECT_DIR = src/spawnsync/CMakeFiles/spawnsync.dir
+  OBJECT_FILE_DIR = src/spawnsync/CMakeFiles/spawnsync.dir
 
 # =============================================================================
 # Link build statements for STATIC_LIBRARY target spawnsync
@@ -190,7 +190,7 @@ build src/spawnsync/CMakeFiles/spawnsync.dir/WorkStealingWorker.cc.o: CXX_COMPIL
 #############################################
 # Link the static library src/spawnsync/libspawnsync.a
 
-build src/spawnsync/libspawnsync.a: CXX_STATIC_LIBRARY_LINKER__spawnsync src/spawnsync/CMakeFiles/spawnsync.dir/WorkStealingRoutine.cc.o src/spawnsync/CMakeFiles/spawnsync.dir/WorkStealingScheduler.cc.o src/spawnsync/CMakeFiles/spawnsync.dir/WorkStealingWorker.cc.o
+build src/spawnsync/libspawnsync.a: CXX_STATIC_LIBRARY_LINKER__spawnsync src/spawnsync/CMakeFiles/spawnsync.dir/WorkStealingScheduler.cc.o src/spawnsync/CMakeFiles/spawnsync.dir/WorkStealingWorker.cc.o src/spawnsync/CMakeFiles/spawnsync.dir/WorkStealingWorkerPool.cc.o
   ARCH_FLAGS = -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk
   LANGUAGE_COMPILE_FLAGS = -std=c++17 -fPIC  -O0 -Wall -g2 -ggdb
   OBJECT_DIR = src/spawnsync/CMakeFiles/spawnsync.dir
