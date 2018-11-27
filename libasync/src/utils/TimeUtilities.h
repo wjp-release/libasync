@@ -28,15 +28,25 @@
 #include <chrono>
 
 namespace wjp{
-
+    using namespace std::chrono_literals;
     using days = std::chrono::duration<int, std::ratio<3600*24,1>>;
     using time_point = std::chrono::high_resolution_clock::time_point;
 
-    static inline time_point        now()
+    static inline time_point now()
     {
         return std::chrono::high_resolution_clock::now();
     }
     
+    template <class Rep, class Period>
+    constexpr std::chrono::milliseconds to_ms(const std::chrono::duration<Rep,Period>& d){
+        return std::chrono::duration_cast<std::chrono::milliseconds>(d);
+    }
+
+    template <class Rep, class Period>
+    constexpr std::chrono::seconds to_sec(const std::chrono::duration<Rep,Period>& d){
+        return std::chrono::duration_cast<std::chrono::seconds>(d);
+    }
+
     static inline int64_t duration_ms_count(time_point start, time_point end)
     {
         return std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();

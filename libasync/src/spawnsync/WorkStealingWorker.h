@@ -27,19 +27,28 @@
 
 #include <functional>
 #include <memory>
+#include <chrono>
 
 #include "ChaseLevDeque.h"
 #include "SubmissionBuffer.h"
 #include "Task.h"
+#include "TimeUtilities.h"
 
 namespace wjp{
 class WorkStealingScheduler;
 // Thread-local data handle
 struct WorkStealingWorker{
+    //constexpr static auto idle_timeout=10s;  
     WorkStealingWorker(WorkStealingScheduler& scheduler);
     std::unique_ptr<ChaseLevDeque<Task>> deque;
     std::unique_ptr<SubmissionBuffer<Task>> buffer;
     std::reference_wrapper<WorkStealingScheduler> scheduler;
+    
+
+    std::shared_ptr<Task> find_next_task(){
+
+
+    }
 };
 
 

@@ -29,7 +29,12 @@
 namespace wjp::WorkStealingRoutine{
 
 void thread_func(FixedThreadPool<WorkStealingWorker>& pool, WorkStealingWorker& worker){
+    // while(pool.is_terminating()){
+    //     auto task=worker.find_next_task();
+    //     if(task==nullptr){ 
 
+    //     }
+    // }
 }
 
 

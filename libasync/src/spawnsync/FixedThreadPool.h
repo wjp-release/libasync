@@ -52,19 +52,20 @@ namespace wjp {
 		}
 
         ~FixedThreadPool() {
+			terminating=true;  //Thread loop should always check if the pool has terminated
 			for(auto& t : threads){
 				t.join();
 			}
         }
 
-		std::optional<int> current_thread_index(){
+		std::optional<int> current_thread_index()noexcept{
 			auto me=std::this_thread::get_id();
 			if(tid_to_index.count(me)) return tid_to_index[me];
 			return {};
 		}
 
 
-		std::optional<std::reference_wrapper<U>> current_thread_handle(){
+		std::optional<std::reference_wrapper<U>> current_thread_handle()noexcept{
 			auto index=current_thread_index();
 			if(index){
 				return std::ref(thread_local_handles[index.value()]);
@@ -73,16 +74,20 @@ namespace wjp {
 			}
 		}
 
-		std::reference_wrapper<U> randomly_pick_one(){
+		std::reference_wrapper<U> randomly_pick_one()noexcept{
 			int index=randinteger(0, threads.size()-1);
 			return std::ref(thread_local_handles[index]);
 		}
 
-		int nr_threads(){
+		int nr_threads() const noexcept{
 			return threads.size();
 		}
 
+		bool is_terminating() const noexcept {
+			return terminating;
+		}
     private:
+	 	bool terminating=false;
 		std::vector<std::thread> threads {};
 		std::vector<U> thread_local_handles {};
 		std::unordered_map<std::thread::id, int> tid_to_index{};
