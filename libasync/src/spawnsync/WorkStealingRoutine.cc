@@ -29,13 +29,18 @@
 namespace wjp::WorkStealingRoutine{
 
 void thread_func(FixedThreadPool<WorkStealingWorker>& pool, WorkStealingWorker& worker){
+    if(!pool.started){}
     auto index=pool.current_thread_index().value_or(-1); 
-    worker.set_index(index);
-    std::cout<<"worker"<<index<<" starts!\n";
+    auto iterindex=pool.find_currrent_thread_index().value_or(-1);
+    if(index!=iterindex){
+        std::cout<<"index!=iterindex\n";
+    }
+    worker.set_index(iterindex);
+    std::cout<<"worker"<<iterindex<<" starts!\n";
     while(!pool.terminating){
         worker.routine(); 
     }
-    std::cout<<"worker"<<index<<" ends!\n";
+    std::cout<<"worker"<<iterindex<<" ends!\n";
 }
 
 

@@ -66,6 +66,13 @@ namespace wjp {
 			return {};
 		}
 
+		std::optional<int> find_currrent_thread_index()const noexcept{
+			auto me=std::this_thread::get_id();
+			for(int i=0;i<threads.size();i++){
+				if(threads[i].get_id()==me)return i;
+			}
+			return {};
+		}
 
 		std::optional<std::reference_wrapper<U>> current_thread_handle()noexcept{
 			auto index=current_thread_index();
@@ -84,8 +91,11 @@ namespace wjp {
 		int nr_threads() const noexcept{
 			return threads.size();
 		}
-
+		void start()noexcept{
+			started=true;
+		}
 	 	bool terminating=false;  
+		bool started=false;  
     private:
 		std::vector<std::thread> threads {};
 		std::vector<U> thread_local_handles {};

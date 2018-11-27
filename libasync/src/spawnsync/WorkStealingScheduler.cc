@@ -32,13 +32,14 @@ namespace wjp{
 WorkStealingScheduler::WorkStealingScheduler() 
 {
     std::vector<WorkStealingWorker> workers{};
-    //auto nr_threads=recommended_nr_thread();
-    auto nr_threads=2;
+    auto nr_threads=recommended_nr_thread();
+    //auto nr_threads=2;
 
     for(int i=0;i<nr_threads;i++){
         workers.emplace_back(*this);
     }
     pool=std::make_unique<FixedThreadPool<WorkStealingWorker>>(workers, WorkStealingRoutine::thread_func); 
+    pool->start();
 }
 
 std::reference_wrapper<WorkStealingWorker> WorkStealingScheduler::submit(std::shared_ptr<Task> task)
