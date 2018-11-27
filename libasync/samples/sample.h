@@ -26,6 +26,7 @@
 #pragma once
 
 #include <any>
+#include "Internal.h"
 
 namespace wjp{
 
@@ -58,5 +59,20 @@ namespace wjp{
 
 	}
 
+
+    static inline void worksteal(){
+        WorkStealingScheduler scheduler;
+        struct bee{
+            int operator()(int x, int y, int z){
+                return x*100+y*10+z;
+            }
+        };
+        auto w = scheduler.create_futuristic_task<int>();
+        w->bind(bee{}, 1,2,3);
+        scheduler.submit(w);
+        auto res=w->get_quietly();
+        int x=res.value_or(0);
+        std::cout<<"now we get x="<<x<<std::endl;
+    }
 
 }

@@ -28,6 +28,7 @@
 #include <functional>
 #include <memory>
 #include <chrono>
+#include <optional>
 
 #include "ChaseLevDeque.h"
 #include "SubmissionBuffer.h"
@@ -38,17 +39,64 @@ namespace wjp{
 class WorkStealingScheduler;
 // Thread-local data handle
 struct WorkStealingWorker{
-    //constexpr static auto idle_timeout=10s;  
+	constexpr static auto idle_timeout=3s;  
     WorkStealingWorker(WorkStealingScheduler& scheduler);
     std::unique_ptr<ChaseLevDeque<Task>> deque;
     std::unique_ptr<SubmissionBuffer<Task>> buffer;
     std::reference_wrapper<WorkStealingScheduler> scheduler;
     
+    std::optional<time_point> when_idle_begins; //Busy if empty, idle otherwise. 
 
-    std::shared_ptr<Task> find_next_task(){
-
-
+    void routine(int index_of_me){
+        auto task=scan_next_task(); //Take a task from local deque or steal one
+        if(task==nullptr){ //Cannot find any task to run, check if it has been idle for too long. 
+            if(!when_idle_begins.has_value()){ //Has always been busy
+                when_idle_begins=now(); //Becomes idle
+            }else{ //Has been idle before
+                if(idle_for_too_long()){ //Idle timeout, seems unnecessary to busy spin any more, should block
+                    block();
+                }
+            }
+        }else{ //Task found
+            std::cout<<"worker"<<index_of_me<<" executes a task!"<<std::endl;
+            when_idle_begins.reset(); //Becomes busy
+            task->execute(); //Finish the task and wake up threads waiting for it.
+        }
     }
+
+    void push_to_deque(std::shared_ptr<Task> task){
+        deque->push(task);
+        std::cout<<"now pushed to deque!\n";
+    }
+    void push_to_buffer(std::shared_ptr<Task> task){
+        buffer->submit(task);
+        std::cout<<"now pushed to buffer!\n";
+    }
+
+private:
+    void block(){
+        std::cout<<"idle timeout, block!\n";
+        //todo!!!! wait
+        when_idle_begins.reset(); 
+    }
+    //Precondition: when_idle_begins has value
+    bool idle_for_too_long(){
+        return ms_elapsed(when_idle_begins.value())  >  idle_timeout ;
+    }
+    std::shared_ptr<Task> scan_next_task(){
+        auto task=deque->take();
+        if(task==nullptr){
+            return steal_a_task();
+        }else{
+            return task;
+        }
+    }
+    std::shared_ptr<Task> steal_a_task(){
+        //@todo!!!!
+        return nullptr;
+    }
+
+
 };
 
 

@@ -13,12 +13,13 @@ protected:
 
 	}
 	virtual void SetUp() {
-
+		scheduler=new WorkStealingScheduler();
 
 	}
 	virtual void TearDown() {
-
+		delete scheduler;
 	}
+	WorkStealingScheduler* scheduler;
 };
 
 struct A{
@@ -27,11 +28,18 @@ struct A{
 };
 
 TEST_F(WorkStealingSchedulerTOT, SS) {
-
+	struct bee{
+		int operator()(int x, int y, int z){
+			return x*100+y*10+z;
+		}
+	};
+	auto w = scheduler->create_futuristic_task<int>();
+	w->bind(bee{}, 1,2,3);
+	scheduler->submit(w);
+	//auto res=w->get_quietly();
+	//int x=res.value_or(0);
+	//std::cout<<"now we get x="<<x<<std::endl;
+	sleep(11000);
 }
 
-
-TEST_F(WorkStealingSchedulerTOT, SSS) {
-
-}
 

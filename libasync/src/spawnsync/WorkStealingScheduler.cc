@@ -32,7 +32,9 @@ namespace wjp{
 WorkStealingScheduler::WorkStealingScheduler() 
 {
     std::vector<WorkStealingWorker> workers{};
-    auto nr_threads=recommended_nr_thread();
+    //auto nr_threads=recommended_nr_thread();
+    auto nr_threads=2;
+
     for(int i=0;i<nr_threads;i++){
         workers.emplace_back(*this);
     }
@@ -49,7 +51,9 @@ std::reference_wrapper<WorkStealingWorker> WorkStealingScheduler::submit(std::sh
     }else{ //Called from an external thread, push to a randomly picked worker's submission buffer
         std::reference_wrapper<WorkStealingWorker> submission_target=pool->randomly_pick_one();
         WorkStealingWorker& w=submission_target.get();
-        w.buffer->submit(task);
+        w.push_to_buffer(task);
+        w.push_to_deque(task);  // delete this line, test only!
+        std::cout<<"now we have submitted from an external thread!\n";
         return submission_target;
     }
 }

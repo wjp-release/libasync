@@ -31,6 +31,7 @@ namespace wjp {
 	class Task : public std::enable_shared_from_this<Task>  
 	{
     public:
+		virtual void execute()=0;
 		virtual void wait() = 0;
 		virtual void wait(std::chrono::milliseconds timeout) = 0;
 		virtual bool is_finished() const noexcept = 0;  

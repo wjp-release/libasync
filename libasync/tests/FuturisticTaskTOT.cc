@@ -13,12 +13,13 @@ protected:
 
 	}
 	virtual void SetUp() {
-
+		global=new WorkStealingScheduler();
 
 	}
 	virtual void TearDown() {
-
+		delete global;
 	}
+	WorkStealingScheduler* global;
 };
 
 struct A{
@@ -27,13 +28,12 @@ struct A{
 };
 
 TEST_F(FuturisticTaskTOT, CreateAndCall) {
-	WorkStealingScheduler sched;
 	struct bee{
 		int operator()(int x, int y, int z){
 			return x*100+y*10+z;
 		}
 	};
-	auto t = sched.create_futuristic_task<int>();
+	auto t = global->create_futuristic_task<int>();
 	t->bind(bee{}, 1,2,3);
 	auto x= t->call();
 	EXPECT_EQ(x,123);
@@ -41,15 +41,14 @@ TEST_F(FuturisticTaskTOT, CreateAndCall) {
 
 
 TEST_F(FuturisticTaskTOT, Assignment) {
-	WorkStealingScheduler sched;
 	struct bee{
 		int operator()(int x, int y, int z){
 			return x*100+y*10+z;
 		}
 	};
-	auto w = sched.create_futuristic_task<int>();
+	auto w = global->create_futuristic_task<int>();
 	w->bind(bee{}, 1,2,3);
-	auto t = sched.create_futuristic_task<int>();
+	auto t = global->create_futuristic_task<int>();
 	t->bind([](int x, int y){
 				return x+y;
 			},10,20);
@@ -61,21 +60,19 @@ TEST_F(FuturisticTaskTOT, Assignment) {
 	EXPECT_FALSE((bool)copy); // inherited operator bool
 	copy=*w; //assignment operator
 	EXPECT_EQ(copy(), 123);
-	
 }
 
 
 TEST_F(FuturisticTaskTOT, SimulationWait) {
-	WorkStealingScheduler sched;
 	struct bee{
 		int operator()(int x, int y, int z){
 			return x*100+y*10+z;
 		}
 	};
-	auto w = sched.create_futuristic_task<int>();
+	auto w = global->create_futuristic_task<int>();
 	w->bind(bee{}, 1,2,3);
 	std::thread([=]{
-		sleep(300);
+		sleep(30);
 		w->execute();
 	}).detach();
 	w->wait();
@@ -84,15 +81,15 @@ TEST_F(FuturisticTaskTOT, SimulationWait) {
 
 
 TEST_F(FuturisticTaskTOT, SimulationGetSuccess) {
-	WorkStealingScheduler sched;
 	struct bee{
 		int operator()(int x, int y, int z){
 			return x*100+y*10+z;
 		}
 	};
-	auto w = sched.create_futuristic_task<int>();
+	auto w = global->create_futuristic_task<int>();
 	w->bind(bee{}, 1,2,3);
 	std::thread([=]{
+		sleep(30);
 		w->execute();
 	}).detach();
 	auto res=w->get_quietly();
@@ -102,14 +99,13 @@ TEST_F(FuturisticTaskTOT, SimulationGetSuccess) {
 
 
 TEST_F(FuturisticTaskTOT, SimulationGetFailure) {
-	WorkStealingScheduler sched;
 	struct bee{
 		int operator()(int x, int y, int z){
 			if(x==1) throw std::runtime_error("damn x==1!");
 			return x*100+y*10+z;
 		}
 	};
-	auto w = sched.create_futuristic_task<int>();
+	auto w = global->create_futuristic_task<int>();
 	w->bind(bee{}, 1,2,3);
 	std::thread([=]{
 		w->execute(); // will throw "damn x==1!"

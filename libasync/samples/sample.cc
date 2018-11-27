@@ -34,8 +34,10 @@
 using namespace wjp;
 int main()
 {
-	cpplatest();
+	worksteal();
 
-	sleep(3000);
+#ifdef _MSC_VER
+	std::cin.get();
+#endif
 	return 0;
 }

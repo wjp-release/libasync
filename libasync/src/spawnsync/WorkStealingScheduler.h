@@ -99,7 +99,7 @@ public:
 
 
         // Set value if the underlying task routine successfully executed. Note that it is not supposed to be called directly by user code. 
-        void execute(){
+        virtual void execute() override{
             try{
                 value=this->call();
             }catch(...){
