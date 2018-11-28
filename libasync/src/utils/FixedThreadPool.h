@@ -52,12 +52,10 @@ namespace wjp {
 		}
 
         ~FixedThreadPool() {
-			std::cout<<"Start to tear down ThreadPool\n";
 			terminating=true;  //Thread loop should always check if the pool has terminated
 			for(auto& t : threads){
 				t.join(); 
 			}
-			std::cout<<"ThreadPool Destroyed\n";
         }
 
 		// std::optional<int> find_currrent_thread_index()const noexcept{

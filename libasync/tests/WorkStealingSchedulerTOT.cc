@@ -37,7 +37,7 @@ TEST_F(WorkStealingSchedulerTOT, SubmitATaskToASchedulerAndGetItsResult) {
 	w->bind(bee{}, 1,2,3);
 	scheduler->submit(w);
 	auto res=w->get_quietly();
-	int x=res.value_or(0);
+	int x=res.value_or(9999);
 	EXPECT_EQ(x, 123);
 }
 

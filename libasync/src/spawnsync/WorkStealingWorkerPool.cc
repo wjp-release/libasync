@@ -27,5 +27,48 @@
 
 namespace wjp {
 
+WorkStealingWorkerPool::WorkStealingWorkerPool(int nr_workers){
+    for(int i=0; i<nr_workers; i++){
+        workers.emplace_back(*this, i);
+    }
+    for(int i=0; i<nr_workers; i++){
+        threads.emplace_back([this,i]{
+            if(!started){}
+            while(!terminating){
+                workers[i].routine(); 
+            }
+        });
+    }
+}
+
+WorkStealingWorkerPool::~WorkStealingWorkerPool() {
+    terminating=true;  
+    for(auto& t : threads){
+        t.join(); 
+    }
+}
+
+std::optional<int> WorkStealingWorkerPool::current_thread_index()const noexcept{
+    auto me=std::this_thread::get_id();
+    for(int i=0;i<threads.size();i++){
+        if(threads[i].get_id()==me)return i;
+    }
+    return {};
+}
+
+std::optional<std::reference_wrapper<WorkStealingWorker>> WorkStealingWorkerPool::current_thread_handle()noexcept{
+    auto index=current_thread_index();
+    if(index){
+        return std::ref(workers[index.value()]);
+    }else{
+        return {};
+    }
+}
+
+std::reference_wrapper<WorkStealingWorker> WorkStealingWorkerPool::randomly_pick_one()noexcept{
+    int index=randinteger(0, threads.size()-1);
+    return std::ref(workers[index]);
+}
+
 }
 

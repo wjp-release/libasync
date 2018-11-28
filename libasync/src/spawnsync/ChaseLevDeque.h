@@ -30,15 +30,15 @@
 #include <iostream>
 #include "AutoRelease.h"
 
+
+namespace wjp{
+
 // An optimized version of Chase-Lev Work Stealing Deque.
 
 // see https://www.dre.vanderbilt.edu/~schmidt/PDF/work-stealing-dequeue.pdf
 // and https://www.di.ens.fr/~zappa/readings/ppopp13.pdf
 
-
-namespace wjp{
-
-// Tasks are stored in std::shared_ptr<T> 
+// Tasks are stored in std::shared_ptr<T> in ChaseLevDeque<T>
 template <class T>
 class ChaseLevDeque
 {

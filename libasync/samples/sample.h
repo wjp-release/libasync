@@ -70,9 +70,16 @@ namespace wjp{
         auto w = scheduler.create_futuristic_task<int>();
         w->bind(bee{}, 1,2,3);
         scheduler.submit(w);
-        auto res=w->get_quietly();
-        int x=res.value_or(0);
-        std::cout<<"now we get x="<<x<<std::endl;
+        try{
+            auto res=w->get();
+            int x=res.value_or(-100);
+            std::cout<<"now we get x="<<x<<std::endl;
+            assert(x==123);
+        }catch(std::exception& e){
+            std::cerr<<"exception: "<<e.what()<<std::endl;
+        }catch(...){
+            std::cerr<<"unknown exception!"<<std::endl;
+        }
     }
 
 }

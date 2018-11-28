@@ -27,7 +27,7 @@
 
 #include <memory>
 #include <thread>
-#include <vector>
+#include <array>
 #include <unordered_map>
 #include <optional>
 #include <iostream>
@@ -36,66 +36,31 @@
 
 namespace wjp {
 
-	class WorkStealingWorkerPool {
-	public:
-		WorkStealingWorkerPool(int nr_workers){
-			for(int i=0; i<nr_workers; i++){
-				workers.emplace_back(*this, i);
-			}
-			for(int i=0; i<nr_workers; i++){
-				threads.emplace_back([this,i]{
-					if(!started){}
-					while(!terminating){
-						workers[i].routine(); 
-					}
-					std::cout<<"worker"<<i<<" ended!\n";
-				});
-			}
-		}
-
-        ~WorkStealingWorkerPool() {
-			std::cout<<"Start to tear down WorkerPool\n";
-			terminating=true;  //Thread loop should always check if the pool has terminated
-			for(auto& t : threads){
-				t.join(); 
-			}
-			std::cout<<"WorkerPool Destroyed\n";
-        }
-
-		std::optional<int> current_thread_index()const noexcept{
-			auto me=std::this_thread::get_id();
-			for(int i=0;i<threads.size();i++){
-				if(threads[i].get_id()==me)return i;
-			}
-			return {};
-		}
-
-		std::optional<std::reference_wrapper<WorkStealingWorker>> current_thread_handle()noexcept{
-			auto index=current_thread_index();
-			if(index){
-				return std::ref(workers[index.value()]);
-			}else{
-				return {};
-			}
-		}
-
-		std::reference_wrapper<WorkStealingWorker> randomly_pick_one()noexcept{
-			int index=randinteger(0, threads.size()-1);
-			return std::ref(workers[index]);
-		}
-
-		int nr_threads() const noexcept{
-			return threads.size();
-		}
-		void start()noexcept{
-			started=true;
-		}
-	 	bool terminating=false;  
-		bool started=false;  
-    private:
-		std::vector<std::thread> threads {};
-		std::vector<WorkStealingWorker> workers {};
-	};
+class WorkStealingWorkerPool {
+public:
+	// Creates <nr_workers> workers and same number of underlying threads. 
+	// The newly created worker threads are initially blocking until start() is called. 
+	WorkStealingWorkerPool(int nr_workers);
+	// It's a blocking operation that waits until all threads complete an orderly-close.
+	~WorkStealingWorkerPool();
+	// Gets current thread's worker index
+	std::optional<int> current_thread_index()const noexcept;
+	// Gets current thread's worker
+	std::optional<std::reference_wrapper<WorkStealingWorker>> current_thread_handle()noexcept;
+	// Gets a randomly picked worker.
+	std::reference_wrapper<WorkStealingWorker> randomly_pick_one()noexcept;
+	// Gets the number of threads/workers.
+	int nr_threads() const noexcept{return threads.size();}
+	// Kicks it off.
+	void start()noexcept{started=true;}
+	// Shut it down.
+	void terminate()noexcept{terminating=true;}
+private:
+	bool terminating=false;  
+	bool started=false;  
+	std::vector<std::thread> threads; 
+	std::vector<WorkStealingWorker> workers;  
+};
 
 }
 

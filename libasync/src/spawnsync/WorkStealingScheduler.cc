@@ -29,6 +29,7 @@
 
 namespace wjp{
 
+// Kicks it off on construction
 WorkStealingScheduler::WorkStealingScheduler() 
 {
     auto nr_threads=recommended_nr_thread();
@@ -36,18 +37,19 @@ WorkStealingScheduler::WorkStealingScheduler()
     pool->start();
 }
 
+// If called from a worker thread, push the task to its deque, 
+// otherwise, to a randomly picked worker's submission buffer.
 std::reference_wrapper<WorkStealingWorker> WorkStealingScheduler::submit(std::shared_ptr<Task> task)
 {
     auto worker=pool->current_thread_handle();
-    if(worker){ //Called from a worker thread, push to its deque
+    if(worker){ 
         WorkStealingWorker& w=worker.value().get();
-        w.push_to_deque(task);
+        w.spawn(task);
         return worker.value();
-    }else{ //Called from an external thread, push to a randomly picked worker's submission buffer
+    }else{ 
         std::reference_wrapper<WorkStealingWorker> submission_target=pool->randomly_pick_one();
         WorkStealingWorker& w=submission_target.get();
-        w.push_to_buffer(task);
-        w.push_to_deque(task);  // delete this line, test only!
+        w.submit(task);
         return submission_target;
     }
 }

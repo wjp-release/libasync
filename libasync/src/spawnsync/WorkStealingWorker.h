@@ -37,44 +37,40 @@
 
 namespace wjp{
 class WorkStealingWorkerPool;
-// Thread-local data handle of the worker thead
+
+// WorkStealingWorker is structured to exploit spatial locality of LLC.
 class WorkStealingWorker{
 public:
 	constexpr static auto idle_timeout=3s;  
+    // Should only be called from its parent pool.
     WorkStealingWorker(WorkStealingWorkerPool& pool, int index);
-    void routine();
-    void push_to_deque(std::shared_ptr<Task> task);
-    void push_to_buffer(std::shared_ptr<Task> task);
+    // Should only be called from this worker's thread loop.
+    void routine(); 
+    // Should only be called from this worker's thread.
+    void spawn(std::shared_ptr<Task> task){deque->push(task);}
+    // Should only be called from an external non-worker thread. 
+    void submit(std::shared_ptr<Task> task){buffer->submit(task);}
 protected:
-    void block(){
-        //todo!!!! wait
-        std::cout<<"worker"<<index<<" idle!"<<std::endl;
-        when_idle_begins.reset(); 
-    }
-    //Precondition: when_idle_begins has value
-    bool idle_for_too_long(){
-        return ms_elapsed(when_idle_begins.value())  >  idle_timeout ;
-    }
-    std::shared_ptr<Task> scan_next_task(){
-        //auto task=deque->take();  //test!
-        auto task=buffer->steal();
-        if(task==nullptr){
-            return steal_a_task();
-        }else{
-            std::cout<<"\nworker"<<index<<" found a task!!\n";
-            return task;
-        }
-    }
-    std::shared_ptr<Task> steal_a_task(){
-        //@todo!!!!
-        return nullptr;
-    }
+    void becomes_idle(){when_idle_begins=now();} 
+    void becomes_busy(){when_idle_begins.reset();}
+    // Been idle for too long, it seems meaningless busy wait any more.  
+    // Workers with certain index (for example, even index) will not get blocked.
+    // (todo: this should be configurable)
+    void try_to_block();
+    // Returns if this worker has been idle for more than idle_timeout.
+    bool idle_for_too_long();
+    // Tries to take a task from local deque first. Only tries to steal from others if 
+    // local deque is empty. Returns nullptr if no task could be found after 1 iteration.
+    std::shared_ptr<Task> scan_next_task();
+    // Starts from this->index, index++ if current worker has nothing left to steal from. 
+    // Deterministic stealing pattern exploits temporal locality and hardware prefetching. 
+    std::shared_ptr<Task> steal_a_task();
 private:    
-    int index=-2;
     std::unique_ptr<ChaseLevDeque<Task>> deque;
     std::unique_ptr<SubmissionBuffer<Task>> buffer;
     std::reference_wrapper<WorkStealingWorkerPool> pool;
     std::optional<time_point> when_idle_begins; //Busy if empty, idle otherwise. 
+    int index;
 };
 
 

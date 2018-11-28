@@ -112,7 +112,7 @@ public:
         }
 
     private:
-        bool finished;
+        bool finished=false; 
         // Sync is a copy/move constructible & copy/move assignable collection of data members that should not actually be copied or move, e.g., mutex and convars. By doing this trick, the FuturisticTask class can reuse Callable's copy/move constructors and assignment operators.
         struct Sync{ 
             Sync(){} 
