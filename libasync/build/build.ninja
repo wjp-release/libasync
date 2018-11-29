@@ -102,7 +102,7 @@ build src/test: phony src/CMakeFiles/test.util
 build cmake_object_order_depends_target_async: phony || cmake_object_order_depends_target_spawnsync
 build src/CMakeFiles/async.dir/Async.cc.o: CXX_COMPILER__async ../src/Async.cc || cmake_object_order_depends_target_async
   DEP_FILE = src/CMakeFiles/async.dir/Async.cc.o.d
-  FLAGS = -std=c++17 -fPIC  -O0 -Wall -g2 -ggdb -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk   -std=gnu++1z
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk   -std=gnu++1z
   INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src
   OBJECT_DIR = src/CMakeFiles/async.dir
   OBJECT_FILE_DIR = src/CMakeFiles/async.dir
@@ -116,7 +116,7 @@ build src/CMakeFiles/async.dir/Async.cc.o: CXX_COMPILER__async ../src/Async.cc |
 
 build src/libasync.a: CXX_STATIC_LIBRARY_LINKER__async src/CMakeFiles/async.dir/Async.cc.o || src/spawnsync/libspawnsync.a
   ARCH_FLAGS = -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk
-  LANGUAGE_COMPILE_FLAGS = -std=c++17 -fPIC  -O0 -Wall -g2 -ggdb
+  LANGUAGE_COMPILE_FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder
   OBJECT_DIR = src/CMakeFiles/async.dir
   POST_BUILD = :
   PRE_LINK = :
@@ -166,19 +166,19 @@ build src/spawnsync/test: phony src/spawnsync/CMakeFiles/test.util
 build cmake_object_order_depends_target_spawnsync: phony || src/spawnsync/CMakeFiles/spawnsync.dir
 build src/spawnsync/CMakeFiles/spawnsync.dir/WorkStealingScheduler.cc.o: CXX_COMPILER__spawnsync ../src/spawnsync/WorkStealingScheduler.cc || cmake_object_order_depends_target_spawnsync
   DEP_FILE = src/spawnsync/CMakeFiles/spawnsync.dir/WorkStealingScheduler.cc.o.d
-  FLAGS = -std=c++17 -fPIC  -O0 -Wall -g2 -ggdb -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk   -std=gnu++1z
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk   -std=gnu++1z
   INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src
   OBJECT_DIR = src/spawnsync/CMakeFiles/spawnsync.dir
   OBJECT_FILE_DIR = src/spawnsync/CMakeFiles/spawnsync.dir
 build src/spawnsync/CMakeFiles/spawnsync.dir/WorkStealingWorker.cc.o: CXX_COMPILER__spawnsync ../src/spawnsync/WorkStealingWorker.cc || cmake_object_order_depends_target_spawnsync
   DEP_FILE = src/spawnsync/CMakeFiles/spawnsync.dir/WorkStealingWorker.cc.o.d
-  FLAGS = -std=c++17 -fPIC  -O0 -Wall -g2 -ggdb -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk   -std=gnu++1z
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk   -std=gnu++1z
   INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src
   OBJECT_DIR = src/spawnsync/CMakeFiles/spawnsync.dir
   OBJECT_FILE_DIR = src/spawnsync/CMakeFiles/spawnsync.dir
 build src/spawnsync/CMakeFiles/spawnsync.dir/WorkStealingWorkerPool.cc.o: CXX_COMPILER__spawnsync ../src/spawnsync/WorkStealingWorkerPool.cc || cmake_object_order_depends_target_spawnsync
   DEP_FILE = src/spawnsync/CMakeFiles/spawnsync.dir/WorkStealingWorkerPool.cc.o.d
-  FLAGS = -std=c++17 -fPIC  -O0 -Wall -g2 -ggdb -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk   -std=gnu++1z
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk   -std=gnu++1z
   INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src
   OBJECT_DIR = src/spawnsync/CMakeFiles/spawnsync.dir
   OBJECT_FILE_DIR = src/spawnsync/CMakeFiles/spawnsync.dir
@@ -192,12 +192,77 @@ build src/spawnsync/CMakeFiles/spawnsync.dir/WorkStealingWorkerPool.cc.o: CXX_CO
 
 build src/spawnsync/libspawnsync.a: CXX_STATIC_LIBRARY_LINKER__spawnsync src/spawnsync/CMakeFiles/spawnsync.dir/WorkStealingScheduler.cc.o src/spawnsync/CMakeFiles/spawnsync.dir/WorkStealingWorker.cc.o src/spawnsync/CMakeFiles/spawnsync.dir/WorkStealingWorkerPool.cc.o
   ARCH_FLAGS = -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk
-  LANGUAGE_COMPILE_FLAGS = -std=c++17 -fPIC  -O0 -Wall -g2 -ggdb
+  LANGUAGE_COMPILE_FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder
   OBJECT_DIR = src/spawnsync/CMakeFiles/spawnsync.dir
   POST_BUILD = :
   PRE_LINK = :
   TARGET_FILE = src/spawnsync/libspawnsync.a
   TARGET_PDB = spawnsync.a.dbg
+# =============================================================================
+# Write statements declared in CMakeLists.txt:
+# /Users/wjp/Desktop/workspace/libasync/libasync/CMakeLists.txt
+# =============================================================================
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build samples/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /Users/wjp/Desktop/workspace/libasync/libasync/build/samples && /opt/local/bin/cmake -H/Users/wjp/Desktop/workspace/libasync/libasync -B/Users/wjp/Desktop/workspace/libasync/libasync/build
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+build samples/rebuild_cache: phony samples/CMakeFiles/rebuild_cache.util
+
+#############################################
+# Utility command for edit_cache
+
+build samples/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /Users/wjp/Desktop/workspace/libasync/libasync/build/samples && /opt/local/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  DESC = No interactive CMake dialog available...
+  restat = 1
+build samples/edit_cache: phony samples/CMakeFiles/edit_cache.util
+
+#############################################
+# Utility command for test
+
+build samples/CMakeFiles/test.util: CUSTOM_COMMAND
+  COMMAND = cd /Users/wjp/Desktop/workspace/libasync/libasync/build/samples && /opt/local/bin/ctest --force-new-ctest-process
+  DESC = Running tests...
+  pool = console
+  restat = 1
+build samples/test: phony samples/CMakeFiles/test.util
+# =============================================================================
+# Object build statements for EXECUTABLE target sample
+
+
+#############################################
+# Order-only phony target for sample
+
+build cmake_object_order_depends_target_sample: phony || cmake_object_order_depends_target_async cmake_object_order_depends_target_spawnsync
+build samples/CMakeFiles/sample.dir/sample.cc.o: CXX_COMPILER__sample ../samples/sample.cc || cmake_object_order_depends_target_sample
+  DEP_FILE = samples/CMakeFiles/sample.dir/sample.cc.o.d
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk   -std=gnu++1z
+  INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src
+  OBJECT_DIR = samples/CMakeFiles/sample.dir
+  OBJECT_FILE_DIR = samples/CMakeFiles/sample.dir
+
+# =============================================================================
+# Link build statements for EXECUTABLE target sample
+
+
+#############################################
+# Link the executable samples/sample
+
+build samples/sample: CXX_EXECUTABLE_LINKER__sample samples/CMakeFiles/sample.dir/sample.cc.o | src/libasync.a src/spawnsync/libspawnsync.a || src/libasync.a src/spawnsync/libspawnsync.a
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk
+  LINK_LIBRARIES = -Wl,-rpath,/Users/wjp/Desktop/workspace/libasync/libasync/./src src/libasync.a src/spawnsync/libspawnsync.a
+  LINK_PATH = -L/Users/wjp/Desktop/workspace/libasync/libasync/./src
+  OBJECT_DIR = samples/CMakeFiles/sample.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = samples/sample
+  TARGET_PDB = sample.dbg
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
 # /Users/wjp/Desktop/workspace/libasync/libasync/CMakeLists.txt
@@ -242,7 +307,7 @@ build googletest/edit_cache: phony googletest/CMakeFiles/edit_cache.util
 build cmake_object_order_depends_target_gtest_main: phony || cmake_object_order_depends_target_gtest
 build googletest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o: CXX_COMPILER__gtest_main ../googletest/src/gtest_main.cc || cmake_object_order_depends_target_gtest_main
   DEP_FILE = googletest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o.d
-  FLAGS = -std=c++17 -fPIC  -O0 -Wall -g2 -ggdb -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk    -DGTEST_HAS_PTHREAD=1   -std=gnu++1z
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk    -DGTEST_HAS_PTHREAD=1   -std=gnu++1z
   INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
   OBJECT_DIR = googletest/CMakeFiles/gtest_main.dir
   OBJECT_FILE_DIR = googletest/CMakeFiles/gtest_main.dir/src
@@ -256,7 +321,7 @@ build googletest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o: CXX_COMPILER__gt
 
 build lib/libgtest_maind.a: CXX_STATIC_LIBRARY_LINKER__gtest_main googletest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o || lib/libgtestd.a
   ARCH_FLAGS = -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk
-  LANGUAGE_COMPILE_FLAGS = -std=c++17 -fPIC  -O0 -Wall -g2 -ggdb
+  LANGUAGE_COMPILE_FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder
   OBJECT_DIR = googletest/CMakeFiles/gtest_main.dir
   POST_BUILD = :
   PRE_LINK = :
@@ -272,7 +337,7 @@ build lib/libgtest_maind.a: CXX_STATIC_LIBRARY_LINKER__gtest_main googletest/CMa
 build cmake_object_order_depends_target_gtest: phony || googletest/CMakeFiles/gtest.dir
 build googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.o: CXX_COMPILER__gtest ../googletest/src/gtest-all.cc || cmake_object_order_depends_target_gtest
   DEP_FILE = googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.o.d
-  FLAGS = -std=c++17 -fPIC  -O0 -Wall -g2 -ggdb -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk    -DGTEST_HAS_PTHREAD=1   -std=gnu++1z
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk    -DGTEST_HAS_PTHREAD=1   -std=gnu++1z
   INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src -I../googletest/include -I../googletest
   OBJECT_DIR = googletest/CMakeFiles/gtest.dir
   OBJECT_FILE_DIR = googletest/CMakeFiles/gtest.dir/src
@@ -286,7 +351,7 @@ build googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.o: CXX_COMPILER__gtest ..
 
 build lib/libgtestd.a: CXX_STATIC_LIBRARY_LINKER__gtest googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.o
   ARCH_FLAGS = -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk
-  LANGUAGE_COMPILE_FLAGS = -std=c++17 -fPIC  -O0 -Wall -g2 -ggdb
+  LANGUAGE_COMPILE_FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder
   OBJECT_DIR = googletest/CMakeFiles/gtest.dir
   POST_BUILD = :
   PRE_LINK = :
@@ -334,63 +399,69 @@ build tests/test: phony tests/CMakeFiles/test.util
 # Order-only phony target for tests
 
 build cmake_object_order_depends_target_tests: phony || cmake_object_order_depends_target_async cmake_object_order_depends_target_gtest cmake_object_order_depends_target_gtest_main cmake_object_order_depends_target_spawnsync
+build tests/CMakeFiles/tests.dir/ArrayTOT.cc.o: CXX_COMPILER__tests ../tests/ArrayTOT.cc || cmake_object_order_depends_target_tests
+  DEP_FILE = tests/CMakeFiles/tests.dir/ArrayTOT.cc.o.d
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk   -std=gnu++1z
+  INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
+  OBJECT_DIR = tests/CMakeFiles/tests.dir
+  OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
 build tests/CMakeFiles/tests.dir/CallableTOT.cc.o: CXX_COMPILER__tests ../tests/CallableTOT.cc || cmake_object_order_depends_target_tests
   DEP_FILE = tests/CMakeFiles/tests.dir/CallableTOT.cc.o.d
-  FLAGS = -std=c++17 -fPIC  -O0 -Wall -g2 -ggdb -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk   -std=gnu++1z
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk   -std=gnu++1z
   INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
   OBJECT_DIR = tests/CMakeFiles/tests.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
 build tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.o: CXX_COMPILER__tests ../tests/ChaseLevDequeTOT.cc || cmake_object_order_depends_target_tests
   DEP_FILE = tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.o.d
-  FLAGS = -std=c++17 -fPIC  -O0 -Wall -g2 -ggdb -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk   -std=gnu++1z
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk   -std=gnu++1z
   INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
   OBJECT_DIR = tests/CMakeFiles/tests.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
 build tests/CMakeFiles/tests.dir/FixedThreadPoolTOT.cc.o: CXX_COMPILER__tests ../tests/FixedThreadPoolTOT.cc || cmake_object_order_depends_target_tests
   DEP_FILE = tests/CMakeFiles/tests.dir/FixedThreadPoolTOT.cc.o.d
-  FLAGS = -std=c++17 -fPIC  -O0 -Wall -g2 -ggdb -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk   -std=gnu++1z
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk   -std=gnu++1z
   INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
   OBJECT_DIR = tests/CMakeFiles/tests.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
 build tests/CMakeFiles/tests.dir/FuturisticTaskTOT.cc.o: CXX_COMPILER__tests ../tests/FuturisticTaskTOT.cc || cmake_object_order_depends_target_tests
   DEP_FILE = tests/CMakeFiles/tests.dir/FuturisticTaskTOT.cc.o.d
-  FLAGS = -std=c++17 -fPIC  -O0 -Wall -g2 -ggdb -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk   -std=gnu++1z
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk   -std=gnu++1z
   INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
   OBJECT_DIR = tests/CMakeFiles/tests.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
 build tests/CMakeFiles/tests.dir/PipableTOT.cc.o: CXX_COMPILER__tests ../tests/PipableTOT.cc || cmake_object_order_depends_target_tests
   DEP_FILE = tests/CMakeFiles/tests.dir/PipableTOT.cc.o.d
-  FLAGS = -std=c++17 -fPIC  -O0 -Wall -g2 -ggdb -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk   -std=gnu++1z
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk   -std=gnu++1z
   INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
   OBJECT_DIR = tests/CMakeFiles/tests.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
 build tests/CMakeFiles/tests.dir/SpawnSyncTaskTOT.cc.o: CXX_COMPILER__tests ../tests/SpawnSyncTaskTOT.cc || cmake_object_order_depends_target_tests
   DEP_FILE = tests/CMakeFiles/tests.dir/SpawnSyncTaskTOT.cc.o.d
-  FLAGS = -std=c++17 -fPIC  -O0 -Wall -g2 -ggdb -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk   -std=gnu++1z
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk   -std=gnu++1z
   INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
   OBJECT_DIR = tests/CMakeFiles/tests.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
 build tests/CMakeFiles/tests.dir/SubmissionBufferTOT.cc.o: CXX_COMPILER__tests ../tests/SubmissionBufferTOT.cc || cmake_object_order_depends_target_tests
   DEP_FILE = tests/CMakeFiles/tests.dir/SubmissionBufferTOT.cc.o.d
-  FLAGS = -std=c++17 -fPIC  -O0 -Wall -g2 -ggdb -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk   -std=gnu++1z
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk   -std=gnu++1z
   INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
   OBJECT_DIR = tests/CMakeFiles/tests.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
 build tests/CMakeFiles/tests.dir/SystemIntegrationTOT.cc.o: CXX_COMPILER__tests ../tests/SystemIntegrationTOT.cc || cmake_object_order_depends_target_tests
   DEP_FILE = tests/CMakeFiles/tests.dir/SystemIntegrationTOT.cc.o.d
-  FLAGS = -std=c++17 -fPIC  -O0 -Wall -g2 -ggdb -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk   -std=gnu++1z
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk   -std=gnu++1z
   INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
   OBJECT_DIR = tests/CMakeFiles/tests.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
 build tests/CMakeFiles/tests.dir/UtilitiesTOT.cc.o: CXX_COMPILER__tests ../tests/UtilitiesTOT.cc || cmake_object_order_depends_target_tests
   DEP_FILE = tests/CMakeFiles/tests.dir/UtilitiesTOT.cc.o.d
-  FLAGS = -std=c++17 -fPIC  -O0 -Wall -g2 -ggdb -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk   -std=gnu++1z
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk   -std=gnu++1z
   INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
   OBJECT_DIR = tests/CMakeFiles/tests.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
 build tests/CMakeFiles/tests.dir/WorkStealingSchedulerTOT.cc.o: CXX_COMPILER__tests ../tests/WorkStealingSchedulerTOT.cc || cmake_object_order_depends_target_tests
   DEP_FILE = tests/CMakeFiles/tests.dir/WorkStealingSchedulerTOT.cc.o.d
-  FLAGS = -std=c++17 -fPIC  -O0 -Wall -g2 -ggdb -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk   -std=gnu++1z
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk   -std=gnu++1z
   INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
   OBJECT_DIR = tests/CMakeFiles/tests.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
@@ -402,8 +473,8 @@ build tests/CMakeFiles/tests.dir/WorkStealingSchedulerTOT.cc.o: CXX_COMPILER__te
 #############################################
 # Link the executable tests/tests
 
-build tests/tests: CXX_EXECUTABLE_LINKER__tests tests/CMakeFiles/tests.dir/CallableTOT.cc.o tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.o tests/CMakeFiles/tests.dir/FixedThreadPoolTOT.cc.o tests/CMakeFiles/tests.dir/FuturisticTaskTOT.cc.o tests/CMakeFiles/tests.dir/PipableTOT.cc.o tests/CMakeFiles/tests.dir/SpawnSyncTaskTOT.cc.o tests/CMakeFiles/tests.dir/SubmissionBufferTOT.cc.o tests/CMakeFiles/tests.dir/SystemIntegrationTOT.cc.o tests/CMakeFiles/tests.dir/UtilitiesTOT.cc.o tests/CMakeFiles/tests.dir/WorkStealingSchedulerTOT.cc.o | lib/libgtest_maind.a src/libasync.a lib/libgtestd.a src/spawnsync/libspawnsync.a || lib/libgtest_maind.a lib/libgtestd.a src/libasync.a src/spawnsync/libspawnsync.a
-  FLAGS = -std=c++17 -fPIC  -O0 -Wall -g2 -ggdb -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk
+build tests/tests: CXX_EXECUTABLE_LINKER__tests tests/CMakeFiles/tests.dir/ArrayTOT.cc.o tests/CMakeFiles/tests.dir/CallableTOT.cc.o tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.o tests/CMakeFiles/tests.dir/FixedThreadPoolTOT.cc.o tests/CMakeFiles/tests.dir/FuturisticTaskTOT.cc.o tests/CMakeFiles/tests.dir/PipableTOT.cc.o tests/CMakeFiles/tests.dir/SpawnSyncTaskTOT.cc.o tests/CMakeFiles/tests.dir/SubmissionBufferTOT.cc.o tests/CMakeFiles/tests.dir/SystemIntegrationTOT.cc.o tests/CMakeFiles/tests.dir/UtilitiesTOT.cc.o tests/CMakeFiles/tests.dir/WorkStealingSchedulerTOT.cc.o | lib/libgtest_maind.a src/libasync.a lib/libgtestd.a src/spawnsync/libspawnsync.a || lib/libgtest_maind.a lib/libgtestd.a src/libasync.a src/spawnsync/libspawnsync.a
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk
   LINK_LIBRARIES = -Wl,-rpath,/Users/wjp/Desktop/workspace/libasync/libasync/./src lib/libgtest_maind.a src/libasync.a lib/libgtestd.a src/spawnsync/libspawnsync.a
   LINK_PATH = -L/Users/wjp/Desktop/workspace/libasync/libasync/./src
   OBJECT_DIR = tests/CMakeFiles/tests.dir
@@ -411,71 +482,6 @@ build tests/tests: CXX_EXECUTABLE_LINKER__tests tests/CMakeFiles/tests.dir/Calla
   PRE_LINK = :
   TARGET_FILE = tests/tests
   TARGET_PDB = tests.dbg
-# =============================================================================
-# Write statements declared in CMakeLists.txt:
-# /Users/wjp/Desktop/workspace/libasync/libasync/CMakeLists.txt
-# =============================================================================
-
-
-#############################################
-# Utility command for rebuild_cache
-
-build samples/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /Users/wjp/Desktop/workspace/libasync/libasync/build/samples && /opt/local/bin/cmake -H/Users/wjp/Desktop/workspace/libasync/libasync -B/Users/wjp/Desktop/workspace/libasync/libasync/build
-  DESC = Running CMake to regenerate build system...
-  pool = console
-  restat = 1
-build samples/rebuild_cache: phony samples/CMakeFiles/rebuild_cache.util
-
-#############################################
-# Utility command for edit_cache
-
-build samples/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /Users/wjp/Desktop/workspace/libasync/libasync/build/samples && /opt/local/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-  DESC = No interactive CMake dialog available...
-  restat = 1
-build samples/edit_cache: phony samples/CMakeFiles/edit_cache.util
-
-#############################################
-# Utility command for test
-
-build samples/CMakeFiles/test.util: CUSTOM_COMMAND
-  COMMAND = cd /Users/wjp/Desktop/workspace/libasync/libasync/build/samples && /opt/local/bin/ctest --force-new-ctest-process
-  DESC = Running tests...
-  pool = console
-  restat = 1
-build samples/test: phony samples/CMakeFiles/test.util
-# =============================================================================
-# Object build statements for EXECUTABLE target sample
-
-
-#############################################
-# Order-only phony target for sample
-
-build cmake_object_order_depends_target_sample: phony || cmake_object_order_depends_target_async cmake_object_order_depends_target_spawnsync
-build samples/CMakeFiles/sample.dir/sample.cc.o: CXX_COMPILER__sample ../samples/sample.cc || cmake_object_order_depends_target_sample
-  DEP_FILE = samples/CMakeFiles/sample.dir/sample.cc.o.d
-  FLAGS = -std=c++17 -fPIC  -O0 -Wall -g2 -ggdb -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk   -std=gnu++1z
-  INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src
-  OBJECT_DIR = samples/CMakeFiles/sample.dir
-  OBJECT_FILE_DIR = samples/CMakeFiles/sample.dir
-
-# =============================================================================
-# Link build statements for EXECUTABLE target sample
-
-
-#############################################
-# Link the executable samples/sample
-
-build samples/sample: CXX_EXECUTABLE_LINKER__sample samples/CMakeFiles/sample.dir/sample.cc.o | src/libasync.a src/spawnsync/libspawnsync.a || src/libasync.a src/spawnsync/libspawnsync.a
-  FLAGS = -std=c++17 -fPIC  -O0 -Wall -g2 -ggdb -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk
-  LINK_LIBRARIES = -Wl,-rpath,/Users/wjp/Desktop/workspace/libasync/libasync/./src src/libasync.a src/spawnsync/libspawnsync.a
-  LINK_PATH = -L/Users/wjp/Desktop/workspace/libasync/libasync/./src
-  OBJECT_DIR = samples/CMakeFiles/sample.dir
-  POST_BUILD = :
-  PRE_LINK = :
-  TARGET_FILE = samples/sample
-  TARGET_PDB = sample.dbg
 # =============================================================================
 # Target aliases.
 
@@ -530,7 +536,7 @@ build  tests/all: phony tests
 #############################################
 # The main all target.
 
-build all: phony src/libasync.a src/spawnsync/libspawnsync.a lib/libgtest_maind.a lib/libgtestd.a tests/tests samples/sample
+build all: phony src/libasync.a src/spawnsync/libspawnsync.a samples/sample lib/libgtest_maind.a lib/libgtestd.a tests/tests
 
 #############################################
 # Make the all target the default.

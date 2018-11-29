@@ -30,10 +30,9 @@
 namespace wjp{
 
 // Kicks it off on construction
-WorkStealingScheduler::WorkStealingScheduler() 
+WorkStealingScheduler::WorkStealingScheduler() : 
+        pool(std::make_unique<WorkStealingWorkerPool>(recommended_nr_thread()))
 {
-    auto nr_threads=recommended_nr_thread();
-    pool=std::make_unique<WorkStealingWorkerPool>(nr_threads);
     pool->start();
 }
 

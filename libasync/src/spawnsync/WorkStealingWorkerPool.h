@@ -27,12 +27,12 @@
 
 #include <memory>
 #include <thread>
-#include <array>
 #include <unordered_map>
 #include <optional>
 #include <iostream>
 #include "WorkStealingWorker.h"
 #include "RandomUtilities.h"
+#include "Array.h"
 
 namespace wjp {
 
@@ -43,14 +43,16 @@ public:
 	WorkStealingWorkerPool(int nr_workers);
 	// It's a blocking operation that waits until all threads complete an orderly-close.
 	~WorkStealingWorkerPool();
-	// Gets current thread's worker index
+	// Gets current thread's worker index.
 	std::optional<int> current_thread_index()const noexcept;
-	// Gets current thread's worker
+	// Gets the requested worker.
+	std::reference_wrapper<WorkStealingWorker> get_worker(int index);
+	// Gets current thread's worker.
 	std::optional<std::reference_wrapper<WorkStealingWorker>> current_thread_handle()noexcept;
 	// Gets a randomly picked worker.
 	std::reference_wrapper<WorkStealingWorker> randomly_pick_one()noexcept;
 	// Gets the number of threads/workers.
-	int nr_threads() const noexcept{return threads.size();}
+	int nr_threads() const noexcept{return threads.capacity();}
 	// Kicks it off.
 	void start()noexcept{started=true;}
 	// Shut it down.
@@ -58,8 +60,8 @@ public:
 private:
 	bool terminating=false;  
 	bool started=false;  
-	std::vector<std::thread> threads; 
-	std::vector<WorkStealingWorker> workers;  
+	Array<std::thread> threads;   
+	Array<WorkStealingWorker> workers;  
 };
 
 }

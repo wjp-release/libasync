@@ -42,3 +42,4 @@
 #include "Async.h"
 #include "Pipable.h"
 #include "Options.h"
+#include "Array.h"

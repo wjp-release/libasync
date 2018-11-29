@@ -34,7 +34,7 @@
 using namespace wjp;
 int main()
 {
-	worksteal();
+	arraytest();
 
 #ifdef _MSC_VER
 	std::cin.get();

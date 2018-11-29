@@ -29,7 +29,7 @@
 #include <memory>
 #include <chrono>
 #include <optional>
-
+#include <cassert>
 #include "ChaseLevDeque.h"
 #include "SubmissionBuffer.h"
 #include "Task.h"
@@ -41,7 +41,7 @@ class WorkStealingWorkerPool;
 // WorkStealingWorker is structured to exploit spatial locality of LLC.
 class WorkStealingWorker{
 public:
-	constexpr static auto idle_timeout=3s;  
+    constexpr static auto idle_timeout=3s;  
     // Should only be called from its parent pool.
     WorkStealingWorker(WorkStealingWorkerPool& pool, int index);
     // Should only be called from this worker's thread loop.
@@ -65,6 +65,8 @@ protected:
     // Starts from this->index, index++ if current worker has nothing left to steal from. 
     // Deterministic stealing pattern exploits temporal locality and hardware prefetching. 
     std::shared_ptr<Task> steal_a_task();
+    // Steals from a worker.
+    std::shared_ptr<Task> steal_from(WorkStealingWorker&);
 private:    
     std::unique_ptr<ChaseLevDeque<Task>> deque;
     std::unique_ptr<SubmissionBuffer<Task>> buffer;

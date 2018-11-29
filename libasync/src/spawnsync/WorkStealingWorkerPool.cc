@@ -24,10 +24,13 @@
  */
 
 #include "WorkStealingWorkerPool.h"
+#include <cassert>
 
 namespace wjp {
 
-WorkStealingWorkerPool::WorkStealingWorkerPool(int nr_workers){
+WorkStealingWorkerPool::WorkStealingWorkerPool(int nr_workers) :
+    threads(nr_workers), workers(nr_workers)
+{
     for(int i=0; i<nr_workers; i++){
         workers.emplace_back(*this, i);
     }
@@ -48,7 +51,13 @@ WorkStealingWorkerPool::~WorkStealingWorkerPool() {
     }
 }
 
+std::reference_wrapper<WorkStealingWorker> WorkStealingWorkerPool::get_worker(int index){
+    assert(index>=0&&index<nr_threads());
+    return std::ref(workers[index]);
+}
+
 std::optional<int> WorkStealingWorkerPool::current_thread_index()const noexcept{
+    assert(started);
     auto me=std::this_thread::get_id();
     for(int i=0;i<threads.size();i++){
         if(threads[i].get_id()==me)return i;
@@ -57,6 +66,7 @@ std::optional<int> WorkStealingWorkerPool::current_thread_index()const noexcept{
 }
 
 std::optional<std::reference_wrapper<WorkStealingWorker>> WorkStealingWorkerPool::current_thread_handle()noexcept{
+    assert(started);
     auto index=current_thread_index();
     if(index){
         return std::ref(workers[index.value()]);
@@ -66,6 +76,7 @@ std::optional<std::reference_wrapper<WorkStealingWorker>> WorkStealingWorkerPool
 }
 
 std::reference_wrapper<WorkStealingWorker> WorkStealingWorkerPool::randomly_pick_one()noexcept{
+    assert(started);
     int index=randinteger(0, threads.size()-1);
     return std::ref(workers[index]);
 }

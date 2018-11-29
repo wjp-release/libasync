@@ -30,13 +30,11 @@
 
 namespace wjp{
 
+    struct A{
+        A(const std::string& str):x(str){}
+        std::string x;
+    };
     static inline void deque_sample(){
-        // T must be
-        struct A{
-            A(const std::string& str):x(str){}
-            std::string x;
-        };
-
         ChaseLevDeque<A>* q=new ChaseLevDeque<A>(4);  
         for(int i=1;i<=100;i++){
             q->push(std::make_shared<A>(std::to_string(i)));
@@ -55,8 +53,34 @@ namespace wjp{
 	}
 
 	
-	static inline void test() {
 
+    struct Bobo{
+        Bobo(int n) : threads(n), workers(n)
+        {
+            for(int i=0;i<n;i++){
+                workers.emplace_back("worker"+std::to_string(i));
+            }
+            for(int i=0;i<n;i++){
+                threads.emplace_back([i]{
+                    // std::cout<<"bobo"<<this->workers[i].x<<"\n";
+                    std::cout<<"bobo"<<i<<"\n";
+                });
+            }
+        }
+        ~Bobo(){
+            for(auto& t:threads){
+                t.join();
+            }
+        }
+        Array<std::thread> threads;
+        Array<A> workers;
+    };
+
+	static inline void arraytest() {
+        {
+            WorkStealingWorkerPool pool(9);
+            pool.start();
+        }
 	}
 
 
@@ -81,5 +105,7 @@ namespace wjp{
             std::cerr<<"unknown exception!"<<std::endl;
         }
     }
+
+    
 
 }

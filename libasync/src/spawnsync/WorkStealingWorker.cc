@@ -24,7 +24,9 @@
 */
 
 #include "WorkStealingWorker.h"
+#include "WorkStealingWorkerPool.h"
 #include <iostream>
+#include <cassert>
 
 namespace wjp{
 
@@ -33,9 +35,6 @@ WorkStealingWorker::WorkStealingWorker(WorkStealingWorkerPool& pool, int index) 
     buffer(std::make_unique<SubmissionBuffer<Task>>())
 {}
 
-
-// Take a task from local deque or steal one
-// The implementation here is self-explanatory.
 void WorkStealingWorker::routine(){
     auto task=scan_next_task(); 
     if(task==nullptr){  
@@ -63,8 +62,7 @@ bool WorkStealingWorker::idle_for_too_long(){
 }
 
 std::shared_ptr<Task> WorkStealingWorker::scan_next_task(){
-    //auto task=deque->take();  
-    auto task=buffer->steal();
+    auto task=deque->take();  
     if(task==nullptr){
         return steal_a_task();
     }else{
@@ -73,10 +71,21 @@ std::shared_ptr<Task> WorkStealingWorker::scan_next_task(){
 }
 
 std::shared_ptr<Task> WorkStealingWorker::steal_a_task(){
-    //@todo!!!!
+    std::shared_ptr<Task> task=buffer->steal();
+    if(task!=nullptr) return task;
+    WorkStealingWorkerPool& mypool=pool.get(); // Note: auto mypool=pool.get() constructs a WorkStealingWorkerPool!
+    int cap=mypool.nr_threads();
+    for(int pos=index; pos<index+cap ;pos++){
+        task=steal_from(mypool.get_worker(pos%cap).get());
+        if(task!=nullptr) return task;
+    }
     return nullptr;
 }
 
-
+std::shared_ptr<Task> WorkStealingWorker::steal_from(WorkStealingWorker& target){
+    auto t=target.deque->steal();
+    if(t!=nullptr) return t;
+    return target.buffer->steal();
+}
 
 }

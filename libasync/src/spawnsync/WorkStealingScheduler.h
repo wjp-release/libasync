@@ -46,9 +46,6 @@ public:
     WorkStealingScheduler();
     // The reference of WorkStealingWorker is returned as a hint to help cancellation.
     std::reference_wrapper<WorkStealingWorker> submit(std::shared_ptr<Task>); 
-    int current_thread_index()const{
-        return pool->current_thread_index().value_or(-1);
-    }
 
     template< class R >
     class FuturisticTask : public Task, public Callable<R> {
@@ -133,7 +130,6 @@ public:
     std::shared_ptr<FuturisticTask<R>> create_futuristic_task(){
         return std::make_shared<FuturisticTask<R>>(*this);
     }
-
 
 private:
     std::unique_ptr<WorkStealingWorkerPool> pool;
