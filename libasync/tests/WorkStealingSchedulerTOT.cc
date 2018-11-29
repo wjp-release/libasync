@@ -27,7 +27,7 @@ struct A{
 	std::string x;
 };
 
-TEST_F(WorkStealingSchedulerTOT, SubmitATaskToASchedulerAndGetItsResult) {
+TEST_F(WorkStealingSchedulerTOT, SubmitFromScheduler) {
 	struct bee{
 		int operator()(int x, int y, int z){
 			return x*100+y*10+z;
@@ -42,3 +42,16 @@ TEST_F(WorkStealingSchedulerTOT, SubmitATaskToASchedulerAndGetItsResult) {
 }
 
 
+TEST_F(WorkStealingSchedulerTOT, SubmitFromTask) {
+	struct bee{
+		int operator()(int x, int y, int z){
+			return x*100+y*10+z;
+		}
+	};
+	auto w = scheduler->create_futuristic_task<int>();
+	w->bind(bee{}, 1,2,3);
+	w->submit();
+	auto res=w->get_quietly();
+	int x=res.value_or(9999);
+	EXPECT_EQ(x, 123);
+}

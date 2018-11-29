@@ -53,9 +53,10 @@ public:
 protected:
     void becomes_idle(){when_idle_begins=now();} 
     void becomes_busy(){when_idle_begins.reset();}
+    // Creates rules to determine if a particular worker will never get blocked.  
+    bool immune_to_block() const noexcept;
     // Been idle for too long, it seems meaningless busy wait any more.  
-    // Workers with certain index (for example, even index) will not get blocked.
-    // (todo: this should be configurable)
+    // Blocking workers should be notified when the worker pool is shut down.
     void try_to_block();
     // Returns if this worker has been idle for more than idle_timeout.
     bool idle_for_too_long();
@@ -73,6 +74,7 @@ private:
     std::reference_wrapper<WorkStealingWorkerPool> pool;
     std::optional<time_point> when_idle_begins; //Busy if empty, idle otherwise. 
     int index;
+    bool blocked=false;
 };
 
 

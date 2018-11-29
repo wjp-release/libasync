@@ -88,4 +88,9 @@ std::shared_ptr<Task> WorkStealingWorker::steal_from(WorkStealingWorker& target)
     return target.buffer->steal();
 }
 
+bool WorkStealingWorker::immune_to_block()const noexcept{
+    if(index<3) return true; 
+    return false;
+}
+
 }
