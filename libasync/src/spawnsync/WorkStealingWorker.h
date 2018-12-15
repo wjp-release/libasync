@@ -42,14 +42,19 @@ class WorkStealingWorkerPool;
 class WorkStealingWorker{
 public:
     constexpr static auto idle_timeout=3s;  
-    // Should only be called from its parent pool.
     WorkStealingWorker(WorkStealingWorkerPool& pool, int index);
-    // Should only be called from this worker's thread loop.
     void routine(); 
-    // Should only be called from this worker's thread.
-    void spawn(std::shared_ptr<Task> task){deque->push(task);}
-    // Should only be called from an external non-worker thread. 
-    void submit(std::shared_ptr<Task> task){buffer->submit(task);}
+    // Should only be called from this worker's owning thread.
+    void spawn(std::shared_ptr<Task> task){
+        deque->push(task);
+    }
+    // Could be called from an external non-worker thread. 
+    void submit(std::shared_ptr<Task> task){
+        buffer->submit(task);
+        if(blocked) wake();
+    }
+
+    void wake();
 protected:
     void becomes_idle(){when_idle_begins=now();} 
     void becomes_busy(){when_idle_begins.reset();}
@@ -75,6 +80,8 @@ private:
     std::optional<time_point> when_idle_begins; //Busy if empty, idle otherwise. 
     int index;
     bool blocked=false;
+    mutable std::condition_variable cv;
+    mutable std::mutex mtx;
 };
 
 

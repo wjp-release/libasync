@@ -35,7 +35,16 @@ WorkStealingWorker::WorkStealingWorker(WorkStealingWorkerPool& pool, int index) 
     buffer(std::make_unique<SubmissionBuffer<Task>>())
 {}
 
+void WorkStealingWorker::wake(){
+    blocked=false;
+    cv.notify_all();
+}
 void WorkStealingWorker::routine(){
+    if(blocked){
+        std::unique_lock<std::mutex> lk(mtx);
+        while(blocked) cv.wait(lk);
+        return;
+    }
     auto task=scan_next_task(); 
     if(task==nullptr){  
         if(!when_idle_begins.has_value()){ 
@@ -52,7 +61,7 @@ void WorkStealingWorker::routine(){
 }
 
 void WorkStealingWorker::try_to_block(){
-    // todo
+    blocked=true;  
     when_idle_begins.reset(); 
 }
 
@@ -73,7 +82,7 @@ std::shared_ptr<Task> WorkStealingWorker::scan_next_task(){
 std::shared_ptr<Task> WorkStealingWorker::steal_a_task(){
     std::shared_ptr<Task> task=buffer->steal();
     if(task!=nullptr) return task;
-    WorkStealingWorkerPool& mypool=pool.get(); // Note: auto mypool=pool.get() constructs a WorkStealingWorkerPool!
+    WorkStealingWorkerPool& mypool=pool.get(); 
     int cap=mypool.nr_threads();
     for(int pos=index; pos<index+cap ;pos++){
         task=steal_from(mypool.get_worker(pos%cap).get());

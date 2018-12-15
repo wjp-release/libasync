@@ -46,6 +46,9 @@ WorkStealingWorkerPool::WorkStealingWorkerPool(int nr_workers) :
 
 WorkStealingWorkerPool::~WorkStealingWorkerPool() {
     terminating=true;  
+    for(auto& w : workers){
+        w.wake();
+    }
     for(auto& t : threads){
         t.join(); 
     }
