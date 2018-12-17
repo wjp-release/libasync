@@ -106,6 +106,12 @@ build src/CMakeFiles/async.dir/Async.cc.o: CXX_COMPILER__async ../src/Async.cc |
   INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src
   OBJECT_DIR = src/CMakeFiles/async.dir
   OBJECT_FILE_DIR = src/CMakeFiles/async.dir
+build src/CMakeFiles/async.dir/ConcurrentPrint.cc.o: CXX_COMPILER__async ../src/ConcurrentPrint.cc || cmake_object_order_depends_target_async
+  DEP_FILE = src/CMakeFiles/async.dir/ConcurrentPrint.cc.o.d
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=gnu++1z
+  INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src
+  OBJECT_DIR = src/CMakeFiles/async.dir
+  OBJECT_FILE_DIR = src/CMakeFiles/async.dir
 
 # =============================================================================
 # Link build statements for STATIC_LIBRARY target async
@@ -114,7 +120,7 @@ build src/CMakeFiles/async.dir/Async.cc.o: CXX_COMPILER__async ../src/Async.cc |
 #############################################
 # Link the static library src/libasync.a
 
-build src/libasync.a: CXX_STATIC_LIBRARY_LINKER__async src/CMakeFiles/async.dir/Async.cc.o || src/spawnsync/libspawnsync.a
+build src/libasync.a: CXX_STATIC_LIBRARY_LINKER__async src/CMakeFiles/async.dir/Async.cc.o src/CMakeFiles/async.dir/ConcurrentPrint.cc.o || src/spawnsync/libspawnsync.a
   ARCH_FLAGS = -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk
   LANGUAGE_COMPILE_FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder
   OBJECT_DIR = src/CMakeFiles/async.dir
@@ -246,6 +252,12 @@ build samples/CMakeFiles/sample.dir/sample.cc.o: CXX_COMPILER__sample ../samples
   INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src
   OBJECT_DIR = samples/CMakeFiles/sample.dir
   OBJECT_FILE_DIR = samples/CMakeFiles/sample.dir
+build samples/CMakeFiles/sample.dir/worksteal.cc.o: CXX_COMPILER__sample ../samples/worksteal.cc || cmake_object_order_depends_target_sample
+  DEP_FILE = samples/CMakeFiles/sample.dir/worksteal.cc.o.d
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=gnu++1z
+  INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src
+  OBJECT_DIR = samples/CMakeFiles/sample.dir
+  OBJECT_FILE_DIR = samples/CMakeFiles/sample.dir
 
 # =============================================================================
 # Link build statements for EXECUTABLE target sample
@@ -254,7 +266,7 @@ build samples/CMakeFiles/sample.dir/sample.cc.o: CXX_COMPILER__sample ../samples
 #############################################
 # Link the executable samples/sample
 
-build samples/sample: CXX_EXECUTABLE_LINKER__sample samples/CMakeFiles/sample.dir/sample.cc.o | src/libasync.a src/spawnsync/libspawnsync.a || src/libasync.a src/spawnsync/libspawnsync.a
+build samples/sample: CXX_EXECUTABLE_LINKER__sample samples/CMakeFiles/sample.dir/sample.cc.o samples/CMakeFiles/sample.dir/worksteal.cc.o | src/libasync.a src/spawnsync/libspawnsync.a || src/libasync.a src/spawnsync/libspawnsync.a
   FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk
   LINK_LIBRARIES = -Wl,-rpath,/Users/wjp/Desktop/workspace/libasync/libasync/./src src/libasync.a src/spawnsync/libspawnsync.a
   LINK_PATH = -L/Users/wjp/Desktop/workspace/libasync/libasync/./src

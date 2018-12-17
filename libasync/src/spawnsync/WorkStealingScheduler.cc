@@ -38,7 +38,7 @@ WorkStealingScheduler::WorkStealingScheduler() :
 
 // If called from a worker thread, push the task to its deque, 
 // otherwise, to a randomly picked worker's submission buffer.
-std::reference_wrapper<WorkStealingWorker> WorkStealingScheduler::submit(std::shared_ptr<Task> task)
+std::reference_wrapper<WorkStealingWorker> WorkStealingScheduler::sched(std::shared_ptr<Task> task)
 {
     auto worker=pool->current_thread_handle();
     if(worker){ 
@@ -53,6 +53,21 @@ std::reference_wrapper<WorkStealingWorker> WorkStealingScheduler::submit(std::sh
     }
 }
 
+std::reference_wrapper<WorkStealingWorker> WorkStealingScheduler::which_worker()
+{
+    auto worker=pool->current_thread_handle();
+    if(worker){ 
+        return worker.value();
+    }else{ 
+        return pool->randomly_pick_one();
+    }
+}
+
+bool WorkStealingScheduler::is_called_from_external()  
+{
+    auto worker=pool->current_thread_handle();
+    return !worker.has_value();
+}
 
 
 }

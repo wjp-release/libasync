@@ -57,6 +57,10 @@ public:
         task_list.pop_front();
         return task_ptr;
     }
+    // Inefficient; should only be used for debugging/monitoring.
+    uint64_t size(){
+        return (uint64_t)task_list.size();
+    }
 private:
     std::list<std::shared_ptr<T>> task_list;
     mutable std::mutex mtx;

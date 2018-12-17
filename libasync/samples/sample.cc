@@ -30,11 +30,12 @@
 #include <thread>
 #include "Internal.h"
 #include "sample.h"
+#include "worksteal.h"
 
 using namespace wjp;
 int main()
 {
-	arraytest();
+	worksteal();
 
 #ifdef _MSC_VER
 	std::cin.get();

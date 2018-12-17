@@ -25,6 +25,8 @@
 
 #include "WorkStealingWorkerPool.h"
 #include <cassert>
+#include "ThreadUtilities.h"
+#include "ConcurrentPrint.h"
 
 namespace wjp {
 
@@ -42,6 +44,18 @@ WorkStealingWorkerPool::WorkStealingWorkerPool(int nr_workers) :
             }
         });
     }
+    #ifdef SAMPLE_DEBUG
+    // Internal Monitor Thread
+    std::thread([this, nr_workers]{
+        while(true){
+            sleep(1000);
+            println("\nMonitoring "+std::to_string(nr_workers)+" worker:");
+            for(auto& w: workers){
+                println(w.stat());
+            }
+        }
+    }).detach();
+    #endif
 }
 
 WorkStealingWorkerPool::~WorkStealingWorkerPool() {

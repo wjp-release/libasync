@@ -34,6 +34,7 @@
 #include "SubmissionBuffer.h"
 #include "Task.h"
 #include "TimeUtilities.h"
+#include "ConcurrentPrint.h"
 
 namespace wjp{
 class WorkStealingWorkerPool;
@@ -51,11 +52,15 @@ public:
     // Could be called from an external non-worker thread. 
     void submit(std::shared_ptr<Task> task){
         buffer->submit(task);
+        #ifdef SAMPLE_DEBUG
+        println("worker "+std::to_string(index)+" submit!");   
+        #endif
         if(blocked) wake();
     }
-
+    std::string stat(); // Debugging/monitoring stats.
     void wake();
 protected:
+    bool is_idle()noexcept{return when_idle_begins.has_value();}
     void becomes_idle(){when_idle_begins=now();} 
     void becomes_busy(){when_idle_begins.reset();}
     // Creates rules to determine if a particular worker will never get blocked.  

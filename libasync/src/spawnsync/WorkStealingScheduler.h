@@ -41,12 +41,19 @@ namespace wjp{
 
 class WorkStealingWorker;
 class WorkStealingScheduler{
+protected:
+    // The reference of WorkStealingWorker is returned as a hint to help cancellation.
+    std::reference_wrapper<WorkStealingWorker> sched(std::shared_ptr<Task>); 
+    // Returns owning worker if called from worker thread. A randomly picked worker otherwise.
+    std::reference_wrapper<WorkStealingWorker> which_worker();
+    bool is_called_from_external();
 public:
+    // Deprecated. (Reserved for test compatibility) 
+    std::reference_wrapper<WorkStealingWorker> submit(std::shared_ptr<Task> task){
+        return sched(task);
+    }
     // Starts running on creation.
     WorkStealingScheduler();
-    // The reference of WorkStealingWorker is returned as a hint to help cancellation.
-    std::reference_wrapper<WorkStealingWorker> submit(std::shared_ptr<Task>); 
-
     template< class R >
     class FuturisticTask : public Task, public Callable<R> {
     public:
@@ -60,9 +67,9 @@ public:
 	    }
         
         // Pushes this task to work deque or submission buffer
-        void submit(){
+        virtual void submit(){
             std::shared_ptr<Task> task=shared_from_this();
-            scheduler.get().submit(task);
+            scheduler.get().sched(task);
         }
 
         // Blocks the calling thread until this task finishes
@@ -108,7 +115,7 @@ public:
             sync.cv.notify_all(); 
         }
 
-    private:
+    protected:
         bool finished=false; 
         // Sync is a copy/move constructible & copy/move assignable collection of data members that should not actually be copied or move, e.g., mutex and convars. By doing this trick, the FuturisticTask class can reuse Callable's copy/move constructors and assignment operators.
         struct Sync{ 
@@ -130,6 +137,59 @@ public:
     std::shared_ptr<FuturisticTask<R>> create_futuristic_task(){
         return std::make_shared<FuturisticTask<R>>(*this);
     }
+
+    // Fork/Join extensions of FuturisticTask
+    // You can use Callable<R>::bind, together with submit/get functions, 
+    // to handle this ForkJoinTask in the exact same way you handle a FuturisticTask. 
+    // Or you can use scheduler_aware_bind and fork/join functions, which allows 
+    // creation of child tasks in user-supplied callable functions.
+    template< class R >
+    class ForkJoinTask : public FuturisticTask<R> {
+    public:
+        ForkJoinTask(WorkStealingScheduler& sched) : FuturisticTask<R>(sched)
+        {}
+
+        ForkJoinTask& operator=(std::nullptr_t)noexcept{
+		    FuturisticTask<R>::operator=(nullptr);
+		    return *this;
+	    }
+
+        // Since join() obviously is usually called from a worker thread, it's beneficial to do some optimization ... in future. 
+        std::optional<R> join(){ 
+            assert(is_scheduler_aware_binded);
+            // todo! steal back ...
+            // If called from worker thread, join() will steal back tasks from its stealers to accelerate the completion of this task's child tasks.
+            FuturisticTask<R>::wait();
+            if(FuturisticTask<R>::reason){
+                 std::rethrow_exception(FuturisticTask<R>::reason);
+            }
+            return FuturisticTask<R>::value; // Could be empty if error happens during execution
+        }
+
+        // ForkJoinTask callable now tasks the reference to the WorkStealingScheduler as its 1st argument.
+        template< class F, class... Args, class=std::enable_if_t<(std::is_invocable<F, Args...>{})>>
+        void scheduler_aware_bind(F&& f, Args&&... args ){
+            Callable<R>::bind(std::forward<F>(f), FuturisticTask<R>::scheduler, std::forward<Args>(args)...);
+            is_scheduler_aware_binded = true;   
+        }
+
+        // The task is forkable/joinable only if it has been scheduler-aware binded.
+        void fork(){
+            assert(is_scheduler_aware_binded);
+            submit();
+        }
+    protected:
+        bool is_scheduler_aware_binded = false;
+    };
+
+    // Note that this function should usually be called in worker thread. 
+    template < class R >
+    std::shared_ptr<ForkJoinTask<R>> create_forkjoin_task(){
+        return std::make_shared<ForkJoinTask<R>>(*this);
+    }
+
+
+
 
 private:
     std::unique_ptr<WorkStealingWorkerPool> pool;

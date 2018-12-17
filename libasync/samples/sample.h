@@ -84,7 +84,7 @@ namespace wjp{
 	}
 
 
-    static inline void worksteal(){
+    static inline void worksteal_test(){
         WorkStealingScheduler scheduler;
         struct bee{
             int operator()(int x, int y, int z){
@@ -106,6 +106,5 @@ namespace wjp{
         }
     }
 
-    
 
 }

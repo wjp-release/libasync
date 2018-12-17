@@ -27,6 +27,8 @@
 #include "WorkStealingWorkerPool.h"
 #include <iostream>
 #include <cassert>
+#include <sstream>
+#include "TimeUtilities.h"
 
 namespace wjp{
 
@@ -36,9 +38,24 @@ WorkStealingWorker::WorkStealingWorker(WorkStealingWorkerPool& pool, int index) 
 {}
 
 void WorkStealingWorker::wake(){
+    #ifdef SAMPLE_DEBUG
+    println("AWAKEN! >> "+stat());
+    #endif
     blocked=false;
     cv.notify_all();
 }
+
+std::string WorkStealingWorker::stat(){
+    std::stringstream ss;
+    bool is_idle_=is_idle();
+    ss<<"worker "<<index<<": is_blocked="<< blocked <<", is_idle="<<is_idle_;
+    if(is_idle_){
+        ss<<"("<< ms_elapsed_count(when_idle_begins.value()) <<"ms)";
+    }
+    ss<<", deque size="<<deque->size()<<", buffer size="<<buffer->size();
+    return ss.str();
+}
+
 void WorkStealingWorker::routine(){
     if(blocked){
         std::unique_lock<std::mutex> lk(mtx);
@@ -47,7 +64,7 @@ void WorkStealingWorker::routine(){
     }
     auto task=scan_next_task(); 
     if(task==nullptr){  
-        if(!when_idle_begins.has_value()){ 
+        if(!is_idle()){ 
             becomes_idle(); 
         }else{ 
             if(idle_for_too_long()){ 
@@ -56,7 +73,15 @@ void WorkStealingWorker::routine(){
         }
     }else{ 
         becomes_busy(); 
+        #ifdef SAMPLE_DEBUG
+        time_point start=now();
+        println("worker "+std::to_string(index)+" starts to run task");
+        #endif
         task->execute(); 
+        #ifdef SAMPLE_DEBUG
+        int time_elasped=ms_elapsed_count(start);
+        println("worker "+std::to_string(index)+" completes task | time_elasped="+std::to_string(time_elasped)+"ms");
+        #endif
     }
 }
 
@@ -97,8 +122,9 @@ std::shared_ptr<Task> WorkStealingWorker::steal_from(WorkStealingWorker& target)
     return target.buffer->steal();
 }
 
+// Block Immunity Strategy
 bool WorkStealingWorker::immune_to_block()const noexcept{
-    if(index<3) return true; 
+    if(index<1) return true;  //Only the first worker is always online. Others could block.
     return false;
 }
 

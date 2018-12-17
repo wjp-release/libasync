@@ -47,7 +47,7 @@ public:
 	std::optional<int> current_thread_index()const noexcept;
 	// Gets the requested worker.
 	std::reference_wrapper<WorkStealingWorker> get_worker(int index);
-	// Gets current thread's worker.
+	// Gets current thread's worker. Empty if it called from a non-worker thread.
 	std::optional<std::reference_wrapper<WorkStealingWorker>> current_thread_handle()noexcept;
 	// Gets a randomly picked worker.
 	std::reference_wrapper<WorkStealingWorker> randomly_pick_one()noexcept;

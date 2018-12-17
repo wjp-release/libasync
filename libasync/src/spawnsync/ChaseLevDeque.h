@@ -80,6 +80,10 @@ public:
         std::cout<<"| buffer="<< arr->buffer<<std::endl;
         std::cout<<std::endl;
     }
+    // Utterly unsafe; should only be used for debugging/monitoring.
+    uint64_t                            size() noexcept{
+        return bottom.load()-top.load();
+    }                         
     // Tries to take a recently pushed task. It should only be called from the owning thread.
     std::shared_ptr<T>					take() {
         auto b=bottom.load(std::memory_order_relaxed)-1;
