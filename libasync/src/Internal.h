@@ -25,9 +25,31 @@
 
 #pragma once
 
-// included by tests or samples
+// Convenient includes for tests & samples only.
 
-#include "Common.h"
+#define WJP_VERSION 1
+#define WJP_DEBUG
+
+#include <cstdint>
+#include <atomic>
+#include <memory>
+#include <iostream>
+#include <string>
+#include <functional>
+#include <chrono>
+#include <list>
+#include <ctime>
+#include <ratio>
+#include <random>
+#include <thread>
+#include <mutex>
+#include <future>
+#include <stdexcept>
+#include <exception>
+#include <condition_variable>
+#include <optional>
+#include <cassert>
+using namespace std::chrono_literals;  //100ms == std::chrono::milliseconds{100}, since c++14
 #include "AutoRelease.h"
 #include "RandomUtilities.h"
 #include "ThreadUtilities.h"
@@ -39,7 +61,7 @@
 #include "WorkStealingWorker.h"
 #include "WorkStealingWorkerPool.h"
 #include "WorkStealingScheduler.h"
+#include "ConcurrentPrint.h"
 #include "Async.h"
 #include "Pipable.h"
-#include "Options.h"
 #include "Array.h"

@@ -1,5 +1,4 @@
 #include "gtest/gtest.h"
-#include "Common.h"
 #include "Internal.h"
 
 using namespace wjp;

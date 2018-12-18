@@ -37,7 +37,32 @@ WorkStealingWorker::WorkStealingWorker(WorkStealingWorkerPool& pool, int index) 
     buffer(std::make_unique<SubmissionBuffer<Task>>())
 {}
 
-void WorkStealingWorker::wake(){
+void WorkStealingWorker::spawn(std::shared_ptr<Task> task){
+    deque->push(task);
+    // Aggressive wake-up strategy 
+    // Since spawn usually indicates influx of child tasks,
+    // now it's time to wake up all blocking workers. 
+    pool.get().wake_all_sleeping_workers();   
+}
+
+void WorkStealingWorker::submit(std::shared_ptr<Task> task){
+    buffer->submit(task);
+    #ifdef SAMPLE_DEBUG
+    println("worker "+std::to_string(index)+" submit!");   
+    #endif
+    if(blocked) wake();
+}
+
+void WorkStealingWorker::wake_if_blocked()
+{
+    if(blocked){
+        blocked=false;
+        cv.notify_all();
+    }
+}
+
+void WorkStealingWorker::wake()
+{
     #ifdef SAMPLE_DEBUG
     println("AWAKEN! >> "+stat());
     #endif
@@ -54,6 +79,21 @@ std::string WorkStealingWorker::stat(){
     }
     ss<<", deque size="<<deque->size()<<", buffer size="<<buffer->size();
     return ss.str();
+}
+
+// The join_routine() does not take newly submitted tasks from submission buffer, 
+// as its purpose is to accelerate completion of the joined parent task. 
+void WorkStealingWorker::join_routine(){
+    std::shared_ptr<Task> task=deque->take();  
+    if(task==nullptr){
+        WorkStealingWorkerPool& mypool=pool.get(); 
+        task = steal_from(mypool.get_worker(who_steals_from_me_index).get());
+        if(task==nullptr){
+            task= steal_a_task();
+            if(task==nullptr) return;
+        }
+    }
+    task->execute(); 
 }
 
 void WorkStealingWorker::routine(){
@@ -119,6 +159,7 @@ std::shared_ptr<Task> WorkStealingWorker::steal_a_task(){
 std::shared_ptr<Task> WorkStealingWorker::steal_from(WorkStealingWorker& target){
     auto t=target.deque->steal();
     if(t!=nullptr) return t;
+    target.who_steals_from_me_index=index;  
     return target.buffer->steal();
 }
 

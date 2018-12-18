@@ -58,22 +58,25 @@ WorkStealingWorkerPool::WorkStealingWorkerPool(int nr_workers) :
     #endif
 }
 
-WorkStealingWorkerPool::~WorkStealingWorkerPool() {
+WorkStealingWorkerPool::~WorkStealingWorkerPool() 
+{
     terminating=true;  
     for(auto& w : workers){
-        w.wake();
+        w.wake();  // notify cv even if it is not blocked
     }
     for(auto& t : threads){
         t.join(); 
     }
 }
 
-std::reference_wrapper<WorkStealingWorker> WorkStealingWorkerPool::get_worker(int index){
+std::reference_wrapper<WorkStealingWorker> WorkStealingWorkerPool::get_worker(int index)
+{
     assert(index>=0&&index<nr_threads());
     return std::ref(workers[index]);
 }
 
-std::optional<int> WorkStealingWorkerPool::current_thread_index()const noexcept{
+std::optional<int> WorkStealingWorkerPool::current_thread_index()const noexcept
+{
     assert(started);
     auto me=std::this_thread::get_id();
     for(int i=0;i<threads.size();i++){
@@ -92,11 +95,21 @@ std::optional<std::reference_wrapper<WorkStealingWorker>> WorkStealingWorkerPool
     }
 }
 
-std::reference_wrapper<WorkStealingWorker> WorkStealingWorkerPool::randomly_pick_one()noexcept{
+std::reference_wrapper<WorkStealingWorker> WorkStealingWorkerPool::randomly_pick_one()noexcept
+{
     assert(started);
     int index=randinteger(0, threads.size()-1);
     return std::ref(workers[index]);
 }
+
+
+void WorkStealingWorkerPool::wake_all_sleeping_workers()
+{
+    for(auto& w : workers){
+        w.wake_if_blocked();
+    }
+}
+
 
 }
 

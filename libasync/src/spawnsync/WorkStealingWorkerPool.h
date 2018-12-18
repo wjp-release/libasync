@@ -57,6 +57,8 @@ public:
 	void start()noexcept{started=true;}
 	// Shut it down.
 	void terminate()noexcept{terminating=true;}
+	// Wake all sleeping workers.
+	void wake_all_sleeping_workers();
 private:
 	bool terminating=false;  
 	bool started=false;  

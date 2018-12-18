@@ -46,8 +46,14 @@ protected:
     std::reference_wrapper<WorkStealingWorker> sched(std::shared_ptr<Task>); 
     // Returns owning worker if called from worker thread. A randomly picked worker otherwise.
     std::reference_wrapper<WorkStealingWorker> which_worker();
+    // Must be called from a worker thread.
+    std::reference_wrapper<WorkStealingWorker> get_worker();
+
     bool is_called_from_external();
 public:
+    int nr_workers()const noexcept{
+        return pool->nr_threads();
+    }
     // Deprecated. (Reserved for test compatibility) 
     std::reference_wrapper<WorkStealingWorker> submit(std::shared_ptr<Task> task){
         return sched(task);
@@ -154,21 +160,35 @@ public:
 		    return *this;
 	    }
 
-        // Since join() obviously is usually called from a worker thread, it's beneficial to do some optimization ... in future. 
+        // Note that worker threads are not supposed to stall by nature. If called from worker thread, join() will steal back tasks from its stealers to avoid deadlock and accelerate the completion of this task's child tasks. 
         std::optional<R> join(){ 
             assert(is_scheduler_aware_binded);
-            // todo! steal back ...
-            // If called from worker thread, join() will steal back tasks from its stealers to accelerate the completion of this task's child tasks.
-            FuturisticTask<R>::wait();
+            WorkStealingScheduler& scheduler=FuturisticTask<R>::scheduler.get();
+            // External join() behaves exactly like get() except that the task must be scheduler-aware binded
+            if(scheduler.is_called_from_external()){
+                FuturisticTask<R>::wait();
+            }else{  // worker thread's join() must be lock-free! 
+                // we can't sit here and wait, try to do some work, like stealing back ... 
+                // otherwise the concurrency of this thread will be lost, 
+                // the entire system will easily fall into deadlock as well.
+                WorkStealingWorker& worker=scheduler.get_worker().get();
+                while(!FuturisticTask<R>::finished){ 
+                    worker.join_routine(); // helping other workers finish 
+                }
+                
+
+            }
             if(FuturisticTask<R>::reason){
-                 std::rethrow_exception(FuturisticTask<R>::reason);
+                std::rethrow_exception(FuturisticTask<R>::reason);
             }
             return FuturisticTask<R>::value; // Could be empty if error happens during execution
         }
 
         // ForkJoinTask callable now tasks the reference to the WorkStealingScheduler as its 1st argument.
-        template< class F, class... Args, class=std::enable_if_t<(std::is_invocable<F, Args...>{})>>
+        template< class F, class... Args, class=std::enable_if_t<(std::is_invocable<F, WorkStealingScheduler&, Args...>{})>>
         void scheduler_aware_bind(F&& f, Args&&... args ){
+            // The type of FuturisticTask<R>::scheduler is std::reference_wapper<WorkStealingScheduler>,
+            // but the first argument of F should be WorkStealingScheduler&.  
             Callable<R>::bind(std::forward<F>(f), FuturisticTask<R>::scheduler, std::forward<Args>(args)...);
             is_scheduler_aware_binded = true;   
         }
@@ -176,7 +196,7 @@ public:
         // The task is forkable/joinable only if it has been scheduler-aware binded.
         void fork(){
             assert(is_scheduler_aware_binded);
-            submit();
+            FuturisticTask<R>::submit();
         }
     protected:
         bool is_scheduler_aware_binded = false;
@@ -187,8 +207,6 @@ public:
     std::shared_ptr<ForkJoinTask<R>> create_forkjoin_task(){
         return std::make_shared<ForkJoinTask<R>>(*this);
     }
-
-
 
 
 private:

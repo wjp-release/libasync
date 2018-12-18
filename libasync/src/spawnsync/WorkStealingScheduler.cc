@@ -53,6 +53,17 @@ std::reference_wrapper<WorkStealingWorker> WorkStealingScheduler::sched(std::sha
     }
 }
 
+std::reference_wrapper<WorkStealingWorker> WorkStealingScheduler::get_worker()
+{
+    auto worker=pool->current_thread_handle();
+    if(worker){ 
+        return worker.value();
+    }else{ 
+        assert(false); //impossible! get_worker must be called from a worker thread!
+    }
+}
+
+
 std::reference_wrapper<WorkStealingWorker> WorkStealingScheduler::which_worker()
 {
     auto worker=pool->current_thread_handle();

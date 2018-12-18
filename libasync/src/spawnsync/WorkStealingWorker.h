@@ -39,26 +39,22 @@
 namespace wjp{
 class WorkStealingWorkerPool;
 
-// WorkStealingWorker is structured to exploit spatial locality of LLC.
 class WorkStealingWorker{
 public:
     constexpr static auto idle_timeout=3s;  
     WorkStealingWorker(WorkStealingWorkerPool& pool, int index);
     void routine(); 
-    // Should only be called from this worker's owning thread.
-    void spawn(std::shared_ptr<Task> task){
-        deque->push(task);
-    }
-    // Could be called from an external non-worker thread. 
-    void submit(std::shared_ptr<Task> task){
-        buffer->submit(task);
-        #ifdef SAMPLE_DEBUG
-        println("worker "+std::to_string(index)+" submit!");   
-        #endif
-        if(blocked) wake();
-    }
-    std::string stat(); // Debugging/monitoring stats.
+    // Spawns a child task from this worker's owning thread. 
+    // A spawn() will wake up all sleeping workers.
+    void spawn(std::shared_ptr<Task> task);
+    // Submits a task from an external non-worker thread. 
+    // A submit() to a sleeping worker will wake up this worker.
+    void submit(std::shared_ptr<Task> task);
+    std::string stat(); // Debugging/monitoring-only stats.
     void wake();
+    void wake_if_blocked();
+    // Worker threads do not wait/stall during join(). Instead they will run join_routine and check if the joined task is finished after each join_routine(). The join_routine never blocks.
+    void join_routine();
 protected:
     bool is_idle()noexcept{return when_idle_begins.has_value();}
     void becomes_idle(){when_idle_begins=now();} 
@@ -84,6 +80,7 @@ private:
     std::reference_wrapper<WorkStealingWorkerPool> pool;
     std::optional<time_point> when_idle_begins; //Busy if empty, idle otherwise. 
     int index;
+    volatile int who_steals_from_me_index=-1; // hint for steal-back algorithm
     bool blocked=false;
     mutable std::condition_variable cv;
     mutable std::mutex mtx;
