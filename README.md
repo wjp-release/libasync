@@ -7,13 +7,12 @@ provides high level building blocks for asynchronous computation in latest C++
 
 ## Why libasync?
 #### Fast
-parallel_sum using libasync is 5 times faster than the C++11 std::async version. (see https://en.cppreference.com/w/cpp/thread/async)
+Accumulating 1 million random integers using libasync is 5 times faster than using std::async. (see https://en.cppreference.com/w/cpp/thread/async)
 
-#### Correct
-Even though lock-free algorithms are in general premature, the correctness of the one used in libasync is formally proved.
+#### Cool
+You can write async functions using pipe-like semantics. 
 
-#### Simplistic API
-Pipable API 
+
 
 ## How to use libasync
 

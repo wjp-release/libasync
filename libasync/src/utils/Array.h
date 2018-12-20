@@ -127,12 +127,12 @@ public:
     }
 
     // Checks whether the container is empty.
-    void empty() const noexcept{
+    bool empty() const noexcept{
         return current_size==0;
     }
 
     // Checks whether the container is full.
-    void full() const noexcept{
+    bool full() const noexcept{
         return current_size==cap;
     }
 
