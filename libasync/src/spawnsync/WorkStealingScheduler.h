@@ -238,10 +238,26 @@ public:
         return subtask;
     }
 
+
+
+
 private:
     std::unique_ptr<WorkStealingWorkerPool> pool;
 };
 
+
+
+template<class R>
+struct evil_spawn_f
+{
+    template<class F, class... Args, class=std::enable_if_t<(std::is_invocable<F, WorkStealingScheduler&, Args...>{})>>
+    std::shared_ptr<WorkStealingScheduler::ForkJoinTask<R>> operator()(F&& f, WorkStealingScheduler& sched,  Args&&... args)const{
+        auto subtask=sched.create_forkjoin_task<R>();
+        subtask->scheduler_aware_bind(std::forward<F>(f),std::forward<Args>(args)...);
+        subtask->fork(); 
+        return subtask;
+    }
+};
 
 
 }
