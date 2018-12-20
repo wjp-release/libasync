@@ -103,13 +103,13 @@ build cmake_object_order_depends_target_async: phony || cmake_object_order_depen
 build src/CMakeFiles/async.dir/Async.cc.o: CXX_COMPILER__async ../src/Async.cc || cmake_object_order_depends_target_async
   DEP_FILE = src/CMakeFiles/async.dir/Async.cc.o.d
   FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=gnu++1z
-  INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src
+  INCLUDES = -I.././include -I.././src/utils -I.././src/spawnsync -I.././src
   OBJECT_DIR = src/CMakeFiles/async.dir
   OBJECT_FILE_DIR = src/CMakeFiles/async.dir
 build src/CMakeFiles/async.dir/ConcurrentPrint.cc.o: CXX_COMPILER__async ../src/ConcurrentPrint.cc || cmake_object_order_depends_target_async
   DEP_FILE = src/CMakeFiles/async.dir/ConcurrentPrint.cc.o.d
   FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=gnu++1z
-  INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src
+  INCLUDES = -I.././include -I.././src/utils -I.././src/spawnsync -I.././src
   OBJECT_DIR = src/CMakeFiles/async.dir
   OBJECT_FILE_DIR = src/CMakeFiles/async.dir
 
@@ -173,19 +173,19 @@ build cmake_object_order_depends_target_spawnsync: phony || src/spawnsync/CMakeF
 build src/spawnsync/CMakeFiles/spawnsync.dir/WorkStealingScheduler.cc.o: CXX_COMPILER__spawnsync ../src/spawnsync/WorkStealingScheduler.cc || cmake_object_order_depends_target_spawnsync
   DEP_FILE = src/spawnsync/CMakeFiles/spawnsync.dir/WorkStealingScheduler.cc.o.d
   FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=gnu++1z
-  INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src
+  INCLUDES = -I.././include -I.././src/utils -I.././src/spawnsync -I.././src
   OBJECT_DIR = src/spawnsync/CMakeFiles/spawnsync.dir
   OBJECT_FILE_DIR = src/spawnsync/CMakeFiles/spawnsync.dir
 build src/spawnsync/CMakeFiles/spawnsync.dir/WorkStealingWorker.cc.o: CXX_COMPILER__spawnsync ../src/spawnsync/WorkStealingWorker.cc || cmake_object_order_depends_target_spawnsync
   DEP_FILE = src/spawnsync/CMakeFiles/spawnsync.dir/WorkStealingWorker.cc.o.d
   FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=gnu++1z
-  INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src
+  INCLUDES = -I.././include -I.././src/utils -I.././src/spawnsync -I.././src
   OBJECT_DIR = src/spawnsync/CMakeFiles/spawnsync.dir
   OBJECT_FILE_DIR = src/spawnsync/CMakeFiles/spawnsync.dir
 build src/spawnsync/CMakeFiles/spawnsync.dir/WorkStealingWorkerPool.cc.o: CXX_COMPILER__spawnsync ../src/spawnsync/WorkStealingWorkerPool.cc || cmake_object_order_depends_target_spawnsync
   DEP_FILE = src/spawnsync/CMakeFiles/spawnsync.dir/WorkStealingWorkerPool.cc.o.d
   FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=gnu++1z
-  INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src
+  INCLUDES = -I.././include -I.././src/utils -I.././src/spawnsync -I.././src
   OBJECT_DIR = src/spawnsync/CMakeFiles/spawnsync.dir
   OBJECT_FILE_DIR = src/spawnsync/CMakeFiles/spawnsync.dir
 
@@ -249,13 +249,13 @@ build cmake_object_order_depends_target_sample: phony || cmake_object_order_depe
 build samples/CMakeFiles/sample.dir/sample.cc.o: CXX_COMPILER__sample ../samples/sample.cc || cmake_object_order_depends_target_sample
   DEP_FILE = samples/CMakeFiles/sample.dir/sample.cc.o.d
   FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=gnu++1z
-  INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src
+  INCLUDES = -I.././include -I.././src/utils -I.././src/spawnsync -I.././src
   OBJECT_DIR = samples/CMakeFiles/sample.dir
   OBJECT_FILE_DIR = samples/CMakeFiles/sample.dir
 build samples/CMakeFiles/sample.dir/worksteal.cc.o: CXX_COMPILER__sample ../samples/worksteal.cc || cmake_object_order_depends_target_sample
   DEP_FILE = samples/CMakeFiles/sample.dir/worksteal.cc.o.d
   FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=gnu++1z
-  INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src
+  INCLUDES = -I.././include -I.././src/utils -I.././src/spawnsync -I.././src
   OBJECT_DIR = samples/CMakeFiles/sample.dir
   OBJECT_FILE_DIR = samples/CMakeFiles/sample.dir
 
@@ -320,7 +320,7 @@ build cmake_object_order_depends_target_gtest_main: phony || cmake_object_order_
 build googletest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o: CXX_COMPILER__gtest_main ../googletest/src/gtest_main.cc || cmake_object_order_depends_target_gtest_main
   DEP_FILE = googletest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o.d
   FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk    -DGTEST_HAS_PTHREAD=1   -std=gnu++1z
-  INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
+  INCLUDES = -I.././include -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
   OBJECT_DIR = googletest/CMakeFiles/gtest_main.dir
   OBJECT_FILE_DIR = googletest/CMakeFiles/gtest_main.dir/src
 
@@ -350,7 +350,7 @@ build cmake_object_order_depends_target_gtest: phony || googletest/CMakeFiles/gt
 build googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.o: CXX_COMPILER__gtest ../googletest/src/gtest-all.cc || cmake_object_order_depends_target_gtest
   DEP_FILE = googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.o.d
   FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk    -DGTEST_HAS_PTHREAD=1   -std=gnu++1z
-  INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src -I../googletest/include -I../googletest
+  INCLUDES = -I.././include -I.././src/utils -I.././src/spawnsync -I.././src -I../googletest/include -I../googletest
   OBJECT_DIR = googletest/CMakeFiles/gtest.dir
   OBJECT_FILE_DIR = googletest/CMakeFiles/gtest.dir/src
 
@@ -414,67 +414,79 @@ build cmake_object_order_depends_target_tests: phony || cmake_object_order_depen
 build tests/CMakeFiles/tests.dir/ArrayTOT.cc.o: CXX_COMPILER__tests ../tests/ArrayTOT.cc || cmake_object_order_depends_target_tests
   DEP_FILE = tests/CMakeFiles/tests.dir/ArrayTOT.cc.o.d
   FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=gnu++1z
-  INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
+  INCLUDES = -I.././include -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
+  OBJECT_DIR = tests/CMakeFiles/tests.dir
+  OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
+build tests/CMakeFiles/tests.dir/AsyncTOT.cc.o: CXX_COMPILER__tests ../tests/AsyncTOT.cc || cmake_object_order_depends_target_tests
+  DEP_FILE = tests/CMakeFiles/tests.dir/AsyncTOT.cc.o.d
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=gnu++1z
+  INCLUDES = -I.././include -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
   OBJECT_DIR = tests/CMakeFiles/tests.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
 build tests/CMakeFiles/tests.dir/CallableTOT.cc.o: CXX_COMPILER__tests ../tests/CallableTOT.cc || cmake_object_order_depends_target_tests
   DEP_FILE = tests/CMakeFiles/tests.dir/CallableTOT.cc.o.d
   FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=gnu++1z
-  INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
+  INCLUDES = -I.././include -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
   OBJECT_DIR = tests/CMakeFiles/tests.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
 build tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.o: CXX_COMPILER__tests ../tests/ChaseLevDequeTOT.cc || cmake_object_order_depends_target_tests
   DEP_FILE = tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.o.d
   FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=gnu++1z
-  INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
+  INCLUDES = -I.././include -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
   OBJECT_DIR = tests/CMakeFiles/tests.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
 build tests/CMakeFiles/tests.dir/FixedThreadPoolTOT.cc.o: CXX_COMPILER__tests ../tests/FixedThreadPoolTOT.cc || cmake_object_order_depends_target_tests
   DEP_FILE = tests/CMakeFiles/tests.dir/FixedThreadPoolTOT.cc.o.d
   FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=gnu++1z
-  INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
+  INCLUDES = -I.././include -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
   OBJECT_DIR = tests/CMakeFiles/tests.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
 build tests/CMakeFiles/tests.dir/FuturisticTaskTOT.cc.o: CXX_COMPILER__tests ../tests/FuturisticTaskTOT.cc || cmake_object_order_depends_target_tests
   DEP_FILE = tests/CMakeFiles/tests.dir/FuturisticTaskTOT.cc.o.d
   FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=gnu++1z
-  INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
+  INCLUDES = -I.././include -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
+  OBJECT_DIR = tests/CMakeFiles/tests.dir
+  OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
+build tests/CMakeFiles/tests.dir/HofTOT.cc.o: CXX_COMPILER__tests ../tests/HofTOT.cc || cmake_object_order_depends_target_tests
+  DEP_FILE = tests/CMakeFiles/tests.dir/HofTOT.cc.o.d
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=gnu++1z
+  INCLUDES = -I.././include -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
   OBJECT_DIR = tests/CMakeFiles/tests.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
 build tests/CMakeFiles/tests.dir/PipableTOT.cc.o: CXX_COMPILER__tests ../tests/PipableTOT.cc || cmake_object_order_depends_target_tests
   DEP_FILE = tests/CMakeFiles/tests.dir/PipableTOT.cc.o.d
   FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=gnu++1z
-  INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
+  INCLUDES = -I.././include -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
   OBJECT_DIR = tests/CMakeFiles/tests.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
 build tests/CMakeFiles/tests.dir/SpawnSyncTaskTOT.cc.o: CXX_COMPILER__tests ../tests/SpawnSyncTaskTOT.cc || cmake_object_order_depends_target_tests
   DEP_FILE = tests/CMakeFiles/tests.dir/SpawnSyncTaskTOT.cc.o.d
   FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=gnu++1z
-  INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
+  INCLUDES = -I.././include -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
   OBJECT_DIR = tests/CMakeFiles/tests.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
 build tests/CMakeFiles/tests.dir/SubmissionBufferTOT.cc.o: CXX_COMPILER__tests ../tests/SubmissionBufferTOT.cc || cmake_object_order_depends_target_tests
   DEP_FILE = tests/CMakeFiles/tests.dir/SubmissionBufferTOT.cc.o.d
   FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=gnu++1z
-  INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
+  INCLUDES = -I.././include -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
   OBJECT_DIR = tests/CMakeFiles/tests.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
 build tests/CMakeFiles/tests.dir/SystemIntegrationTOT.cc.o: CXX_COMPILER__tests ../tests/SystemIntegrationTOT.cc || cmake_object_order_depends_target_tests
   DEP_FILE = tests/CMakeFiles/tests.dir/SystemIntegrationTOT.cc.o.d
   FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=gnu++1z
-  INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
+  INCLUDES = -I.././include -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
   OBJECT_DIR = tests/CMakeFiles/tests.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
 build tests/CMakeFiles/tests.dir/UtilitiesTOT.cc.o: CXX_COMPILER__tests ../tests/UtilitiesTOT.cc || cmake_object_order_depends_target_tests
   DEP_FILE = tests/CMakeFiles/tests.dir/UtilitiesTOT.cc.o.d
   FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=gnu++1z
-  INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
+  INCLUDES = -I.././include -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
   OBJECT_DIR = tests/CMakeFiles/tests.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
 build tests/CMakeFiles/tests.dir/WorkStealingSchedulerTOT.cc.o: CXX_COMPILER__tests ../tests/WorkStealingSchedulerTOT.cc || cmake_object_order_depends_target_tests
   DEP_FILE = tests/CMakeFiles/tests.dir/WorkStealingSchedulerTOT.cc.o.d
   FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=gnu++1z
-  INCLUDES = -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
+  INCLUDES = -I.././include -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
   OBJECT_DIR = tests/CMakeFiles/tests.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
 
@@ -485,7 +497,7 @@ build tests/CMakeFiles/tests.dir/WorkStealingSchedulerTOT.cc.o: CXX_COMPILER__te
 #############################################
 # Link the executable tests/tests
 
-build tests/tests: CXX_EXECUTABLE_LINKER__tests tests/CMakeFiles/tests.dir/ArrayTOT.cc.o tests/CMakeFiles/tests.dir/CallableTOT.cc.o tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.o tests/CMakeFiles/tests.dir/FixedThreadPoolTOT.cc.o tests/CMakeFiles/tests.dir/FuturisticTaskTOT.cc.o tests/CMakeFiles/tests.dir/PipableTOT.cc.o tests/CMakeFiles/tests.dir/SpawnSyncTaskTOT.cc.o tests/CMakeFiles/tests.dir/SubmissionBufferTOT.cc.o tests/CMakeFiles/tests.dir/SystemIntegrationTOT.cc.o tests/CMakeFiles/tests.dir/UtilitiesTOT.cc.o tests/CMakeFiles/tests.dir/WorkStealingSchedulerTOT.cc.o | lib/libgtest_maind.a src/libasync.a lib/libgtestd.a src/spawnsync/libspawnsync.a || lib/libgtest_maind.a lib/libgtestd.a src/libasync.a src/spawnsync/libspawnsync.a
+build tests/tests: CXX_EXECUTABLE_LINKER__tests tests/CMakeFiles/tests.dir/ArrayTOT.cc.o tests/CMakeFiles/tests.dir/AsyncTOT.cc.o tests/CMakeFiles/tests.dir/CallableTOT.cc.o tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.o tests/CMakeFiles/tests.dir/FixedThreadPoolTOT.cc.o tests/CMakeFiles/tests.dir/FuturisticTaskTOT.cc.o tests/CMakeFiles/tests.dir/HofTOT.cc.o tests/CMakeFiles/tests.dir/PipableTOT.cc.o tests/CMakeFiles/tests.dir/SpawnSyncTaskTOT.cc.o tests/CMakeFiles/tests.dir/SubmissionBufferTOT.cc.o tests/CMakeFiles/tests.dir/SystemIntegrationTOT.cc.o tests/CMakeFiles/tests.dir/UtilitiesTOT.cc.o tests/CMakeFiles/tests.dir/WorkStealingSchedulerTOT.cc.o | lib/libgtest_maind.a src/libasync.a lib/libgtestd.a src/spawnsync/libspawnsync.a || lib/libgtest_maind.a lib/libgtestd.a src/libasync.a src/spawnsync/libspawnsync.a
   FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk
   LINK_LIBRARIES = -Wl,-rpath,/Users/wjp/Desktop/workspace/libasync/libasync/./src lib/libgtest_maind.a src/libasync.a lib/libgtestd.a src/spawnsync/libspawnsync.a
   LINK_PATH = -L/Users/wjp/Desktop/workspace/libasync/libasync/./src

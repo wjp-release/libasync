@@ -278,12 +278,15 @@ void worksteal10(){
     println("SumTree(12) result="+std::to_string(w->join()));
 }
 
+// Pipable semantics
 void worksteal11(){
-    
+    WorkStealingScheduler scheduler;
+
+
 }
 
 void worksteal(){
-    worksteal10();
+    worksteal11();
 }
 
 

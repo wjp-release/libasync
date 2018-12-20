@@ -58,6 +58,7 @@ if(MSVC)
 	set(CMAKE_CXX_FLAGS "/W4 /EHsc")
 endif()
 
+include_directories(./include)
 include_directories(./src/utils)
 include_directories(./src/spawnsync)
 include_directories(./src)

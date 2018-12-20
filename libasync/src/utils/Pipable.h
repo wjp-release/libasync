@@ -26,6 +26,9 @@
 #pragma once
 #include <functional>
 
+// Don't use this one!
+// Use boost::hof, which actually supports multiple arguments
+
 namespace wjp{
 
 template<class F>

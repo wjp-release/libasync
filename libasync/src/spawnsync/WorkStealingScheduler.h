@@ -146,10 +146,6 @@ public:
     }
 
     // Fork/Join extensions of FuturisticTask
-    // You can use Callable<R>::bind, together with submit/get functions, 
-    // to handle this ForkJoinTask in the exact same way you handle a FuturisticTask. 
-    // Or you can use scheduler_aware_bind and fork/join functions, which allows 
-    // creation of child tasks in user-supplied callable functions.
     template< class R >
     class ForkJoinTask : public FuturisticTask<R> {
     public:
@@ -160,11 +156,8 @@ public:
 		    FuturisticTask<R>::operator=(nullptr);
 		    return *this;
 	    }
-
-
         // Quiet version of join. It does not throw. You can tell it's failed if optional<R> is empty.
         std::optional<R> join_quietly(){ 
-            assert(is_scheduler_aware_binded);
             WorkStealingScheduler& scheduler=FuturisticTask<R>::scheduler.get();
             // External join() behaves exactly like get() except that the task must be scheduler-aware binded
             if(scheduler.is_called_from_external()){
@@ -184,7 +177,6 @@ public:
 
         // Note that worker threads are not supposed to stall by nature. If called from worker thread, join() will steal back tasks from its stealers to avoid deadlock and accelerate the completion of this task's child tasks. 
         R join(){ 
-            assert(is_scheduler_aware_binded);
             WorkStealingScheduler& scheduler=FuturisticTask<R>::scheduler.get();
             // External join() behaves exactly like get() except that the task must be scheduler-aware binded
             if(scheduler.is_called_from_external()){
@@ -211,16 +203,11 @@ public:
             // The type of FuturisticTask<R>::scheduler is std::reference_wapper<WorkStealingScheduler>,
             // but the first argument of F should be WorkStealingScheduler&.  
             Callable<R>::bind(std::forward<F>(f), FuturisticTask<R>::scheduler, std::forward<Args>(args)...);
-            is_scheduler_aware_binded = true;   
         }
 
-        // The task is forkable/joinable only if it has been scheduler-aware binded.
         void fork(){
-            assert(is_scheduler_aware_binded);
             FuturisticTask<R>::submit();
         }
-    protected:
-        bool is_scheduler_aware_binded = false;
     };
 
     // Note that this function should usually be called in worker thread. 
@@ -229,7 +216,6 @@ public:
         return std::make_shared<ForkJoinTask<R>>(*this);
     }
 
-    
     template< class R, class F, class... Args, class=std::enable_if_t<(std::is_invocable<F, WorkStealingScheduler&, Args...>{})>>
     std::shared_ptr<ForkJoinTask<R>> spawn(F&& f, Args&&... args){
         auto subtask=create_forkjoin_task<R>();
@@ -238,26 +224,10 @@ public:
         return subtask;
     }
 
-
-
-
 private:
     std::unique_ptr<WorkStealingWorkerPool> pool;
 };
 
-
-
-template<class R>
-struct evil_spawn_f
-{
-    template<class F, class... Args, class=std::enable_if_t<(std::is_invocable<F, WorkStealingScheduler&, Args...>{})>>
-    std::shared_ptr<WorkStealingScheduler::ForkJoinTask<R>> operator()(F&& f, WorkStealingScheduler& sched,  Args&&... args)const{
-        auto subtask=sched.create_forkjoin_task<R>();
-        subtask->scheduler_aware_bind(std::forward<F>(f),std::forward<Args>(args)...);
-        subtask->fork(); 
-        return subtask;
-    }
-};
 
 
 }

@@ -27,5 +27,16 @@
 
 namespace wjp {
 
+static WorkStealingScheduler* scheduler=nullptr;
+
+void register_scheduler(WorkStealingScheduler&s)
+{
+    scheduler=&s;
+}
+
+WorkStealingScheduler& get_scheduler()
+{
+    return *scheduler;
+}
 
 }

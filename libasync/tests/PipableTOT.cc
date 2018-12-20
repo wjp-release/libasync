@@ -1,5 +1,6 @@
 #include "gtest/gtest.h"
 #include "Internal.h"
+#include "Pipable.h" 
 
 using namespace wjp;
 

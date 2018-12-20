@@ -62,6 +62,5 @@ using namespace std::chrono_literals;  //100ms == std::chrono::milliseconds{100}
 #include "WorkStealingWorkerPool.h"
 #include "WorkStealingScheduler.h"
 #include "ConcurrentPrint.h"
-#include "Async.h"
-#include "Pipable.h"
+// #include "Pipable.h" //obsolete
 #include "Array.h"
