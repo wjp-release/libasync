@@ -81,12 +81,19 @@ std::string WorkStealingWorker::stat(){
     return ss.str();
 }
 
-// The join_routine() does not take newly submitted tasks from submission buffer, 
-// as its purpose is to accelerate completion of the joined parent task. 
+// The join_routine() does not take newly submitted tasks from submission buffer
+// It tries to find a task to run to accelerate completion of the joined parent task
 void WorkStealingWorker::join_routine(){
+    simple_frogleaping();
+}
+
+// Note that simple_frogleaping() does not check task depth or cyclic dependency. 
+// Vast vast majority of task family doesn't have cycles though, unless you deliberately create them, which is not exactly a natural way to program anyway.
+void WorkStealingWorker::simple_frogleaping(){
     std::shared_ptr<Task> task=deque->take();  
     if(task==nullptr){
         WorkStealingWorkerPool& mypool=pool.get(); 
+        // stealing back subtasks of the stolen task
         task = steal_from(mypool.get_worker(who_steals_from_me_index).get());
         if(task==nullptr){
             task= steal_a_task();
@@ -95,6 +102,7 @@ void WorkStealingWorker::join_routine(){
     }
     task->execute(); 
 }
+
 
 void WorkStealingWorker::routine(){
     if(blocked){

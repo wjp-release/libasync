@@ -95,8 +95,7 @@ namespace wjp{
         w->bind(bee{}, 1,2,3);
         scheduler.submit(w);
         try{
-            auto res=w->get();
-            int x=res.value_or(-100);
+            auto x=w->get();
             std::cout<<"now we get x="<<x<<std::endl;
             assert(x==123);
         }catch(std::exception& e){

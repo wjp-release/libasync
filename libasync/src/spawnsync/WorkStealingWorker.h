@@ -56,6 +56,9 @@ public:
     // Worker threads do not wait/stall during join(). Instead they will run join_routine and check if the joined task is finished after each join_routine(). The join_routine never blocks.
     void join_routine();
 protected:
+    // The default implementation of the join_routine.
+    // A simplified version of "Frogleaping: A Portable Technique for Implementing Efficient Futures" 
+    void simple_frogleaping(); 
     bool is_idle()noexcept{return when_idle_begins.has_value();}
     void becomes_idle(){when_idle_begins=now();} 
     void becomes_busy(){when_idle_begins.reset();}

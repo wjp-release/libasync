@@ -95,12 +95,13 @@ public:
         }
 
         // A future-like interface to get fulfilled value or rejected reason
-        std::optional<R> get(){ 
+        R get(){ 
             wait();
             if(reason){
                  std::rethrow_exception(reason);
             }
-            return value; // Could be empty if error happens during execution
+            assert(value.has_value());
+            return value.value(); // Could be empty if error happens during execution
         }
 
         // Does not throw. Get an empty value on failure.
@@ -160,8 +161,9 @@ public:
 		    return *this;
 	    }
 
-        // Note that worker threads are not supposed to stall by nature. If called from worker thread, join() will steal back tasks from its stealers to avoid deadlock and accelerate the completion of this task's child tasks. 
-        std::optional<R> join(){ 
+
+        // Quiet version of join. It does not throw. You can tell it's failed if optional<R> is empty.
+        std::optional<R> join_quietly(){ 
             assert(is_scheduler_aware_binded);
             WorkStealingScheduler& scheduler=FuturisticTask<R>::scheduler.get();
             // External join() behaves exactly like get() except that the task must be scheduler-aware binded
@@ -175,13 +177,32 @@ public:
                 while(!FuturisticTask<R>::finished){ 
                     worker.join_routine(); // helping other workers finish 
                 }
-                
+            }
+            return FuturisticTask<R>::value; // Could be empty if error happens during execution
+        }
 
+
+        // Note that worker threads are not supposed to stall by nature. If called from worker thread, join() will steal back tasks from its stealers to avoid deadlock and accelerate the completion of this task's child tasks. 
+        R join(){ 
+            assert(is_scheduler_aware_binded);
+            WorkStealingScheduler& scheduler=FuturisticTask<R>::scheduler.get();
+            // External join() behaves exactly like get() except that the task must be scheduler-aware binded
+            if(scheduler.is_called_from_external()){
+                FuturisticTask<R>::wait();
+            }else{  // worker thread's join() must be lock-free! 
+                // we can't sit here and wait, try to do some work, like stealing back ... 
+                // otherwise the concurrency of this thread will be lost, 
+                // the entire system will easily fall into deadlock as well.
+                WorkStealingWorker& worker=scheduler.get_worker().get();
+                while(!FuturisticTask<R>::finished){ 
+                    worker.join_routine(); // helping other workers finish 
+                }
             }
             if(FuturisticTask<R>::reason){
                 std::rethrow_exception(FuturisticTask<R>::reason);
             }
-            return FuturisticTask<R>::value; // Could be empty if error happens during execution
+            assert(FuturisticTask<R>::value.has_value());
+            return FuturisticTask<R>::value.value(); // Could be empty if error happens during execution
         }
 
         // ForkJoinTask callable now tasks the reference to the WorkStealingScheduler as its 1st argument.

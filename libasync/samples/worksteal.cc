@@ -85,7 +85,7 @@ void worksteal4(){
         auto w = scheduler.create_forkjoin_task<int>();
         w->scheduler_aware_bind(bee{},1,2,3);
         w->fork();
-        w->join(); // Tasks are run in completely synchronous mode now.
+        w->join_quietly(); // Tasks are run in completely synchronous mode now.
         int result=w->get_quietly().value_or(0); // expect 123  
         println("Task"+std::to_string(i)+" result="+std::to_string(result));
     }
@@ -144,31 +144,133 @@ void worksteal6(){
 
 
 // Fork/Join
-// ~ Fibonacci ~
-// Calculation is deliberately delayed to make worksteal pool stats observable to the periodic monitor
+// ~ SumTree ~
+// Each task spawns one child task
 void worksteal7(){
+    WorkStealingScheduler scheduler;
+    struct SumTree{  
+        int operator()(WorkStealingScheduler& scheduler, int x){
+            // Calculation is deliberately delayed to make worksteal pool stats observable to the periodic monitor
+            sleep(1000); 
+            if(x==2) return 3;
+            println("sum"+std::to_string(x));
+            auto c1=scheduler.create_forkjoin_task<int>();
+            c1->scheduler_aware_bind(SumTree{},x-1);
+            c1->fork(); // c1 should be directly pushed into deque
+            int result=c1->join_quietly().value_or(0);
+            return x+result;
+        }
+    };
+    auto w = scheduler.create_forkjoin_task<int>();
+    w->scheduler_aware_bind(SumTree{},12);
+    w->fork(); // external fork
+    int result=w->join_quietly().value_or(0);
+    println("SumTree(12) result="+std::to_string(result));
+}
+
+
+// Fork/Join
+// ~ Fibonacci Example ~
+// Each task spawns 2 child tasks. 
+void worksteal8(){
     WorkStealingScheduler scheduler;
     struct Fibonacci{  
         int operator()(WorkStealingScheduler& scheduler, int x){
-            sleep(1000); // one layer deeper per second
-            if(x==2) return 3;
+            if(x==1) return 1;
+            if(x==2) return 1;
             println("fib"+std::to_string(x));
             auto c1=scheduler.create_forkjoin_task<int>();
             c1->scheduler_aware_bind(Fibonacci{},x-1);
-            c1->fork(); // c1 should be directly pushed into deque
-            int result=c1->join().value_or(0);
-            return x+result;
+            c1->fork(); 
+            auto c2=scheduler.create_forkjoin_task<int>();
+            c2->scheduler_aware_bind(Fibonacci{},x-2);
+            c2->fork(); 
+            int v1=c1->join_quietly().value_or(0);
+            int v2=c2->join_quietly().value_or(0);
+            return v1+v2;
         }
     };
     auto w = scheduler.create_forkjoin_task<int>();
     w->scheduler_aware_bind(Fibonacci{},12);
     w->fork(); // external fork
-    int result=w->join().value_or(0);
+    int result=w->join_quietly().value_or(0);
     println("Fibonacci(12) result="+std::to_string(result));
 }
 
+template <typename RandomIt>
+int std_ps(RandomIt beg, RandomIt end)
+{
+    auto len = end - beg;
+    if (len < 1000) return std::accumulate(beg, end, 0);
+    RandomIt mid = beg + len/2;
+    auto handle = std::async(std::launch::async, std_ps<RandomIt>, mid, end);
+    int sum = std_ps(beg, mid);
+    return sum + handle.get();
+}
+
+// parallel_sum
+// https://en.cppreference.com/w/cpp/thread/async
+template <typename RandomIt>
+int parallel_sum(WorkStealingScheduler& scheduler, RandomIt beg, RandomIt end)
+{
+    auto len = end - beg;
+    if (len < 1000) return std::accumulate(beg, end, 0);
+    RandomIt mid = beg + len/2;
+
+    auto w = scheduler.create_forkjoin_task<int>();  
+    w->scheduler_aware_bind(parallel_sum<RandomIt>, mid, end);
+    w->fork(); 
+
+    int sum = parallel_sum(scheduler, beg, mid);
+    return sum + w->join_quietly().value();
+}
+
+// Fork/Join
+// Parallel Sum
+// I beat C++ standard lib!
+// std::async version: 86ms,73ms,86ms,86ms,73ms
+// my version:         14ms,15ms,13ms,22ms,22ms
+#define workload_size 1000000
+void worksteal9()
+{
+    // init workload 100k 
+    std::vector<int> v(workload_size);
+    for(int i=0;i<workload_size;i++){
+        v[i]=randint<0,10>();
+    }
+    // serial sum
+    time_point serial_start=now();
+    int serial_sum=0;
+    for(int i=0;i<workload_size;i++){
+        serial_sum+=v[i];
+    }
+    int serial_elapsed=ms_elapsed_count(serial_start);
+    println("forloop sum="+std::to_string(serial_sum)+", elapsed="+std::to_string(serial_elapsed)+"ms");
+    // std::accumulate
+    serial_start=now();
+    serial_sum=std::accumulate(v.begin(), v.end(), 0);
+    serial_elapsed=ms_elapsed_count(serial_start);
+    println("std::accumulate sum="+std::to_string(serial_sum)+", elapsed="+std::to_string(serial_elapsed)+"ms");
+
+    // parallel sum
+    WorkStealingScheduler scheduler; 
+    time_point start=now();
+    int sum=parallel_sum(scheduler, v.begin(), v.end());
+    int elapsed=ms_elapsed_count(start);
+    println("worksteal sum="+std::to_string(sum)+", elapsed="+std::to_string(elapsed)+"ms");
+    // std::async
+    time_point start2=now();
+    int sum2=std_ps(v.begin(), v.end());
+    int elapsed2=ms_elapsed_count(start2);
+    println("async sum="+std::to_string(sum2)+", elapsed="+std::to_string(elapsed2)+"ms");
+}
+
+
+
+
+
 void worksteal(){
-    worksteal7();
+    worksteal9();
 }
 
 
