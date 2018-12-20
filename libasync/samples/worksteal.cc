@@ -265,12 +265,23 @@ void worksteal9()
     println("async sum="+std::to_string(sum2)+", elapsed="+std::to_string(elapsed2)+"ms");
 }
 
-
+// Less verbose semantics 
+void worksteal10(){
+    WorkStealingScheduler scheduler;
+    struct SumTree{  
+        int operator()(WorkStealingScheduler& scheduler, int x){
+            if(x==2) return 3;
+            return x+scheduler.spawn<int>(SumTree{},x-1)->join();
+        }
+    };
+    auto w = scheduler.spawn<int>(SumTree{},12);
+    println("SumTree(12) result="+std::to_string(w->join()));
+}
 
 
 
 void worksteal(){
-    worksteal9();
+    worksteal10();
 }
 
 

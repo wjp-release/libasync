@@ -9,8 +9,8 @@ provides high level building blocks for asynchronous computation in latest C++
 #### Fast
 Accumulating 1 million random integers using libasync is 5 times faster than using std::async. (see https://en.cppreference.com/w/cpp/thread/async)
 
-#### Cool
-You can write async functions using pipe-like semantics. 
+#### Evil
+You can write async functions using pipe-like semantics. (yep you need C++17)
 
 
 

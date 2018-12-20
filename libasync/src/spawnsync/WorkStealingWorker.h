@@ -30,6 +30,9 @@
 #include <chrono>
 #include <optional>
 #include <cassert>
+#include <thread>
+#include <condition_variable>
+#include <mutex>
 #include "ChaseLevDeque.h"
 #include "SubmissionBuffer.h"
 #include "Task.h"

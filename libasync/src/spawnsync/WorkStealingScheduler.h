@@ -229,10 +229,19 @@ public:
         return std::make_shared<ForkJoinTask<R>>(*this);
     }
 
+    
+    template< class R, class F, class... Args, class=std::enable_if_t<(std::is_invocable<F, WorkStealingScheduler&, Args...>{})>>
+    std::shared_ptr<ForkJoinTask<R>> spawn(F&& f, Args&&... args){
+        auto subtask=create_forkjoin_task<R>();
+        subtask->scheduler_aware_bind(std::forward<F>(f),std::forward<Args>(args)...);
+        subtask->fork(); 
+        return subtask;
+    }
 
 private:
     std::unique_ptr<WorkStealingWorkerPool> pool;
 };
+
 
 
 }
