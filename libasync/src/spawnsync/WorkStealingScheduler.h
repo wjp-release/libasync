@@ -30,6 +30,7 @@
 #include <vector>
 #include <mutex>
 #include <condition_variable>
+#include <atomic>
 
 #include "WorkStealingWorkerPool.h"
 #include "ChaseLevDeque.h"
@@ -54,15 +55,17 @@ public:
     int nr_workers()const noexcept{
         return pool->nr_threads();
     }
-    // Deprecated. (Reserved for test compatibility) 
-    std::reference_wrapper<WorkStealingWorker> submit(std::shared_ptr<Task> task){
-        return sched(task);
-    }
     // Starts running on creation.
     WorkStealingScheduler();
     template< class R >
     class FuturisticTask : public Task, public Callable<R> {
     public:
+        enum TaskState: int {
+            freelance=0,  // in_pool --> cancel --> freelance
+            in_pool=1,
+            sched=2,
+            done=3,
+        };
         FuturisticTask(WorkStealingScheduler& sched):scheduler(sched)
         {}
 
@@ -73,25 +76,62 @@ public:
 	    }
         
         // Pushes this task to work deque or submission buffer
-        virtual void submit(){
+        virtual void submit() override{
+            assert(state==freelance);
+            ready_for_sched(); // set state to in_pool! 
             std::shared_ptr<Task> task=shared_from_this();
             scheduler.get().sched(task);
         }
 
-        // Blocks the calling thread until this task finishes
+        virtual bool is_waitable(){
+            bool s=state;
+            return (s==in_pool||s==sched);
+        }
+
+        // Blocks the calling thread until this task finishes. It doesn't wait for freelance or done tasks.
         virtual void wait() override{ 
-            std::unique_lock<std::mutex> lk(sync.mtx);
-			sync.cv.wait(lk, [this]{return finished;});
+            if(is_waitable()){
+                std::unique_lock<std::mutex> lk(sync.mtx);
+                sync.cv.wait(lk, [this]{return is_finished();});
+            } 
         }
         
         // Blocks the calling thread until this task finishes or timeout
         virtual void wait(std::chrono::milliseconds timeout) override{
-            std::unique_lock<std::mutex> lk(sync.mtx);
-			sync.cv.wait_for(lk, timeout, [this]{return finished;});
+            if(is_waitable()){
+                std::unique_lock<std::mutex> lk(sync.mtx);
+                sync.cv.wait_for(lk, timeout, [this]{return is_finished();});
+            }
+        }
+
+        // Lazy cancel: simpley remark a task as freelance. 
+        // Its container should ignore freelance tasks in their take()/steal() operations. 
+        virtual bool cancel() override{
+            if(state==in_pool){
+                state=freelance; 
+                return true;
+            }
+            return false; // damn too late
+        }
+
+        // You might want to recycle a task and resubmit it without creating a new task.
+        void recycle(){
+            state=freelance;
+            reason=nullptr;
+            value.reset();
+        }
+
+        // [Probably not often used] You may need this function if you want to submit this task to your custom schedulers. You must set state to in_pool before executing the task asynchronously.
+        void ready_for_sched(){
+            state=in_pool;
         }
 
         virtual bool is_finished() const noexcept override{
-            return finished;
+            return state==done;
+        }
+
+        virtual bool is_canceled() const noexcept override{
+            return state==freelance;
         }
 
         // A future-like interface to get fulfilled value or rejected reason
@@ -118,12 +158,12 @@ public:
             }catch(...){
                 reason=std::current_exception();
             }
-            finished=true;
+            state=done;
             sync.cv.notify_all(); 
         }
 
     protected:
-        bool finished=false; 
+        int state = freelance;
         // Sync is a copy/move constructible & copy/move assignable collection of data members that should not actually be copied or move, e.g., mutex and convars. By doing this trick, the FuturisticTask class can reuse Callable's copy/move constructors and assignment operators.
         struct Sync{ 
             Sync(){} 
@@ -167,7 +207,7 @@ public:
                 // otherwise the concurrency of this thread will be lost, 
                 // the entire system will easily fall into deadlock as well.
                 WorkStealingWorker& worker=scheduler.get_worker().get();
-                while(!FuturisticTask<R>::finished){ 
+                while(!FuturisticTask<R>::is_finished()){ 
                     worker.join_routine(); // helping other workers finish 
                 }
             }
@@ -186,7 +226,7 @@ public:
                 // otherwise the concurrency of this thread will be lost, 
                 // the entire system will easily fall into deadlock as well.
                 WorkStealingWorker& worker=scheduler.get_worker().get();
-                while(!FuturisticTask<R>::finished){ 
+                while(!FuturisticTask<R>::is_finished()){ 
                     worker.join_routine(); // helping other workers finish 
                 }
             }
@@ -205,6 +245,7 @@ public:
             Callable<R>::bind(std::forward<F>(f), FuturisticTask<R>::scheduler, std::forward<Args>(args)...);
         }
 
+        // ForkJoinTask's alias for submit()
         void fork(){
             FuturisticTask<R>::submit();
         }

@@ -35,8 +35,9 @@ namespace wjp {
 		virtual void wait() = 0;
 		virtual void wait(std::chrono::milliseconds timeout) = 0;
 		virtual bool is_finished() const noexcept = 0;  
-		// virtual void cancel() = 0;
-		// virtual bool is_canceled() = 0;  //@todo: support cancellable task in future
+		virtual bool cancel() = 0; // Returns true on success
+		virtual bool is_canceled() const noexcept = 0;  
+		virtual void submit() = 0;
 		virtual ~Task() {}
 	};
 }

@@ -429,6 +429,12 @@ build tests/CMakeFiles/tests.dir/CallableTOT.cc.o: CXX_COMPILER__tests ../tests/
   INCLUDES = -I.././include -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
   OBJECT_DIR = tests/CMakeFiles/tests.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
+build tests/CMakeFiles/tests.dir/CancelTaskTOT.cc.o: CXX_COMPILER__tests ../tests/CancelTaskTOT.cc || cmake_object_order_depends_target_tests
+  DEP_FILE = tests/CMakeFiles/tests.dir/CancelTaskTOT.cc.o.d
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=gnu++1z
+  INCLUDES = -I.././include -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
+  OBJECT_DIR = tests/CMakeFiles/tests.dir
+  OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
 build tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.o: CXX_COMPILER__tests ../tests/ChaseLevDequeTOT.cc || cmake_object_order_depends_target_tests
   DEP_FILE = tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.o.d
   FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=gnu++1z
@@ -497,7 +503,7 @@ build tests/CMakeFiles/tests.dir/WorkStealingSchedulerTOT.cc.o: CXX_COMPILER__te
 #############################################
 # Link the executable tests/tests
 
-build tests/tests: CXX_EXECUTABLE_LINKER__tests tests/CMakeFiles/tests.dir/ArrayTOT.cc.o tests/CMakeFiles/tests.dir/AsyncTOT.cc.o tests/CMakeFiles/tests.dir/CallableTOT.cc.o tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.o tests/CMakeFiles/tests.dir/FixedThreadPoolTOT.cc.o tests/CMakeFiles/tests.dir/FuturisticTaskTOT.cc.o tests/CMakeFiles/tests.dir/HofTOT.cc.o tests/CMakeFiles/tests.dir/PipableTOT.cc.o tests/CMakeFiles/tests.dir/SpawnSyncTaskTOT.cc.o tests/CMakeFiles/tests.dir/SubmissionBufferTOT.cc.o tests/CMakeFiles/tests.dir/SystemIntegrationTOT.cc.o tests/CMakeFiles/tests.dir/UtilitiesTOT.cc.o tests/CMakeFiles/tests.dir/WorkStealingSchedulerTOT.cc.o | lib/libgtest_maind.a src/libasync.a lib/libgtestd.a src/spawnsync/libspawnsync.a || lib/libgtest_maind.a lib/libgtestd.a src/libasync.a src/spawnsync/libspawnsync.a
+build tests/tests: CXX_EXECUTABLE_LINKER__tests tests/CMakeFiles/tests.dir/ArrayTOT.cc.o tests/CMakeFiles/tests.dir/AsyncTOT.cc.o tests/CMakeFiles/tests.dir/CallableTOT.cc.o tests/CMakeFiles/tests.dir/CancelTaskTOT.cc.o tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.o tests/CMakeFiles/tests.dir/FixedThreadPoolTOT.cc.o tests/CMakeFiles/tests.dir/FuturisticTaskTOT.cc.o tests/CMakeFiles/tests.dir/HofTOT.cc.o tests/CMakeFiles/tests.dir/PipableTOT.cc.o tests/CMakeFiles/tests.dir/SpawnSyncTaskTOT.cc.o tests/CMakeFiles/tests.dir/SubmissionBufferTOT.cc.o tests/CMakeFiles/tests.dir/SystemIntegrationTOT.cc.o tests/CMakeFiles/tests.dir/UtilitiesTOT.cc.o tests/CMakeFiles/tests.dir/WorkStealingSchedulerTOT.cc.o | lib/libgtest_maind.a src/libasync.a lib/libgtestd.a src/spawnsync/libspawnsync.a || lib/libgtest_maind.a lib/libgtestd.a src/libasync.a src/spawnsync/libspawnsync.a
   FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk
   LINK_LIBRARIES = -Wl,-rpath,/Users/wjp/Desktop/workspace/libasync/libasync/./src lib/libgtest_maind.a src/libasync.a lib/libgtestd.a src/spawnsync/libspawnsync.a
   LINK_PATH = -L/Users/wjp/Desktop/workspace/libasync/libasync/./src

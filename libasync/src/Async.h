@@ -48,6 +48,7 @@ struct spawn_functor
 {
     // F is a callable object(function, functor, lambda, etc.) 
     // that can be invoked with (WorkStealingScheduler&, Args...)
+    // todo: parse return type of F
     template<class F, class... Args, class=std::enable_if_t<(std::is_invocable<F, Args...>{})>>
     std::shared_ptr<WorkStealingScheduler::ForkJoinTask<R>> operator()(F&& f, Args&&... args) const
     {

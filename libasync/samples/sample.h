@@ -34,6 +34,7 @@ namespace wjp{
         A(const std::string& str):x(str){}
         std::string x;
     };
+
     static inline void deque_sample(){
         ChaseLevDeque<A>* q=new ChaseLevDeque<A>(4);  
         for(int i=1;i<=100;i++){
@@ -44,15 +45,10 @@ namespace wjp{
         delete q;
     }
 
-	
-
-
 	static inline void 	cpplatest() {
 		std::any a = 1;
 		std::cout << std::any_cast<int>(a) << std::endl;
 	}
-
-	
 
     struct Bobo{
         Bobo(int n) : threads(n), workers(n)
@@ -83,7 +79,6 @@ namespace wjp{
         }
 	}
 
-
     static inline void worksteal_test(){
         WorkStealingScheduler scheduler;
         struct bee{
@@ -93,7 +88,7 @@ namespace wjp{
         };
         auto w = scheduler.create_futuristic_task<int>();
         w->bind(bee{}, 1,2,3);
-        scheduler.submit(w);
+        w->submit();
         try{
             auto x=w->get();
             std::cout<<"now we get x="<<x<<std::endl;

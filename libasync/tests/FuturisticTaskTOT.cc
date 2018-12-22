@@ -70,6 +70,7 @@ TEST_F(FuturisticTaskTOT, SimulationWait) {
 	};
 	auto w = global->create_futuristic_task<int>();
 	w->bind(bee{}, 1,2,3);
+	w->ready_for_sched();
 	std::thread([=]{
 		sleep(30);
 		w->execute();
@@ -87,6 +88,7 @@ TEST_F(FuturisticTaskTOT, SimulationGetSuccess) {
 	};
 	auto w = global->create_futuristic_task<int>();
 	w->bind(bee{}, 1,2,3);
+	w->ready_for_sched();
 	std::thread([=]{
 		sleep(30);
 		w->execute();
@@ -106,6 +108,7 @@ TEST_F(FuturisticTaskTOT, SimulationGetFailure) {
 	};
 	auto w = global->create_futuristic_task<int>();
 	w->bind(bee{}, 1,2,3);
+	w->ready_for_sched();
 	std::thread([=]{
 		w->execute(); // will throw "damn x==1!"
 	}).detach();

@@ -1,0 +1,8 @@
+include_directories(../libasync/src)
+link_directories(../libasync/build/src/)
+include_directories(/usr/local/tbb/include/tbb)
+link_directories(/usr/local/tbb/lib) 
+aux_source_directory(. BENCHMARKSDIRSRCS)
+add_executable(benchmarks ${BENCHMARKSDIRSRCS})
+find_package(TBB REQUIRED tbb)
+target_link_libraries(benchmarks async TBB::tbb)

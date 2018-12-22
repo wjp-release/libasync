@@ -49,6 +49,18 @@ public:
         task_list.erase(it);
         return true;
     }
+    // Ignores canceled tasks.                 
+    std::shared_ptr<T> steal_ignore_canceled() {
+        std::shared_ptr<T> task=steal();
+        while(task!=nullptr){
+            if(task->is_canceled()){
+                task=steal();
+            }else{
+                break;
+            }
+        }
+        return task;
+    }
     // Tries to steal an oldest task at front.
     std::shared_ptr<T> steal(){
         std::lock_guard<std::mutex> lk(mtx); 

@@ -83,7 +83,31 @@ public:
     // Utterly unsafe; should only be used for debugging/monitoring.
     uint64_t                            size() noexcept{
         return bottom.load()-top.load();
-    }                         
+    }        
+    // Ignores canceled tasks.                 
+    std::shared_ptr<T>					take_ignore_canceled() {
+        std::shared_ptr<T> task=take();
+        while(task!=nullptr){
+            if(task->is_canceled()){
+                task=take();
+            }else{
+                break;
+            }
+        }
+        return task;
+    }
+    // Ignores canceled tasks.                 
+    std::shared_ptr<T>					steal_ignore_canceled() {
+        std::shared_ptr<T> task=steal();
+        while(task!=nullptr){
+            if(task->is_canceled()){
+                task=steal();
+            }else{
+                break;
+            }
+        }
+        return task;
+    }
     // Tries to take a recently pushed task. It should only be called from the owning thread.
     std::shared_ptr<T>					take() {
         auto b=bottom.load(std::memory_order_relaxed)-1;

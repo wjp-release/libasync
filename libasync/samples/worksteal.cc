@@ -19,7 +19,7 @@ void worksteal1(){
     for(int i=0;i<50;i++){
         auto w = scheduler.create_futuristic_task<int>();
         w->bind(bee{}, 1,2,3);
-        scheduler.submit(w);
+        w->submit();
         sleep(100);
     }
 }
@@ -40,7 +40,7 @@ void worksteal2(){
     for(int i=0;i<50;i++){
         auto w = scheduler.create_futuristic_task<int>();
         w->bind(bee{}, 1,2,3);
-        scheduler.submit(w);
+        w->submit();
         sleep(100);
     }
 }

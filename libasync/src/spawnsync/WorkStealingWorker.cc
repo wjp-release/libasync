@@ -90,7 +90,7 @@ void WorkStealingWorker::join_routine(){
 // Note that simple_frogleaping() does not check task depth or cyclic dependency. 
 // Vast vast majority of task family doesn't have cycles though, unless you deliberately create them, which is not exactly a natural way to program anyway.
 void WorkStealingWorker::simple_frogleaping(){
-    std::shared_ptr<Task> task=deque->take();  
+    std::shared_ptr<Task> task=deque->take_ignore_canceled();  
     if(task==nullptr){
         WorkStealingWorkerPool& mypool=pool.get(); 
         // stealing back subtasks of the stolen task
@@ -144,7 +144,7 @@ bool WorkStealingWorker::idle_for_too_long(){
 }
 
 std::shared_ptr<Task> WorkStealingWorker::scan_next_task(){
-    auto task=deque->take();  
+    auto task=deque->take_ignore_canceled();  
     if(task==nullptr){
         return steal_a_task();
     }else{
@@ -153,7 +153,7 @@ std::shared_ptr<Task> WorkStealingWorker::scan_next_task(){
 }
 
 std::shared_ptr<Task> WorkStealingWorker::steal_a_task(){
-    std::shared_ptr<Task> task=buffer->steal();
+    std::shared_ptr<Task> task=buffer->steal_ignore_canceled();
     if(task!=nullptr) return task;
     WorkStealingWorkerPool& mypool=pool.get(); 
     int cap=mypool.nr_threads();
@@ -165,10 +165,10 @@ std::shared_ptr<Task> WorkStealingWorker::steal_a_task(){
 }
 
 std::shared_ptr<Task> WorkStealingWorker::steal_from(WorkStealingWorker& target){
-    auto t=target.deque->steal();
+    auto t=target.deque->steal_ignore_canceled();
     if(t!=nullptr) return t;
     target.who_steals_from_me_index=index;  
-    return target.buffer->steal();
+    return target.buffer->steal_ignore_canceled();
 }
 
 // Block Immunity Strategy
