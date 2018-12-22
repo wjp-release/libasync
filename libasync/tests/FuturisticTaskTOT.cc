@@ -3,6 +3,12 @@
 
 using namespace wjp;
 
+// This testsuit executes FuturisticTask simply in a thread
+// to avoid dependency on the complicated work-stealing scheduler/worker/pool.
+
+// You must call ready_for_sched before asynchronous execution though, 
+// otherwise libasync assumes you intends to execute the freelance task in your current thread. 
+
 class FuturisticTaskTOT : public ::testing::Test {
 protected:
 	FuturisticTaskTOT() {
