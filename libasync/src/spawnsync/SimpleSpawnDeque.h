@@ -33,11 +33,11 @@
 namespace wjp{
 
 template <class T>
-class SubmissionBuffer
+class SimpleSpawnDeque
 {
 public:
     // Pushes a task to back.
-    void submit(std::shared_ptr<T> task){
+    void push(std::shared_ptr<T> task){
         std::lock_guard<std::mutex> lk(mtx);
         task_list.push_back(task);
     }
@@ -48,6 +48,19 @@ public:
         if(it==task_list.end()) return false;
         task_list.erase(it);
         return true;
+    }
+    // Ignores canceled tasks.                 
+    std::shared_ptr<T> take_ignore_canceled() {
+        std::shared_ptr<T> task=take();
+        while(task!=nullptr){
+            if(task->is_canceled()){
+                task=take();
+            }else{
+                break;
+            }
+        }
+        if(task!=nullptr)task->to_sched();
+        return task;
     }
     // Ignores canceled tasks.                 
     std::shared_ptr<T> steal_ignore_canceled() {
@@ -68,6 +81,14 @@ public:
         if(task_list.empty()) return nullptr;
         auto task_ptr=task_list.front();
         task_list.pop_front();
+        return task_ptr;
+    }
+    // Tries to take a newest task at back.
+    std::shared_ptr<T> take(){
+        std::lock_guard<std::mutex> lk(mtx); 
+        if(task_list.empty()) return nullptr;
+        auto task_ptr=task_list.back();
+        task_list.pop_back();
         return task_ptr;
     }
     // Inefficient; should only be used for debugging/monitoring.

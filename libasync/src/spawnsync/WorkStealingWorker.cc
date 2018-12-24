@@ -33,8 +33,8 @@
 namespace wjp{
 
 WorkStealingWorker::WorkStealingWorker(WorkStealingWorkerPool& pool, int index) : 
-    index(index), pool(pool), deque(std::make_unique<ChaseLevDeque<Task>>()), 
-    buffer(std::make_unique<SubmissionBuffer<Task>>())
+    deque(std::make_unique<WorkerDeque<Task>>()), pool(pool),
+    buffer(std::make_unique<SubmissionBuffer<Task>>()), index(index)
 {}
 
 void WorkStealingWorker::spawn(std::shared_ptr<Task> task){

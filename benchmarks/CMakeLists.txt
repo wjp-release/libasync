@@ -13,13 +13,17 @@ if(MSVC)
 	set(CMAKE_CXX_FLAGS "/W4 /EHsc")
 endif()
 
+include_directories(../libasync/include)
 include_directories(../libasync/src)
+include_directories(../libasync/src/spawnsync)
+include_directories(../libasync/src/utils)
 include_directories(/usr/local/tbb/include/tbb)
 
+link_directories(../libasync/build/src/spawnsync)
 link_directories(../libasync/build/src/)
 link_directories(/usr/local/tbb/lib) 
 
 aux_source_directory(. BENCHMARKSDIRSRCS)
 add_executable(benchmarks ${BENCHMARKSDIRSRCS})
 find_package(TBB REQUIRED tbb)
-target_link_libraries(benchmarks async TBB::tbb)
+target_link_libraries(benchmarks async spawnsync TBB::tbb)

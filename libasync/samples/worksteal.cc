@@ -227,13 +227,10 @@ int parallel_sum(WorkStealingScheduler& scheduler, RandomIt beg, RandomIt end)
 
 // Fork/Join
 // Parallel Sum
-// I beat C++ standard lib!
-// std::async version: 86ms,73ms,86ms,86ms,73ms
-// my version:         14ms,15ms,13ms,22ms,22ms
-#define workload_size 1000000
+#define workload_size 10000000
 void worksteal9()
 {
-    // init workload 100k 
+    // init workload 
     std::vector<int> v(workload_size);
     for(int i=0;i<workload_size;i++){
         v[i]=randint<0,10>();
@@ -286,7 +283,7 @@ void worksteal11(){
 }
 
 void worksteal(){
-    worksteal11();
+    worksteal9();
 }
 
 

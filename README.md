@@ -5,14 +5,6 @@
 
 provides high level building blocks for asynchronous computation in latest C++
 
-## Why libasync?
-#### Fast
-Accumulating 1 million random integers using libasync is 5 times faster than using std::async. (see https://en.cppreference.com/w/cpp/thread/async)
-
-#### Evil
-You can write async functions using pipe-like semantics. (yep you need C++17)
-
-
 
 ## How to use libasync
 
@@ -20,4 +12,4 @@ You can write async functions using pipe-like semantics. (yep you need C++17)
 2) then use `add_subdirectory(libasync)` to build it as a part of your project,
 3) use `include_directories(./libasync/libasync/src/)` and `link_directories(./libasync/libasync/src/)` to set include and link paths.
 
-## 
+

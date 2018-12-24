@@ -28,22 +28,22 @@ The CXX compiler identification is AppleClang, found in "/Users/wjp/Desktop/work
 Determining if the C compiler works passed with the following output:
 Change Dir: /Users/wjp/Desktop/workspace/libasync/benchmarks/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/opt/local/bin/ninja" "cmTC_fddfb"
-[1/2] Building C object CMakeFiles/cmTC_fddfb.dir/testCCompiler.c.o
-[2/2] Linking C executable cmTC_fddfb
+Run Build Command:"/opt/local/bin/ninja" "cmTC_5cc9a"
+[1/2] Building C object CMakeFiles/cmTC_5cc9a.dir/testCCompiler.c.o
+[2/2] Linking C executable cmTC_5cc9a
 
 
 Detecting C compiler ABI info compiled with the following output:
 Change Dir: /Users/wjp/Desktop/workspace/libasync/benchmarks/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/opt/local/bin/ninja" "cmTC_74a98"
-[1/2] Building C object CMakeFiles/cmTC_74a98.dir/CMakeCCompilerABI.c.o
-[2/2] Linking C executable cmTC_74a98
+Run Build Command:"/opt/local/bin/ninja" "cmTC_c3f5d"
+[1/2] Building C object CMakeFiles/cmTC_c3f5d.dir/CMakeCCompilerABI.c.o
+[2/2] Linking C executable cmTC_c3f5d
 Apple LLVM version 10.0.0 (clang-1000.10.44.4)
 Target: x86_64-apple-darwin18.2.0
 Thread model: posix
 InstalledDir: /Library/Developer/CommandLineTools/usr/bin
- "/Library/Developer/CommandLineTools/usr/bin/ld" -demangle -lto_library /Library/Developer/CommandLineTools/usr/lib/libLTO.dylib -dynamic -arch x86_64 -macosx_version_min 10.14.0 -syslibroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk -o cmTC_74a98 -search_paths_first -headerpad_max_install_names -v CMakeFiles/cmTC_74a98.dir/CMakeCCompilerABI.c.o -lSystem /Library/Developer/CommandLineTools/usr/lib/clang/10.0.0/lib/darwin/libclang_rt.osx.a
+ "/Library/Developer/CommandLineTools/usr/bin/ld" -demangle -lto_library /Library/Developer/CommandLineTools/usr/lib/libLTO.dylib -dynamic -arch x86_64 -macosx_version_min 10.14.0 -syslibroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk -o cmTC_c3f5d -search_paths_first -headerpad_max_install_names -v CMakeFiles/cmTC_c3f5d.dir/CMakeCCompilerABI.c.o -lSystem /Library/Developer/CommandLineTools/usr/lib/clang/10.0.0/lib/darwin/libclang_rt.osx.a
 @(#)PROGRAM:ld  PROJECT:ld64-409.12
 BUILD 17:47:51 Sep 25 2018
 configured to support archs: armv6 armv7 armv7s arm64 i386 x86_64 x86_64h armv6m armv7k armv7m armv7em
@@ -57,14 +57,14 @@ Parsed C implicit link information from above output:
   link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
   ignore line: [Change Dir: /Users/wjp/Desktop/workspace/libasync/benchmarks/build/CMakeFiles/CMakeTmp]
   ignore line: []
-  ignore line: [Run Build Command:"/opt/local/bin/ninja" "cmTC_74a98"]
-  ignore line: [[1/2] Building C object CMakeFiles/cmTC_74a98.dir/CMakeCCompilerABI.c.o]
-  ignore line: [[2/2] Linking C executable cmTC_74a98]
+  ignore line: [Run Build Command:"/opt/local/bin/ninja" "cmTC_c3f5d"]
+  ignore line: [[1/2] Building C object CMakeFiles/cmTC_c3f5d.dir/CMakeCCompilerABI.c.o]
+  ignore line: [[2/2] Linking C executable cmTC_c3f5d]
   ignore line: [Apple LLVM version 10.0.0 (clang-1000.10.44.4)]
   ignore line: [Target: x86_64-apple-darwin18.2.0]
   ignore line: [Thread model: posix]
   ignore line: [InstalledDir: /Library/Developer/CommandLineTools/usr/bin]
-  link line: [ "/Library/Developer/CommandLineTools/usr/bin/ld" -demangle -lto_library /Library/Developer/CommandLineTools/usr/lib/libLTO.dylib -dynamic -arch x86_64 -macosx_version_min 10.14.0 -syslibroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk -o cmTC_74a98 -search_paths_first -headerpad_max_install_names -v CMakeFiles/cmTC_74a98.dir/CMakeCCompilerABI.c.o -lSystem /Library/Developer/CommandLineTools/usr/lib/clang/10.0.0/lib/darwin/libclang_rt.osx.a]
+  link line: [ "/Library/Developer/CommandLineTools/usr/bin/ld" -demangle -lto_library /Library/Developer/CommandLineTools/usr/lib/libLTO.dylib -dynamic -arch x86_64 -macosx_version_min 10.14.0 -syslibroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk -o cmTC_c3f5d -search_paths_first -headerpad_max_install_names -v CMakeFiles/cmTC_c3f5d.dir/CMakeCCompilerABI.c.o -lSystem /Library/Developer/CommandLineTools/usr/lib/clang/10.0.0/lib/darwin/libclang_rt.osx.a]
     arg [/Library/Developer/CommandLineTools/usr/bin/ld] ==> ignore
     arg [-demangle] ==> ignore
     arg [-lto_library] ==> ignore, skip following value
@@ -77,11 +77,11 @@ Parsed C implicit link information from above output:
     arg [-syslibroot] ==> ignore
     arg [/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk] ==> ignore
     arg [-o] ==> ignore
-    arg [cmTC_74a98] ==> ignore
+    arg [cmTC_c3f5d] ==> ignore
     arg [-search_paths_first] ==> ignore
     arg [-headerpad_max_install_names] ==> ignore
     arg [-v] ==> ignore
-    arg [CMakeFiles/cmTC_74a98.dir/CMakeCCompilerABI.c.o] ==> ignore
+    arg [CMakeFiles/cmTC_c3f5d.dir/CMakeCCompilerABI.c.o] ==> ignore
     arg [-lSystem] ==> lib [System]
     arg [/Library/Developer/CommandLineTools/usr/lib/clang/10.0.0/lib/darwin/libclang_rt.osx.a] ==> lib [/Library/Developer/CommandLineTools/usr/lib/clang/10.0.0/lib/darwin/libclang_rt.osx.a]
   Library search paths: [;/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/usr/lib]
@@ -100,9 +100,9 @@ Parsed C implicit link information from above output:
 Detecting C [-std=c11] compiler features compiled with the following output:
 Change Dir: /Users/wjp/Desktop/workspace/libasync/benchmarks/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/opt/local/bin/ninja" "cmTC_5d65d"
-[1/2] Building C object CMakeFiles/cmTC_5d65d.dir/feature_tests.c.o
-[2/2] Linking C executable cmTC_5d65d
+Run Build Command:"/opt/local/bin/ninja" "cmTC_d42ff"
+[1/2] Building C object CMakeFiles/cmTC_d42ff.dir/feature_tests.c.o
+[2/2] Linking C executable cmTC_d42ff
 
 
     Feature record: C_FEATURE:1c_function_prototypes
@@ -114,9 +114,9 @@ Run Build Command:"/opt/local/bin/ninja" "cmTC_5d65d"
 Detecting C [-std=c99] compiler features compiled with the following output:
 Change Dir: /Users/wjp/Desktop/workspace/libasync/benchmarks/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/opt/local/bin/ninja" "cmTC_c2094"
-[1/2] Building C object CMakeFiles/cmTC_c2094.dir/feature_tests.c.o
-[2/2] Linking C executable cmTC_c2094
+Run Build Command:"/opt/local/bin/ninja" "cmTC_08ead"
+[1/2] Building C object CMakeFiles/cmTC_08ead.dir/feature_tests.c.o
+[2/2] Linking C executable cmTC_08ead
 
 
     Feature record: C_FEATURE:1c_function_prototypes
@@ -128,9 +128,9 @@ Run Build Command:"/opt/local/bin/ninja" "cmTC_c2094"
 Detecting C [-std=c90] compiler features compiled with the following output:
 Change Dir: /Users/wjp/Desktop/workspace/libasync/benchmarks/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/opt/local/bin/ninja" "cmTC_6effc"
-[1/2] Building C object CMakeFiles/cmTC_6effc.dir/feature_tests.c.o
-[2/2] Linking C executable cmTC_6effc
+Run Build Command:"/opt/local/bin/ninja" "cmTC_36f3d"
+[1/2] Building C object CMakeFiles/cmTC_36f3d.dir/feature_tests.c.o
+[2/2] Linking C executable cmTC_36f3d
 
 
     Feature record: C_FEATURE:1c_function_prototypes
@@ -140,22 +140,22 @@ Run Build Command:"/opt/local/bin/ninja" "cmTC_6effc"
 Determining if the CXX compiler works passed with the following output:
 Change Dir: /Users/wjp/Desktop/workspace/libasync/benchmarks/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/opt/local/bin/ninja" "cmTC_5278e"
-[1/2] Building CXX object CMakeFiles/cmTC_5278e.dir/testCXXCompiler.cxx.o
-[2/2] Linking CXX executable cmTC_5278e
+Run Build Command:"/opt/local/bin/ninja" "cmTC_1e561"
+[1/2] Building CXX object CMakeFiles/cmTC_1e561.dir/testCXXCompiler.cxx.o
+[2/2] Linking CXX executable cmTC_1e561
 
 
 Detecting CXX compiler ABI info compiled with the following output:
 Change Dir: /Users/wjp/Desktop/workspace/libasync/benchmarks/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/opt/local/bin/ninja" "cmTC_b5b2b"
-[1/2] Building CXX object CMakeFiles/cmTC_b5b2b.dir/CMakeCXXCompilerABI.cpp.o
-[2/2] Linking CXX executable cmTC_b5b2b
+Run Build Command:"/opt/local/bin/ninja" "cmTC_11e61"
+[1/2] Building CXX object CMakeFiles/cmTC_11e61.dir/CMakeCXXCompilerABI.cpp.o
+[2/2] Linking CXX executable cmTC_11e61
 Apple LLVM version 10.0.0 (clang-1000.10.44.4)
 Target: x86_64-apple-darwin18.2.0
 Thread model: posix
 InstalledDir: /Library/Developer/CommandLineTools/usr/bin
- "/Library/Developer/CommandLineTools/usr/bin/ld" -demangle -lto_library /Library/Developer/CommandLineTools/usr/lib/libLTO.dylib -dynamic -arch x86_64 -macosx_version_min 10.14.0 -syslibroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk -o cmTC_b5b2b -search_paths_first -headerpad_max_install_names -v CMakeFiles/cmTC_b5b2b.dir/CMakeCXXCompilerABI.cpp.o -lc++ -lSystem /Library/Developer/CommandLineTools/usr/lib/clang/10.0.0/lib/darwin/libclang_rt.osx.a
+ "/Library/Developer/CommandLineTools/usr/bin/ld" -demangle -lto_library /Library/Developer/CommandLineTools/usr/lib/libLTO.dylib -dynamic -arch x86_64 -macosx_version_min 10.14.0 -syslibroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk -o cmTC_11e61 -search_paths_first -headerpad_max_install_names -v CMakeFiles/cmTC_11e61.dir/CMakeCXXCompilerABI.cpp.o -lc++ -lSystem /Library/Developer/CommandLineTools/usr/lib/clang/10.0.0/lib/darwin/libclang_rt.osx.a
 @(#)PROGRAM:ld  PROJECT:ld64-409.12
 BUILD 17:47:51 Sep 25 2018
 configured to support archs: armv6 armv7 armv7s arm64 i386 x86_64 x86_64h armv6m armv7k armv7m armv7em
@@ -169,14 +169,14 @@ Parsed CXX implicit link information from above output:
   link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
   ignore line: [Change Dir: /Users/wjp/Desktop/workspace/libasync/benchmarks/build/CMakeFiles/CMakeTmp]
   ignore line: []
-  ignore line: [Run Build Command:"/opt/local/bin/ninja" "cmTC_b5b2b"]
-  ignore line: [[1/2] Building CXX object CMakeFiles/cmTC_b5b2b.dir/CMakeCXXCompilerABI.cpp.o]
-  ignore line: [[2/2] Linking CXX executable cmTC_b5b2b]
+  ignore line: [Run Build Command:"/opt/local/bin/ninja" "cmTC_11e61"]
+  ignore line: [[1/2] Building CXX object CMakeFiles/cmTC_11e61.dir/CMakeCXXCompilerABI.cpp.o]
+  ignore line: [[2/2] Linking CXX executable cmTC_11e61]
   ignore line: [Apple LLVM version 10.0.0 (clang-1000.10.44.4)]
   ignore line: [Target: x86_64-apple-darwin18.2.0]
   ignore line: [Thread model: posix]
   ignore line: [InstalledDir: /Library/Developer/CommandLineTools/usr/bin]
-  link line: [ "/Library/Developer/CommandLineTools/usr/bin/ld" -demangle -lto_library /Library/Developer/CommandLineTools/usr/lib/libLTO.dylib -dynamic -arch x86_64 -macosx_version_min 10.14.0 -syslibroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk -o cmTC_b5b2b -search_paths_first -headerpad_max_install_names -v CMakeFiles/cmTC_b5b2b.dir/CMakeCXXCompilerABI.cpp.o -lc++ -lSystem /Library/Developer/CommandLineTools/usr/lib/clang/10.0.0/lib/darwin/libclang_rt.osx.a]
+  link line: [ "/Library/Developer/CommandLineTools/usr/bin/ld" -demangle -lto_library /Library/Developer/CommandLineTools/usr/lib/libLTO.dylib -dynamic -arch x86_64 -macosx_version_min 10.14.0 -syslibroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk -o cmTC_11e61 -search_paths_first -headerpad_max_install_names -v CMakeFiles/cmTC_11e61.dir/CMakeCXXCompilerABI.cpp.o -lc++ -lSystem /Library/Developer/CommandLineTools/usr/lib/clang/10.0.0/lib/darwin/libclang_rt.osx.a]
     arg [/Library/Developer/CommandLineTools/usr/bin/ld] ==> ignore
     arg [-demangle] ==> ignore
     arg [-lto_library] ==> ignore, skip following value
@@ -189,11 +189,11 @@ Parsed CXX implicit link information from above output:
     arg [-syslibroot] ==> ignore
     arg [/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk] ==> ignore
     arg [-o] ==> ignore
-    arg [cmTC_b5b2b] ==> ignore
+    arg [cmTC_11e61] ==> ignore
     arg [-search_paths_first] ==> ignore
     arg [-headerpad_max_install_names] ==> ignore
     arg [-v] ==> ignore
-    arg [CMakeFiles/cmTC_b5b2b.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+    arg [CMakeFiles/cmTC_11e61.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
     arg [-lc++] ==> lib [c++]
     arg [-lSystem] ==> lib [System]
     arg [/Library/Developer/CommandLineTools/usr/lib/clang/10.0.0/lib/darwin/libclang_rt.osx.a] ==> lib [/Library/Developer/CommandLineTools/usr/lib/clang/10.0.0/lib/darwin/libclang_rt.osx.a]
@@ -213,9 +213,9 @@ Parsed CXX implicit link information from above output:
 Detecting CXX [-std=c++1z] compiler features compiled with the following output:
 Change Dir: /Users/wjp/Desktop/workspace/libasync/benchmarks/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/opt/local/bin/ninja" "cmTC_2efe8"
-[1/2] Building CXX object CMakeFiles/cmTC_2efe8.dir/feature_tests.cxx.o
-[2/2] Linking CXX executable cmTC_2efe8
+Run Build Command:"/opt/local/bin/ninja" "cmTC_2d021"
+[1/2] Building CXX object CMakeFiles/cmTC_2d021.dir/feature_tests.cxx.o
+[2/2] Linking CXX executable cmTC_2d021
 
 
     Feature record: CXX_FEATURE:1cxx_aggregate_default_initializers
@@ -280,9 +280,9 @@ Run Build Command:"/opt/local/bin/ninja" "cmTC_2efe8"
 Detecting CXX [-std=c++14] compiler features compiled with the following output:
 Change Dir: /Users/wjp/Desktop/workspace/libasync/benchmarks/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/opt/local/bin/ninja" "cmTC_ce5d8"
-[1/2] Building CXX object CMakeFiles/cmTC_ce5d8.dir/feature_tests.cxx.o
-[2/2] Linking CXX executable cmTC_ce5d8
+Run Build Command:"/opt/local/bin/ninja" "cmTC_60952"
+[1/2] Building CXX object CMakeFiles/cmTC_60952.dir/feature_tests.cxx.o
+[2/2] Linking CXX executable cmTC_60952
 
 
     Feature record: CXX_FEATURE:1cxx_aggregate_default_initializers
@@ -347,9 +347,9 @@ Run Build Command:"/opt/local/bin/ninja" "cmTC_ce5d8"
 Detecting CXX [-std=c++11] compiler features compiled with the following output:
 Change Dir: /Users/wjp/Desktop/workspace/libasync/benchmarks/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/opt/local/bin/ninja" "cmTC_dda0a"
-[1/2] Building CXX object CMakeFiles/cmTC_dda0a.dir/feature_tests.cxx.o
-[2/2] Linking CXX executable cmTC_dda0a
+Run Build Command:"/opt/local/bin/ninja" "cmTC_e119a"
+[1/2] Building CXX object CMakeFiles/cmTC_e119a.dir/feature_tests.cxx.o
+[2/2] Linking CXX executable cmTC_e119a
 
 
     Feature record: CXX_FEATURE:0cxx_aggregate_default_initializers
@@ -414,9 +414,9 @@ Run Build Command:"/opt/local/bin/ninja" "cmTC_dda0a"
 Detecting CXX [-std=c++98] compiler features compiled with the following output:
 Change Dir: /Users/wjp/Desktop/workspace/libasync/benchmarks/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/opt/local/bin/ninja" "cmTC_8c31e"
-[1/2] Building CXX object CMakeFiles/cmTC_8c31e.dir/feature_tests.cxx.o
-[2/2] Linking CXX executable cmTC_8c31e
+Run Build Command:"/opt/local/bin/ninja" "cmTC_f167d"
+[1/2] Building CXX object CMakeFiles/cmTC_f167d.dir/feature_tests.cxx.o
+[2/2] Linking CXX executable cmTC_f167d
 
 
     Feature record: CXX_FEATURE:0cxx_aggregate_default_initializers

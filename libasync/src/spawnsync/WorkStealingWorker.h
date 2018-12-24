@@ -34,10 +34,14 @@
 #include <condition_variable>
 #include <mutex>
 #include "ChaseLevDeque.h"
+#include "SimpleSpawnDeque.h"
 #include "SubmissionBuffer.h"
 #include "Task.h"
 #include "TimeUtilities.h"
 #include "ConcurrentPrint.h"
+
+//#define WorkerDeque ChaseLevDeque
+#define WorkerDeque SimpleSpawnDeque
 
 namespace wjp{
 class WorkStealingWorkerPool;
@@ -81,7 +85,7 @@ protected:
     // Steals from a worker.
     std::shared_ptr<Task> steal_from(WorkStealingWorker&);
 private:    
-    std::unique_ptr<ChaseLevDeque<Task>> deque;
+    std::unique_ptr<WorkerDeque<Task>> deque;
     std::unique_ptr<SubmissionBuffer<Task>> buffer;
     std::reference_wrapper<WorkStealingWorkerPool> pool;
     std::optional<time_point> when_idle_begins; //Busy if empty, idle otherwise. 
@@ -91,8 +95,6 @@ private:
     mutable std::condition_variable cv;
     mutable std::mutex mtx;
 };
-
-
 
 
 }

@@ -12,7 +12,7 @@
 
 # =============================================================================
 # Project: libasync_benchmarks
-# Configuration: 
+# Configuration: Release
 # =============================================================================
 
 #############################################
@@ -58,16 +58,24 @@ build edit_cache: phony CMakeFiles/edit_cache.util
 build cmake_object_order_depends_target_benchmarks: phony || CMakeFiles/benchmarks.dir
 build CMakeFiles/benchmarks.dir/main.cpp.o: CXX_COMPILER__benchmarks ../main.cpp || cmake_object_order_depends_target_benchmarks
   DEP_FILE = CMakeFiles/benchmarks.dir/main.cpp.o.d
-  FLAGS = -std=c++17 -fPIC -Wno-reorder -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=gnu++1z
-  INCLUDES = -I../../libasync/src -I/usr/local/tbb/include/tbb -isystem /usr/local/tbb/include
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=gnu++1z
+  INCLUDES = -I../../libasync/include -I../../libasync/src -I../../libasync/src/spawnsync -I../../libasync/src/utils -I/usr/local/tbb/include/tbb -isystem /usr/local/tbb/include
+  OBJECT_DIR = CMakeFiles/benchmarks.dir
+  OBJECT_FILE_DIR = CMakeFiles/benchmarks.dir
+  TARGET_COMPILE_PDB = CMakeFiles/benchmarks.dir/
+  TARGET_PDB = benchmarks.pdb
+build CMakeFiles/benchmarks.dir/parallel_sum_benchmark.cc.o: CXX_COMPILER__benchmarks ../parallel_sum_benchmark.cc || cmake_object_order_depends_target_benchmarks
+  DEP_FILE = CMakeFiles/benchmarks.dir/parallel_sum_benchmark.cc.o.d
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=gnu++1z
+  INCLUDES = -I../../libasync/include -I../../libasync/src -I../../libasync/src/spawnsync -I../../libasync/src/utils -I/usr/local/tbb/include/tbb -isystem /usr/local/tbb/include
   OBJECT_DIR = CMakeFiles/benchmarks.dir
   OBJECT_FILE_DIR = CMakeFiles/benchmarks.dir
   TARGET_COMPILE_PDB = CMakeFiles/benchmarks.dir/
   TARGET_PDB = benchmarks.pdb
 build CMakeFiles/benchmarks.dir/test_tbb.cc.o: CXX_COMPILER__benchmarks ../test_tbb.cc || cmake_object_order_depends_target_benchmarks
   DEP_FILE = CMakeFiles/benchmarks.dir/test_tbb.cc.o.d
-  FLAGS = -std=c++17 -fPIC -Wno-reorder -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=gnu++1z
-  INCLUDES = -I../../libasync/src -I/usr/local/tbb/include/tbb -isystem /usr/local/tbb/include
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=gnu++1z
+  INCLUDES = -I../../libasync/include -I../../libasync/src -I../../libasync/src/spawnsync -I../../libasync/src/utils -I/usr/local/tbb/include/tbb -isystem /usr/local/tbb/include
   OBJECT_DIR = CMakeFiles/benchmarks.dir
   OBJECT_FILE_DIR = CMakeFiles/benchmarks.dir
   TARGET_COMPILE_PDB = CMakeFiles/benchmarks.dir/
@@ -80,10 +88,10 @@ build CMakeFiles/benchmarks.dir/test_tbb.cc.o: CXX_COMPILER__benchmarks ../test_
 #############################################
 # Link the executable benchmarks
 
-build benchmarks: CXX_EXECUTABLE_LINKER__benchmarks CMakeFiles/benchmarks.dir/main.cpp.o CMakeFiles/benchmarks.dir/test_tbb.cc.o | /usr/local/tbb/lib/libtbb.dylib
-  FLAGS = -std=c++17 -fPIC -Wno-reorder -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk
-  LINK_LIBRARIES = -Wl,-rpath,/Users/wjp/Desktop/workspace/libasync/benchmarks/../libasync/build/src -Wl,-rpath,/usr/local/tbb/lib -lasync /usr/local/tbb/lib/libtbb.dylib
-  LINK_PATH = -L/Users/wjp/Desktop/workspace/libasync/benchmarks/../libasync/build/src  -L/usr/local/tbb/lib
+build benchmarks: CXX_EXECUTABLE_LINKER__benchmarks CMakeFiles/benchmarks.dir/main.cpp.o CMakeFiles/benchmarks.dir/parallel_sum_benchmark.cc.o CMakeFiles/benchmarks.dir/test_tbb.cc.o | /usr/local/tbb/lib/libtbb.dylib
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk
+  LINK_LIBRARIES = -Wl,-rpath,/Users/wjp/Desktop/workspace/libasync/benchmarks/../libasync/build/src/spawnsync -Wl,-rpath,/Users/wjp/Desktop/workspace/libasync/benchmarks/../libasync/build/src -Wl,-rpath,/usr/local/tbb/lib -lasync -lspawnsync /usr/local/tbb/lib/libtbb.dylib
+  LINK_PATH = -L/Users/wjp/Desktop/workspace/libasync/benchmarks/../libasync/build/src/spawnsync  -L/Users/wjp/Desktop/workspace/libasync/benchmarks/../libasync/build/src  -L/usr/local/tbb/lib
   OBJECT_DIR = CMakeFiles/benchmarks.dir
   POST_BUILD = :
   PRE_LINK = :

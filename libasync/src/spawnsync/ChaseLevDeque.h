@@ -94,6 +94,7 @@ public:
                 break;
             }
         }
+        if(task!=nullptr)task->to_sched();
         return task;
     }
     // Ignores canceled tasks.                 
@@ -106,6 +107,7 @@ public:
                 break;
             }
         }
+        if(task!=nullptr)task->to_sched();
         return task;
     }
     // Tries to take a recently pushed task. It should only be called from the owning thread.

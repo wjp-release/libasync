@@ -25,7 +25,7 @@
 
 #pragma once
 
-// Convenient includes for tests & samples only.
+// Convenient includes for tests & samples & benchmarks only.
 
 #define WJP_VERSION 1
 #define WJP_DEBUG
@@ -55,6 +55,7 @@ using namespace std::chrono_literals;  //100ms == std::chrono::milliseconds{100}
 #include "ThreadUtilities.h"
 #include "TimeUtilities.h"
 #include "SubmissionBuffer.h"
+#include "SimpleSpawnDeque.h"
 #include "ChaseLevDeque.h"
 #include "Callable.h"
 #include "FixedThreadPool.h"
@@ -64,3 +65,4 @@ using namespace std::chrono_literals;  //100ms == std::chrono::milliseconds{100}
 #include "ConcurrentPrint.h"
 // #include "Pipable.h" //obsolete
 #include "Array.h"
+#include "ParallelSum.h"

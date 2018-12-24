@@ -40,7 +40,7 @@
 
 namespace wjp{
 
-class WorkStealingWorker;
+
 class WorkStealingScheduler{
 protected:
     // The reference of WorkStealingWorker is returned as a hint to help cancellation.
@@ -63,18 +63,16 @@ public:
         enum TaskState: int {
             freelance=0,  // in_pool --> cancel --> freelance
             in_pool=1,
-            sched=2,
+            sched=2, // in_pool --> taken/stolen from deque/buffer --> sched
             done=3,
         };
         FuturisticTask(WorkStealingScheduler& sched):scheduler(sched)
         {}
-
         // Note that nullptr_t assignment cannot be inherited, so we need to define it manually. Neither can nullptr_t construtor be inherited, but that makes perfect sense since FuturisticTask must have a scheduler reference ever since its construction. 
         FuturisticTask& operator=(std::nullptr_t)noexcept{
 		    Callable<R>::operator=(nullptr);
 		    return *this;
 	    }
-        
         // Pushes this task to work deque or submission buffer
         virtual void submit() override{
             assert(state==freelance);
@@ -82,12 +80,10 @@ public:
             std::shared_ptr<Task> task=shared_from_this();
             scheduler.get().sched(task);
         }
-
         virtual bool is_waitable(){
             bool s=state;
             return (s==in_pool||s==sched);
         }
-
         // Blocks the calling thread until this task finishes. It doesn't wait for freelance or done tasks.
         virtual void wait() override{ 
             if(is_waitable()){
@@ -95,7 +91,6 @@ public:
                 sync.cv.wait(lk, [this]{return is_finished();});
             } 
         }
-        
         // Blocks the calling thread until this task finishes or timeout
         virtual void wait(std::chrono::milliseconds timeout) override{
             if(is_waitable()){
@@ -103,7 +98,6 @@ public:
                 sync.cv.wait_for(lk, timeout, [this]{return is_finished();});
             }
         }
-
         // Lazy cancel: simpley remark a task as freelance. 
         // Its container should ignore freelance tasks in their take()/steal() operations. 
         virtual bool cancel() override{
@@ -113,27 +107,26 @@ public:
             }
             return false; // damn too late
         }
-
         // You might want to recycle a task and resubmit it without creating a new task.
         void recycle(){
             state=freelance;
             reason=nullptr;
             value.reset();
         }
-
         // [Probably not often used] You may need this function if you want to submit this task to your custom schedulers. You must set state to in_pool before executing the task asynchronously.
         void ready_for_sched(){
             state=in_pool;
         }
-
+        // Called by worker thread when it takes/steals a task
+        virtual void to_sched() override{
+            state=sched;
+        }
         virtual bool is_finished() const noexcept override{
             return state==done;
         }
-
         virtual bool is_canceled() const noexcept override{
             return state==freelance;
         }
-
         // A future-like interface to get fulfilled value or rejected reason
         R get(){ 
             wait();
@@ -143,14 +136,11 @@ public:
             assert(value.has_value());
             return value.value(); // Could be empty if error happens during execution
         }
-
         // Does not throw. Get an empty value on failure.
         std::optional<R> get_quietly(){ 
             wait();
             return value; // Could be empty if error happens during execution
         }
-
-
         // Set value if the underlying task routine successfully executed. Note that it is not supposed to be called directly by user code. 
         virtual void execute() override{
             try{
@@ -161,7 +151,6 @@ public:
             state=done;
             sync.cv.notify_all(); 
         }
-
     protected:
         int state = freelance;
         // Sync is a copy/move constructible & copy/move assignable collection of data members that should not actually be copied or move, e.g., mutex and convars. By doing this trick, the FuturisticTask class can reuse Callable's copy/move constructors and assignment operators.
@@ -191,63 +180,60 @@ public:
     public:
         ForkJoinTask(WorkStealingScheduler& sched) : FuturisticTask<R>(sched)
         {}
-
         ForkJoinTask& operator=(std::nullptr_t)noexcept{
 		    FuturisticTask<R>::operator=(nullptr);
 		    return *this;
 	    }
-        // Quiet version of join. It does not throw. You can tell it's failed if optional<R> is empty.
-        std::optional<R> join_quietly(){ 
+        // Worker threads are not supposed to stall by nature. If called from worker thread, wait() will steal back tasks from its stealers to avoid deadlock and accelerate the completion of this task's child tasks. 
+        // It only blocks when it is called from an external thread.
+        virtual void wait() override{ 
+            // if(FuturisticTask<R>::cancel()){
+            //     FuturisticTask<R>::execute();
+            //     return;
+            // }
             WorkStealingScheduler& scheduler=FuturisticTask<R>::scheduler.get();
-            // External join() behaves exactly like get() except that the task must be scheduler-aware binded
             if(scheduler.is_called_from_external()){
                 FuturisticTask<R>::wait();
-            }else{  // worker thread's join() must be lock-free! 
-                // we can't sit here and wait, try to do some work, like stealing back ... 
-                // otherwise the concurrency of this thread will be lost, 
-                // the entire system will easily fall into deadlock as well.
+            }else{ 
                 WorkStealingWorker& worker=scheduler.get_worker().get();
                 while(!FuturisticTask<R>::is_finished()){ 
-                    worker.join_routine(); // helping other workers finish 
+                    worker.join_routine();  
                 }
             }
-            return FuturisticTask<R>::value; // Could be empty if error happens during execution
         }
-
-
-        // Note that worker threads are not supposed to stall by nature. If called from worker thread, join() will steal back tasks from its stealers to avoid deadlock and accelerate the completion of this task's child tasks. 
-        R join(){ 
+        virtual void wait(std::chrono::milliseconds timeout) override{
+            // if(FuturisticTask<R>::cancel()){
+            //     FuturisticTask<R>::execute();
+            //     return;
+            // }
             WorkStealingScheduler& scheduler=FuturisticTask<R>::scheduler.get();
-            // External join() behaves exactly like get() except that the task must be scheduler-aware binded
             if(scheduler.is_called_from_external()){
-                FuturisticTask<R>::wait();
-            }else{  // worker thread's join() must be lock-free! 
-                // we can't sit here and wait, try to do some work, like stealing back ... 
-                // otherwise the concurrency of this thread will be lost, 
-                // the entire system will easily fall into deadlock as well.
+                FuturisticTask<R>::wait(timeout);
+            }else{ 
+                time_point start=now();
                 WorkStealingWorker& worker=scheduler.get_worker().get();
                 while(!FuturisticTask<R>::is_finished()){ 
-                    worker.join_routine(); // helping other workers finish 
+                    worker.join_routine();  
+                    if(ms_elapsed(start)>timeout) break;
                 }
             }
-            if(FuturisticTask<R>::reason){
-                std::rethrow_exception(FuturisticTask<R>::reason);
-            }
-            assert(FuturisticTask<R>::value.has_value());
-            return FuturisticTask<R>::value.value(); // Could be empty if error happens during execution
         }
-
-        // ForkJoinTask callable now tasks the reference to the WorkStealingScheduler as its 1st argument.
+        // [You don't need it with pipable semantics] Forces the underlying callable to take WorkStealingScheduler& as its 1st argument. 
         template< class F, class... Args, class=std::enable_if_t<(std::is_invocable<F, WorkStealingScheduler&, Args...>{})>>
         void scheduler_aware_bind(F&& f, Args&&... args ){
-            // The type of FuturisticTask<R>::scheduler is std::reference_wapper<WorkStealingScheduler>,
-            // but the first argument of F should be WorkStealingScheduler&.  
             Callable<R>::bind(std::forward<F>(f), FuturisticTask<R>::scheduler, std::forward<Args>(args)...);
         }
-
-        // ForkJoinTask's alias for submit()
+        // ForkJoinTask's alias for submit(); exactly the same.
         void fork(){
             FuturisticTask<R>::submit();
+        }
+        // ForkJoinTask's alias for get_quietly(); underlying wait() is different though.
+        std::optional<R> join_quietly(){ 
+            return FuturisticTask<R>::get_quietly();
+        }
+        // ForkJoinTask's alias for get(); underlying wait() is different though.
+        R join(){ 
+            return FuturisticTask<R>::get();
         }
     };
 

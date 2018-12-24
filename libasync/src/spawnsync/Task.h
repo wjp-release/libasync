@@ -38,6 +38,7 @@ namespace wjp {
 		virtual bool cancel() = 0; // Returns true on success
 		virtual bool is_canceled() const noexcept = 0;  
 		virtual void submit() = 0;
+		virtual void to_sched() = 0;
 		virtual ~Task() {}
 	};
 }
