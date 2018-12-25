@@ -255,6 +255,9 @@ void worksteal9()
     int sum=parallel_sum(scheduler, v.begin(), v.end());
     int elapsed=ms_elapsed_count(start);
     println("worksteal sum="+std::to_string(sum)+", elapsed="+std::to_string(elapsed)+"ms");
+#ifdef INTERNAL_STATS
+    std::cout<<"nr_tasks="<<scheduler.nr_tasks_executed<<std::endl;
+#endif    
     // std::async
     time_point start2=now();
     int sum2=std_ps(v.begin(), v.end());

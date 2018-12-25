@@ -29,6 +29,7 @@
 #include <optional>
 #include <vector>
 #include <mutex>
+#include <shared_mutex>
 #include <condition_variable>
 #include <atomic>
 
@@ -37,9 +38,11 @@
 #include "Callable.h"
 #include "ThreadUtilities.h"
 #include "Task.h"
+#include "Config.h"
 
 namespace wjp{
 
+//#define INTERNAL_STATS
 
 class WorkStealingScheduler{
 protected:
@@ -52,6 +55,9 @@ protected:
 
     bool is_called_from_external();
 public:
+#ifdef INTERNAL_STATS
+    std::atomic<int> nr_tasks_executed=0;  
+#endif 
     int nr_workers()const noexcept{
         return pool->nr_threads();
     }
@@ -87,20 +93,23 @@ public:
         // Blocks the calling thread until this task finishes. It doesn't wait for freelance or done tasks.
         virtual void wait() override{ 
             if(is_waitable()){
-                std::unique_lock<std::mutex> lk(sync.mtx);
-                sync.cv.wait(lk, [this]{return is_finished();});
+                std::unique_lock<std::mutex> lk(Task::sync.mtx);
+                Task::sync.cv.wait(lk, [this]{return is_finished();});
             } 
         }
         // Blocks the calling thread until this task finishes or timeout
         virtual void wait(std::chrono::milliseconds timeout) override{
             if(is_waitable()){
-                std::unique_lock<std::mutex> lk(sync.mtx);
-                sync.cv.wait_for(lk, timeout, [this]{return is_finished();});
+                std::unique_lock<std::mutex> lk(Task::sync.mtx);
+                Task::sync.cv.wait_for(lk, timeout, [this]{return is_finished();});
             }
         }
         // Lazy cancel: simpley remark a task as freelance. 
         // Its container should ignore freelance tasks in their take()/steal() operations. 
         virtual bool cancel() override{
+            #ifdef WITH_CANCEL
+            std::unique_lock lk(Task::sync.cancel_mtx); //write lock
+            #endif
             if(state==in_pool){
                 state=freelance; 
                 return true;
@@ -149,21 +158,10 @@ public:
                 reason=std::current_exception();
             }
             state=done;
-            sync.cv.notify_all(); 
+            Task::sync.cv.notify_all(); 
         }
     protected:
         int state = freelance;
-        // Sync is a copy/move constructible & copy/move assignable collection of data members that should not actually be copied or move, e.g., mutex and convars. By doing this trick, the FuturisticTask class can reuse Callable's copy/move constructors and assignment operators.
-        struct Sync{ 
-            Sync(){} 
-            Sync(const Sync& s){} // Do not copy
-            Sync(Sync&& s){} // Do not move
-            Sync& operator=(Sync&& s){return *this;} // Do not move
-            Sync& operator=(const Sync&s){return *this;} // Do not copy
-            mutable std::mutex mtx; 
-            mutable std::condition_variable cv;  // Notified on finished
-        };
-        mutable Sync sync; 
         std::optional<R> value; // Default: nullopt
         std::exception_ptr reason; // Default: nullptr
         std::reference_wrapper<WorkStealingScheduler> scheduler;
@@ -171,6 +169,9 @@ public:
 
     template < class R >
     std::shared_ptr<FuturisticTask<R>> create_futuristic_task(){
+        #ifdef INTERNAL_STATS
+        nr_tasks_executed++; 
+        #endif 
         return std::make_shared<FuturisticTask<R>>(*this);
     }
 
@@ -187,14 +188,16 @@ public:
         // Worker threads are not supposed to stall by nature. If called from worker thread, wait() will steal back tasks from its stealers to avoid deadlock and accelerate the completion of this task's child tasks. 
         // It only blocks when it is called from an external thread.
         virtual void wait() override{ 
-            // if(FuturisticTask<R>::cancel()){
-            //     FuturisticTask<R>::execute();
-            //     return;
-            // }
             WorkStealingScheduler& scheduler=FuturisticTask<R>::scheduler.get();
             if(scheduler.is_called_from_external()){
                 FuturisticTask<R>::wait();
             }else{ 
+                // Without Cancel&Exec: (162+256+170+56+225+60+76+110+45+48+198+177)/12=132
+                // Potential optimization
+                // if(FuturisticTask<R>::cancel()){  
+                //     FuturisticTask<R>::execute();
+                //     return;
+                // }
                 WorkStealingWorker& worker=scheduler.get_worker().get();
                 while(!FuturisticTask<R>::is_finished()){ 
                     worker.join_routine();  
@@ -202,10 +205,6 @@ public:
             }
         }
         virtual void wait(std::chrono::milliseconds timeout) override{
-            // if(FuturisticTask<R>::cancel()){
-            //     FuturisticTask<R>::execute();
-            //     return;
-            // }
             WorkStealingScheduler& scheduler=FuturisticTask<R>::scheduler.get();
             if(scheduler.is_called_from_external()){
                 FuturisticTask<R>::wait(timeout);
@@ -240,6 +239,9 @@ public:
     // Note that this function should usually be called in worker thread. 
     template < class R >
     std::shared_ptr<ForkJoinTask<R>> create_forkjoin_task(){
+        #ifdef INTERNAL_STATS
+        nr_tasks_executed++; 
+        #endif 
         return std::make_shared<ForkJoinTask<R>>(*this);
     }
 

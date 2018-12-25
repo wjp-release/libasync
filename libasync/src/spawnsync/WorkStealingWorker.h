@@ -39,9 +39,7 @@
 #include "Task.h"
 #include "TimeUtilities.h"
 #include "ConcurrentPrint.h"
-
-//#define WorkerDeque ChaseLevDeque
-#define WorkerDeque SimpleSpawnDeque
+#include "Config.h"
 
 namespace wjp{
 class WorkStealingWorkerPool;

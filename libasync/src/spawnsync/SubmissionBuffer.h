@@ -29,6 +29,8 @@
 #include <mutex>
 #include <algorithm>
 #include <memory>
+#include <shared_mutex>
+#include "Config.h"
 
 namespace wjp{
 
@@ -51,16 +53,29 @@ public:
     }
     // Ignores canceled tasks.                 
     std::shared_ptr<T> steal_ignore_canceled() {
+        #ifdef WITH_CANCEL
         std::shared_ptr<T> task=steal();
+        std::shared_ptr<T> next=nullptr;
         while(task!=nullptr){
-            if(task->is_canceled()){
-                task=steal();
-            }else{
-                break;
+            {
+                std::shared_lock lk(task->sync.cancel_mtx);
+                if(task->is_canceled()){
+                    next=steal();
+                }else{
+                    task->to_sched();
+                    break;
+                }
             }
+            task=next;
         }
-        if(task!=nullptr)task->to_sched();
         return task;
+        #else
+        std::shared_ptr<T> task=steal(); 
+        if(task==nullptr) return nullptr;
+        task->to_sched();
+        return task;
+        #endif
+
     }
     // Tries to steal an oldest task at front.
     std::shared_ptr<T> steal(){

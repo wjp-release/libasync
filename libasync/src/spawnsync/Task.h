@@ -24,7 +24,10 @@
  */
 
 #pragma once
-
+#include <mutex>
+#include <shared_mutex>
+#include <condition_variable>
+#include "Config.h"
 
 namespace wjp {
 
@@ -40,5 +43,18 @@ namespace wjp {
 		virtual void submit() = 0;
 		virtual void to_sched() = 0;
 		virtual ~Task() {}
+        struct Sync{ 
+            Sync(){} 
+            Sync(const Sync& s){} 
+            Sync(Sync&& s){} 
+            Sync& operator=(Sync&& s){return *this;} 
+            Sync& operator=(const Sync&s){return *this;}
+            mutable std::mutex mtx; // Sync wait 
+			#ifdef WITH_CANCEL
+			mutable std::shared_mutex cancel_mtx; // Sync cancel
+			#endif
+            mutable std::condition_variable cv;  // Notified on finished
+        };
+        mutable Sync sync;  // copy/move constructible & copy/move assignable wrapper of mtx, cv
 	};
 }
