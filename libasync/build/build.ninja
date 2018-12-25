@@ -106,16 +106,12 @@ build src/CMakeFiles/async.dir/Async.cc.o: CXX_COMPILER__async ../src/Async.cc |
   INCLUDES = -I.././include -I.././src/utils -I.././src/spawnsync -I.././src
   OBJECT_DIR = src/CMakeFiles/async.dir
   OBJECT_FILE_DIR = src/CMakeFiles/async.dir
-  TARGET_COMPILE_PDB = src/CMakeFiles/async.dir/async.pdb
-  TARGET_PDB = src/libasync.pdb
 build src/CMakeFiles/async.dir/ConcurrentPrint.cc.o: CXX_COMPILER__async ../src/ConcurrentPrint.cc || cmake_object_order_depends_target_async
   DEP_FILE = src/CMakeFiles/async.dir/ConcurrentPrint.cc.o.d
   FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=gnu++1z
   INCLUDES = -I.././include -I.././src/utils -I.././src/spawnsync -I.././src
   OBJECT_DIR = src/CMakeFiles/async.dir
   OBJECT_FILE_DIR = src/CMakeFiles/async.dir
-  TARGET_COMPILE_PDB = src/CMakeFiles/async.dir/async.pdb
-  TARGET_PDB = src/libasync.pdb
 
 # =============================================================================
 # Link build statements for STATIC_LIBRARY target async
@@ -130,9 +126,8 @@ build src/libasync.a: CXX_STATIC_LIBRARY_LINKER__async src/CMakeFiles/async.dir/
   OBJECT_DIR = src/CMakeFiles/async.dir
   POST_BUILD = :
   PRE_LINK = :
-  TARGET_COMPILE_PDB = src/CMakeFiles/async.dir/async.pdb
   TARGET_FILE = src/libasync.a
-  TARGET_PDB = src/libasync.pdb
+  TARGET_PDB = async.a.dbg
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
 # /Users/wjp/Desktop/workspace/libasync/libasync/src/CMakeLists.txt
@@ -181,24 +176,18 @@ build src/spawnsync/CMakeFiles/spawnsync.dir/WorkStealingScheduler.cc.o: CXX_COM
   INCLUDES = -I.././include -I.././src/utils -I.././src/spawnsync -I.././src
   OBJECT_DIR = src/spawnsync/CMakeFiles/spawnsync.dir
   OBJECT_FILE_DIR = src/spawnsync/CMakeFiles/spawnsync.dir
-  TARGET_COMPILE_PDB = src/spawnsync/CMakeFiles/spawnsync.dir/spawnsync.pdb
-  TARGET_PDB = src/spawnsync/libspawnsync.pdb
 build src/spawnsync/CMakeFiles/spawnsync.dir/WorkStealingWorker.cc.o: CXX_COMPILER__spawnsync ../src/spawnsync/WorkStealingWorker.cc || cmake_object_order_depends_target_spawnsync
   DEP_FILE = src/spawnsync/CMakeFiles/spawnsync.dir/WorkStealingWorker.cc.o.d
   FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=gnu++1z
   INCLUDES = -I.././include -I.././src/utils -I.././src/spawnsync -I.././src
   OBJECT_DIR = src/spawnsync/CMakeFiles/spawnsync.dir
   OBJECT_FILE_DIR = src/spawnsync/CMakeFiles/spawnsync.dir
-  TARGET_COMPILE_PDB = src/spawnsync/CMakeFiles/spawnsync.dir/spawnsync.pdb
-  TARGET_PDB = src/spawnsync/libspawnsync.pdb
 build src/spawnsync/CMakeFiles/spawnsync.dir/WorkStealingWorkerPool.cc.o: CXX_COMPILER__spawnsync ../src/spawnsync/WorkStealingWorkerPool.cc || cmake_object_order_depends_target_spawnsync
   DEP_FILE = src/spawnsync/CMakeFiles/spawnsync.dir/WorkStealingWorkerPool.cc.o.d
   FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=gnu++1z
   INCLUDES = -I.././include -I.././src/utils -I.././src/spawnsync -I.././src
   OBJECT_DIR = src/spawnsync/CMakeFiles/spawnsync.dir
   OBJECT_FILE_DIR = src/spawnsync/CMakeFiles/spawnsync.dir
-  TARGET_COMPILE_PDB = src/spawnsync/CMakeFiles/spawnsync.dir/spawnsync.pdb
-  TARGET_PDB = src/spawnsync/libspawnsync.pdb
 
 # =============================================================================
 # Link build statements for STATIC_LIBRARY target spawnsync
@@ -213,9 +202,8 @@ build src/spawnsync/libspawnsync.a: CXX_STATIC_LIBRARY_LINKER__spawnsync src/spa
   OBJECT_DIR = src/spawnsync/CMakeFiles/spawnsync.dir
   POST_BUILD = :
   PRE_LINK = :
-  TARGET_COMPILE_PDB = src/spawnsync/CMakeFiles/spawnsync.dir/spawnsync.pdb
   TARGET_FILE = src/spawnsync/libspawnsync.a
-  TARGET_PDB = src/spawnsync/libspawnsync.pdb
+  TARGET_PDB = spawnsync.a.dbg
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
 # /Users/wjp/Desktop/workspace/libasync/libasync/CMakeLists.txt
@@ -264,16 +252,12 @@ build samples/CMakeFiles/sample.dir/sample.cc.o: CXX_COMPILER__sample ../samples
   INCLUDES = -I.././include -I.././src/utils -I.././src/spawnsync -I.././src
   OBJECT_DIR = samples/CMakeFiles/sample.dir
   OBJECT_FILE_DIR = samples/CMakeFiles/sample.dir
-  TARGET_COMPILE_PDB = samples/CMakeFiles/sample.dir/
-  TARGET_PDB = samples/sample.pdb
 build samples/CMakeFiles/sample.dir/worksteal.cc.o: CXX_COMPILER__sample ../samples/worksteal.cc || cmake_object_order_depends_target_sample
   DEP_FILE = samples/CMakeFiles/sample.dir/worksteal.cc.o.d
   FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=gnu++1z
   INCLUDES = -I.././include -I.././src/utils -I.././src/spawnsync -I.././src
   OBJECT_DIR = samples/CMakeFiles/sample.dir
   OBJECT_FILE_DIR = samples/CMakeFiles/sample.dir
-  TARGET_COMPILE_PDB = samples/CMakeFiles/sample.dir/
-  TARGET_PDB = samples/sample.pdb
 
 # =============================================================================
 # Link build statements for EXECUTABLE target sample
@@ -289,9 +273,8 @@ build samples/sample: CXX_EXECUTABLE_LINKER__sample samples/CMakeFiles/sample.di
   OBJECT_DIR = samples/CMakeFiles/sample.dir
   POST_BUILD = :
   PRE_LINK = :
-  TARGET_COMPILE_PDB = samples/CMakeFiles/sample.dir/
   TARGET_FILE = samples/sample
-  TARGET_PDB = samples/sample.pdb
+  TARGET_PDB = sample.dbg
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
 # /Users/wjp/Desktop/workspace/libasync/libasync/CMakeLists.txt
@@ -340,8 +323,6 @@ build googletest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o: CXX_COMPILER__gt
   INCLUDES = -I.././include -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
   OBJECT_DIR = googletest/CMakeFiles/gtest_main.dir
   OBJECT_FILE_DIR = googletest/CMakeFiles/gtest_main.dir/src
-  TARGET_COMPILE_PDB = bin/libgtest_main.pdb
-  TARGET_PDB = bin/libgtest_main.pdb
 
 # =============================================================================
 # Link build statements for STATIC_LIBRARY target gtest_main
@@ -356,9 +337,8 @@ build lib/libgtest_main.a: CXX_STATIC_LIBRARY_LINKER__gtest_main googletest/CMak
   OBJECT_DIR = googletest/CMakeFiles/gtest_main.dir
   POST_BUILD = :
   PRE_LINK = :
-  TARGET_COMPILE_PDB = bin/libgtest_main.pdb
   TARGET_FILE = lib/libgtest_main.a
-  TARGET_PDB = bin/libgtest_main.pdb
+  TARGET_PDB = gtest_main.a.dbg
 # =============================================================================
 # Object build statements for STATIC_LIBRARY target gtest
 
@@ -373,8 +353,6 @@ build googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.o: CXX_COMPILER__gtest ..
   INCLUDES = -I.././include -I.././src/utils -I.././src/spawnsync -I.././src -I../googletest/include -I../googletest
   OBJECT_DIR = googletest/CMakeFiles/gtest.dir
   OBJECT_FILE_DIR = googletest/CMakeFiles/gtest.dir/src
-  TARGET_COMPILE_PDB = bin/libgtest.pdb
-  TARGET_PDB = bin/libgtest.pdb
 
 # =============================================================================
 # Link build statements for STATIC_LIBRARY target gtest
@@ -389,9 +367,8 @@ build lib/libgtest.a: CXX_STATIC_LIBRARY_LINKER__gtest googletest/CMakeFiles/gte
   OBJECT_DIR = googletest/CMakeFiles/gtest.dir
   POST_BUILD = :
   PRE_LINK = :
-  TARGET_COMPILE_PDB = bin/libgtest.pdb
   TARGET_FILE = lib/libgtest.a
-  TARGET_PDB = bin/libgtest.pdb
+  TARGET_PDB = gtest.a.dbg
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
 # /Users/wjp/Desktop/workspace/libasync/libasync/CMakeLists.txt
@@ -440,128 +417,96 @@ build tests/CMakeFiles/tests.dir/ArrayTOT.cc.o: CXX_COMPILER__tests ../tests/Arr
   INCLUDES = -I.././include -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
   OBJECT_DIR = tests/CMakeFiles/tests.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
-  TARGET_COMPILE_PDB = tests/CMakeFiles/tests.dir/
-  TARGET_PDB = tests/tests.pdb
 build tests/CMakeFiles/tests.dir/AsyncTOT.cc.o: CXX_COMPILER__tests ../tests/AsyncTOT.cc || cmake_object_order_depends_target_tests
   DEP_FILE = tests/CMakeFiles/tests.dir/AsyncTOT.cc.o.d
   FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=gnu++1z
   INCLUDES = -I.././include -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
   OBJECT_DIR = tests/CMakeFiles/tests.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
-  TARGET_COMPILE_PDB = tests/CMakeFiles/tests.dir/
-  TARGET_PDB = tests/tests.pdb
 build tests/CMakeFiles/tests.dir/CallableTOT.cc.o: CXX_COMPILER__tests ../tests/CallableTOT.cc || cmake_object_order_depends_target_tests
   DEP_FILE = tests/CMakeFiles/tests.dir/CallableTOT.cc.o.d
   FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=gnu++1z
   INCLUDES = -I.././include -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
   OBJECT_DIR = tests/CMakeFiles/tests.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
-  TARGET_COMPILE_PDB = tests/CMakeFiles/tests.dir/
-  TARGET_PDB = tests/tests.pdb
 build tests/CMakeFiles/tests.dir/CancelTaskTOT.cc.o: CXX_COMPILER__tests ../tests/CancelTaskTOT.cc || cmake_object_order_depends_target_tests
   DEP_FILE = tests/CMakeFiles/tests.dir/CancelTaskTOT.cc.o.d
   FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=gnu++1z
   INCLUDES = -I.././include -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
   OBJECT_DIR = tests/CMakeFiles/tests.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
-  TARGET_COMPILE_PDB = tests/CMakeFiles/tests.dir/
-  TARGET_PDB = tests/tests.pdb
 build tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.o: CXX_COMPILER__tests ../tests/ChaseLevDequeTOT.cc || cmake_object_order_depends_target_tests
   DEP_FILE = tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.o.d
   FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=gnu++1z
   INCLUDES = -I.././include -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
   OBJECT_DIR = tests/CMakeFiles/tests.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
-  TARGET_COMPILE_PDB = tests/CMakeFiles/tests.dir/
-  TARGET_PDB = tests/tests.pdb
 build tests/CMakeFiles/tests.dir/FixedThreadPoolTOT.cc.o: CXX_COMPILER__tests ../tests/FixedThreadPoolTOT.cc || cmake_object_order_depends_target_tests
   DEP_FILE = tests/CMakeFiles/tests.dir/FixedThreadPoolTOT.cc.o.d
   FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=gnu++1z
   INCLUDES = -I.././include -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
   OBJECT_DIR = tests/CMakeFiles/tests.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
-  TARGET_COMPILE_PDB = tests/CMakeFiles/tests.dir/
-  TARGET_PDB = tests/tests.pdb
 build tests/CMakeFiles/tests.dir/FuturisticTaskTOT.cc.o: CXX_COMPILER__tests ../tests/FuturisticTaskTOT.cc || cmake_object_order_depends_target_tests
   DEP_FILE = tests/CMakeFiles/tests.dir/FuturisticTaskTOT.cc.o.d
   FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=gnu++1z
   INCLUDES = -I.././include -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
   OBJECT_DIR = tests/CMakeFiles/tests.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
-  TARGET_COMPILE_PDB = tests/CMakeFiles/tests.dir/
-  TARGET_PDB = tests/tests.pdb
 build tests/CMakeFiles/tests.dir/HofTOT.cc.o: CXX_COMPILER__tests ../tests/HofTOT.cc || cmake_object_order_depends_target_tests
   DEP_FILE = tests/CMakeFiles/tests.dir/HofTOT.cc.o.d
   FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=gnu++1z
   INCLUDES = -I.././include -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
   OBJECT_DIR = tests/CMakeFiles/tests.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
-  TARGET_COMPILE_PDB = tests/CMakeFiles/tests.dir/
-  TARGET_PDB = tests/tests.pdb
 build tests/CMakeFiles/tests.dir/ParallelSumTOT.cc.o: CXX_COMPILER__tests ../tests/ParallelSumTOT.cc || cmake_object_order_depends_target_tests
   DEP_FILE = tests/CMakeFiles/tests.dir/ParallelSumTOT.cc.o.d
   FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=gnu++1z
   INCLUDES = -I.././include -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
   OBJECT_DIR = tests/CMakeFiles/tests.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
-  TARGET_COMPILE_PDB = tests/CMakeFiles/tests.dir/
-  TARGET_PDB = tests/tests.pdb
 build tests/CMakeFiles/tests.dir/PipableTOT.cc.o: CXX_COMPILER__tests ../tests/PipableTOT.cc || cmake_object_order_depends_target_tests
   DEP_FILE = tests/CMakeFiles/tests.dir/PipableTOT.cc.o.d
   FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=gnu++1z
   INCLUDES = -I.././include -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
   OBJECT_DIR = tests/CMakeFiles/tests.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
-  TARGET_COMPILE_PDB = tests/CMakeFiles/tests.dir/
-  TARGET_PDB = tests/tests.pdb
 build tests/CMakeFiles/tests.dir/SimpleSpawnDequeTOT.cc.o: CXX_COMPILER__tests ../tests/SimpleSpawnDequeTOT.cc || cmake_object_order_depends_target_tests
   DEP_FILE = tests/CMakeFiles/tests.dir/SimpleSpawnDequeTOT.cc.o.d
   FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=gnu++1z
   INCLUDES = -I.././include -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
   OBJECT_DIR = tests/CMakeFiles/tests.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
-  TARGET_COMPILE_PDB = tests/CMakeFiles/tests.dir/
-  TARGET_PDB = tests/tests.pdb
 build tests/CMakeFiles/tests.dir/SpawnSyncTaskTOT.cc.o: CXX_COMPILER__tests ../tests/SpawnSyncTaskTOT.cc || cmake_object_order_depends_target_tests
   DEP_FILE = tests/CMakeFiles/tests.dir/SpawnSyncTaskTOT.cc.o.d
   FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=gnu++1z
   INCLUDES = -I.././include -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
   OBJECT_DIR = tests/CMakeFiles/tests.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
-  TARGET_COMPILE_PDB = tests/CMakeFiles/tests.dir/
-  TARGET_PDB = tests/tests.pdb
 build tests/CMakeFiles/tests.dir/SubmissionBufferTOT.cc.o: CXX_COMPILER__tests ../tests/SubmissionBufferTOT.cc || cmake_object_order_depends_target_tests
   DEP_FILE = tests/CMakeFiles/tests.dir/SubmissionBufferTOT.cc.o.d
   FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=gnu++1z
   INCLUDES = -I.././include -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
   OBJECT_DIR = tests/CMakeFiles/tests.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
-  TARGET_COMPILE_PDB = tests/CMakeFiles/tests.dir/
-  TARGET_PDB = tests/tests.pdb
 build tests/CMakeFiles/tests.dir/SystemIntegrationTOT.cc.o: CXX_COMPILER__tests ../tests/SystemIntegrationTOT.cc || cmake_object_order_depends_target_tests
   DEP_FILE = tests/CMakeFiles/tests.dir/SystemIntegrationTOT.cc.o.d
   FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=gnu++1z
   INCLUDES = -I.././include -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
   OBJECT_DIR = tests/CMakeFiles/tests.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
-  TARGET_COMPILE_PDB = tests/CMakeFiles/tests.dir/
-  TARGET_PDB = tests/tests.pdb
 build tests/CMakeFiles/tests.dir/UtilitiesTOT.cc.o: CXX_COMPILER__tests ../tests/UtilitiesTOT.cc || cmake_object_order_depends_target_tests
   DEP_FILE = tests/CMakeFiles/tests.dir/UtilitiesTOT.cc.o.d
   FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=gnu++1z
   INCLUDES = -I.././include -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
   OBJECT_DIR = tests/CMakeFiles/tests.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
-  TARGET_COMPILE_PDB = tests/CMakeFiles/tests.dir/
-  TARGET_PDB = tests/tests.pdb
 build tests/CMakeFiles/tests.dir/WorkStealingSchedulerTOT.cc.o: CXX_COMPILER__tests ../tests/WorkStealingSchedulerTOT.cc || cmake_object_order_depends_target_tests
   DEP_FILE = tests/CMakeFiles/tests.dir/WorkStealingSchedulerTOT.cc.o.d
   FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=gnu++1z
   INCLUDES = -I.././include -I.././src/utils -I.././src/spawnsync -I.././src -isystem ../googletest/include -isystem ../googletest
   OBJECT_DIR = tests/CMakeFiles/tests.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
-  TARGET_COMPILE_PDB = tests/CMakeFiles/tests.dir/
-  TARGET_PDB = tests/tests.pdb
 
 # =============================================================================
 # Link build statements for EXECUTABLE target tests
@@ -577,9 +522,8 @@ build tests/tests: CXX_EXECUTABLE_LINKER__tests tests/CMakeFiles/tests.dir/Array
   OBJECT_DIR = tests/CMakeFiles/tests.dir
   POST_BUILD = :
   PRE_LINK = :
-  TARGET_COMPILE_PDB = tests/CMakeFiles/tests.dir/
   TARGET_FILE = tests/tests
-  TARGET_PDB = tests/tests.pdb
+  TARGET_PDB = tests.dbg
 # =============================================================================
 # Target aliases.
 
@@ -644,13 +588,13 @@ default all
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | ../CMakeLists.txt ../googletest/CMakeLists.txt ../googletest/cmake/internal_utils.cmake ../samples/CMakeLists.txt ../src/CMakeLists.txt ../src/spawnsync/CMakeLists.txt ../tests/CMakeLists.txt /opt/local/share/cmake-3.12/Modules/CMakeCCompiler.cmake.in /opt/local/share/cmake-3.12/Modules/CMakeCCompilerABI.c /opt/local/share/cmake-3.12/Modules/CMakeCInformation.cmake /opt/local/share/cmake-3.12/Modules/CMakeCXXCompiler.cmake.in /opt/local/share/cmake-3.12/Modules/CMakeCXXCompilerABI.cpp /opt/local/share/cmake-3.12/Modules/CMakeCXXInformation.cmake /opt/local/share/cmake-3.12/Modules/CMakeCommonLanguageInclude.cmake /opt/local/share/cmake-3.12/Modules/CMakeCompilerIdDetection.cmake /opt/local/share/cmake-3.12/Modules/CMakeConfigurableFile.in /opt/local/share/cmake-3.12/Modules/CMakeDetermineCCompiler.cmake /opt/local/share/cmake-3.12/Modules/CMakeDetermineCXXCompiler.cmake /opt/local/share/cmake-3.12/Modules/CMakeDetermineCompileFeatures.cmake /opt/local/share/cmake-3.12/Modules/CMakeDetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/CMakeDetermineCompilerABI.cmake /opt/local/share/cmake-3.12/Modules/CMakeDetermineCompilerId.cmake /opt/local/share/cmake-3.12/Modules/CMakeDetermineSystem.cmake /opt/local/share/cmake-3.12/Modules/CMakeFindBinUtils.cmake /opt/local/share/cmake-3.12/Modules/CMakeGenericSystem.cmake /opt/local/share/cmake-3.12/Modules/CMakeInitializeConfigs.cmake /opt/local/share/cmake-3.12/Modules/CMakeLanguageInformation.cmake /opt/local/share/cmake-3.12/Modules/CMakeNinjaFindMake.cmake /opt/local/share/cmake-3.12/Modules/CMakeParseImplicitLinkInfo.cmake /opt/local/share/cmake-3.12/Modules/CMakeSystem.cmake.in /opt/local/share/cmake-3.12/Modules/CMakeSystemSpecificInformation.cmake /opt/local/share/cmake-3.12/Modules/CMakeSystemSpecificInitialize.cmake /opt/local/share/cmake-3.12/Modules/CMakeTestCCompiler.cmake /opt/local/share/cmake-3.12/Modules/CMakeTestCXXCompiler.cmake /opt/local/share/cmake-3.12/Modules/CMakeTestCompilerCommon.cmake /opt/local/share/cmake-3.12/Modules/CheckIncludeFile.c.in /opt/local/share/cmake-3.12/Modules/CheckIncludeFile.cmake /opt/local/share/cmake-3.12/Modules/CheckLibraryExists.cmake /opt/local/share/cmake-3.12/Modules/CheckSymbolExists.cmake /opt/local/share/cmake-3.12/Modules/Compiler/ADSP-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/ARMCC-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/AppleClang-C-FeatureTests.cmake /opt/local/share/cmake-3.12/Modules/Compiler/AppleClang-C.cmake /opt/local/share/cmake-3.12/Modules/Compiler/AppleClang-CXX-FeatureTests.cmake /opt/local/share/cmake-3.12/Modules/Compiler/AppleClang-CXX.cmake /opt/local/share/cmake-3.12/Modules/Compiler/AppleClang-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/Borland-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/Bruce-C-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/CMakeCommonCompilerMacros.cmake /opt/local/share/cmake-3.12/Modules/Compiler/Clang-CXX-TestableFeatures.cmake /opt/local/share/cmake-3.12/Modules/Compiler/Clang-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/Clang-DetermineCompilerInternal.cmake /opt/local/share/cmake-3.12/Modules/Compiler/Clang.cmake /opt/local/share/cmake-3.12/Modules/Compiler/Comeau-CXX-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/Compaq-C-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/Cray-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/Embarcadero-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/Fujitsu-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/GHS-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/GNU-C-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/GNU.cmake /opt/local/share/cmake-3.12/Modules/Compiler/HP-C-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/HP-CXX-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/IAR-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/IBMCPP-C-DetermineVersionInternal.cmake /opt/local/share/cmake-3.12/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake /opt/local/share/cmake-3.12/Modules/Compiler/Intel-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/MIPSpro-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/MSVC-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/NVIDIA-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/PGI-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/PathScale-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/SCO-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/SDCC-C-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/SunPro-C-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/TI-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/TinyCC-C-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/VisualAge-C-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/Watcom-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/XL-C-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/XL-CXX-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/zOS-C-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/FindPackageHandleStandardArgs.cmake /opt/local/share/cmake-3.12/Modules/FindPackageMessage.cmake /opt/local/share/cmake-3.12/Modules/FindPythonInterp.cmake /opt/local/share/cmake-3.12/Modules/FindThreads.cmake /opt/local/share/cmake-3.12/Modules/Internal/FeatureTesting.cmake /opt/local/share/cmake-3.12/Modules/Platform/Apple-AppleClang-C.cmake /opt/local/share/cmake-3.12/Modules/Platform/Apple-AppleClang-CXX.cmake /opt/local/share/cmake-3.12/Modules/Platform/Apple-Clang-C.cmake /opt/local/share/cmake-3.12/Modules/Platform/Apple-Clang-CXX.cmake /opt/local/share/cmake-3.12/Modules/Platform/Apple-Clang.cmake /opt/local/share/cmake-3.12/Modules/Platform/Darwin-Determine-CXX.cmake /opt/local/share/cmake-3.12/Modules/Platform/Darwin-Initialize.cmake /opt/local/share/cmake-3.12/Modules/Platform/Darwin.cmake /opt/local/share/cmake-3.12/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.12.4/CMakeCCompiler.cmake CMakeFiles/3.12.4/CMakeCXXCompiler.cmake CMakeFiles/3.12.4/CMakeSystem.cmake CMakeFiles/feature_tests.c CMakeFiles/feature_tests.cxx
+build build.ninja: RERUN_CMAKE | ../CMakeLists.txt ../googletest/CMakeLists.txt ../googletest/cmake/internal_utils.cmake ../samples/CMakeLists.txt ../src/CMakeLists.txt ../src/spawnsync/CMakeLists.txt ../tests/CMakeLists.txt /opt/local/share/cmake-3.12/Modules/CMakeCInformation.cmake /opt/local/share/cmake-3.12/Modules/CMakeCXXInformation.cmake /opt/local/share/cmake-3.12/Modules/CMakeCommonLanguageInclude.cmake /opt/local/share/cmake-3.12/Modules/CMakeGenericSystem.cmake /opt/local/share/cmake-3.12/Modules/CMakeInitializeConfigs.cmake /opt/local/share/cmake-3.12/Modules/CMakeLanguageInformation.cmake /opt/local/share/cmake-3.12/Modules/CMakeSystemSpecificInformation.cmake /opt/local/share/cmake-3.12/Modules/CMakeSystemSpecificInitialize.cmake /opt/local/share/cmake-3.12/Modules/CheckIncludeFile.cmake /opt/local/share/cmake-3.12/Modules/CheckLibraryExists.cmake /opt/local/share/cmake-3.12/Modules/CheckSymbolExists.cmake /opt/local/share/cmake-3.12/Modules/Compiler/AppleClang-C.cmake /opt/local/share/cmake-3.12/Modules/Compiler/AppleClang-CXX.cmake /opt/local/share/cmake-3.12/Modules/Compiler/CMakeCommonCompilerMacros.cmake /opt/local/share/cmake-3.12/Modules/Compiler/Clang.cmake /opt/local/share/cmake-3.12/Modules/Compiler/GNU.cmake /opt/local/share/cmake-3.12/Modules/FindPackageHandleStandardArgs.cmake /opt/local/share/cmake-3.12/Modules/FindPackageMessage.cmake /opt/local/share/cmake-3.12/Modules/FindPythonInterp.cmake /opt/local/share/cmake-3.12/Modules/FindThreads.cmake /opt/local/share/cmake-3.12/Modules/Platform/Apple-AppleClang-C.cmake /opt/local/share/cmake-3.12/Modules/Platform/Apple-AppleClang-CXX.cmake /opt/local/share/cmake-3.12/Modules/Platform/Apple-Clang-C.cmake /opt/local/share/cmake-3.12/Modules/Platform/Apple-Clang-CXX.cmake /opt/local/share/cmake-3.12/Modules/Platform/Apple-Clang.cmake /opt/local/share/cmake-3.12/Modules/Platform/Darwin-Initialize.cmake /opt/local/share/cmake-3.12/Modules/Platform/Darwin.cmake /opt/local/share/cmake-3.12/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.12.4/CMakeCCompiler.cmake CMakeFiles/3.12.4/CMakeCXXCompiler.cmake CMakeFiles/3.12.4/CMakeSystem.cmake
   pool = console
 
 #############################################
 # A missing CMake input file is not an error.
 
-build ../CMakeLists.txt ../googletest/CMakeLists.txt ../googletest/cmake/internal_utils.cmake ../samples/CMakeLists.txt ../src/CMakeLists.txt ../src/spawnsync/CMakeLists.txt ../tests/CMakeLists.txt /opt/local/share/cmake-3.12/Modules/CMakeCCompiler.cmake.in /opt/local/share/cmake-3.12/Modules/CMakeCCompilerABI.c /opt/local/share/cmake-3.12/Modules/CMakeCInformation.cmake /opt/local/share/cmake-3.12/Modules/CMakeCXXCompiler.cmake.in /opt/local/share/cmake-3.12/Modules/CMakeCXXCompilerABI.cpp /opt/local/share/cmake-3.12/Modules/CMakeCXXInformation.cmake /opt/local/share/cmake-3.12/Modules/CMakeCommonLanguageInclude.cmake /opt/local/share/cmake-3.12/Modules/CMakeCompilerIdDetection.cmake /opt/local/share/cmake-3.12/Modules/CMakeConfigurableFile.in /opt/local/share/cmake-3.12/Modules/CMakeDetermineCCompiler.cmake /opt/local/share/cmake-3.12/Modules/CMakeDetermineCXXCompiler.cmake /opt/local/share/cmake-3.12/Modules/CMakeDetermineCompileFeatures.cmake /opt/local/share/cmake-3.12/Modules/CMakeDetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/CMakeDetermineCompilerABI.cmake /opt/local/share/cmake-3.12/Modules/CMakeDetermineCompilerId.cmake /opt/local/share/cmake-3.12/Modules/CMakeDetermineSystem.cmake /opt/local/share/cmake-3.12/Modules/CMakeFindBinUtils.cmake /opt/local/share/cmake-3.12/Modules/CMakeGenericSystem.cmake /opt/local/share/cmake-3.12/Modules/CMakeInitializeConfigs.cmake /opt/local/share/cmake-3.12/Modules/CMakeLanguageInformation.cmake /opt/local/share/cmake-3.12/Modules/CMakeNinjaFindMake.cmake /opt/local/share/cmake-3.12/Modules/CMakeParseImplicitLinkInfo.cmake /opt/local/share/cmake-3.12/Modules/CMakeSystem.cmake.in /opt/local/share/cmake-3.12/Modules/CMakeSystemSpecificInformation.cmake /opt/local/share/cmake-3.12/Modules/CMakeSystemSpecificInitialize.cmake /opt/local/share/cmake-3.12/Modules/CMakeTestCCompiler.cmake /opt/local/share/cmake-3.12/Modules/CMakeTestCXXCompiler.cmake /opt/local/share/cmake-3.12/Modules/CMakeTestCompilerCommon.cmake /opt/local/share/cmake-3.12/Modules/CheckIncludeFile.c.in /opt/local/share/cmake-3.12/Modules/CheckIncludeFile.cmake /opt/local/share/cmake-3.12/Modules/CheckLibraryExists.cmake /opt/local/share/cmake-3.12/Modules/CheckSymbolExists.cmake /opt/local/share/cmake-3.12/Modules/Compiler/ADSP-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/ARMCC-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/AppleClang-C-FeatureTests.cmake /opt/local/share/cmake-3.12/Modules/Compiler/AppleClang-C.cmake /opt/local/share/cmake-3.12/Modules/Compiler/AppleClang-CXX-FeatureTests.cmake /opt/local/share/cmake-3.12/Modules/Compiler/AppleClang-CXX.cmake /opt/local/share/cmake-3.12/Modules/Compiler/AppleClang-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/Borland-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/Bruce-C-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/CMakeCommonCompilerMacros.cmake /opt/local/share/cmake-3.12/Modules/Compiler/Clang-CXX-TestableFeatures.cmake /opt/local/share/cmake-3.12/Modules/Compiler/Clang-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/Clang-DetermineCompilerInternal.cmake /opt/local/share/cmake-3.12/Modules/Compiler/Clang.cmake /opt/local/share/cmake-3.12/Modules/Compiler/Comeau-CXX-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/Compaq-C-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/Cray-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/Embarcadero-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/Fujitsu-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/GHS-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/GNU-C-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/GNU.cmake /opt/local/share/cmake-3.12/Modules/Compiler/HP-C-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/HP-CXX-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/IAR-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/IBMCPP-C-DetermineVersionInternal.cmake /opt/local/share/cmake-3.12/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake /opt/local/share/cmake-3.12/Modules/Compiler/Intel-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/MIPSpro-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/MSVC-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/NVIDIA-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/PGI-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/PathScale-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/SCO-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/SDCC-C-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/SunPro-C-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/TI-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/TinyCC-C-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/VisualAge-C-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/Watcom-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/XL-C-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/XL-CXX-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/zOS-C-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake /opt/local/share/cmake-3.12/Modules/FindPackageHandleStandardArgs.cmake /opt/local/share/cmake-3.12/Modules/FindPackageMessage.cmake /opt/local/share/cmake-3.12/Modules/FindPythonInterp.cmake /opt/local/share/cmake-3.12/Modules/FindThreads.cmake /opt/local/share/cmake-3.12/Modules/Internal/FeatureTesting.cmake /opt/local/share/cmake-3.12/Modules/Platform/Apple-AppleClang-C.cmake /opt/local/share/cmake-3.12/Modules/Platform/Apple-AppleClang-CXX.cmake /opt/local/share/cmake-3.12/Modules/Platform/Apple-Clang-C.cmake /opt/local/share/cmake-3.12/Modules/Platform/Apple-Clang-CXX.cmake /opt/local/share/cmake-3.12/Modules/Platform/Apple-Clang.cmake /opt/local/share/cmake-3.12/Modules/Platform/Darwin-Determine-CXX.cmake /opt/local/share/cmake-3.12/Modules/Platform/Darwin-Initialize.cmake /opt/local/share/cmake-3.12/Modules/Platform/Darwin.cmake /opt/local/share/cmake-3.12/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.12.4/CMakeCCompiler.cmake CMakeFiles/3.12.4/CMakeCXXCompiler.cmake CMakeFiles/3.12.4/CMakeSystem.cmake CMakeFiles/feature_tests.c CMakeFiles/feature_tests.cxx: phony
+build ../CMakeLists.txt ../googletest/CMakeLists.txt ../googletest/cmake/internal_utils.cmake ../samples/CMakeLists.txt ../src/CMakeLists.txt ../src/spawnsync/CMakeLists.txt ../tests/CMakeLists.txt /opt/local/share/cmake-3.12/Modules/CMakeCInformation.cmake /opt/local/share/cmake-3.12/Modules/CMakeCXXInformation.cmake /opt/local/share/cmake-3.12/Modules/CMakeCommonLanguageInclude.cmake /opt/local/share/cmake-3.12/Modules/CMakeGenericSystem.cmake /opt/local/share/cmake-3.12/Modules/CMakeInitializeConfigs.cmake /opt/local/share/cmake-3.12/Modules/CMakeLanguageInformation.cmake /opt/local/share/cmake-3.12/Modules/CMakeSystemSpecificInformation.cmake /opt/local/share/cmake-3.12/Modules/CMakeSystemSpecificInitialize.cmake /opt/local/share/cmake-3.12/Modules/CheckIncludeFile.cmake /opt/local/share/cmake-3.12/Modules/CheckLibraryExists.cmake /opt/local/share/cmake-3.12/Modules/CheckSymbolExists.cmake /opt/local/share/cmake-3.12/Modules/Compiler/AppleClang-C.cmake /opt/local/share/cmake-3.12/Modules/Compiler/AppleClang-CXX.cmake /opt/local/share/cmake-3.12/Modules/Compiler/CMakeCommonCompilerMacros.cmake /opt/local/share/cmake-3.12/Modules/Compiler/Clang.cmake /opt/local/share/cmake-3.12/Modules/Compiler/GNU.cmake /opt/local/share/cmake-3.12/Modules/FindPackageHandleStandardArgs.cmake /opt/local/share/cmake-3.12/Modules/FindPackageMessage.cmake /opt/local/share/cmake-3.12/Modules/FindPythonInterp.cmake /opt/local/share/cmake-3.12/Modules/FindThreads.cmake /opt/local/share/cmake-3.12/Modules/Platform/Apple-AppleClang-C.cmake /opt/local/share/cmake-3.12/Modules/Platform/Apple-AppleClang-CXX.cmake /opt/local/share/cmake-3.12/Modules/Platform/Apple-Clang-C.cmake /opt/local/share/cmake-3.12/Modules/Platform/Apple-Clang-CXX.cmake /opt/local/share/cmake-3.12/Modules/Platform/Apple-Clang.cmake /opt/local/share/cmake-3.12/Modules/Platform/Darwin-Initialize.cmake /opt/local/share/cmake-3.12/Modules/Platform/Darwin.cmake /opt/local/share/cmake-3.12/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.12.4/CMakeCCompiler.cmake CMakeFiles/3.12.4/CMakeCXXCompiler.cmake CMakeFiles/3.12.4/CMakeSystem.cmake: phony
 
 #############################################
 # Clean all the built files.

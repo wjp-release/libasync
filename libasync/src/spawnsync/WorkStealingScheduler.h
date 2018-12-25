@@ -109,11 +109,11 @@ public:
         virtual bool cancel() override{
             #ifdef WITH_CANCEL
             std::unique_lock lk(Task::sync.cancel_mtx); //write lock
-            #endif
             if(state==in_pool){
                 state=freelance; 
                 return true;
             }
+            #endif
             return false; // damn too late
         }
         // You might want to recycle a task and resubmit it without creating a new task.
@@ -160,6 +160,14 @@ public:
             state=done;
             Task::sync.cv.notify_all(); 
         }
+        // Freelance execution without changing its state (it might still lie in a pool with canceled state, which we cannot modify)
+        virtual void compute() override{
+            try{
+                value=this->call();
+            }catch(...){
+                reason=std::current_exception();
+            }
+        }
     protected:
         int state = freelance;
         std::optional<R> value; // Default: nullopt
@@ -193,11 +201,12 @@ public:
                 FuturisticTask<R>::wait();
             }else{ 
                 // Without Cancel&Exec: (162+256+170+56+225+60+76+110+45+48+198+177)/12=132
-                // Potential optimization
-                // if(FuturisticTask<R>::cancel()){  
-                //     FuturisticTask<R>::execute();
-                //     return;
-                // }
+                #ifdef WITH_CANCEL
+                if(FuturisticTask<R>::cancel()){  // cancel & execute locally if possible
+                    FuturisticTask<R>::compute();
+                    return;
+                }
+                #endif
                 WorkStealingWorker& worker=scheduler.get_worker().get();
                 while(!FuturisticTask<R>::is_finished()){ 
                     worker.join_routine();  
