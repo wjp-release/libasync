@@ -25,7 +25,7 @@
 
 #pragma once
 
-// Convenient includes for tests & samples & benchmarks only.
+// Used by tests/samples/benchmarks.
 
 #define WJP_VERSION 1
 #define WJP_DEBUG
@@ -50,6 +50,7 @@
 #include <optional>
 #include <cassert>
 using namespace std::chrono_literals;  //100ms == std::chrono::milliseconds{100}, since c++14
+#include "Profiler.h"
 #include "AutoRelease.h"
 #include "RandomUtilities.h"
 #include "ThreadUtilities.h"
@@ -65,4 +66,4 @@ using namespace std::chrono_literals;  //100ms == std::chrono::milliseconds{100}
 #include "ConcurrentPrint.h"
 // #include "Pipable.h" //obsolete
 #include "Array.h"
-#include "ParallelSum.h"
+#include "PFParallelSum.h"

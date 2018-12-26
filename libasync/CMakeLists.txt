@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.5)
 
 # cmake -Dtest=ON to turn on test mode
 option(test "Build all tests." OFF) 
+# cmake -Dbench=ON to build benchmarks. (requires tbb && TBB_ROOT=/usr/local/tbb)
+option(bench "Build benchmarks." OFF) 
 
 project(libasync)
 
@@ -60,11 +62,16 @@ endif()
 
 include_directories(./include)
 include_directories(./src/utils)
-include_directories(./src/spawnsync)
+include_directories(./src/cache_friendly)
+include_directories(./src/programmer_friendly)
 include_directories(./src)
 link_directories(./src)
 add_subdirectory(./src)
 add_subdirectory(./samples) 
+
+if(bench STREQUAL "ON")
+add_subdirectory(./benchmarks) 
+endif()
 
 if(test STREQUAL "ON")
 		add_subdirectory(googletest) 

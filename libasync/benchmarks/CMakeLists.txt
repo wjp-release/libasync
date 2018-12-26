@@ -1,0 +1,9 @@
+include_directories(/usr/local/tbb/include/tbb)
+link_directories(/usr/local/tbb/lib) 
+
+aux_source_directory(. BENCHMARKSDIRSRCS)
+add_executable(benchmarks ${BENCHMARKSDIRSRCS})
+find_package(TBB REQUIRED tbb)
+target_link_libraries(benchmarks async TBB::tbb)
+set_property(TARGET benchmarks PROPERTY CXX_STANDARD 17)
+set_property(TARGET benchmarks PROPERTY CXX_STANDARD_REQUIRED ON)

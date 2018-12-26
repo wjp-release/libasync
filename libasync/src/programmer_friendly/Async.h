@@ -31,8 +31,6 @@
 
 namespace wjp{
 
-
-
 // Note that: to use pipable async semantics,
 // you must register a single global instance of scheduler.
 // If you have multiple schedulers (which doesn't make much sense though),

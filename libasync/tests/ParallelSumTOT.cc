@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "ParallelSum.h"
+#include "PFParallelSum.h"
 #include <functional>
 
 using namespace wjp;

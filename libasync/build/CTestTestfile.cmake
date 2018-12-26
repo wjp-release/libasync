@@ -6,5 +6,6 @@
 # testing this directory and lists subdirectories to be tested as well.
 subdirs("src")
 subdirs("samples")
+subdirs("benchmarks")
 subdirs("googletest")
 subdirs("tests")
