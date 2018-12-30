@@ -25,12 +25,27 @@
 
 #pragma once
 
-namespace wjp{
+#include "CFConfig.h"
+#include "CFWorker.h"
+#include <optional>
+
+namespace wjp::cf{
 
 class TaskScheduler{
-
-
-
+	TaskScheduler(){}
+	~TaskScheduler(){}
+	// std::optional<int> current_thread_index()const noexcept;
+	// std::reference_wrapper<WorkStealingWorker> get_worker(int index);
+	// std::optional<std::reference_wrapper<WorkStealingWorker>> current_thread_handle()noexcept;
+	// std::reference_wrapper<WorkStealingWorker> randomly_pick_one()noexcept;
+	// int nr_threads() const noexcept{return threads.capacity();}
+	// void start()noexcept{started=true;}
+	// void terminate()noexcept{terminating=true;}
+	// void wake_all_sleeping_workers();
+private:
+	bool                            terminating=false;  
+	bool                            started=false;  
+    Worker                          workers[WorkerNumber];
 };
 
 

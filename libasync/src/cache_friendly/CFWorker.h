@@ -31,27 +31,25 @@
 #include <mutex>
 #include <condition_variable>
 #include "TimeUtilities.h"
-#include "CFScheduler.h"
+#include <thread>
 
 namespace wjp::cf{
-
+class TaskScheduler;
 class Worker{
 public:
-    constexpr static auto idle_timeout=3s;  
     // Worker(TaskScheduler&, int index);
     // void routine(); 
 
     template < class T, class... Args >  
-    T*                          emplaceTaskInDeque(Args&&... args){
+    T*                                  emplaceTaskInDeque(Args&&... args){
         return deque.emplaceTask<T>(std::forward<Args>(args)...);
     }
 
     template < class T, class... Args >  
-    T*                          emplaceTaskInBuffer(Args&&... args){
+    T*                                  emplaceTaskInBuffer(Args&&... args){
         return buffer.emplaceTask<T>(std::forward<Args>(args)...);
     }
 
-    // void submit(Task* task);
     // std::string stat(); // Debugging/monitoring-only stats.
     // void wake();
     // void wake_if_blocked();
@@ -70,13 +68,14 @@ protected:
 private:
     TaskDeque                           deque;
     TaskBuffer                          buffer;
-    TaskScheduler                       scheduler;
+    TaskScheduler*                      scheduler;
     std::optional<time_point>           idleBeginTime; //Busy if empty, idle otherwise. 
     int                                 index;
     volatile int                        stealerIndex=-1; // hint for steal-back algorithm
     bool                                blocked=false;
     mutable std::condition_variable     cv; 
     mutable std::mutex                  mtx;
+    std::thread                         thread;
 };
 
 
