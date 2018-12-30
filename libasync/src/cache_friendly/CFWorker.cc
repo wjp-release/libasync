@@ -23,14 +23,5 @@
  * SOFTWARE.
  */
 
-#pragma once
+#include "CFWorker"
 
-namespace wjp::cf{
-
-class Worker{
-
-
-};
-
-
-}
