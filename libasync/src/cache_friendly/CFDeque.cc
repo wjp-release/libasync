@@ -33,7 +33,7 @@ Task*                       TaskDeque::steal(){
     std::lock_guard<DequeMutex> lk(mtx);
     if(endPosition>beginPosition){
         beginPosition++;
-        return at(beginPosition-1).taskPointer<Task>();
+        return at(beginPosition-1).taskPointer();
     }else{
         return nullptr;
     }
@@ -44,7 +44,7 @@ Task*                       TaskDeque::take(){
     std::lock_guard<DequeMutex> lk(mtx);
     if(endPosition>beginPosition){
         endPosition--;
-        return at(endPosition).taskPointer<Task>();
+        return at(endPosition).taskPointer();
     }else{
         return nullptr;
     }

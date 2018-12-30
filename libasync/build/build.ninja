@@ -230,6 +230,12 @@ build src/cache_friendly/CMakeFiles/cf.dir/CFTask.cc.o: CXX_COMPILER__cf ../src/
   INCLUDES = -I.././include -I.././src/utils -I.././src/cache_friendly -I.././src/programmer_friendly -I.././src
   OBJECT_DIR = src/cache_friendly/CMakeFiles/cf.dir
   OBJECT_FILE_DIR = src/cache_friendly/CMakeFiles/cf.dir
+build src/cache_friendly/CMakeFiles/cf.dir/CFWorker.cc.o: CXX_COMPILER__cf ../src/cache_friendly/CFWorker.cc || cmake_object_order_depends_target_cf
+  DEP_FILE = src/cache_friendly/CMakeFiles/cf.dir/CFWorker.cc.o.d
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk   -std=gnu++1z
+  INCLUDES = -I.././include -I.././src/utils -I.././src/cache_friendly -I.././src/programmer_friendly -I.././src
+  OBJECT_DIR = src/cache_friendly/CMakeFiles/cf.dir
+  OBJECT_FILE_DIR = src/cache_friendly/CMakeFiles/cf.dir
 
 # =============================================================================
 # Link build statements for STATIC_LIBRARY target cf
@@ -238,7 +244,7 @@ build src/cache_friendly/CMakeFiles/cf.dir/CFTask.cc.o: CXX_COMPILER__cf ../src/
 #############################################
 # Link the static library src/cache_friendly/libcf.a
 
-build src/cache_friendly/libcf.a: CXX_STATIC_LIBRARY_LINKER__cf src/cache_friendly/CMakeFiles/cf.dir/CFBuffer.cc.o src/cache_friendly/CMakeFiles/cf.dir/CFDeque.cc.o src/cache_friendly/CMakeFiles/cf.dir/CFScheduler.cc.o src/cache_friendly/CMakeFiles/cf.dir/CFTask.cc.o
+build src/cache_friendly/libcf.a: CXX_STATIC_LIBRARY_LINKER__cf src/cache_friendly/CMakeFiles/cf.dir/CFBuffer.cc.o src/cache_friendly/CMakeFiles/cf.dir/CFDeque.cc.o src/cache_friendly/CMakeFiles/cf.dir/CFScheduler.cc.o src/cache_friendly/CMakeFiles/cf.dir/CFTask.cc.o src/cache_friendly/CMakeFiles/cf.dir/CFWorker.cc.o
   ARCH_FLAGS = -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk
   LANGUAGE_COMPILE_FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall
   OBJECT_DIR = src/cache_friendly/CMakeFiles/cf.dir

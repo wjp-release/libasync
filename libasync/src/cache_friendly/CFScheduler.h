@@ -27,7 +27,7 @@
 
 namespace wjp{
 
-class CFScheduler{
+class TaskScheduler{
 
 
 

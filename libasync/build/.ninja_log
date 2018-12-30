@@ -125,3 +125,14 @@
 27	19906	1546153085	samples/CMakeFiles/sample.dir/sample.cc.o	2ee98f19ed01ccd5
 54	45409	1546153111	samples/CMakeFiles/sample.dir/worksteal.cc.o	681c9dc7b8a44976
 45409	45560	1546153111	samples/sample	3ce32131ec959f81
+20	6300	1546155218	src/cache_friendly/CMakeFiles/cf.dir/CFTask.cc.o	5b27b9c92aec2bb7
+18	6444	1546155218	src/cache_friendly/CMakeFiles/cf.dir/CFDeque.cc.o	5172f422a5809ddb
+16	6540	1546155218	src/cache_friendly/CMakeFiles/cf.dir/CFBuffer.cc.o	9dbe664d005a867d
+24	13497	1546155225	samples/CMakeFiles/sample.dir/cfdeque.cc.o	b3d716e5deefb5db
+28	15379	1546155227	samples/CMakeFiles/sample.dir/sample.cc.o	2ee98f19ed01ccd5
+8	6188	1546155291	src/cache_friendly/CMakeFiles/cf.dir/CFWorker.cc.o	247ba9c64d68bb01
+6200	6301	1546155291	src/cache_friendly/libcf.a	e780be6736d80629
+11	13281	1546155298	samples/CMakeFiles/sample.dir/cfdeque.cc.o	b3d716e5deefb5db
+13	15130	1546155300	samples/CMakeFiles/sample.dir/sample.cc.o	2ee98f19ed01ccd5
+16	39616	1546155325	samples/CMakeFiles/sample.dir/worksteal.cc.o	681c9dc7b8a44976
+39622	39767	1546155325	samples/sample	3ce32131ec959f81

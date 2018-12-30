@@ -49,7 +49,7 @@ public:
         if(endPosition-beginPosition >= BufferCapacity){
             return nullptr; // return nullptr if current size == capacity
         }
-        T* task = at(endPosition).emplaceTask(std::forward<Args>(args)...);
+        T* task = at(endPosition).emplaceTask<T>(std::forward<Args>(args)...);
         endPosition++;
         return task;
     }
@@ -60,7 +60,7 @@ protected:
     }
 private:
     TaskBlock                   blocks[BufferCapacity];  // pre-constructed empty TaskBlocks
-    BufferMutex                 mtx;
+    mutable BufferMutex         mtx;
     uint64_t                    beginPosition=0; 
     uint64_t                    endPosition=0; // always >= beginPosition
 };

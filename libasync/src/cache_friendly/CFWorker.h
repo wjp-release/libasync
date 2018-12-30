@@ -25,11 +25,58 @@
 
 #pragma once
 
+#include "CFDeque.h"
+#include "CFBuffer.h"
+#include <optional>
+#include <mutex>
+#include <condition_variable>
+#include "TimeUtilities.h"
+#include "CFScheduler.h"
+
 namespace wjp::cf{
 
 class Worker{
+public:
+    constexpr static auto idle_timeout=3s;  
+    // Worker(TaskScheduler&, int index);
+    // void routine(); 
 
+    template < class T, class... Args >  
+    T*                          emplaceTaskInDeque(Args&&... args){
+        return deque.emplaceTask<T>(std::forward<Args>(args)...);
+    }
 
+    template < class T, class... Args >  
+    T*                          emplaceTaskInBuffer(Args&&... args){
+        return buffer.emplaceTask<T>(std::forward<Args>(args)...);
+    }
+
+    // void submit(Task* task);
+    // std::string stat(); // Debugging/monitoring-only stats.
+    // void wake();
+    // void wake_if_blocked();
+    // void join_routine();
+protected:
+    // void simple_frogleaping(); 
+    // bool is_idle()noexcept{return when_idle_begins.has_value();}
+    // void becomes_idle(){when_idle_begins=now();} 
+    // void becomes_busy(){when_idle_begins.reset();}
+    // bool immune_to_block() const noexcept;
+    // void try_to_block();
+    // bool idle_for_too_long();
+    // Task* scan_next_task();
+    // Task* steal_a_task();
+    // Task* steal_from(WorkStealingWorker&);
+private:
+    TaskDeque                           deque;
+    TaskBuffer                          buffer;
+    TaskScheduler                       scheduler;
+    std::optional<time_point>           idleBeginTime; //Busy if empty, idle otherwise. 
+    int                                 index;
+    volatile int                        stealerIndex=-1; // hint for steal-back algorithm
+    bool                                blocked=false;
+    mutable std::condition_variable     cv; 
+    mutable std::mutex                  mtx;
 };
 
 
