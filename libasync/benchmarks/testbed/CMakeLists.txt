@@ -1,0 +1,5 @@
+aux_source_directory(. BENCHMARTESTBEDSDIRSRCS)
+add_executable(testbed ${BENCHMARTESTBEDSDIRSRCS})
+target_link_libraries(testbed async)
+set_property(TARGET testbed PROPERTY CXX_STANDARD 17)
+set_property(TARGET testbed PROPERTY CXX_STANDARD_REQUIRED ON)

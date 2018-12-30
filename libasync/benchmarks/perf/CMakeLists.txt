@@ -1,0 +1,5 @@
+aux_source_directory(. BENCHMARKPERFSDIRSRCS)
+add_executable(perf ${BENCHMARKPERFSDIRSRCS})
+target_link_libraries(perf async)
+set_property(TARGET perf PROPERTY CXX_STANDARD 17)
+set_property(TARGET perf PROPERTY CXX_STANDARD_REQUIRED ON)

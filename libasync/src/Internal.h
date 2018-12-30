@@ -64,6 +64,18 @@ using namespace std::chrono_literals;  //100ms == std::chrono::milliseconds{100}
 #include "WorkStealingWorkerPool.h"
 #include "WorkStealingScheduler.h"
 #include "ConcurrentPrint.h"
+#include "PFParallelSum.h"
+#include "SimpleNumeric.h"
 // #include "Pipable.h" //obsolete
 #include "Array.h"
 #include "PFParallelSum.h"
+
+
+#include "CFConfig.h"
+#include "CFDeque.h"
+#include "CFBuffer.h"
+#include "CFScheduler.h"
+#include "CFTask.h"
+#include "CFTaskBlock.h"
+#include "CFTaskHeader.h"
+#include "CFWorker.h"

@@ -1,6 +1,7 @@
 include_directories(/usr/local/tbb/include/tbb)
 link_directories(/usr/local/tbb/lib) 
-
+add_subdirectory(perf)
+add_subdirectory(testbed)
 aux_source_directory(. BENCHMARKSDIRSRCS)
 add_executable(benchmarks ${BENCHMARKSDIRSRCS})
 find_package(TBB REQUIRED tbb)

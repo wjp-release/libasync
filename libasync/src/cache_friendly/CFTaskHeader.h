@@ -23,5 +23,34 @@
  * SOFTWARE.
  */
 
-#include "CFTask.h"
+#pragma once
 
+#include "CFConfig.h"
+
+namespace wjp::cf{
+
+class Task;
+
+class TaskHeader{
+public:
+    TaskHeader(){}
+    enum : uint32_t {
+        allocated_but_empty = 0,
+        freelance = 1,
+        
+    };
+    Task*                       parent=nullptr;
+    Task*                       next=nullptr;
+    uint32_t                    refCount=0;
+    uint32_t                    state=allocated_but_empty;
+    template< class T >
+    T*                          taskPointer(){
+        return reinterpret_cast<T*>(this+1);
+    }
+    template< class T >
+    T&                          taskReference(){
+        return *reinterpret_cast<T*>(this+1);
+    }                 
+};
+
+}

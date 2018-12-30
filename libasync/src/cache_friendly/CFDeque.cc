@@ -23,5 +23,37 @@
  * SOFTWARE.
  */
 
+#include "CFDeque.h"
 #include "CFTask.h"
 
+namespace wjp::cf{
+
+// Return the least recently emplaced task
+Task*                       TaskDeque::steal(){
+    std::lock_guard<DequeMutex> lk(mtx);
+    if(endPosition>beginPosition){
+        beginPosition++;
+        return at(beginPosition-1).taskPointer<Task>();
+    }else{
+        return nullptr;
+    }
+}
+
+// Return the most recently emplaced task
+Task*                       TaskDeque::take(){
+    std::lock_guard<DequeMutex> lk(mtx);
+    if(endPosition>beginPosition){
+        endPosition--;
+        return at(endPosition).taskPointer<Task>();
+    }else{
+        return nullptr;
+    }
+}
+
+int                         TaskDeque::size(){
+    std::lock_guard<DequeMutex> lk(mtx);
+    return endPosition-beginPosition;
+}   
+
+
+}

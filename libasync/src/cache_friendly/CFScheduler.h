@@ -23,5 +23,15 @@
  * SOFTWARE.
  */
 
-#include "CFTask.h"
+#pragma once
 
+namespace wjp{
+
+class CFScheduler{
+
+
+
+};
+
+
+}

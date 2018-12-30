@@ -31,11 +31,12 @@
 #include "Internal.h"
 #include "sample.h"
 #include "worksteal.h"
+#include "cfdeque.h"
 
 using namespace wjp;
 int main()
 {
-	worksteal();
+	cfdeque();
 
 #ifdef _MSC_VER
 	std::cin.get();

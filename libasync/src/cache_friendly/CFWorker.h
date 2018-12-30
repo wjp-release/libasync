@@ -23,5 +23,3 @@
  * SOFTWARE.
  */
 
-#include "CFTask.h"
-
