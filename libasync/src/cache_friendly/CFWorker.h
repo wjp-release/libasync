@@ -24,7 +24,7 @@
  */
 
 #pragma once
-
+#include "CFConfig.h"
 #include "CFDeque.h"
 #include "CFBuffer.h"
 #include <optional>
@@ -37,22 +37,28 @@ namespace wjp::cf{
 class TaskScheduler;
 class Worker{
 public:
-    // Worker(TaskScheduler&, int index);
-    // void routine(); 
-
+    friend class TaskPool;
     template < class T, class... Args >  
-    T*                                  emplaceTaskInDeque(Args&&... args){
+    T*                              emplaceTaskInDeque(Args&&... args){
         return deque.emplaceTask<T>(std::forward<Args>(args)...);
     }
 
     template < class T, class... Args >  
-    T*                                  emplaceTaskInBuffer(Args&&... args){
+    T*                              emplaceTaskInBuffer(Args&&... args){
         return buffer.emplaceTask<T>(std::forward<Args>(args)...);
     }
 
-    // std::string stat(); // Debugging/monitoring-only stats.
-    // void wake();
-    // void wake_if_blocked();
+    #ifdef EnableWorkerSleep
+    void                            wake(){
+
+    }
+    void                            wakeIfBlocked(){
+
+    }
+    #endif
+
+    void                            routine(); 
+    std::string                     stat(); 
     // void join_routine();
 protected:
     // void simple_frogleaping(); 
@@ -66,16 +72,19 @@ protected:
     // Task* steal_a_task();
     // Task* steal_from(WorkStealingWorker&);
 private:
-    TaskDeque                           deque;
-    TaskBuffer                          buffer;
-    TaskScheduler*                      scheduler;
-    std::optional<time_point>           idleBeginTime; //Busy if empty, idle otherwise. 
-    int                                 index;
-    volatile int                        stealerIndex=-1; // hint for steal-back algorithm
-    bool                                blocked=false;
-    mutable std::condition_variable     cv; 
-    mutable std::mutex                  mtx;
-    std::thread                         thread;
+    TaskDeque                       deque;
+    TaskBuffer                      buffer;
+    int                             index=-1;
+    volatile int                    stealerIndex=-1; // hint for steal-back algorithm
+    std::thread                     workerThread;
+
+    #ifdef EnableWorkerSleep
+    std::optional<time_point>       idleBeginTime; //Busy if empty, idle otherwise. 
+    bool                            blocked=false;
+    mutable std::condition_variable cv; 
+    mutable std::mutex              mtx;
+    #endif
+
 };
 
 

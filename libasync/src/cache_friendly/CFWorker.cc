@@ -24,4 +24,29 @@
  */
 
 #include "CFWorker.h"
+#include "ConcurrentPrint.h"
+#include <sstream>
 
+namespace wjp::cf{
+
+void Worker::routine()
+{
+    println("~~");
+}
+
+std::string Worker::stat()
+{
+    std::stringstream ss;
+    ss<<"worker "<<index;
+    #ifdef EnableWorkerSleep
+    bool is_idle_=is_idle();
+    ss<<": is_blocked="<< blocked <<", is_idle="<<is_idle_;
+    if(is_idle_){
+        ss<<"("<< ms_elapsed_count(when_idle_begins.value()) <<"ms)";
+    }
+    #endif
+    ss<<", deque size="<<deque.size()<<", buffer size="<<buffer.size();
+    return ss.str();
+}
+
+}

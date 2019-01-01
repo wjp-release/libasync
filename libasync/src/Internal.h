@@ -70,11 +70,10 @@ using namespace std::chrono_literals;  //100ms == std::chrono::milliseconds{100}
 #include "Array.h"
 #include "PFParallelSum.h"
 
-
+#include "CFBuffer.h"
 #include "CFConfig.h"
 #include "CFDeque.h"
-#include "CFBuffer.h"
-#include "CFScheduler.h"
+#include "CFPool.h"
 #include "CFTask.h"
 #include "CFTaskBlock.h"
 #include "CFTaskHeader.h"

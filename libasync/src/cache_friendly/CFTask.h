@@ -33,19 +33,24 @@ namespace wjp::cf{
 
 class Task{
 public:
-    TaskHeader&                 taskHeader() const{
+    TaskHeader&             taskHeader() const{
         return reinterpret_cast<TaskHeader*>(const_cast<Task*>(this))[-1];
     }
-    virtual Task*               execute() = 0; // return the latest generated child task
+    virtual Task*           execute() = 0; // return the latest generated child task
+
+    virtual void            wait();
+    void                    setRefCount(int r)
+    {
+        taskHeader().refCount=r;
+    }
 };
 
 class EmptyTask : public Task {
 public:
-    Task*                       execute() override {
+    Task*                   execute() override {
         return nullptr;
     }
 };
-
 
 
 }

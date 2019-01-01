@@ -32,11 +32,12 @@
 #include "sample.h"
 #include "worksteal.h"
 #include "cfdeque.h"
+#include "cfsched.h"
 
 using namespace wjp;
 int main()
 {
-	cfdeque();
+	cfsched();
 
 #ifdef _MSC_VER
 	std::cin.get();

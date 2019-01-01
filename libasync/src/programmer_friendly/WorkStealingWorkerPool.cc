@@ -38,7 +38,7 @@ WorkStealingWorkerPool::WorkStealingWorkerPool(int nr_workers) :
     }
     for(int i=0; i<nr_workers; i++){
         threads.emplace_back([this,i]{
-            if(!started){}
+            while(!started){}
             while(!terminating){
                 workers[i].routine(); 
             }

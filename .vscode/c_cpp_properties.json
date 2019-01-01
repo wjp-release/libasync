@@ -3,7 +3,12 @@
         {
             "name": "Win32",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/libasync/src/",
+                "${workspaceFolder}/libasync/src/cache_friendly",
+                "${workspaceFolder}/libasync/src/programmer_friendly",
+                "${workspaceFolder}/libasync/src/utils",
+                "${workspaceFolder}/libasync/include"
             ],
             "defines": [
                 "_DEBUG",

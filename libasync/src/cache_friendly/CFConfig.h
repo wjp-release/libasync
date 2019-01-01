@@ -31,7 +31,7 @@
 
 // Configurable constexpr values
 
-namespace wjp{
+namespace wjp::cf{
 
 static constexpr uint32_t   WorkerNumber = 8;
 static constexpr uint32_t   CacheLineSize = 128;  // 64B is a little bit too small for tasks
@@ -42,3 +42,6 @@ static constexpr bool       MeasureInitTime = false;
 static constexpr auto       WorkerIdleTimeout = 3s;  // worker yields after being idle for too long
 
 }
+
+//#define EnableWorkerSleep
+//#define EnableInternalMonitor

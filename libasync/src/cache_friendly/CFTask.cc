@@ -25,3 +25,14 @@
 
 #include "CFTask.h"
 
+namespace wjp::cf{
+
+
+void Task::wait()
+{
+    
+}
+
+
+
+}
