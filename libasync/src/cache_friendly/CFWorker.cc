@@ -31,7 +31,7 @@ namespace wjp::cf{
 
 void Worker::routine()
 {
-    println("~~");
+
 }
 
 std::string Worker::stat()

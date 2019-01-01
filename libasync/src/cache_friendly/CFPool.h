@@ -27,6 +27,7 @@
 
 #include <optional>
 #include <cassert>
+#include <atomic>
 
 #include "CFConfig.h"
 #include "CFWorker.h"
@@ -50,12 +51,9 @@ public:
         return workers[index];    
     }
     Worker&             randomlyPickOne() noexcept{
-        assert(started);
         return workers[randinteger(0, WorkerNumber-1)];
     }
-    void                start() noexcept{
-        started=true;
-    }
+    void                start();
     void                terminate() noexcept{
         terminating=true;
     }
@@ -68,11 +66,10 @@ public:
     }
     #endif
 protected:
-	TaskPool();
+	TaskPool():terminating(false){}
     ~TaskPool();
 private:
-	bool                terminating=false;  
-	bool                started=false;      
+	volatile bool       terminating;  
     Worker              workers[WorkerNumber];
 };
 

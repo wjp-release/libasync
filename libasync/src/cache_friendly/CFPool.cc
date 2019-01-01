@@ -29,7 +29,6 @@ namespace wjp::cf{
 
 std::optional<int> TaskPool::currentThreadIndex()const noexcept
 {
-    assert(started);
     auto me=std::this_thread::get_id();
     for(auto& w : workers){
         if(w.workerThread.get_id()==me) return w.index;
@@ -37,16 +36,15 @@ std::optional<int> TaskPool::currentThreadIndex()const noexcept
     return {};
 }
 
-TaskPool::TaskPool()
-{
+void TaskPool::start(){
     for(int i=0;i<WorkerNumber;i++){
         workers[i].index=i;
         workers[i].workerThread=std::thread{
             [this,i]{
-                while(!started){}
                 while(!terminating){
                     workers[i].routine();
                 }
+                println("terminated!");
             }
         };
     }

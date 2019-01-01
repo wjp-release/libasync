@@ -87,7 +87,7 @@ public:
             scheduler.get().sched(task);
         }
         virtual bool is_waitable(){
-            bool s=state;
+            int s=state;
             return (s==in_pool||s==sched);
         }
         // Blocks the calling thread until this task finishes. It doesn't wait for freelance or done tasks.
