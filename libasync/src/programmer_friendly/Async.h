@@ -28,6 +28,7 @@
 #include "WorkStealingScheduler.h"
 #include <boost/hof.hpp>
 #include <string>
+#include "Config.h"
 
 namespace wjp{
 

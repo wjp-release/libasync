@@ -25,6 +25,7 @@
 
 #include "CFDeque.h"
 #include "CFTask.h"
+#include "CFTaskHeader.h"
 
 namespace wjp::cf{
 
@@ -43,8 +44,9 @@ Task*                       TaskDeque::steal(){
 Task*                       TaskDeque::take(){
     std::lock_guard<DequeMutex> lk(mtx);
     if(endPosition>beginPosition){
-        endPosition--;
-        return at(endPosition).taskPointer();
+        int pos=endPosition-1;
+        // todo!
+        return at(pos).taskPointer();
     }else{
         return nullptr;
     }
@@ -55,5 +57,26 @@ int                         TaskDeque::size(){
     return endPosition-beginPosition;
 }   
 
+
+void                        TaskDeque::freeListPush(Task* t){
+    if(freeListEmpty()){
+        firstFreeTask=t;
+        t->taskHeader().next=t;
+        t->taskHeader().prev=t;
+    }else{
+        Task* last=firstFreeTask->taskHeader().prev;
+        last->taskHeader().next=t;
+        t->taskHeader().prev=last;
+        t->taskHeader().next=firstFreeTask;
+    }
+}
+Task*                       TaskDeque::freeListPop(){
+    if(freeListEmpty()) return nullptr;
+    Task* last=firstFreeTask->taskHeader().prev;
+    Task* prev_last=last->taskHeader().prev;
+    prev_last->taskHeader().next=firstFreeTask;
+    firstFreeTask->taskHeader().prev=prev_last;
+    return last;
+}
 
 }

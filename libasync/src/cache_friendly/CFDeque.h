@@ -50,14 +50,25 @@ public:
     template < class T, class... Args >  
     T*                          emplaceTask(Args&&... args){
         std::lock_guard<DequeMutex> lk(mtx);
-        if(endPosition-beginPosition >= DequeCapacity){
-            return nullptr; // return nullptr if current size == capacity
+        void* address=nullptr;
+        if(freeListEmpty()){
+            if(endPosition-beginPosition >= DequeCapacity){
+                return nullptr; // return nullptr if current size == capacity
+            }
+            address=at(endPosition).taskAddress;
+        }else{
+            address=freeListPop();
         }
-        T* task = at(endPosition).emplaceTask<T>(std::forward<Args>(args)...);
-        endPosition++;
+        T* task = new (address) T(std::forward<Args>(args)...);
         return task;
     }
-protected:
+
+protected: // These functions are not protected by mutex.
+    bool                        freeListEmpty(){
+        return firstFreeTask==nullptr;
+    }
+    void                        freeListPush(Task* t);
+    Task*                       freeListPop();
     // Random access should only be used internally under lock protection
     TaskBlock&                  at(uint64_t index){
         return blocks[endPosition%DequeCapacity];
@@ -67,6 +78,7 @@ private:
     mutable DequeMutex          mtx;
     uint64_t                    beginPosition=0; 
     uint64_t                    endPosition=0; // always >= beginPosition
+    Task*                       firstFreeTask=nullptr;
 };
 
 }

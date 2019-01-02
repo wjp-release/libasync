@@ -45,7 +45,6 @@ public:
 		static TaskPool pool; 
 		return pool;
 	}
-	std::optional<int>  currentThreadIndex()const noexcept;
     Worker&             getWorker(int index) noexcept{
         assert(index>=0&&index<WorkerNumber);
         return workers[index];    
@@ -53,10 +52,36 @@ public:
     Worker&             randomlyPickOne() noexcept{
         return workers[randinteger(0, WorkerNumber-1)];
     }
-    void                start();
     void                terminate() noexcept{
         terminating=true;
     }
+
+    void                start();
+    std::optional<int>  currentThreadIndex()const noexcept;
+
+    template < class T, class... Args >  
+    T*                  emplaceTask(Args&&... args)
+    {
+        auto current_worker=currentThreadIndex();
+        if(current_worker.has_value()){
+            int index=current_worker.value();
+            return workers[index].deque.emplaceTask<T>(std::forward<Args>(args)...);
+        }else{
+            Worker& w=randomlyPickOne();
+            return w.buffer.emplaceTask<T>(std::forward<Args>(args)...);
+        }
+    }
+
+    // Can only be called by a worker thread.
+    template < class T, class... Args >  
+    T*                  emplaceLastTaskAndWait(Args&&... args)
+    {
+        auto current_worker=currentThreadIndex();
+        assert(current_worker.has_value() && "This method can only be called by a worker thread.");
+            int index=current_worker.value();
+            return workers[index].deque.emplaceTask<T>(std::forward<Args>(args)...);
+    }
+
     #ifdef EnableWorkerSleep
     void                wakeAllSleepingWorkers()
     {
@@ -69,6 +94,9 @@ protected:
 	TaskPool():terminating(false){}
     ~TaskPool();
 private:
+    bool                isCalledByWorkerThread(){
+        return currentThreadIndex().has_value();
+    }
 	volatile bool       terminating;  
     Worker              workers[WorkerNumber];
 };

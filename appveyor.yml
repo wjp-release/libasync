@@ -17,5 +17,5 @@ before_build:
 build:
   project: $(APPVEYOR_BUILD_FOLDER)\libasync\$(APPVEYOR_PROJECT_NAME).sln
 
-test_script:
+#test_script:
   #- '.\tests\%CONFIGURATION%\tests.exe'

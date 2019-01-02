@@ -30,6 +30,7 @@
 namespace wjp::cf{
 
 class Task;
+class TaskBlock;
 
 class TaskHeader{
 public:
@@ -37,12 +38,17 @@ public:
     enum : uint32_t {
         allocated_but_empty = 0,
         freelance = 1,
-        
+        ready_to_execute = 2,
+        executing = 3,
     };
     Task*                       parent=nullptr;
     Task*                       next=nullptr;
+    Task*                       prev=nullptr;
     uint32_t                    refCount=0;
     uint32_t                    state=allocated_but_empty;
+    TaskBlock*                  taskBlockPointer(){
+        return reinterpret_cast<TaskBlock*>(this);
+    }
     template< class T >
     T*                          taskPointer(){
         return reinterpret_cast<T*>(this+1);

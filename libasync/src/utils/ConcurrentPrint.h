@@ -2,7 +2,6 @@
 #include <string>
 namespace wjp{
 
-//#define SAMPLE_DEBUG
 
 // Avoid mutithreaded print interleaving
 // Auto end-line 

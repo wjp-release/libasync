@@ -38,13 +38,31 @@ WorkStealingWorkerPool::WorkStealingWorkerPool(int nr_workers) :
     }
     for(int i=0; i<nr_workers; i++){
         threads.emplace_back([this,i]{
-            while(!started){}
+            //sleep(1);
+            #ifdef SAMPLE_DEBUG
+            println("Worker"+std::to_string(i)+" Created!");
+            #endif
+            while(!started){
+                if(terminating){
+                    #ifdef SAMPLE_DEBUG
+                    println("Worker"+std::to_string(i)+" Terminates Before Started!");
+                    #endif       
+                    return;
+                }
+            }
+            #ifdef SAMPLE_DEBUG
+            println("Worker"+std::to_string(i)+" Starts!");
+            #endif
             while(!terminating){
                 workers[i].routine(); 
             }
+            #ifdef SAMPLE_DEBUG
+            println("Worker"+std::to_string(i)+" Terminates!");
+            #endif
         });
     }
     #ifdef SAMPLE_DEBUG
+    #ifdef INTERNAL_STATS
     // Internal Monitor Thread
     std::thread([this, nr_workers]{
         while(true){
@@ -55,6 +73,7 @@ WorkStealingWorkerPool::WorkStealingWorkerPool(int nr_workers) :
             }
         }
     }).detach();
+    #endif
     #endif
 }
 

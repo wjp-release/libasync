@@ -30,6 +30,10 @@
 
 namespace wjp{
     static inline int recommended_nr_thread(){
+        return std::thread::hardware_concurrency();
+    }
+
+    static inline int recommended_nr_thread2(){
         return std::thread::hardware_concurrency()*2+1;
     }
 

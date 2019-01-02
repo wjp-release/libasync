@@ -281,12 +281,10 @@ void worksteal10(){
 // Pipable semantics
 void worksteal11(){
     WorkStealingScheduler scheduler;
-
-
 }
 
 void worksteal(){
-    worksteal9();
+    worksteal11();
 }
 
 

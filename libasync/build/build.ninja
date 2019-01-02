@@ -41,6 +41,16 @@ build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
 build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 
 #############################################
+# Utility command for test
+
+build CMakeFiles/test.util: CUSTOM_COMMAND
+  COMMAND = cd /mnt/d/workspace/libasync/libasync/build && /usr/bin/ctest --force-new-ctest-process
+  DESC = Running tests...
+  pool = console
+  restat = 1
+build test: phony CMakeFiles/test.util
+
+#############################################
 # Utility command for edit_cache
 
 build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
@@ -53,6 +63,15 @@ build edit_cache: phony CMakeFiles/edit_cache.util
 # /mnt/d/workspace/libasync/libasync/CMakeLists.txt
 # =============================================================================
 
+
+#############################################
+# Utility command for edit_cache
+
+build src/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /mnt/d/workspace/libasync/libasync/build/src && /usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  DESC = No interactive CMake dialog available...
+  restat = 1
+build src/edit_cache: phony src/CMakeFiles/edit_cache.util
 
 #############################################
 # Utility command for rebuild_cache
@@ -94,13 +113,14 @@ build src/libasync.a: CXX_STATIC_LIBRARY_LINKER__async src/CMakeFiles/async.dir/
   TARGET_PDB = async.a.dbg
 
 #############################################
-# Utility command for edit_cache
+# Utility command for test
 
-build src/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /mnt/d/workspace/libasync/libasync/build/src && /usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-  DESC = No interactive CMake dialog available...
+build src/CMakeFiles/test.util: CUSTOM_COMMAND
+  COMMAND = cd /mnt/d/workspace/libasync/libasync/build/src && /usr/bin/ctest --force-new-ctest-process
+  DESC = Running tests...
+  pool = console
   restat = 1
-build src/edit_cache: phony src/CMakeFiles/edit_cache.util
+build src/test: phony src/CMakeFiles/test.util
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
 # /mnt/d/workspace/libasync/libasync/src/CMakeLists.txt
@@ -116,6 +136,15 @@ build src/programmer_friendly/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
   pool = console
   restat = 1
 build src/programmer_friendly/rebuild_cache: phony src/programmer_friendly/CMakeFiles/rebuild_cache.util
+
+#############################################
+# Utility command for edit_cache
+
+build src/programmer_friendly/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /mnt/d/workspace/libasync/libasync/build/src/programmer_friendly && /usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  DESC = No interactive CMake dialog available...
+  restat = 1
+build src/programmer_friendly/edit_cache: phony src/programmer_friendly/CMakeFiles/edit_cache.util
 # =============================================================================
 # Object build statements for STATIC_LIBRARY target pf
 
@@ -165,13 +194,14 @@ build src/programmer_friendly/libpf.a: CXX_STATIC_LIBRARY_LINKER__pf src/program
   TARGET_PDB = pf.a.dbg
 
 #############################################
-# Utility command for edit_cache
+# Utility command for test
 
-build src/programmer_friendly/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /mnt/d/workspace/libasync/libasync/build/src/programmer_friendly && /usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-  DESC = No interactive CMake dialog available...
+build src/programmer_friendly/CMakeFiles/test.util: CUSTOM_COMMAND
+  COMMAND = cd /mnt/d/workspace/libasync/libasync/build/src/programmer_friendly && /usr/bin/ctest --force-new-ctest-process
+  DESC = Running tests...
+  pool = console
   restat = 1
-build src/programmer_friendly/edit_cache: phony src/programmer_friendly/CMakeFiles/edit_cache.util
+build src/programmer_friendly/test: phony src/programmer_friendly/CMakeFiles/test.util
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
 # /mnt/d/workspace/libasync/libasync/src/CMakeLists.txt
@@ -187,6 +217,15 @@ build src/cache_friendly/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
   pool = console
   restat = 1
 build src/cache_friendly/rebuild_cache: phony src/cache_friendly/CMakeFiles/rebuild_cache.util
+
+#############################################
+# Utility command for edit_cache
+
+build src/cache_friendly/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /mnt/d/workspace/libasync/libasync/build/src/cache_friendly && /usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  DESC = No interactive CMake dialog available...
+  restat = 1
+build src/cache_friendly/edit_cache: phony src/cache_friendly/CMakeFiles/edit_cache.util
 # =============================================================================
 # Object build statements for STATIC_LIBRARY target cf
 
@@ -242,13 +281,14 @@ build src/cache_friendly/libcf.a: CXX_STATIC_LIBRARY_LINKER__cf src/cache_friend
   TARGET_PDB = cf.a.dbg
 
 #############################################
-# Utility command for edit_cache
+# Utility command for test
 
-build src/cache_friendly/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /mnt/d/workspace/libasync/libasync/build/src/cache_friendly && /usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-  DESC = No interactive CMake dialog available...
+build src/cache_friendly/CMakeFiles/test.util: CUSTOM_COMMAND
+  COMMAND = cd /mnt/d/workspace/libasync/libasync/build/src/cache_friendly && /usr/bin/ctest --force-new-ctest-process
+  DESC = Running tests...
+  pool = console
   restat = 1
-build src/cache_friendly/edit_cache: phony src/cache_friendly/CMakeFiles/edit_cache.util
+build src/cache_friendly/test: phony src/cache_friendly/CMakeFiles/test.util
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
 # /mnt/d/workspace/libasync/libasync/src/CMakeLists.txt
@@ -264,6 +304,15 @@ build src/utils/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
   pool = console
   restat = 1
 build src/utils/rebuild_cache: phony src/utils/CMakeFiles/rebuild_cache.util
+
+#############################################
+# Utility command for edit_cache
+
+build src/utils/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /mnt/d/workspace/libasync/libasync/build/src/utils && /usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  DESC = No interactive CMake dialog available...
+  restat = 1
+build src/utils/edit_cache: phony src/utils/CMakeFiles/edit_cache.util
 # =============================================================================
 # Object build statements for STATIC_LIBRARY target utils
 
@@ -295,18 +344,28 @@ build src/utils/libutils.a: CXX_STATIC_LIBRARY_LINKER__utils src/utils/CMakeFile
   TARGET_PDB = utils.a.dbg
 
 #############################################
-# Utility command for edit_cache
+# Utility command for test
 
-build src/utils/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /mnt/d/workspace/libasync/libasync/build/src/utils && /usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-  DESC = No interactive CMake dialog available...
+build src/utils/CMakeFiles/test.util: CUSTOM_COMMAND
+  COMMAND = cd /mnt/d/workspace/libasync/libasync/build/src/utils && /usr/bin/ctest --force-new-ctest-process
+  DESC = Running tests...
+  pool = console
   restat = 1
-build src/utils/edit_cache: phony src/utils/CMakeFiles/edit_cache.util
+build src/utils/test: phony src/utils/CMakeFiles/test.util
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
 # /mnt/d/workspace/libasync/libasync/CMakeLists.txt
 # =============================================================================
 
+
+#############################################
+# Utility command for edit_cache
+
+build samples/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /mnt/d/workspace/libasync/libasync/build/samples && /usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  DESC = No interactive CMake dialog available...
+  restat = 1
+build samples/edit_cache: phony samples/CMakeFiles/edit_cache.util
 
 #############################################
 # Utility command for rebuild_cache
@@ -368,29 +427,300 @@ build samples/sample: CXX_EXECUTABLE_LINKER__sample samples/CMakeFiles/sample.di
   TARGET_PDB = sample.dbg
 
 #############################################
+# Utility command for test
+
+build samples/CMakeFiles/test.util: CUSTOM_COMMAND
+  COMMAND = cd /mnt/d/workspace/libasync/libasync/build/samples && /usr/bin/ctest --force-new-ctest-process
+  DESC = Running tests...
+  pool = console
+  restat = 1
+build samples/test: phony samples/CMakeFiles/test.util
+# =============================================================================
+# Write statements declared in CMakeLists.txt:
+# /mnt/d/workspace/libasync/libasync/CMakeLists.txt
+# =============================================================================
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build googletest/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /mnt/d/workspace/libasync/libasync/build/googletest && /usr/bin/cmake -H/mnt/d/workspace/libasync/libasync -B/mnt/d/workspace/libasync/libasync/build
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+build googletest/rebuild_cache: phony googletest/CMakeFiles/rebuild_cache.util
+
+#############################################
+# Utility command for test
+
+build googletest/CMakeFiles/test.util: CUSTOM_COMMAND
+  COMMAND = cd /mnt/d/workspace/libasync/libasync/build/googletest && /usr/bin/ctest --force-new-ctest-process
+  DESC = Running tests...
+  pool = console
+  restat = 1
+build googletest/test: phony googletest/CMakeFiles/test.util
+# =============================================================================
+# Object build statements for STATIC_LIBRARY target gtest
+
+
+#############################################
+# Order-only phony target for gtest
+
+build cmake_object_order_depends_target_gtest: phony
+build googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.o: CXX_COMPILER__gtest ../googletest/src/gtest-all.cc || cmake_object_order_depends_target_gtest
+  DEP_FILE = googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.o.d
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall   -Wall -Wshadow -Werror -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -pthread -std=gnu++1z
+  INCLUDES = -I.././include -I.././src/utils -I.././src/cache_friendly -I.././src/programmer_friendly -I.././src -I../googletest/include -I../googletest
+  OBJECT_DIR = googletest/CMakeFiles/gtest.dir
+  OBJECT_FILE_DIR = googletest/CMakeFiles/gtest.dir/src
+
+# =============================================================================
+# Link build statements for STATIC_LIBRARY target gtest
+
+
+#############################################
+# Link the static library lib/libgtest.a
+
+build lib/libgtest.a: CXX_STATIC_LIBRARY_LINKER__gtest googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.o
+  LANGUAGE_COMPILE_FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall
+  OBJECT_DIR = googletest/CMakeFiles/gtest.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = lib/libgtest.a
+  TARGET_PDB = gtest.a.dbg
+
+#############################################
 # Utility command for edit_cache
 
-build samples/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /mnt/d/workspace/libasync/libasync/build/samples && /usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+build googletest/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /mnt/d/workspace/libasync/libasync/build/googletest && /usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
   DESC = No interactive CMake dialog available...
   restat = 1
-build samples/edit_cache: phony samples/CMakeFiles/edit_cache.util
+build googletest/edit_cache: phony googletest/CMakeFiles/edit_cache.util
+# =============================================================================
+# Object build statements for STATIC_LIBRARY target gtest_main
+
+
+#############################################
+# Order-only phony target for gtest_main
+
+build cmake_object_order_depends_target_gtest_main: phony || cmake_object_order_depends_target_gtest
+build googletest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o: CXX_COMPILER__gtest_main ../googletest/src/gtest_main.cc || cmake_object_order_depends_target_gtest_main
+  DEP_FILE = googletest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o.d
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall   -Wall -Wshadow -Werror -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -pthread -std=gnu++1z
+  INCLUDES = -I.././include -I.././src/utils -I.././src/cache_friendly -I.././src/programmer_friendly -I.././src -isystem ../googletest/include -isystem ../googletest
+  OBJECT_DIR = googletest/CMakeFiles/gtest_main.dir
+  OBJECT_FILE_DIR = googletest/CMakeFiles/gtest_main.dir/src
+
+# =============================================================================
+# Link build statements for STATIC_LIBRARY target gtest_main
+
+
+#############################################
+# Link the static library lib/libgtest_main.a
+
+build lib/libgtest_main.a: CXX_STATIC_LIBRARY_LINKER__gtest_main googletest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o || lib/libgtest.a
+  LANGUAGE_COMPILE_FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall
+  OBJECT_DIR = googletest/CMakeFiles/gtest_main.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = lib/libgtest_main.a
+  TARGET_PDB = gtest_main.a.dbg
+# =============================================================================
+# Write statements declared in CMakeLists.txt:
+# /mnt/d/workspace/libasync/libasync/CMakeLists.txt
+# =============================================================================
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build tests/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /mnt/d/workspace/libasync/libasync/build/tests && /usr/bin/cmake -H/mnt/d/workspace/libasync/libasync -B/mnt/d/workspace/libasync/libasync/build
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+build tests/rebuild_cache: phony tests/CMakeFiles/rebuild_cache.util
+
+#############################################
+# Utility command for edit_cache
+
+build tests/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /mnt/d/workspace/libasync/libasync/build/tests && /usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  DESC = No interactive CMake dialog available...
+  restat = 1
+build tests/edit_cache: phony tests/CMakeFiles/edit_cache.util
+# =============================================================================
+# Object build statements for EXECUTABLE target tests
+
+
+#############################################
+# Order-only phony target for tests
+
+build cmake_object_order_depends_target_tests: phony || cmake_object_order_depends_target_async cmake_object_order_depends_target_cf cmake_object_order_depends_target_gtest cmake_object_order_depends_target_gtest_main cmake_object_order_depends_target_pf cmake_object_order_depends_target_utils
+build tests/CMakeFiles/tests.dir/ArrayTOT.cc.o: CXX_COMPILER__tests ../tests/ArrayTOT.cc || cmake_object_order_depends_target_tests
+  DEP_FILE = tests/CMakeFiles/tests.dir/ArrayTOT.cc.o.d
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall   -pthread -std=gnu++1z
+  INCLUDES = -I.././include -I.././src/utils -I.././src/cache_friendly -I.././src/programmer_friendly -I.././src -isystem ../googletest/include -isystem ../googletest
+  OBJECT_DIR = tests/CMakeFiles/tests.dir
+  OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
+build tests/CMakeFiles/tests.dir/AsyncTOT.cc.o: CXX_COMPILER__tests ../tests/AsyncTOT.cc || cmake_object_order_depends_target_tests
+  DEP_FILE = tests/CMakeFiles/tests.dir/AsyncTOT.cc.o.d
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall   -pthread -std=gnu++1z
+  INCLUDES = -I.././include -I.././src/utils -I.././src/cache_friendly -I.././src/programmer_friendly -I.././src -isystem ../googletest/include -isystem ../googletest
+  OBJECT_DIR = tests/CMakeFiles/tests.dir
+  OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
+build tests/CMakeFiles/tests.dir/CFDequeTOT.cc.o: CXX_COMPILER__tests ../tests/CFDequeTOT.cc || cmake_object_order_depends_target_tests
+  DEP_FILE = tests/CMakeFiles/tests.dir/CFDequeTOT.cc.o.d
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall   -pthread -std=gnu++1z
+  INCLUDES = -I.././include -I.././src/utils -I.././src/cache_friendly -I.././src/programmer_friendly -I.././src -isystem ../googletest/include -isystem ../googletest
+  OBJECT_DIR = tests/CMakeFiles/tests.dir
+  OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
+build tests/CMakeFiles/tests.dir/CFTaskBlockTOT.cc.o: CXX_COMPILER__tests ../tests/CFTaskBlockTOT.cc || cmake_object_order_depends_target_tests
+  DEP_FILE = tests/CMakeFiles/tests.dir/CFTaskBlockTOT.cc.o.d
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall   -pthread -std=gnu++1z
+  INCLUDES = -I.././include -I.././src/utils -I.././src/cache_friendly -I.././src/programmer_friendly -I.././src -isystem ../googletest/include -isystem ../googletest
+  OBJECT_DIR = tests/CMakeFiles/tests.dir
+  OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
+build tests/CMakeFiles/tests.dir/CallableTOT.cc.o: CXX_COMPILER__tests ../tests/CallableTOT.cc || cmake_object_order_depends_target_tests
+  DEP_FILE = tests/CMakeFiles/tests.dir/CallableTOT.cc.o.d
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall   -pthread -std=gnu++1z
+  INCLUDES = -I.././include -I.././src/utils -I.././src/cache_friendly -I.././src/programmer_friendly -I.././src -isystem ../googletest/include -isystem ../googletest
+  OBJECT_DIR = tests/CMakeFiles/tests.dir
+  OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
+build tests/CMakeFiles/tests.dir/CancelTaskTOT.cc.o: CXX_COMPILER__tests ../tests/CancelTaskTOT.cc || cmake_object_order_depends_target_tests
+  DEP_FILE = tests/CMakeFiles/tests.dir/CancelTaskTOT.cc.o.d
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall   -pthread -std=gnu++1z
+  INCLUDES = -I.././include -I.././src/utils -I.././src/cache_friendly -I.././src/programmer_friendly -I.././src -isystem ../googletest/include -isystem ../googletest
+  OBJECT_DIR = tests/CMakeFiles/tests.dir
+  OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
+build tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.o: CXX_COMPILER__tests ../tests/ChaseLevDequeTOT.cc || cmake_object_order_depends_target_tests
+  DEP_FILE = tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.o.d
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall   -pthread -std=gnu++1z
+  INCLUDES = -I.././include -I.././src/utils -I.././src/cache_friendly -I.././src/programmer_friendly -I.././src -isystem ../googletest/include -isystem ../googletest
+  OBJECT_DIR = tests/CMakeFiles/tests.dir
+  OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
+build tests/CMakeFiles/tests.dir/FixedThreadPoolTOT.cc.o: CXX_COMPILER__tests ../tests/FixedThreadPoolTOT.cc || cmake_object_order_depends_target_tests
+  DEP_FILE = tests/CMakeFiles/tests.dir/FixedThreadPoolTOT.cc.o.d
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall   -pthread -std=gnu++1z
+  INCLUDES = -I.././include -I.././src/utils -I.././src/cache_friendly -I.././src/programmer_friendly -I.././src -isystem ../googletest/include -isystem ../googletest
+  OBJECT_DIR = tests/CMakeFiles/tests.dir
+  OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
+build tests/CMakeFiles/tests.dir/FuturisticTaskTOT.cc.o: CXX_COMPILER__tests ../tests/FuturisticTaskTOT.cc || cmake_object_order_depends_target_tests
+  DEP_FILE = tests/CMakeFiles/tests.dir/FuturisticTaskTOT.cc.o.d
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall   -pthread -std=gnu++1z
+  INCLUDES = -I.././include -I.././src/utils -I.././src/cache_friendly -I.././src/programmer_friendly -I.././src -isystem ../googletest/include -isystem ../googletest
+  OBJECT_DIR = tests/CMakeFiles/tests.dir
+  OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
+build tests/CMakeFiles/tests.dir/HofTOT.cc.o: CXX_COMPILER__tests ../tests/HofTOT.cc || cmake_object_order_depends_target_tests
+  DEP_FILE = tests/CMakeFiles/tests.dir/HofTOT.cc.o.d
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall   -pthread -std=gnu++1z
+  INCLUDES = -I.././include -I.././src/utils -I.././src/cache_friendly -I.././src/programmer_friendly -I.././src -isystem ../googletest/include -isystem ../googletest
+  OBJECT_DIR = tests/CMakeFiles/tests.dir
+  OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
+build tests/CMakeFiles/tests.dir/ParallelSumTOT.cc.o: CXX_COMPILER__tests ../tests/ParallelSumTOT.cc || cmake_object_order_depends_target_tests
+  DEP_FILE = tests/CMakeFiles/tests.dir/ParallelSumTOT.cc.o.d
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall   -pthread -std=gnu++1z
+  INCLUDES = -I.././include -I.././src/utils -I.././src/cache_friendly -I.././src/programmer_friendly -I.././src -isystem ../googletest/include -isystem ../googletest
+  OBJECT_DIR = tests/CMakeFiles/tests.dir
+  OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
+build tests/CMakeFiles/tests.dir/PipableTOT.cc.o: CXX_COMPILER__tests ../tests/PipableTOT.cc || cmake_object_order_depends_target_tests
+  DEP_FILE = tests/CMakeFiles/tests.dir/PipableTOT.cc.o.d
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall   -pthread -std=gnu++1z
+  INCLUDES = -I.././include -I.././src/utils -I.././src/cache_friendly -I.././src/programmer_friendly -I.././src -isystem ../googletest/include -isystem ../googletest
+  OBJECT_DIR = tests/CMakeFiles/tests.dir
+  OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
+build tests/CMakeFiles/tests.dir/SimpleSpawnDequeTOT.cc.o: CXX_COMPILER__tests ../tests/SimpleSpawnDequeTOT.cc || cmake_object_order_depends_target_tests
+  DEP_FILE = tests/CMakeFiles/tests.dir/SimpleSpawnDequeTOT.cc.o.d
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall   -pthread -std=gnu++1z
+  INCLUDES = -I.././include -I.././src/utils -I.././src/cache_friendly -I.././src/programmer_friendly -I.././src -isystem ../googletest/include -isystem ../googletest
+  OBJECT_DIR = tests/CMakeFiles/tests.dir
+  OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
+build tests/CMakeFiles/tests.dir/SpawnSyncTaskTOT.cc.o: CXX_COMPILER__tests ../tests/SpawnSyncTaskTOT.cc || cmake_object_order_depends_target_tests
+  DEP_FILE = tests/CMakeFiles/tests.dir/SpawnSyncTaskTOT.cc.o.d
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall   -pthread -std=gnu++1z
+  INCLUDES = -I.././include -I.././src/utils -I.././src/cache_friendly -I.././src/programmer_friendly -I.././src -isystem ../googletest/include -isystem ../googletest
+  OBJECT_DIR = tests/CMakeFiles/tests.dir
+  OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
+build tests/CMakeFiles/tests.dir/SubmissionBufferTOT.cc.o: CXX_COMPILER__tests ../tests/SubmissionBufferTOT.cc || cmake_object_order_depends_target_tests
+  DEP_FILE = tests/CMakeFiles/tests.dir/SubmissionBufferTOT.cc.o.d
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall   -pthread -std=gnu++1z
+  INCLUDES = -I.././include -I.././src/utils -I.././src/cache_friendly -I.././src/programmer_friendly -I.././src -isystem ../googletest/include -isystem ../googletest
+  OBJECT_DIR = tests/CMakeFiles/tests.dir
+  OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
+build tests/CMakeFiles/tests.dir/SystemIntegrationTOT.cc.o: CXX_COMPILER__tests ../tests/SystemIntegrationTOT.cc || cmake_object_order_depends_target_tests
+  DEP_FILE = tests/CMakeFiles/tests.dir/SystemIntegrationTOT.cc.o.d
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall   -pthread -std=gnu++1z
+  INCLUDES = -I.././include -I.././src/utils -I.././src/cache_friendly -I.././src/programmer_friendly -I.././src -isystem ../googletest/include -isystem ../googletest
+  OBJECT_DIR = tests/CMakeFiles/tests.dir
+  OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
+build tests/CMakeFiles/tests.dir/UtilitiesTOT.cc.o: CXX_COMPILER__tests ../tests/UtilitiesTOT.cc || cmake_object_order_depends_target_tests
+  DEP_FILE = tests/CMakeFiles/tests.dir/UtilitiesTOT.cc.o.d
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall   -pthread -std=gnu++1z
+  INCLUDES = -I.././include -I.././src/utils -I.././src/cache_friendly -I.././src/programmer_friendly -I.././src -isystem ../googletest/include -isystem ../googletest
+  OBJECT_DIR = tests/CMakeFiles/tests.dir
+  OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
+build tests/CMakeFiles/tests.dir/WorkStealingSchedulerTOT.cc.o: CXX_COMPILER__tests ../tests/WorkStealingSchedulerTOT.cc || cmake_object_order_depends_target_tests
+  DEP_FILE = tests/CMakeFiles/tests.dir/WorkStealingSchedulerTOT.cc.o.d
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall   -pthread -std=gnu++1z
+  INCLUDES = -I.././include -I.././src/utils -I.././src/cache_friendly -I.././src/programmer_friendly -I.././src -isystem ../googletest/include -isystem ../googletest
+  OBJECT_DIR = tests/CMakeFiles/tests.dir
+  OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
+
+# =============================================================================
+# Link build statements for EXECUTABLE target tests
+
+
+#############################################
+# Link the executable tests/tests
+
+build tests/tests: CXX_EXECUTABLE_LINKER__tests tests/CMakeFiles/tests.dir/ArrayTOT.cc.o tests/CMakeFiles/tests.dir/AsyncTOT.cc.o tests/CMakeFiles/tests.dir/CFDequeTOT.cc.o tests/CMakeFiles/tests.dir/CFTaskBlockTOT.cc.o tests/CMakeFiles/tests.dir/CallableTOT.cc.o tests/CMakeFiles/tests.dir/CancelTaskTOT.cc.o tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.o tests/CMakeFiles/tests.dir/FixedThreadPoolTOT.cc.o tests/CMakeFiles/tests.dir/FuturisticTaskTOT.cc.o tests/CMakeFiles/tests.dir/HofTOT.cc.o tests/CMakeFiles/tests.dir/ParallelSumTOT.cc.o tests/CMakeFiles/tests.dir/PipableTOT.cc.o tests/CMakeFiles/tests.dir/SimpleSpawnDequeTOT.cc.o tests/CMakeFiles/tests.dir/SpawnSyncTaskTOT.cc.o tests/CMakeFiles/tests.dir/SubmissionBufferTOT.cc.o tests/CMakeFiles/tests.dir/SystemIntegrationTOT.cc.o tests/CMakeFiles/tests.dir/UtilitiesTOT.cc.o tests/CMakeFiles/tests.dir/WorkStealingSchedulerTOT.cc.o | lib/libgtest_main.a src/libasync.a lib/libgtest.a src/programmer_friendly/libpf.a src/cache_friendly/libcf.a src/utils/libutils.a || lib/libgtest.a lib/libgtest_main.a src/cache_friendly/libcf.a src/libasync.a src/programmer_friendly/libpf.a src/utils/libutils.a
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall
+  LINK_LIBRARIES = -Wl,-rpath,/mnt/d/workspace/libasync/libasync/./src lib/libgtest_main.a src/libasync.a lib/libgtest.a -pthread src/programmer_friendly/libpf.a src/cache_friendly/libcf.a src/utils/libutils.a -lpthread
+  LINK_PATH = -L/mnt/d/workspace/libasync/libasync/./src
+  OBJECT_DIR = tests/CMakeFiles/tests.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = tests/tests
+  TARGET_PDB = tests.dbg
+
+#############################################
+# Utility command for test
+
+build tests/CMakeFiles/test.util: CUSTOM_COMMAND
+  COMMAND = cd /mnt/d/workspace/libasync/libasync/build/tests && /usr/bin/ctest --force-new-ctest-process
+  DESC = Running tests...
+  pool = console
+  restat = 1
+build tests/test: phony tests/CMakeFiles/test.util
 # =============================================================================
 # Target aliases.
 
 build async: phony src/libasync.a
 build cf: phony src/cache_friendly/libcf.a
+build gtest: phony lib/libgtest.a
+build gtest_main: phony lib/libgtest_main.a
 build libasync.a: phony src/libasync.a
 build libcf.a: phony src/cache_friendly/libcf.a
+build libgtest.a: phony lib/libgtest.a
+build libgtest_main.a: phony lib/libgtest_main.a
 build libpf.a: phony src/programmer_friendly/libpf.a
 build libutils.a: phony src/utils/libutils.a
 build pf: phony src/programmer_friendly/libpf.a
 build sample: phony samples/sample
+build tests: phony tests/tests
 build utils: phony src/utils/libutils.a
 # =============================================================================
 # Folder targets.
 
 # =============================================================================
+# =============================================================================
+
+#############################################
+# Folder: /mnt/d/workspace/libasync/libasync/build/googletest
+
+build  googletest/all: phony gtest gtest_main
 # =============================================================================
 
 #############################################
@@ -422,13 +752,19 @@ build  src/programmer_friendly/all: phony pf
 
 build  src/utils/all: phony utils
 # =============================================================================
+
+#############################################
+# Folder: /mnt/d/workspace/libasync/libasync/build/tests
+
+build  tests/all: phony tests
+# =============================================================================
 # Built-in targets
 
 
 #############################################
 # The main all target.
 
-build all: phony src/libasync.a src/programmer_friendly/libpf.a src/cache_friendly/libcf.a src/utils/libutils.a samples/sample
+build all: phony src/libasync.a src/programmer_friendly/libpf.a src/cache_friendly/libcf.a src/utils/libutils.a samples/sample lib/libgtest.a lib/libgtest_main.a tests/tests
 
 #############################################
 # Make the all target the default.
@@ -438,13 +774,13 @@ default all
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | ../CMakeLists.txt ../samples/CMakeLists.txt ../src/CMakeLists.txt ../src/cache_friendly/CMakeLists.txt ../src/programmer_friendly/CMakeLists.txt ../src/utils/CMakeLists.txt /usr/share/cmake-3.10/Modules/CMakeCInformation.cmake /usr/share/cmake-3.10/Modules/CMakeCXXInformation.cmake /usr/share/cmake-3.10/Modules/CMakeCommonLanguageInclude.cmake /usr/share/cmake-3.10/Modules/CMakeGenericSystem.cmake /usr/share/cmake-3.10/Modules/CMakeLanguageInformation.cmake /usr/share/cmake-3.10/Modules/CMakeSystemSpecificInformation.cmake /usr/share/cmake-3.10/Modules/CMakeSystemSpecificInitialize.cmake /usr/share/cmake-3.10/Modules/Compiler/CMakeCommonCompilerMacros.cmake /usr/share/cmake-3.10/Modules/Compiler/GNU-C.cmake /usr/share/cmake-3.10/Modules/Compiler/GNU-CXX.cmake /usr/share/cmake-3.10/Modules/Compiler/GNU.cmake /usr/share/cmake-3.10/Modules/Platform/Linux-GNU-C.cmake /usr/share/cmake-3.10/Modules/Platform/Linux-GNU-CXX.cmake /usr/share/cmake-3.10/Modules/Platform/Linux-GNU.cmake /usr/share/cmake-3.10/Modules/Platform/Linux.cmake /usr/share/cmake-3.10/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.10.2/CMakeCCompiler.cmake CMakeFiles/3.10.2/CMakeCXXCompiler.cmake CMakeFiles/3.10.2/CMakeSystem.cmake
+build build.ninja: RERUN_CMAKE | ../CMakeLists.txt ../googletest/CMakeLists.txt ../googletest/cmake/internal_utils.cmake ../samples/CMakeLists.txt ../src/CMakeLists.txt ../src/cache_friendly/CMakeLists.txt ../src/programmer_friendly/CMakeLists.txt ../src/utils/CMakeLists.txt ../tests/CMakeLists.txt /usr/share/cmake-3.10/Modules/CMakeCInformation.cmake /usr/share/cmake-3.10/Modules/CMakeCXXInformation.cmake /usr/share/cmake-3.10/Modules/CMakeCommonLanguageInclude.cmake /usr/share/cmake-3.10/Modules/CMakeGenericSystem.cmake /usr/share/cmake-3.10/Modules/CMakeLanguageInformation.cmake /usr/share/cmake-3.10/Modules/CMakeSystemSpecificInformation.cmake /usr/share/cmake-3.10/Modules/CMakeSystemSpecificInitialize.cmake /usr/share/cmake-3.10/Modules/CheckIncludeFile.cmake /usr/share/cmake-3.10/Modules/CheckLibraryExists.cmake /usr/share/cmake-3.10/Modules/CheckSymbolExists.cmake /usr/share/cmake-3.10/Modules/Compiler/CMakeCommonCompilerMacros.cmake /usr/share/cmake-3.10/Modules/Compiler/GNU-C.cmake /usr/share/cmake-3.10/Modules/Compiler/GNU-CXX.cmake /usr/share/cmake-3.10/Modules/Compiler/GNU.cmake /usr/share/cmake-3.10/Modules/FindPackageHandleStandardArgs.cmake /usr/share/cmake-3.10/Modules/FindPackageMessage.cmake /usr/share/cmake-3.10/Modules/FindPythonInterp.cmake /usr/share/cmake-3.10/Modules/FindThreads.cmake /usr/share/cmake-3.10/Modules/Platform/Linux-GNU-C.cmake /usr/share/cmake-3.10/Modules/Platform/Linux-GNU-CXX.cmake /usr/share/cmake-3.10/Modules/Platform/Linux-GNU.cmake /usr/share/cmake-3.10/Modules/Platform/Linux.cmake /usr/share/cmake-3.10/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.10.2/CMakeCCompiler.cmake CMakeFiles/3.10.2/CMakeCXXCompiler.cmake CMakeFiles/3.10.2/CMakeSystem.cmake
   pool = console
 
 #############################################
 # A missing CMake input file is not an error.
 
-build ../CMakeLists.txt ../samples/CMakeLists.txt ../src/CMakeLists.txt ../src/cache_friendly/CMakeLists.txt ../src/programmer_friendly/CMakeLists.txt ../src/utils/CMakeLists.txt /usr/share/cmake-3.10/Modules/CMakeCInformation.cmake /usr/share/cmake-3.10/Modules/CMakeCXXInformation.cmake /usr/share/cmake-3.10/Modules/CMakeCommonLanguageInclude.cmake /usr/share/cmake-3.10/Modules/CMakeGenericSystem.cmake /usr/share/cmake-3.10/Modules/CMakeLanguageInformation.cmake /usr/share/cmake-3.10/Modules/CMakeSystemSpecificInformation.cmake /usr/share/cmake-3.10/Modules/CMakeSystemSpecificInitialize.cmake /usr/share/cmake-3.10/Modules/Compiler/CMakeCommonCompilerMacros.cmake /usr/share/cmake-3.10/Modules/Compiler/GNU-C.cmake /usr/share/cmake-3.10/Modules/Compiler/GNU-CXX.cmake /usr/share/cmake-3.10/Modules/Compiler/GNU.cmake /usr/share/cmake-3.10/Modules/Platform/Linux-GNU-C.cmake /usr/share/cmake-3.10/Modules/Platform/Linux-GNU-CXX.cmake /usr/share/cmake-3.10/Modules/Platform/Linux-GNU.cmake /usr/share/cmake-3.10/Modules/Platform/Linux.cmake /usr/share/cmake-3.10/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.10.2/CMakeCCompiler.cmake CMakeFiles/3.10.2/CMakeCXXCompiler.cmake CMakeFiles/3.10.2/CMakeSystem.cmake: phony
+build ../CMakeLists.txt ../googletest/CMakeLists.txt ../googletest/cmake/internal_utils.cmake ../samples/CMakeLists.txt ../src/CMakeLists.txt ../src/cache_friendly/CMakeLists.txt ../src/programmer_friendly/CMakeLists.txt ../src/utils/CMakeLists.txt ../tests/CMakeLists.txt /usr/share/cmake-3.10/Modules/CMakeCInformation.cmake /usr/share/cmake-3.10/Modules/CMakeCXXInformation.cmake /usr/share/cmake-3.10/Modules/CMakeCommonLanguageInclude.cmake /usr/share/cmake-3.10/Modules/CMakeGenericSystem.cmake /usr/share/cmake-3.10/Modules/CMakeLanguageInformation.cmake /usr/share/cmake-3.10/Modules/CMakeSystemSpecificInformation.cmake /usr/share/cmake-3.10/Modules/CMakeSystemSpecificInitialize.cmake /usr/share/cmake-3.10/Modules/CheckIncludeFile.cmake /usr/share/cmake-3.10/Modules/CheckLibraryExists.cmake /usr/share/cmake-3.10/Modules/CheckSymbolExists.cmake /usr/share/cmake-3.10/Modules/Compiler/CMakeCommonCompilerMacros.cmake /usr/share/cmake-3.10/Modules/Compiler/GNU-C.cmake /usr/share/cmake-3.10/Modules/Compiler/GNU-CXX.cmake /usr/share/cmake-3.10/Modules/Compiler/GNU.cmake /usr/share/cmake-3.10/Modules/FindPackageHandleStandardArgs.cmake /usr/share/cmake-3.10/Modules/FindPackageMessage.cmake /usr/share/cmake-3.10/Modules/FindPythonInterp.cmake /usr/share/cmake-3.10/Modules/FindThreads.cmake /usr/share/cmake-3.10/Modules/Platform/Linux-GNU-C.cmake /usr/share/cmake-3.10/Modules/Platform/Linux-GNU-CXX.cmake /usr/share/cmake-3.10/Modules/Platform/Linux-GNU.cmake /usr/share/cmake-3.10/Modules/Platform/Linux.cmake /usr/share/cmake-3.10/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.10.2/CMakeCCompiler.cmake CMakeFiles/3.10.2/CMakeCXXCompiler.cmake CMakeFiles/3.10.2/CMakeSystem.cmake: phony
 
 #############################################
 # Clean all the built files.

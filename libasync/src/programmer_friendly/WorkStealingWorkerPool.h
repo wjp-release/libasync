@@ -33,6 +33,7 @@
 #include "WorkStealingWorker.h"
 #include "RandomUtilities.h"
 #include "Array.h"
+#include "Config.h"
 
 namespace wjp {
 
@@ -60,8 +61,8 @@ public:
 	// Wake all sleeping workers.
 	void wake_all_sleeping_workers();
 private:
-	bool terminating=false;  
-	bool started=false;  
+	volatile bool terminating=false;  
+	volatile bool started=false;  // volatile here is necessary if you compile the project on high optimization level
 	Array<std::thread> threads;   
 	Array<WorkStealingWorker> workers;  
 };
