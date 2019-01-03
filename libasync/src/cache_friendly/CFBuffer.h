@@ -41,15 +41,17 @@ public:
     // Return the least recently emplaced task
     Task*                       steal();
     int                         size();
-    // We construct tasks in-place, so there is no need to copy or move them into deque.
-    // T is a subclass of Task; args are T constructor's parameters.
     template < class T, class... Args >  
-    T*                          emplaceTask(Args&&... args){
+    T*                          emplace(Args&&... args){
         std::lock_guard<BufferMutex> lk(mtx);
         if(endPosition-beginPosition >= BufferCapacity){
             return nullptr; // return nullptr if current size == capacity
         }
-        T* task = at(endPosition).emplaceTask<T>(std::forward<Args>(args)...);
+        TaskBlock& block=at(endPosition);
+        if(block.taskHeader().state==TaskHeader::Exec){
+            return nullptr; // 
+        }
+        T* task = block.emplaceTask<T>(std::forward<Args>(args)...);
         endPosition++;
         return task;
     }

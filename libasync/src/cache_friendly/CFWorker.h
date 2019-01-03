@@ -38,14 +38,15 @@ class TaskScheduler;
 class Worker{
 public:
     friend class TaskPool;
+    // obsolete; 
     template < class T, class... Args >  
     T*                              emplaceTaskInDeque(Args&&... args){
-        return deque.emplaceTask<T>(std::forward<Args>(args)...);
+        return deque.emplace<T>(std::forward<Args>(args)...);
     }
-
+    // obsolete; 
     template < class T, class... Args >  
     T*                              emplaceTaskInBuffer(Args&&... args){
-        return buffer.emplaceTask<T>(std::forward<Args>(args)...);
+        return buffer.emplace<T>(std::forward<Args>(args)...);
     }
 
     #ifdef EnableWorkerSleep

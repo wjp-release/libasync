@@ -28,57 +28,67 @@
 #include "CFConfig.h"
 #include "CFTaskBlock.h"
 #include <mutex> 
+#include "CFTaskList.h"
+#include "CFTooManyTasks.h"
 
 namespace wjp::cf{
 class Task;
 
-// TaskDeque is a cache-friendly worker-local container of pre-constructed TaskBlocks.
-// It holds internally-generated tasks. 
-// It works as a memory pool for Task allocation as well. 
+
+/*
+    TaskDeque is structured as an array of TaskBlocks.
+    TaskBlocks pack TaskHeader, Task and padding bytes together in 128 bytes.
+    TaskHeaders contain intrusive link nodes that help construct 3 lists: freelist, readylist, execlist
+    The freelist is a list of empty tasks that have not been created yet.  
+    The readylist is a list of tasks that have been created, but not executed yet.
+    The execlist is a list of tasks that are being executed now.
+
+    TaskDeque operations:
+    1. <take>
+    Take the newest task from readylist, put it into execlist.
+    <take> itself does not execute the task.
+    It's called by worker routine that intends to execute the task very soon.
+
+    2. <steal>
+    Take the oldest task from readylist, put it into execlist.
+    <steal> itself does not execute the task.
+    It's called by worker routine that intends to execute the task very soon.
+
+    3. <emplace>
+    Take a task from freelist, put it into readylist,
+    and then create the task in-place.
+*/
+
+
 class TaskDeque{
 public:
     using DequeMutex = std::mutex; 
-    TaskDeque(){}
-    // Return the least recently emplaced task
+    TaskDeque();
     Task*                       steal();
-    // Return the most recently emplaced task
     Task*                       take();
-    // Return the number of emplaced tasks
-    int                         size();
-    // We construct tasks in-place, so there is no need to copy or move them into deque.
-    // T is a subclass of Task; args are T constructor's parameters.
+    // Number of tasks that have been created (Ready or Exec)
+    int                         size() const noexcept {
+        return DequeCapacity-freeList.size();
+    }
     template < class T, class... Args >  
-    T*                          emplaceTask(Args&&... args){
+    T*                          emplace(Args&&... args){
         std::lock_guard<DequeMutex> lk(mtx);
-        void* address=nullptr;
-        if(freeListEmpty()){
-            if(endPosition-beginPosition >= DequeCapacity){
-                return nullptr; // return nullptr if current size == capacity
-            }
-            address=at(endPosition).taskAddress;
-        }else{
-            address=freeListPop();
-        }
-        T* task = new (address) T(std::forward<Args>(args)...);
-        return task;
+        return new (freeToReady()) T(std::forward<Args>(args)...);
     }
-
-protected: // These functions are not protected by mutex.
-    bool                        freeListEmpty(){
-        return firstFreeTask==nullptr;
+    template < class T, class... Args >  
+    T*                          emplaceAsExec(Args&&... args){
+        std::lock_guard<DequeMutex> lk(mtx);
+        return new (freeToExec()) T(std::forward<Args>(args)...);
     }
-    void                        freeListPush(Task* t);
-    Task*                       freeListPop();
-    // Random access should only be used internally under lock protection
-    TaskBlock&                  at(uint64_t index){
-        return blocks[endPosition%DequeCapacity];
-    }
+protected: 
+    void*                       freeToReady();
+    void*                       freeToExec();
 private:
     TaskBlock                   blocks[DequeCapacity];  // pre-constructed empty TaskBlocks
     mutable DequeMutex          mtx;
-    uint64_t                    beginPosition=0; 
-    uint64_t                    endPosition=0; // always >= beginPosition
-    Task*                       firstFreeTask=nullptr;
+    TaskList                    freeList;  
+    TaskList                    readyList; 
+    TaskList                    execList;  
 };
 
 }

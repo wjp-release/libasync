@@ -40,8 +40,9 @@ static constexpr uint32_t   BufferCapacity = 1024;
 static constexpr uint32_t   DequeCapacity = TaskNumberPerWorker - BufferCapacity;
 static constexpr bool       MeasureInitTime = false;
 static constexpr auto       WorkerIdleTimeout = 3s;  // worker yields after being idle for too long
-
+static constexpr bool       EnableAssert = true; // Turn it off if you can't even tolerate the performance loss of assertions
 }
 
 //#define EnableWorkerSleep
 //#define EnableInternalMonitor
+

@@ -36,16 +36,15 @@ class TaskHeader{
 public:
     TaskHeader(){}
     enum : uint32_t {
-        allocated_but_empty = 0,
-        freelance = 1,
-        ready_to_execute = 2,
-        executing = 3,
+        Free    = 0, // not created, in freelist
+        Ready   = 1, // created, not executed, in readylist
+        Exec    = 2,  // executed, in execlist
     };
     Task*                       parent=nullptr;
     Task*                       next=nullptr;
     Task*                       prev=nullptr;
     uint32_t                    refCount=0;
-    uint32_t                    state=allocated_but_empty;
+    uint32_t                    state=Free;
     TaskBlock*                  taskBlockPointer(){
         return reinterpret_cast<TaskBlock*>(this);
     }

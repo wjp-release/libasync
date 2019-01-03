@@ -46,7 +46,7 @@ public:
 		return pool;
 	}
     Worker&             getWorker(int index) noexcept{
-        assert(index>=0&&index<WorkerNumber);
+        if constexpr(EnableAssert) assert(index>=0&&index<WorkerNumber);
         return workers[index];    
     }
     Worker&             randomlyPickOne() noexcept{
@@ -60,26 +60,42 @@ public:
     std::optional<int>  currentThreadIndex()const noexcept;
 
     template < class T, class... Args >  
-    T*                  emplaceTask(Args&&... args)
+    T*                  emplace(Args&&... args)
     {
         auto current_worker=currentThreadIndex();
         if(current_worker.has_value()){
             int index=current_worker.value();
-            return workers[index].deque.emplaceTask<T>(std::forward<Args>(args)...);
+            return workers[index].deque.emplace<T>(std::forward<Args>(args)...);
         }else{
             Worker& w=randomlyPickOne();
-            return w.buffer.emplaceTask<T>(std::forward<Args>(args)...);
+            return w.buffer.emplace<T>(std::forward<Args>(args)...);
         }
+    }
+
+    template < class T, class... Args >  
+    T*                  emplaceExternally(Args&&... args)
+    {
+        Worker& w=randomlyPickOne();
+        return w.buffer.emplace<T>(std::forward<Args>(args)...);
+    }
+
+    template < class T, class... Args >  
+    T*                  emplaceLocally(Args&&... args)
+    {
+        auto current_worker=currentThreadIndex();
+        if constexpr(EnableAssert) assert(current_worker.has_value() && "This method can only be called by a worker thread.");
+        int index=current_worker.value();
+        return workers[index].deque.emplace<T>(std::forward<Args>(args)...);
     }
 
     // Can only be called by a worker thread.
     template < class T, class... Args >  
-    T*                  emplaceLastTaskAndWait(Args&&... args)
+    T*                  emplaceAsExec(Args&&... args)
     {
         auto current_worker=currentThreadIndex();
-        assert(current_worker.has_value() && "This method can only be called by a worker thread.");
-            int index=current_worker.value();
-            return workers[index].deque.emplaceTask<T>(std::forward<Args>(args)...);
+        if constexpr(EnableAssert) assert(current_worker.has_value() && "This method can only be called by a worker thread.");
+        int index=current_worker.value();
+        return workers[index].deque.emplaceAsExec<T>(std::forward<Args>(args)...);
     }
 
     #ifdef EnableWorkerSleep

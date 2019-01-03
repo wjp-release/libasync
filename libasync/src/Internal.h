@@ -77,4 +77,6 @@ using namespace std::chrono_literals;  //100ms == std::chrono::milliseconds{100}
 #include "CFTask.h"
 #include "CFTaskBlock.h"
 #include "CFTaskHeader.h"
+#include "CFTaskList.h"
+#include "CFTooManyTasks.h"
 #include "CFWorker.h"

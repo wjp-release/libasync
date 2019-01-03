@@ -28,6 +28,7 @@
 #include <cstdint>
 #include "CFConfig.h"
 #include "CFTaskHeader.h"
+#include "CFPool.h"
 
 namespace wjp::cf{
 
@@ -38,11 +39,44 @@ public:
     }
     virtual Task*           execute() = 0; // return the latest generated child task
     
-    virtual void            wait();
+    // Spawn a child task in deque in Ready state, 
+    // which can be consumed by the owning worker,
+    // or stolen by a hungry wild worker.
+    template < class T, class... Args >  
+    T*                      spawn(Args&&... args){
+        return TaskPool::instance().emplaceLocally(std::forward<Args>(args)...);
+    }
+
+    // Spawn a child task in deque in Exec state.
+    // Exec tasks will always be executed by the local worker. 
+    // They are scheduled with highest priority and safe from work-stealing.
+    // Don't overuse spawnAsExec though, single worker cannot execute everything.
+    template < class T, class... Args >  
+    T*                      spawnAsExec(Args&&... args){  
+        return TaskPool::instance().emplaceAsExec(std::forward<Args>(args)...);
+    }
+
+    // Why not return the task? 
+    // sync(task) will always finish this task. 
+    // So when you are able to return it, it's already destroyed.
+    template < class T, class... Args >  
+    void                    spawnLastChildAndSync(Args&&... args){
+        T* task=TaskPool::instance().emplaceAsExec(std::forward<Args>(args)...);
+        sync(task);
+    }
+    // Note that sync always waits for all child tasks. 
+    // sync(Task*) could be easily misunderstood, so I decide not to expose it as public API.
+    // Use spawnLastChildAndSync to benefit from shortcut.
+    virtual void            sync(){  
+        sync(nullptr);
+    }
     void                    setRefCount(int r)
     {
         taskHeader().refCount=r;
     }
+protected:
+    // shortcut must be emplaced as Exec; it will be executed immediately
+    virtual void            sync(Task* shortcut); 
 };
 
 class EmptyTask : public Task {

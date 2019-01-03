@@ -5,16 +5,14 @@
 2. scalable malloc，多线程alloc内存不必经过global lock。
 3. 预先构造好的空白任务池，以及一个freelist记录可用任务。
 
-cache-friendly版本进行更激进的优化，直接把所有task（固定大小，两个cacheline大）放在一起，组成wjp deque和wjp buffer。deque与buffer再组成worker，N个物理线程则对应N个worker。deque和buffer初始虽空，却实际上已经将空白任务初始化，以后新建任务只需移动base，top边界，并为新任务进行一次赋值。
+cache-friendly版本进行更激进的优化，直接把所有task（固定大小，两个cacheline大）放在一起，组成deque和buffer。deque与buffer再组成worker，N个物理线程则对应N个worker。deque和buffer初始虽空，却实际上已经将空白任务初始化，以后新建任务只需移动base，top边界，并为新任务进行一次赋值。
 
 从而省去了三个开销：任务push进容器的开销、分配内存的开销（尤其是多线程环境下还避免了默认malloc/new的全局锁）、task共通部分构造函数的开销。
 
-## wjp deque/buffer
+## CFDeque
+CFDeque本质并非deque，叫deque只是沿袭传统，表明它是存放所属worker thread新生的子任务的容器，支持take(), push(), steal()操作而已。
 
-在Chase Lev Deque基础上加了3条规则：
-1. take()不再左移top指针，而只是把自右向左搜索到的第一个非executing任务状态改成executing。当这个任务执行完施放之后，状态改成done，并加入freelist。（这里存在优化的空间，如何避免自右向左搜索开销？）
-2. freelist是一个较小的单链表（taskheader里有一个task*next，就借助它进行链接），任务结束后加入freelist。
-3. 若freelist不空，则push()不再右移top指针，而是直接利用freelist里的任务。这样可以避免freelist太大、top-base太大。
+从内存布局上讲，它是放在全局内存段中的大块连续TaskBlock数组。这些TaskBlock内部的TaskHeader内含侵入式双链表节点（以后还可以优化，把指针改成uint32_t的数组下标，可节省8字节给用户任务）。这些链表节点连起来形成freelist，readylist两个链表。初始状态所有节点都在freelist，每创建一个任务就取一个放入readylist。
 
 
 ## 结构布局优化

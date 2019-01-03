@@ -258,6 +258,12 @@ build src/cache_friendly/CMakeFiles/cf.dir/CFTask.cc.o: CXX_COMPILER__cf ../src/
   INCLUDES = -I.././include -I.././src/utils -I.././src/cache_friendly -I.././src/programmer_friendly -I.././src
   OBJECT_DIR = src/cache_friendly/CMakeFiles/cf.dir
   OBJECT_FILE_DIR = src/cache_friendly/CMakeFiles/cf.dir
+build src/cache_friendly/CMakeFiles/cf.dir/CFTaskList.cc.o: CXX_COMPILER__cf ../src/cache_friendly/CFTaskList.cc || cmake_object_order_depends_target_cf
+  DEP_FILE = src/cache_friendly/CMakeFiles/cf.dir/CFTaskList.cc.o.d
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall   -std=gnu++1z
+  INCLUDES = -I.././include -I.././src/utils -I.././src/cache_friendly -I.././src/programmer_friendly -I.././src
+  OBJECT_DIR = src/cache_friendly/CMakeFiles/cf.dir
+  OBJECT_FILE_DIR = src/cache_friendly/CMakeFiles/cf.dir
 build src/cache_friendly/CMakeFiles/cf.dir/CFWorker.cc.o: CXX_COMPILER__cf ../src/cache_friendly/CFWorker.cc || cmake_object_order_depends_target_cf
   DEP_FILE = src/cache_friendly/CMakeFiles/cf.dir/CFWorker.cc.o.d
   FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall   -std=gnu++1z
@@ -272,7 +278,7 @@ build src/cache_friendly/CMakeFiles/cf.dir/CFWorker.cc.o: CXX_COMPILER__cf ../sr
 #############################################
 # Link the static library src/cache_friendly/libcf.a
 
-build src/cache_friendly/libcf.a: CXX_STATIC_LIBRARY_LINKER__cf src/cache_friendly/CMakeFiles/cf.dir/CFBuffer.cc.o src/cache_friendly/CMakeFiles/cf.dir/CFDeque.cc.o src/cache_friendly/CMakeFiles/cf.dir/CFPool.cc.o src/cache_friendly/CMakeFiles/cf.dir/CFTask.cc.o src/cache_friendly/CMakeFiles/cf.dir/CFWorker.cc.o
+build src/cache_friendly/libcf.a: CXX_STATIC_LIBRARY_LINKER__cf src/cache_friendly/CMakeFiles/cf.dir/CFBuffer.cc.o src/cache_friendly/CMakeFiles/cf.dir/CFDeque.cc.o src/cache_friendly/CMakeFiles/cf.dir/CFPool.cc.o src/cache_friendly/CMakeFiles/cf.dir/CFTask.cc.o src/cache_friendly/CMakeFiles/cf.dir/CFTaskList.cc.o src/cache_friendly/CMakeFiles/cf.dir/CFWorker.cc.o
   LANGUAGE_COMPILE_FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall
   OBJECT_DIR = src/cache_friendly/CMakeFiles/cf.dir
   POST_BUILD = :
@@ -583,6 +589,12 @@ build tests/CMakeFiles/tests.dir/CFTaskBlockTOT.cc.o: CXX_COMPILER__tests ../tes
   INCLUDES = -I.././include -I.././src/utils -I.././src/cache_friendly -I.././src/programmer_friendly -I.././src -isystem ../googletest/include -isystem ../googletest
   OBJECT_DIR = tests/CMakeFiles/tests.dir
   OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
+build tests/CMakeFiles/tests.dir/CFTaskListTOT.cc.o: CXX_COMPILER__tests ../tests/CFTaskListTOT.cc || cmake_object_order_depends_target_tests
+  DEP_FILE = tests/CMakeFiles/tests.dir/CFTaskListTOT.cc.o.d
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall   -pthread -std=gnu++1z
+  INCLUDES = -I.././include -I.././src/utils -I.././src/cache_friendly -I.././src/programmer_friendly -I.././src -isystem ../googletest/include -isystem ../googletest
+  OBJECT_DIR = tests/CMakeFiles/tests.dir
+  OBJECT_FILE_DIR = tests/CMakeFiles/tests.dir
 build tests/CMakeFiles/tests.dir/CallableTOT.cc.o: CXX_COMPILER__tests ../tests/CallableTOT.cc || cmake_object_order_depends_target_tests
   DEP_FILE = tests/CMakeFiles/tests.dir/CallableTOT.cc.o.d
   FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall   -pthread -std=gnu++1z
@@ -675,7 +687,7 @@ build tests/CMakeFiles/tests.dir/WorkStealingSchedulerTOT.cc.o: CXX_COMPILER__te
 #############################################
 # Link the executable tests/tests
 
-build tests/tests: CXX_EXECUTABLE_LINKER__tests tests/CMakeFiles/tests.dir/ArrayTOT.cc.o tests/CMakeFiles/tests.dir/AsyncTOT.cc.o tests/CMakeFiles/tests.dir/CFDequeTOT.cc.o tests/CMakeFiles/tests.dir/CFTaskBlockTOT.cc.o tests/CMakeFiles/tests.dir/CallableTOT.cc.o tests/CMakeFiles/tests.dir/CancelTaskTOT.cc.o tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.o tests/CMakeFiles/tests.dir/FixedThreadPoolTOT.cc.o tests/CMakeFiles/tests.dir/FuturisticTaskTOT.cc.o tests/CMakeFiles/tests.dir/HofTOT.cc.o tests/CMakeFiles/tests.dir/ParallelSumTOT.cc.o tests/CMakeFiles/tests.dir/PipableTOT.cc.o tests/CMakeFiles/tests.dir/SimpleSpawnDequeTOT.cc.o tests/CMakeFiles/tests.dir/SpawnSyncTaskTOT.cc.o tests/CMakeFiles/tests.dir/SubmissionBufferTOT.cc.o tests/CMakeFiles/tests.dir/SystemIntegrationTOT.cc.o tests/CMakeFiles/tests.dir/UtilitiesTOT.cc.o tests/CMakeFiles/tests.dir/WorkStealingSchedulerTOT.cc.o | lib/libgtest_main.a src/libasync.a lib/libgtest.a src/programmer_friendly/libpf.a src/cache_friendly/libcf.a src/utils/libutils.a || lib/libgtest.a lib/libgtest_main.a src/cache_friendly/libcf.a src/libasync.a src/programmer_friendly/libpf.a src/utils/libutils.a
+build tests/tests: CXX_EXECUTABLE_LINKER__tests tests/CMakeFiles/tests.dir/ArrayTOT.cc.o tests/CMakeFiles/tests.dir/AsyncTOT.cc.o tests/CMakeFiles/tests.dir/CFDequeTOT.cc.o tests/CMakeFiles/tests.dir/CFTaskBlockTOT.cc.o tests/CMakeFiles/tests.dir/CFTaskListTOT.cc.o tests/CMakeFiles/tests.dir/CallableTOT.cc.o tests/CMakeFiles/tests.dir/CancelTaskTOT.cc.o tests/CMakeFiles/tests.dir/ChaseLevDequeTOT.cc.o tests/CMakeFiles/tests.dir/FixedThreadPoolTOT.cc.o tests/CMakeFiles/tests.dir/FuturisticTaskTOT.cc.o tests/CMakeFiles/tests.dir/HofTOT.cc.o tests/CMakeFiles/tests.dir/ParallelSumTOT.cc.o tests/CMakeFiles/tests.dir/PipableTOT.cc.o tests/CMakeFiles/tests.dir/SimpleSpawnDequeTOT.cc.o tests/CMakeFiles/tests.dir/SpawnSyncTaskTOT.cc.o tests/CMakeFiles/tests.dir/SubmissionBufferTOT.cc.o tests/CMakeFiles/tests.dir/SystemIntegrationTOT.cc.o tests/CMakeFiles/tests.dir/UtilitiesTOT.cc.o tests/CMakeFiles/tests.dir/WorkStealingSchedulerTOT.cc.o | lib/libgtest_main.a src/libasync.a lib/libgtest.a src/programmer_friendly/libpf.a src/cache_friendly/libcf.a src/utils/libutils.a || lib/libgtest.a lib/libgtest_main.a src/cache_friendly/libcf.a src/libasync.a src/programmer_friendly/libpf.a src/utils/libutils.a
   FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall
   LINK_LIBRARIES = -Wl,-rpath,/mnt/d/workspace/libasync/libasync/./src lib/libgtest_main.a src/libasync.a lib/libgtest.a -pthread src/programmer_friendly/libpf.a src/cache_friendly/libcf.a src/utils/libutils.a -lpthread
   LINK_PATH = -L/mnt/d/workspace/libasync/libasync/./src

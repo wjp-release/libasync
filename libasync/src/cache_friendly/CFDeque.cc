@@ -29,54 +29,57 @@
 
 namespace wjp::cf{
 
-// Return the least recently emplaced task
+TaskDeque::TaskDeque(){
+    for(auto& block : blocks){
+        freeList.pushBack(block.taskPointer());
+    }
+}
+
+/*
+    Take the oldest task from readylist, put it into execlist.
+    <steal> itself does not execute the task.
+    It's called by worker routine that intends to execute the task very soon.
+*/
 Task*                       TaskDeque::steal(){
     std::lock_guard<DequeMutex> lk(mtx);
-    if(endPosition>beginPosition){
-        beginPosition++;
-        return at(beginPosition-1).taskPointer();
-    }else{
-        return nullptr;
-    }
+    return nullptr;
 }
 
-// Return the most recently emplaced task
+/*
+    Take the newest task from readylist, put it into execlist.
+    <take> itself does not execute the task.
+    It's called by worker routine that intends to execute the task very soon.
+*/
 Task*                       TaskDeque::take(){
     std::lock_guard<DequeMutex> lk(mtx);
-    if(endPosition>beginPosition){
-        int pos=endPosition-1;
-        // todo!
-        return at(pos).taskPointer();
-    }else{
-        return nullptr;
-    }
+    return nullptr;
 }
 
-int                         TaskDeque::size(){
-    std::lock_guard<DequeMutex> lk(mtx);
-    return endPosition-beginPosition;
-}   
-
-
-void                        TaskDeque::freeListPush(Task* t){
-    if(freeListEmpty()){
-        firstFreeTask=t;
-        t->taskHeader().next=t;
-        t->taskHeader().prev=t;
-    }else{
-        Task* last=firstFreeTask->taskHeader().prev;
-        last->taskHeader().next=t;
-        t->taskHeader().prev=last;
-        t->taskHeader().next=firstFreeTask;
-    }
+/*
+    Return the address of the yet-to-be-created task
+    Take a task from freelist, put it into readylist
+*/    
+void*                       TaskDeque::freeToReady()
+{
+    if(freeList.empty()) throw TooManyTasks();  
+    Task* task = freeList.popBack();
+    task->taskHeader().state=TaskHeader::Ready;
+    readyList.pushBack(task);
+    return task;
 }
-Task*                       TaskDeque::freeListPop(){
-    if(freeListEmpty()) return nullptr;
-    Task* last=firstFreeTask->taskHeader().prev;
-    Task* prev_last=last->taskHeader().prev;
-    prev_last->taskHeader().next=firstFreeTask;
-    firstFreeTask->taskHeader().prev=prev_last;
-    return last;
+
+
+/*
+    Return the address of the yet-to-be-created task
+    Take a task from freelist, put it into execlist
+*/    
+void*                       TaskDeque::freeToExec()
+{
+    if(freeList.empty()) throw TooManyTasks();  
+    Task* task = freeList.popBack();
+    task->taskHeader().state=TaskHeader::Exec;
+    execList.pushBack(task);
+    return task;
 }
 
 }

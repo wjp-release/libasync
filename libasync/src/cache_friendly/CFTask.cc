@@ -28,7 +28,7 @@
 namespace wjp::cf{
 
 
-void Task::wait()
+void Task::sync(Task* lastSubTask)
 {
     
 }
