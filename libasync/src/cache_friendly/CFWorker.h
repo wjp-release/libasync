@@ -38,6 +38,7 @@ class TaskScheduler;
 class Worker{
 public:
     friend class TaskPool;
+    friend class Task;
     // obsolete; 
     template < class T, class... Args >  
     T*                              emplaceTaskInDeque(Args&&... args){
@@ -57,9 +58,14 @@ public:
 
     }
     #endif
-
+    void                            reclaim(Task* executed) noexcept;
     void                            routine(); 
     std::string                     stat(); 
+    void                            setIndex(uint8_t workerIndex) noexcept{
+        index=workerIndex;
+        deque.setIndex(index);
+        buffer.setIndex(index);
+    }
     // void join_routine();
 protected:
     // void simple_frogleaping(); 
@@ -75,10 +81,9 @@ protected:
 private:
     TaskDeque                       deque;
     TaskBuffer                      buffer;
-    int                             index=-1;
-    volatile int                    stealerIndex=-1; // hint for steal-back algorithm
+    uint8_t                         index=-1; // inited by TaskPool's constructor
+    // volatile uint8_t                stealerIndex=-1; // hint for steal-back algorithm
     std::thread                     workerThread;
-
     #ifdef EnableWorkerSleep
     std::optional<time_point>       idleBeginTime; //Busy if empty, idle otherwise. 
     bool                            blocked=false;

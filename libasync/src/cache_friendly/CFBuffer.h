@@ -39,8 +39,9 @@ public:
     using BufferMutex = std::mutex; 
     TaskBuffer(){}
     // Return the least recently emplaced task
-    Task*                       steal();
-    int                         size();
+    Task*                       steal()noexcept;
+    int                         size() const noexcept;
+    void                        reclaim(Task*)noexcept;
     template < class T, class... Args >  
     T*                          emplace(Args&&... args){
         std::lock_guard<BufferMutex> lk(mtx);
@@ -48,16 +49,19 @@ public:
             return nullptr; // return nullptr if current size == capacity
         }
         TaskBlock& block=at(endPosition);
-        if(block.taskHeader().state==TaskHeader::Exec){
-            return nullptr; // 
+        if(block.taskHeader().state==TaskHeader::StolenFromBuffer){
+            return nullptr;  
         }
         T* task = block.emplaceTask<T>(std::forward<Args>(args)...);
         endPosition++;
         return task;
     }
+    void                        setIndex(uint8_t workerIndex)noexcept{ 
+        for(auto& b : blocks) b.setIndex(workerIndex);
+    }    
 protected:
     // Random access should only be used internally under lock protection
-    TaskBlock&                  at(uint64_t index){
+    TaskBlock&                  at(uint64_t index) noexcept{
         return blocks[endPosition%BufferCapacity];
     }
 private:

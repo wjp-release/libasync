@@ -1,20 +1,26 @@
 #include "CFBuffer.h"
 #include "CFTask.h"
-
+#include "CFTaskHeader.h"
 namespace wjp::cf{
 
 // Return the least recently emplaced task
-Task*                       TaskBuffer::steal(){
+Task* TaskBuffer::steal()noexcept{
     std::lock_guard<BufferMutex> lk(mtx);
     if(endPosition>beginPosition){
         beginPosition++;
-        return at(beginPosition-1).taskPointer();
+        Task* task = at(beginPosition-1).taskPointer();
+        task->taskHeader().state=TaskHeader::StolenFromBuffer;
+        return task;
     }else{
         return nullptr;
     }
 }
 
-int                         TaskBuffer::size(){
+void TaskBuffer::reclaim(Task* executed)noexcept{
+    executed->taskHeader().state=TaskHeader::Free;
+}
+
+int TaskBuffer::size()const noexcept{
     std::lock_guard<BufferMutex> lk(mtx);
     return endPosition-beginPosition;
 }   

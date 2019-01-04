@@ -4,9 +4,11 @@
 using namespace wjp::cf;
 
 struct A : public Task{ 
+public:
 	A(const std::string& str):x(str){}
 	std::string x;
-	Task* execute() override{
+protected:
+	Task* compute() override{
 		std::cout<<x<<"\n";
 		return nullptr;
 	}
@@ -21,7 +23,7 @@ protected:
 };
 
 
-TEST_F(CFTaskBlockTOT, duh) {
+TEST_F(CFTaskBlockTOT, Sanity) {
 	TaskBlock block;
 	block.emplaceTask<A>("haha!");
 	A* a=block.taskPointer<A>();

@@ -34,11 +34,15 @@ namespace wjp::cf{
 
 class Task{
 public:
-    TaskHeader&             taskHeader() const{
+    TaskHeader&             taskHeader() const noexcept{
         return reinterpret_cast<TaskHeader*>(const_cast<Task*>(this))[-1];
     }
-    virtual Task*           execute() = 0; // return the latest generated child task
-    
+    // Run user-defined routine and release the task.
+    Task*                   execute(){
+        Task* shortcut = compute();
+        onComputeDone();
+        return shortcut;
+    }
     // Spawn a child task in deque in Ready state, 
     // which can be consumed by the owning worker,
     // or stolen by a hungry wild worker.
@@ -70,21 +74,28 @@ public:
     virtual void            sync(){  
         sync(nullptr);
     }
-    void                    setRefCount(int r)
+    void                    decRefCount() noexcept{
+        taskHeader().refCount--; // atomic
+    }
+    void                    setRefCount(int r) noexcept
     {
         taskHeader().refCount=r;
     }
 protected:
+    virtual void            onComputeDone();
+    // user-defined task routine
+    virtual Task*           compute() = 0; 
     // shortcut must be emplaced as Exec; it will be executed immediately
     virtual void            sync(Task* shortcut); 
 };
 
 class EmptyTask : public Task {
 public:
-    Task*                   execute() override {
+    virtual Task*           compute() override {
         return nullptr;
     }
 };
+
 
 
 }

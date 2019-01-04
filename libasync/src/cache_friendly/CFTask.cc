@@ -24,6 +24,7 @@
  */
 
 #include "CFTask.h"
+#include "CFPool.h"
 
 namespace wjp::cf{
 
@@ -34,5 +35,12 @@ void Task::sync(Task* lastSubTask)
 }
 
 
+
+void Task::onComputeDone(){
+    TaskHeader& header=taskHeader();
+    Task* parent=header.parent;
+    if(parent) parent->decRefCount();
+    TaskPool::instance().getWorker(header.emplacerIndex).reclaim(this);
+}
 
 }

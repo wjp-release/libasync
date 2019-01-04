@@ -10,14 +10,15 @@ class TaskList{
 public:
     bool        empty() const noexcept {return first==nullptr;}
     uint32_t    size()  const noexcept {return listSize;}
-    void        pushBack(Task* target);
-    Task*       popBack();
-    void        pushFront(Task* target);
-    Task*       popFront();
+    void        pushBack(Task* target) noexcept;
+    Task*       popBack() noexcept;
+    void        pushFront(Task* target) noexcept;
+    Task*       popFront() noexcept;
+    void        remove(Task* target) noexcept;
+    bool        contains(Task* target) const noexcept;
 private:
-    void        remove(Task* target);
-    void        insertFirst(Task* target);
-    void        insertBetween(Task* prev, Task* next, Task* target);
+    void        insertFirst(Task* target) noexcept;
+    void        insertBetween(Task* prev, Task* next, Task* target) noexcept;
     Task*       first = nullptr;
     uint32_t    listSize = 0;
 };

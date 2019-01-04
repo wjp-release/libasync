@@ -26,6 +26,7 @@
 #pragma once
 
 #include "CFConfig.h"
+#include <atomic>
 
 namespace wjp::cf{
 
@@ -34,26 +35,30 @@ class TaskBlock;
 
 class TaskHeader{
 public:
-    TaskHeader(){}
-    enum : uint32_t {
-        Free    = 0, // not created, in freelist
-        Ready   = 1, // created, not executed, in readylist
-        Exec    = 2,  // executed, in execlist
+    TaskHeader(): refCount(0){}
+    enum : uint16_t {
+        Free    = 0,    // not created, in freelist or buffer
+        Ready   = 1,    // created, not executed, in readylist
+        Exec    = 2,    // sched for execution, in local execlist
+        Stolen  = 3,    // sched for execution, NOT in stealer's execlist, but is executed by stealer
+        StolenFromBuffer = 10, // externally-emplaced root task that has been sched for execution
     };
-    Task*                       parent=nullptr;
-    Task*                       next=nullptr;
-    Task*                       prev=nullptr;
-    uint32_t                    refCount=0;
-    uint32_t                    state=Free;
-    TaskBlock*                  taskBlockPointer(){
+    Task*                       parent=nullptr;   // 8 bytes
+    Task*                       next=nullptr;     // 8 bytes
+    Task*                       prev=nullptr;     // 8 bytes
+    std::atomic<uint32_t>       refCount;       // 4 bytes
+    uint16_t                    state=Free;       // 2 bytes
+    uint8_t                     stealerIndex=0;   // 1 byte
+    uint8_t                     emplacerIndex=0;  // 1 byte
+    TaskBlock*                  taskBlockPointer() noexcept{
         return reinterpret_cast<TaskBlock*>(this);
     }
     template< class T >
-    T*                          taskPointer(){
+    T*                          taskPointer() noexcept{
         return reinterpret_cast<T*>(this+1);
     }
     template< class T >
-    T&                          taskReference(){
+    T&                          taskReference() noexcept{
         return *reinterpret_cast<T*>(this+1);
     }                 
 };

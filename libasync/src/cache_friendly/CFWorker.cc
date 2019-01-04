@@ -25,6 +25,9 @@
 
 #include "CFWorker.h"
 #include "ConcurrentPrint.h"
+#include "CFTaskHeader.h"
+#include "CFTask.h"
+
 #include <sstream>
 
 namespace wjp::cf{
@@ -33,6 +36,16 @@ void Worker::routine()
 {
 
 }
+
+void Worker::reclaim(Task* executed) noexcept
+{
+    if(executed->taskHeader().state==TaskHeader::StolenFromBuffer){
+        buffer.reclaim(executed);
+    }else{
+        deque.reclaim(executed);
+    }
+}
+
 
 std::string Worker::stat()
 {
@@ -45,7 +58,7 @@ std::string Worker::stat()
         ss<<"("<< ms_elapsed_count(when_idle_begins.value()) <<"ms)";
     }
     #endif
-    ss<<", deque size="<<deque.size()<<", buffer size="<<buffer.size();
+    ss<<", deque freeListSize="<<deque.freeListSize()<<", buffer size="<<buffer.size();
     return ss.str();
 }
 

@@ -33,14 +33,20 @@
 
 namespace wjp::cf{
 
-static constexpr int        WorkerNumber = 8;
+static constexpr uint8_t    WorkerNumber = 8;
 static constexpr uint32_t   CacheLineSize = 128;  // 64B is a little bit too small for tasks
 static constexpr uint32_t   TaskNumberPerWorker = 1024*1024;  
 static constexpr uint32_t   BufferCapacity = 1024;
 static constexpr uint32_t   DequeCapacity = TaskNumberPerWorker - BufferCapacity;
+
+// worker yields after being idle for too long
+static constexpr auto       WorkerIdleTimeout = 3s;  
+
+// Turn it off if you can't even tolerate the performance loss of assertions
+static constexpr bool       EnableAssert = true; 
 static constexpr bool       MeasureInitTime = false;
-static constexpr auto       WorkerIdleTimeout = 3s;  // worker yields after being idle for too long
-static constexpr bool       EnableAssert = true; // Turn it off if you can't even tolerate the performance loss of assertions
+static constexpr bool       SanityCheck = true;
+
 }
 
 //#define EnableWorkerSleep

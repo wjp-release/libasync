@@ -29,57 +29,88 @@
 
 namespace wjp::cf{
 
-TaskDeque::TaskDeque(){
-    for(auto& block : blocks){
-        freeList.pushBack(block.taskPointer());
+// Public methods 
+
+/* 
+    Release an executed task or cancel a ready task.
+    Called by onComputeDone() of each task.
+    You can also call it to cancel a task in readylist.
+*/
+void TaskDeque::reclaim(Task* executed)noexcept{
+    std::lock_guard<DequeMutex> lk(mtx);
+    TaskHeader& header=executed->taskHeader();
+    if(header.state==TaskHeader::Stolen){
+        stolenList.remove(executed);
+    }else if(header.state==TaskHeader::Exec){
+        execList.remove(executed);
+    }else if(header.state==TaskHeader::Ready){
+        readyList.remove(executed);
+    }else{
+        return;
     }
+    freeList.pushBack(executed);
+    header.state=TaskHeader::Free;
 }
 
 /*
-    Take the oldest task from readylist, put it into execlist.
-    <steal> itself does not execute the task.
-    It's called by worker routine that intends to execute the task very soon.
+    Take the oldest task from readylist, put it into stolenlist.
+    Note that this task will not be put into stealer's execlist.
+    The stealer must execute stolen task immediately. 
+    Return nullptr if readylist is empty.
 */
-Task*                       TaskDeque::steal(){
+Task* TaskDeque::steal()noexcept{
     std::lock_guard<DequeMutex> lk(mtx);
-    return nullptr;
+    if(readyList.empty()) return nullptr;
+    return toStolen(readyList.popFront());
 }
 
 /*
     Take the newest task from readylist, put it into execlist.
     <take> itself does not execute the task.
     It's called by worker routine that intends to execute the task very soon.
+    Return nullptr if readylist is empty.
 */
-Task*                       TaskDeque::take(){
+Task* TaskDeque::take()noexcept{
     std::lock_guard<DequeMutex> lk(mtx);
-    return nullptr;
+    if(readyList.empty()) return nullptr;
+    return toExec(readyList.popFront());
 }
 
-/*
-    Return the address of the yet-to-be-created task
-    Take a task from freelist, put it into readylist
-*/    
-void*                       TaskDeque::freeToReady()
-{
-    if(freeList.empty()) throw TooManyTasks();  
-    Task* task = freeList.popBack();
+
+// Private methods 
+
+Task* TaskDeque::toExec(Task* task)noexcept{
+    task->taskHeader().state=TaskHeader::Exec;
+    execList.pushBack(task);
+    return task;
+}
+
+Task* TaskDeque::toStolen(Task* task)noexcept{
+    task->taskHeader().state=TaskHeader::Stolen;
+    stolenList.pushBack(task);
+    return task;
+}
+
+Task* TaskDeque::toReady(Task* task)noexcept{
     task->taskHeader().state=TaskHeader::Ready;
     readyList.pushBack(task);
     return task;
 }
 
-
-/*
-    Return the address of the yet-to-be-created task
-    Take a task from freelist, put it into execlist
-*/    
-void*                       TaskDeque::freeToExec()
-{
-    if(freeList.empty()) throw TooManyTasks();  
-    Task* task = freeList.popBack();
-    task->taskHeader().state=TaskHeader::Exec;
-    execList.pushBack(task);
+Task* TaskDeque::toFree(Task* task)noexcept{
+    task->taskHeader().state=TaskHeader::Free;
+    freeList.pushBack(task);
     return task;
+}
+
+void* TaskDeque::freeToReadyAddr(){
+    if(freeList.empty()) throw TooManyTasks();   
+    return toReady(freeList.popBack());
+}
+
+void* TaskDeque::freeToExecAddr(){
+    if(freeList.empty()) throw TooManyTasks();  
+    return toExec(freeList.popBack());
 }
 
 }

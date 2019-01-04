@@ -99,7 +99,7 @@ public:
     }
 
     #ifdef EnableWorkerSleep
-    void                wakeAllSleepingWorkers()
+    void                wakeAllSleepingWorkers()noexcept
     {
         for(auto& w : workers){
             w.wakeIfBlocked();
@@ -107,10 +107,14 @@ public:
     }
     #endif
 protected:
-	TaskPool():terminating(false){}
+	TaskPool() noexcept :terminating(false){
+        for(uint8_t i=0;i<WorkerNumber;i++){
+            workers[i].setIndex(i);
+        }
+    }
     ~TaskPool();
 private:
-    bool                isCalledByWorkerThread(){
+    bool                isCalledByWorkerThread()noexcept{
         return currentThreadIndex().has_value();
     }
 	volatile bool       terminating;  

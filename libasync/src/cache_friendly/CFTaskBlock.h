@@ -36,7 +36,7 @@ class Task;
 // All TaskBlocks are compactly allcoated in TaskDeques or TaskBuffers.
 class TaskBlock{
 public:
-    TaskBlock(){
+    TaskBlock() noexcept{
         if constexpr(MeasureInitTime){
             static wjp::time_point start=now();
             static int i=0;
@@ -44,10 +44,10 @@ public:
             if(i==DequeCapacity) std::cout<<"time elapsed="<<wjp::ms_elapsed_count(start)<<std::endl;
         }
     }
-    TaskHeader&                 taskHeader(){
+    TaskHeader&                 taskHeader() noexcept{
         return header;
     }
-    void*                       taskAddress(){
+    void*                       taskAddress() noexcept{
         return address;
     }
     template < class T, class... Args >
@@ -55,16 +55,19 @@ public:
         return new (address) T(std::forward<Args>(args)...);
     }
     template < class T = Task >
-    T*                          taskPointer(){
+    T*                          taskPointer()noexcept{
         return reinterpret_cast<T*>(address);
     }
     template < class T = Task >
-    T*                          taskReference(){
+    T*                          taskReference()noexcept{
         return *reinterpret_cast<T*>(address);
     }
     template < class T >
     void                        destroyTask(){
         reinterpret_cast<T*>(address)->~T();
+    }
+    void                        setIndex(uint8_t index)noexcept{
+        header.emplacerIndex=index;
     }
 private:
     TaskHeader                  header; 
