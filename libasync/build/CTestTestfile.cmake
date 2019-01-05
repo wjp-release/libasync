@@ -7,4 +7,4 @@
 subdirs("src")
 subdirs("samples")
 subdirs("googletest")
-subdirs("tests")
+subdirs("tests_cf")

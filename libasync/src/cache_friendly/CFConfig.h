@@ -46,7 +46,7 @@ static constexpr auto       WorkerIdleTimeout = 3s;
 static constexpr bool       EnableAssert = true; 
 static constexpr bool       MeasureInitTime = false;
 static constexpr bool       SanityCheck = true;
-
+static constexpr bool       VerboseDebug = true;
 }
 
 //#define EnableWorkerSleep

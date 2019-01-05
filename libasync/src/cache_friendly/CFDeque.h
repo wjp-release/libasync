@@ -27,9 +27,10 @@
 
 #include "CFConfig.h"
 #include "CFTaskBlock.h"
-#include <mutex> 
 #include "CFTaskList.h"
 #include "CFTooManyTasks.h"
+#include <mutex> 
+#include <string>
 
 namespace wjp::cf{
 class Task;
@@ -94,6 +95,7 @@ public:
     void                        setIndex(uint8_t workerIndex)noexcept{ 
         for(auto& b : blocks) b.setIndex(workerIndex);
     }    
+    std::string                 stats()const;
 private:
     void*                       freeToReadyAddr();
     void*                       freeToExecAddr();

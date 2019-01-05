@@ -26,7 +26,7 @@
 /mnt/d/workspace/libasync/libasync/build/googletest/CMakeFiles/gtest.dir
 /mnt/d/workspace/libasync/libasync/build/googletest/CMakeFiles/edit_cache.dir
 /mnt/d/workspace/libasync/libasync/build/googletest/CMakeFiles/gtest_main.dir
-/mnt/d/workspace/libasync/libasync/build/tests/CMakeFiles/rebuild_cache.dir
-/mnt/d/workspace/libasync/libasync/build/tests/CMakeFiles/edit_cache.dir
-/mnt/d/workspace/libasync/libasync/build/tests/CMakeFiles/tests.dir
-/mnt/d/workspace/libasync/libasync/build/tests/CMakeFiles/test.dir
+/mnt/d/workspace/libasync/libasync/build/tests_cf/CMakeFiles/rebuild_cache.dir
+/mnt/d/workspace/libasync/libasync/build/tests_cf/CMakeFiles/edit_cache.dir
+/mnt/d/workspace/libasync/libasync/build/tests_cf/CMakeFiles/cftests.dir
+/mnt/d/workspace/libasync/libasync/build/tests_cf/CMakeFiles/test.dir

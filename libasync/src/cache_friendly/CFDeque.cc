@@ -26,6 +26,8 @@
 #include "CFDeque.h"
 #include "CFTask.h"
 #include "CFTaskHeader.h"
+#include <sstream>
+#include <string>
 
 namespace wjp::cf{
 
@@ -40,13 +42,15 @@ void TaskDeque::reclaim(Task* executed)noexcept{
     std::lock_guard<DequeMutex> lk(mtx);
     TaskHeader& header=executed->taskHeader();
     if(header.state==TaskHeader::Stolen){
-        stolenList.remove(executed);
+        stolenList.remove(executed); // stealers do not clean up emplacer's stolenList
     }else if(header.state==TaskHeader::Exec){
-        execList.remove(executed);
+        execList.remove(executed); // it's probably already removed except for shortcuts
     }else if(header.state==TaskHeader::Ready){
-        readyList.remove(executed);
-    }else{
+        readyList.remove(executed); // cancel task
+    }else if(header.state==TaskHeader::Free){
         return;
+    }else{
+        assert(false && "This task should not be reclaimed by a deque!");
     }
     freeList.pushBack(executed);
     header.state=TaskHeader::Free;
@@ -73,9 +77,18 @@ Task* TaskDeque::steal()noexcept{
 Task* TaskDeque::take()noexcept{
     std::lock_guard<DequeMutex> lk(mtx);
     if(readyList.empty()) return nullptr;
-    return toExec(readyList.popFront());
+    return toExec(readyList.popBack());
 }
 
+/*
+    Collect debugging stats 
+*/
+std::string TaskDeque::stats()const{
+    std::stringstream ss;
+    ss<<"CFDeque: freelist size="<<freeListSize()<<", stolenlist size="<<stolenListSize()<<", readylist size="<<readyListSize()<<", execlist size="<<execListSize();
+    ss<<std::endl;
+    return ss.str();
+}
 
 // Private methods 
 

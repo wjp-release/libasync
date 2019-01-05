@@ -1,5 +1,5 @@
-aux_source_directory(. DIRSRCS)
-add_executable(tests ${DIRSRCS})
+aux_source_directory(. TESTSDIRSRCS)
+add_executable(tests ${TESTSDIRSRCS})
 #target_compile_options(tests PRIVATE --coverage)
 target_link_libraries(tests gtest_main async)
 set_property(TARGET tests PROPERTY CXX_STANDARD 17)

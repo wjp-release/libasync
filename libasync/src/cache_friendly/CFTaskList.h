@@ -8,7 +8,7 @@ class Task;
 
 class TaskList{
 public:
-    bool        empty() const noexcept {return first==nullptr;}
+    bool        empty() const noexcept {return first==nullptr&&listSize==0;}
     uint32_t    size()  const noexcept {return listSize;}
     void        pushBack(Task* target) noexcept;
     Task*       popBack() noexcept;

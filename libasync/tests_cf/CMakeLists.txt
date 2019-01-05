@@ -1,0 +1,6 @@
+aux_source_directory(. TESTCFDIRSRCS)
+add_executable(cftests ${TESTCFDIRSRCS})
+#target_compile_options(cftests PRIVATE --coverage)
+target_link_libraries(cftests gtest_main async)
+set_property(TARGET cftests PROPERTY CXX_STANDARD 17)
+set_property(TARGET cftests PROPERTY CXX_STANDARD_REQUIRED ON)

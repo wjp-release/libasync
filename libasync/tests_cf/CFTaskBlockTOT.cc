@@ -1,5 +1,7 @@
 #include "gtest/gtest.h"
-#include "Internal.h"
+#include "CFTaskBlock.h"
+#include "CFTask.h"
+#include "CFTaskHeader.h"
 
 using namespace wjp::cf;
 

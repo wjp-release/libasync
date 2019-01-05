@@ -42,7 +42,7 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   include("/mnt/d/workspace/libasync/libasync/build/src/cmake_install.cmake")
   include("/mnt/d/workspace/libasync/libasync/build/samples/cmake_install.cmake")
   include("/mnt/d/workspace/libasync/libasync/build/googletest/cmake_install.cmake")
-  include("/mnt/d/workspace/libasync/libasync/build/tests/cmake_install.cmake")
+  include("/mnt/d/workspace/libasync/libasync/build/tests_cf/cmake_install.cmake")
 
 endif()
 

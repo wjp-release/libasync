@@ -1,7 +1,9 @@
 cmake_minimum_required(VERSION 3.5)
 
 # cmake -Dtest=ON to turn on test mode
-option(test "Build all tests." OFF) 
+option(test "Build tests." OFF) 
+# cmake -Dcftest=ON to turn on cftest mode
+option(cftest "Build tests_cf." OFF) 
 # cmake -Dbench=ON to build benchmarks. (requires tbb && TBB_ROOT=/usr/local/tbb)
 option(bench "Build benchmarks." OFF) 
 
@@ -70,14 +72,20 @@ add_subdirectory(./src)
 add_subdirectory(./samples) 
 
 if(bench STREQUAL "ON")
-add_subdirectory(./benchmarks) 
+	add_subdirectory(./benchmarks) 
+	message("${Green}-- Benchmarks will be built.${ColourReset}")
 endif()
 
 if(test STREQUAL "ON")
 		add_subdirectory(googletest) 
 		enable_testing()
 		add_subdirectory(tests)
-		message("${Green}-- In test mode, tests and samples are built.${ColourReset}")
-else()
-		message("${Green}-- In production-mode, googletest, tests and samples are excluded.${ColourReset}")
+		message("${Green}-- Tests will be built.${ColourReset}")
+endif()
+
+if(cftest STREQUAL "ON")
+		add_subdirectory(googletest) 
+		enable_testing()
+		add_subdirectory(tests_cf)
+		message("${Green}-- Tests(CF) will built.${ColourReset}")
 endif()

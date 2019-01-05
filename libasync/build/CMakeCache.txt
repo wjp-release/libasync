@@ -190,6 +190,9 @@ bench:BOOL=OFF
 //Dependencies for target
 cf_LIB_DEPENDS:STATIC=
 
+//Build tests_cf.
+cftest:BOOL=ON
+
 //Value Computed by CMake
 gtest_BINARY_DIR:STATIC=/mnt/d/workspace/libasync/libasync/build/googletest
 
@@ -227,8 +230,8 @@ libasync_SOURCE_DIR:STATIC=/mnt/d/workspace/libasync/libasync
 //Dependencies for target
 pf_LIB_DEPENDS:STATIC=
 
-//Build all tests.
-test:BOOL=ON
+//Build tests.
+test:BOOL=OFF
 
 //Dependencies for target
 utils_LIB_DEPENDS:STATIC=

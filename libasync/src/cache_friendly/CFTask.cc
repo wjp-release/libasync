@@ -29,12 +29,17 @@
 namespace wjp::cf{
 
 
-void Task::sync(Task* lastSubTask)
+void Task::syncWithShortcut(Task* lastSubTask)
 {
     
 }
 
-
+// Run user-defined routine and release the task.
+Task* Task::execute(){
+    Task* shortcut = compute();
+    onComputeDone();
+    return shortcut;
+}
 
 void Task::onComputeDone(){
     TaskHeader& header=taskHeader();

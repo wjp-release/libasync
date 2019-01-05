@@ -23,6 +23,7 @@ void    TaskList::insertFirst(Task* t)noexcept
 // public methods
 bool    TaskList::contains(Task* target) const noexcept
 {
+    if(empty()) return false;
     if(first==target) return true;
     for(Task*pos=first->taskHeader().next;pos!=first;pos=pos->taskHeader().next){
         if(pos==target) return true;
@@ -31,13 +32,29 @@ bool    TaskList::contains(Task* target) const noexcept
 }
 void    TaskList::remove(Task* t)noexcept
 {
-    if constexpr(SanityCheck){
+    if constexpr(SanityCheck && EnableAssert){
+        assert(t!=nullptr && "Precondition: t != nullptr");
         assert(contains(t) && "Precondition: t must be in list.");
     }
-    Task* prev=t->taskHeader().prev;
-    Task* next=t->taskHeader().next;
+    if(empty()) return;
+    if(t->notInList()) return; // already removed
+    if(listSize==1){
+        if(t==first){
+            first=nullptr;
+            listSize=0;
+            return;
+        }
+    }
+    TaskHeader& header=t->taskHeader();
+    if constexpr (EnableAssert){
+        assert(header.prev!=nullptr&&header.next!=nullptr && "prev, next must be valid");
+    }
+    Task* prev=header.prev;
+    Task* next=header.next;
     prev->taskHeader().next=next;
     next->taskHeader().prev=prev;
+    header.prev=nullptr;
+    header.next=nullptr;
     listSize--;
 }
 void    TaskList::pushBack(Task* t)noexcept

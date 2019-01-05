@@ -38,17 +38,35 @@ public:
         return reinterpret_cast<TaskHeader*>(const_cast<Task*>(this))[-1];
     }
     // Run user-defined routine and release the task.
-    Task*                   execute(){
-        Task* shortcut = compute();
-        onComputeDone();
-        return shortcut;
+    // Return a child task that is (1) detached, (2) in execList as the shortcut after parent task is executed.
+    // If you don't have a detached child task that must be run immediately after the parent task, return nullptr.
+    Task*                   execute();
+    
+    // Parent tasks' sync()/syncWithShortcut() doesn't wait for detached tasks.
+    // A detached child task does not point back to its parent. 
+    // It does not have any effect on parent task's refcount as well.
+    template < class T, class... Args >  
+    T*                      spawnDetached(Args&&... args){
+        return TaskPool::instance().emplaceLocally(std::forward<Args>(args)...);
     }
+
+    // Spawn a detached child task that's protected against stealing.
+    // You can return this task in user-defined compute() function to promote it as a shortcut.
+    template < class T, class... Args >  
+    T*                      spawnDetachedAsExec(Args&&... args){  
+        return TaskPool::instance().emplaceAsExec(std::forward<Args>(args)...);
+    }
+
     // Spawn a child task in deque in Ready state, 
     // which can be consumed by the owning worker,
     // or stolen by a hungry wild worker.
     template < class T, class... Args >  
     T*                      spawn(Args&&... args){
-        return TaskPool::instance().emplaceLocally(std::forward<Args>(args)...);
+
+        T* child=TaskPool::instance().emplaceLocally(std::forward<Args>(args)...);
+        incRefCount();
+        child->setParent(this);
+        return child;
     }
 
     // Spawn a child task in deque in Exec state.
@@ -57,23 +75,22 @@ public:
     // Don't overuse spawnAsExec though, single worker cannot execute everything.
     template < class T, class... Args >  
     T*                      spawnAsExec(Args&&... args){  
-        return TaskPool::instance().emplaceAsExec(std::forward<Args>(args)...);
+        T* child=TaskPool::instance().emplaceAsExec(std::forward<Args>(args)...);
+        incRefCount();
+        child->setParent(this);
+        return child;
     }
 
-    // Why not return the task? 
-    // sync(task) will always finish this task. 
-    // So when you are able to return it, it's already destroyed.
-    template < class T, class... Args >  
-    void                    spawnLastChildAndSync(Args&&... args){
-        T* task=TaskPool::instance().emplaceAsExec(std::forward<Args>(args)...);
-        sync(task);
-    }
     // Note that sync always waits for all child tasks. 
     // sync(Task*) could be easily misunderstood, so I decide not to expose it as public API.
     // Use spawnLastChildAndSync to benefit from shortcut.
     virtual void            sync(){  
-        sync(nullptr);
+        syncWithShortcut(nullptr);
     }
+
+    // Execute the given task before fetching tasks from execList
+    virtual void            syncWithShortcut(Task* shortcut); 
+
     void                    decRefCount() noexcept{
         taskHeader().refCount--; // atomic
     }
@@ -81,12 +98,21 @@ public:
     {
         taskHeader().refCount=r;
     }
+    void                    setParent(Task* parent){
+        taskHeader().parent=parent;
+    }
+    bool                    notInList(){
+        return taskHeader().next==nullptr && taskHeader().prev==nullptr;
+    }
 protected:
     virtual void            onComputeDone();
     // user-defined task routine
     virtual Task*           compute() = 0; 
     // shortcut must be emplaced as Exec; it will be executed immediately
-    virtual void            sync(Task* shortcut); 
+private:
+    void                    incRefCount() noexcept{
+        taskHeader().refCount++;   
+    }
 };
 
 class EmptyTask : public Task {

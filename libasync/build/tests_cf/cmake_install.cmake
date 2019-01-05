@@ -1,4 +1,4 @@
-# Install script for directory: /mnt/d/workspace/libasync/libasync/tests
+# Install script for directory: /mnt/d/workspace/libasync/libasync/tests_cf
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
