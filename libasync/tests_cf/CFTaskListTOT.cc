@@ -2,6 +2,8 @@
 #include "CFTaskList.h"
 #include "CFTaskBlock.h"
 #include "CFTask.h"
+#include <iostream>
+#include <string>
 
 using namespace wjp::cf;
 

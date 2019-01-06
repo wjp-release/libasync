@@ -2,6 +2,8 @@
 #include "CFDeque.h"
 #include "CFTask.h"
 #include "CFTaskHeader.h"
+#include <iostream>
+#include <string>
 
 using namespace wjp::cf;
 
