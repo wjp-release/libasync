@@ -7,6 +7,6 @@
     "\\src",
     "\\src\\cache_friendly"
   ],
-  "SelectedNode": "\\CMakeLists.txt",
+  "SelectedNode": "\\src\\cache_friendly\\CFBuffer.cc",
   "PreviewInSolutionExplorer": false
 }
