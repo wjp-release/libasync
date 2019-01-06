@@ -182,7 +182,7 @@ CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 PYTHON_EXECUTABLE:FILEPATH=/usr/bin/python3.6
 
 //Dependencies for the target
-async_LIB_DEPENDS:STATIC=general;pf;general;cf;general;utils;general;pthread;
+async_LIB_DEPENDS:STATIC=general;pthread;general;pf;general;cf;general;utils;
 
 //Build benchmarks.
 bench:BOOL=OFF

@@ -9,7 +9,7 @@
       ],
       "buildRoot": "${env.USERPROFILE}\\CMakeBuilds\\${workspaceHash}\\build\\${name}",
       "installRoot": "${env.USERPROFILE}\\CMakeBuilds\\${workspaceHash}\\install\\${name}",
-      "cmakeCommandArgs": "-Dtest=ON",
+      "cmakeCommandArgs": "-Dcftest=ON -DCMAKE_BUILD_TYPE=Debug",
       "buildCommandArgs": "-v",
       "ctestCommandArgs": ""
     }

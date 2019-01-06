@@ -424,7 +424,7 @@ build samples/CMakeFiles/sample.dir/worksteal.cc.o: CXX_COMPILER__sample ../samp
 
 build samples/sample: CXX_EXECUTABLE_LINKER__sample samples/CMakeFiles/sample.dir/cfdeque.cc.o samples/CMakeFiles/sample.dir/cfsched.cc.o samples/CMakeFiles/sample.dir/sample.cc.o samples/CMakeFiles/sample.dir/worksteal.cc.o | src/libasync.a src/programmer_friendly/libpf.a src/cache_friendly/libcf.a src/utils/libutils.a || src/cache_friendly/libcf.a src/libasync.a src/programmer_friendly/libpf.a src/utils/libutils.a
   FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall
-  LINK_LIBRARIES = -Wl,-rpath,/mnt/d/workspace/libasync/libasync/./src src/libasync.a src/programmer_friendly/libpf.a src/cache_friendly/libcf.a src/utils/libutils.a -lpthread
+  LINK_LIBRARIES = -Wl,-rpath,/mnt/d/workspace/libasync/libasync/./src src/libasync.a -lpthread src/programmer_friendly/libpf.a src/cache_friendly/libcf.a src/utils/libutils.a
   LINK_PATH = -L/mnt/d/workspace/libasync/libasync/./src
   OBJECT_DIR = samples/CMakeFiles/sample.dir
   POST_BUILD = :
@@ -605,7 +605,7 @@ build tests_cf/CMakeFiles/cftests.dir/CFTaskListTOT.cc.o: CXX_COMPILER__cftests 
 
 build tests_cf/cftests: CXX_EXECUTABLE_LINKER__cftests tests_cf/CMakeFiles/cftests.dir/CFBufferTOT.cc.o tests_cf/CMakeFiles/cftests.dir/CFDequeTOT.cc.o tests_cf/CMakeFiles/cftests.dir/CFIntegratedTOT.cc.o tests_cf/CMakeFiles/cftests.dir/CFTaskBlockTOT.cc.o tests_cf/CMakeFiles/cftests.dir/CFTaskListTOT.cc.o | lib/libgtest_main.a src/libasync.a lib/libgtest.a src/programmer_friendly/libpf.a src/cache_friendly/libcf.a src/utils/libutils.a || lib/libgtest.a lib/libgtest_main.a src/cache_friendly/libcf.a src/libasync.a src/programmer_friendly/libpf.a src/utils/libutils.a
   FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall
-  LINK_LIBRARIES = -Wl,-rpath,/mnt/d/workspace/libasync/libasync/./src lib/libgtest_main.a src/libasync.a lib/libgtest.a -pthread src/programmer_friendly/libpf.a src/cache_friendly/libcf.a src/utils/libutils.a -lpthread
+  LINK_LIBRARIES = -Wl,-rpath,/mnt/d/workspace/libasync/libasync/./src lib/libgtest_main.a src/libasync.a lib/libgtest.a -pthread -lpthread src/programmer_friendly/libpf.a src/cache_friendly/libcf.a src/utils/libutils.a
   LINK_PATH = -L/mnt/d/workspace/libasync/libasync/./src
   OBJECT_DIR = tests_cf/CMakeFiles/cftests.dir
   POST_BUILD = :

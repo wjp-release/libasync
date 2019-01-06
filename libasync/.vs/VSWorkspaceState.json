@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\benchmarks",
+    "\\googletest",
+    "\\samples",
+    "\\src",
+    "\\src\\cache_friendly"
+  ],
+  "SelectedNode": "\\CMakeLists.txt",
+  "PreviewInSolutionExplorer": false
+}

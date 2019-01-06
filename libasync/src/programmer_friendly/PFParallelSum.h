@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Async.h"
-#include <algorithm>
+#include <numeric>
 
 // Used in benchmarks against tbb::parallel_reduce and std::async.
 

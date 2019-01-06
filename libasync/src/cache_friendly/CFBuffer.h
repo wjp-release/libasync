@@ -53,6 +53,7 @@ public:
             return nullptr;  
         }
         T* task = block.emplaceTask<T>(std::forward<Args>(args)...);
+        task->taskHeader().state=TaskHeader::Ready;
         endPosition++;
         return task;
     }
@@ -62,7 +63,7 @@ public:
 protected:
     // Random access should only be used internally under lock protection
     TaskBlock&                  at(uint64_t index) noexcept{
-        return blocks[endPosition%BufferCapacity];
+        return blocks[index%BufferCapacity];
     }
 private:
     TaskBlock                   blocks[BufferCapacity];  // pre-constructed empty TaskBlocks

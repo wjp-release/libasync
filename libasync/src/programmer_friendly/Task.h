@@ -46,9 +46,9 @@ namespace wjp {
 		virtual ~Task() {}
         struct Sync{ 
             Sync(){} 
-            Sync(const Sync& s){} 
-            Sync(Sync&& s){} 
-            Sync& operator=(Sync&& s){return *this;} 
+            Sync(const Sync&){} 
+            Sync(Sync&&){} 
+            Sync& operator=(Sync&&){return *this;} 
             Sync& operator=(const Sync&s){return *this;}
             mutable std::mutex mtx; // Sync wait 
 			#ifdef WITH_CANCEL
