@@ -1,3 +1,0 @@
-/Users/wjp/Desktop/workspace/libasync/benchmarks/build/CMakeFiles/rebuild_cache.dir
-/Users/wjp/Desktop/workspace/libasync/benchmarks/build/CMakeFiles/edit_cache.dir
-/Users/wjp/Desktop/workspace/libasync/benchmarks/build/CMakeFiles/benchmarks.dir
