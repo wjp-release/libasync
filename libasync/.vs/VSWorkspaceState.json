@@ -5,8 +5,9 @@
     "\\googletest",
     "\\samples",
     "\\src",
-    "\\src\\cache_friendly"
+    "\\src\\cache_friendly",
+    "\\tests_cf"
   ],
-  "SelectedNode": "\\src\\cache_friendly\\CFBuffer.cc",
+  "SelectedNode": "\\src\\cache_friendly\\CFTask.cc",
   "PreviewInSolutionExplorer": false
 }

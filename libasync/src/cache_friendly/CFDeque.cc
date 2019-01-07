@@ -44,7 +44,10 @@ void TaskDeque::reclaim(Task* executed)noexcept{
     if(header.state==TaskHeader::Stolen){
         stolenList.remove(executed); // stealers do not clean up emplacer's stolenList
     }else if(header.state==TaskHeader::Exec){
-        execList.remove(executed); // it's probably already removed except for shortcuts
+        // Tasks must be removed from execList right before its execution
+        if constexpr(SanityCheck&&EnableAssert){
+            assert(!execList.contains(executed));
+        }
     }else if(header.state==TaskHeader::Ready){
         readyList.remove(executed); // cancel task
     }else if(header.state==TaskHeader::Free){
@@ -69,15 +72,35 @@ Task* TaskDeque::steal()noexcept{
 }
 
 /*
-    Take the newest task from readylist, put it into execlist.
-    <take> itself does not execute the task.
-    It's called by worker routine that intends to execute the task very soon.
+    Take the newest task from readylist, mark it as Exec without putting it into execList. So you must execute it right after calling take().
     Return nullptr if readylist is empty.
 */
 Task* TaskDeque::take()noexcept{
     std::lock_guard<DequeMutex> lk(mtx);
     if(readyList.empty()) return nullptr;
+    Task* task=readyList.popFront();
+    task->taskHeader().state=TaskHeader::Exec;
+    return task;
+}
+
+/*
+    Prefetch the newest task from readylist, put it into execlist. 
+    <prefetch> promotes a task from ready to exec and protects it from stealing. It could be used by scheduling algorithms to control how rampant stealing behavior could be. 
+    Return nullptr if readylist is empty.
+*/
+Task* TaskDeque::prefetch()noexcept{
+    std::lock_guard<DequeMutex> lk(mtx);
+    if(readyList.empty()) return nullptr;
     return toExec(readyList.popBack());
+}
+
+/*
+    Lock protected execList.popBack()
+*/
+Task* TaskDeque::takeFromExec()noexcept{
+    std::lock_guard<DequeMutex> lk(mtx);
+    if(execList.empty()) return nullptr;
+    return execList.popBack();
 }
 
 /*

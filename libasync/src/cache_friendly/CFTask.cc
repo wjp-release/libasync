@@ -29,7 +29,7 @@
 namespace wjp::cf{
 
 
-void Task::syncWithShortcut(Task* lastSubTask)
+void Task::syncAndShortcut(Task* lastSubTask)
 {
     
 }

@@ -41,7 +41,7 @@ TEST_F(CFDequeTOT, Construct) {
 }
 
 
-TEST_F(CFDequeTOT, EmpalceStealTake) {
+TEST_F(CFDequeTOT, EmpalceStealPrefetch) {
 	// emplace
 	auto t1=deque->emplace<StringTask>("t1");
 	EXPECT_EQ(t1->taskHeader().state, TaskHeader::Ready);
@@ -65,10 +65,10 @@ TEST_F(CFDequeTOT, EmpalceStealTake) {
 	EXPECT_EQ(deque->execListSize(), 0);
 
 	// take
-	Task* take1=deque->take();
+	Task* take1=deque->prefetch();
 	EXPECT_EQ(take1, (Task*)t4); // take newest (hottest cache)
 	EXPECT_EQ(take1->taskHeader().state, TaskHeader::Exec);
-	Task* take2=deque->take();
+	Task* take2=deque->prefetch();
 	EXPECT_EQ(take2, (Task*)t3);
 	EXPECT_EQ(take2->taskHeader().state, TaskHeader::Exec);
 	EXPECT_EQ(deque->stolenListSize(), 2);
@@ -77,7 +77,7 @@ TEST_F(CFDequeTOT, EmpalceStealTake) {
 	EXPECT_EQ(deque->NumberOfEmplacedTasks(), 4);
 
 	// continue to take when empty
-	Task* take3=deque->take();
+	Task* take3=deque->prefetch();
 	EXPECT_EQ(take3, nullptr);
 	
 	// continue to steal when empty

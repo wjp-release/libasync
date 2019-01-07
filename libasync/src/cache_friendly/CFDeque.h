@@ -59,14 +59,27 @@ class Task;
 
 class TaskDeque{
 public:
-    friend class Task;
     using DequeMutex = std::mutex; 
     TaskDeque()noexcept{
         for(auto& b : blocks) freeList.pushBack(b.taskPointer());
     }
     void                        reclaim(Task* executed)noexcept; 
+    Task*                       take()noexcept; // return nullptr on failure
     Task*                       steal()noexcept; // return nullptr on failure
-    Task*                       take()noexcept;  // return nullptr on failure
+    Task*                       prefetch()noexcept;  // return nullp             tr on failure
+    Task*          takeFromExec()noexcept;  // return nullptr on failure
+    bool                        existsExec() const noexcept{
+        return !execList.empty();
+    }
+    bool                        existsReady() const noexcept{
+        return !readyList.empty();
+    }
+    bool                        existsFree() const noexcept{
+        return !freeList.empty();
+    }
+    bool                        existsStolen() const noexcept{
+        return !stolenList.empty();
+    }
     int                         freeListSize() const noexcept {
         return freeList.size();
     }

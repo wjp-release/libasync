@@ -41,6 +41,7 @@ void TaskPool::start(){
         workers[i].index=i;
         workers[i].workerThread=std::thread{
             [this,i]{
+                println("starts!");
                 while(!terminating){
                     workers[i].routine();
                 }

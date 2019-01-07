@@ -1,19 +1,25 @@
 #include "gtest/gtest.h"
 #include "CFDeque.h"
 #include "CFTask.h"
+#include "CFPool.h"
 #include "CFTaskHeader.h"
 #include <iostream>
 #include <string>
+#include "ConcurrentPrint.h"
+#include "ThreadUtilities.h"
 
 using namespace wjp::cf;
 
-struct StringTask : public Task{ 
+struct AddOne : public Task{ 
 public:
-	StringTask(const std::string& str):x(str){}
-	std::string x;
+	AddOne(int v):value(v){}
 protected:
+	int value;
 	Task* compute() override{
-		std::cout<<x<<"\n";
+		if(value==30) return nullptr;
+		AddOne* child1=spawnDetached<AddOne>(value+1);
+		AddOne* child2=spawnDetached<AddOne>(value+1);
+		if constexpr(PrintTestTaskOutput) wjp::println(std::to_string(value));		
 		return nullptr;
 	}
 };
@@ -29,13 +35,19 @@ protected:
 	}
 };
 
-TEST_F(CFIntegratedTOT, Construct) {
-	
+TEST_F(CFIntegratedTOT, StartTaskPool) {
+	TaskPool::instance().start();
+}
+
+TEST_F(CFIntegratedTOT, EmplaceExternallySpawnDetached) {
+	AddOne* root_task=TaskPool::instance().emplaceExternally<AddOne>(10);
+	if constexpr(PrintTestTaskOutput) wjp::sleep(3000);
 }
 
 
-TEST_F(CFIntegratedTOT, Empalce) {
-
+TEST_F(CFIntegratedTOT, EmpalceSpawnDetached) {
+	AddOne* root_task=TaskPool::instance().emplace<AddOne>(10);
+	if constexpr(PrintTestTaskOutput) wjp::sleep(3000);
 }
 
 

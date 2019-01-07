@@ -58,7 +58,7 @@ public:
 
     }
     #endif
-    void                            reclaim(Task* executed) noexcept;
+void                            reclaim(Task* executed) noexcept;
     void                            routine(); 
     std::string                     stat(); 
     void                            setIndex(uint8_t workerIndex) noexcept{
@@ -68,6 +68,10 @@ public:
     }
     // void join_routine();
 protected:
+    Task*                           stealFromBuffer();
+    Task*                           stealFromBufferOf(Worker& worker);
+    Task*                           stealFromDeque();
+    Task*                           stealFromDequeOf(Worker& worker);
     // void simple_frogleaping(); 
     // bool is_idle()noexcept{return when_idle_begins.has_value();}
     // void becomes_idle(){when_idle_begins=now();} 
@@ -76,8 +80,6 @@ protected:
     // void try_to_block();
     // bool idle_for_too_long();
     // Task* scan_next_task();
-    // Task* steal_a_task();
-    // Task* steal_from(WorkStealingWorker&);
 private:
     TaskDeque                       deque;
     TaskBuffer                      buffer;

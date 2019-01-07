@@ -47,14 +47,14 @@ public:
     // It does not have any effect on parent task's refcount as well.
     template < class T, class... Args >  
     T*                      spawnDetached(Args&&... args){
-        return TaskPool::instance().emplaceLocally(std::forward<Args>(args)...);
+        return TaskPool::instance().emplaceLocally<T>(std::forward<Args>(args)...);
     }
 
     // Spawn a detached child task that's protected against stealing.
     // You can return this task in user-defined compute() function to promote it as a shortcut.
     template < class T, class... Args >  
     T*                      spawnDetachedAsExec(Args&&... args){  
-        return TaskPool::instance().emplaceAsExec(std::forward<Args>(args)...);
+        return TaskPool::instance().emplaceAsExec<T>(std::forward<Args>(args)...);
     }
 
     // Spawn a child task in deque in Ready state, 
@@ -63,7 +63,7 @@ public:
     template < class T, class... Args >  
     T*                      spawn(Args&&... args){
 
-        T* child=TaskPool::instance().emplaceLocally(std::forward<Args>(args)...);
+        T* child=TaskPool::instance().emplaceLocally<T>(std::forward<Args>(args)...);
         incRefCount();
         child->setParent(this);
         return child;
@@ -75,7 +75,7 @@ public:
     // Don't overuse spawnAsExec though, single worker cannot execute everything.
     template < class T, class... Args >  
     T*                      spawnAsExec(Args&&... args){  
-        T* child=TaskPool::instance().emplaceAsExec(std::forward<Args>(args)...);
+        T* child=TaskPool::instance().emplaceAsExec<T>(std::forward<Args>(args)...);
         incRefCount();
         child->setParent(this);
         return child;
@@ -85,11 +85,11 @@ public:
     // sync(Task*) could be easily misunderstood, so I decide not to expose it as public API.
     // Use spawnLastChildAndSync to benefit from shortcut.
     virtual void            sync(){  
-        syncWithShortcut(nullptr);
+        syncAndShortcut(nullptr);
     }
 
     // Execute the given task before fetching tasks from execList
-    virtual void            syncWithShortcut(Task* shortcut); 
+    virtual void            syncAndShortcut(Task* shortcut); 
 
     void                    decRefCount() noexcept{
         taskHeader().refCount--; // atomic

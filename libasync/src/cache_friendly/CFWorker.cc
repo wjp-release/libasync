@@ -32,9 +32,80 @@
 
 namespace wjp::cf{
 
+/*
+ * Worker routine fetches one task each iteration.
+ * It searches a task in the following order:
+ * 1. if execList is nonempty, run a task fetched from execList (newest first)
+ * 2. elif readyList is nonempty, run a task fetched from readyList (newest first) 
+ * 3. elif there exist tasks in other workers' readLists, run a task stolen from others.(FIFO)
+ * 4. elif there exist a task in local submission buffer, run it. (FIFO)    
+ * 5. elif there exist a task in other workers' submission buffer, run it. (FIFO)
+ * 6. else search fails.
+ */
 void Worker::routine()
 {
+    // Seach a task
+     // [1] execList
+    Task* task = deque.takeFromExec();
+    if(task==nullptr){
+       // [2] readyList 
+       task=deque.take(); 
+    //    if(task==nullptr){
+    //         // [3] others' readyList 
+    //         task=stealFromDeque();
+    //         if(task==nullptr){
+    //             // [4] local buffer
+    //             task=buffer.steal();
+    //             if(task==nullptr){
+    //                 // [5] others' buffer
+    //                 task=stealFromBuffer(); 
+    //             }       
+    //         }   
+    //     }
+    }
+    if(task==nullptr) return;
+    // Execute the task
+    if constexpr(EnableAfterDeathShortcut){
+        Task* next = task->execute();
+        while(next!=nullptr){
+            next = task->execute();
+        }
+    }else{
+        task->execute();
+    }
+}
 
+Task* Worker::stealFromBuffer()
+{
+    Task* task=nullptr;
+    for(uint8_t i=0;i<WorkerNumber;i++){
+        if(i==index) continue;
+        Worker& worker = TaskPool::instance().getWorker(i);
+        task=worker.buffer.steal();
+        if(task!=nullptr) return task;
+    }
+    return task;
+}
+
+Task* Worker::stealFromBufferOf(Worker& worker)
+{
+    return worker.buffer.steal();
+}
+
+Task* Worker::stealFromDeque()
+{
+    Task* task=nullptr;
+    for(uint8_t i=0;i<WorkerNumber;i++){
+        if(i==index) continue;
+        Worker& worker = TaskPool::instance().getWorker(i);
+        task=worker.deque.steal();
+        if(task!=nullptr) return task;
+    }
+}
+
+Task* Worker::stealFromDequeOf(Worker& worker)
+{
+    return worker.deque.steal();
 }
 
 void Worker::reclaim(Task* executed) noexcept
@@ -50,7 +121,7 @@ void Worker::reclaim(Task* executed) noexcept
 std::string Worker::stat()
 {
     std::stringstream ss;
-    ss<<"worker "<<index;
+    ss<<"worker "<<(int)index;
     #ifdef EnableWorkerSleep
     bool is_idle_=is_idle();
     ss<<": is_blocked="<< blocked <<", is_idle="<<is_idle_;
