@@ -50,9 +50,9 @@ void Worker::routine()
     if(task==nullptr){
        // [2] readyList 
        task=deque.take(); 
-    //    if(task==nullptr){
-    //         // [3] others' readyList 
-    //         task=stealFromDeque();
+       if(task==nullptr){
+            // [3] others' readyList 
+            task=stealFromDeque(); // segment fault here!
     //         if(task==nullptr){
     //             // [4] local buffer
     //             task=buffer.steal();
@@ -61,17 +61,18 @@ void Worker::routine()
     //                 task=stealFromBuffer(); 
     //             }       
     //         }   
-    //     }
+        }
     }
     if(task==nullptr) return;
+    println("cool, get a task");
     // Execute the task
     if constexpr(EnableAfterDeathShortcut){
         Task* next = task->execute();
         while(next!=nullptr){
-            next = task->execute();
+            next = next->execute();
         }
     }else{
-        task->execute();
+        task->execute();  // 问题根源。。。这里会执行到，然后崩。。
     }
 }
 
@@ -81,7 +82,7 @@ Task* Worker::stealFromBuffer()
     for(uint8_t i=0;i<WorkerNumber;i++){
         if(i==index) continue;
         Worker& worker = TaskPool::instance().getWorker(i);
-        task=worker.buffer.steal();
+        task=stealFromBufferOf(worker);
         if(task!=nullptr) return task;
     }
     return task;
@@ -98,9 +99,10 @@ Task* Worker::stealFromDeque()
     for(uint8_t i=0;i<WorkerNumber;i++){
         if(i==index) continue;
         Worker& worker = TaskPool::instance().getWorker(i);
-        task=worker.deque.steal();
+        task=stealFromDequeOf(worker);
         if(task!=nullptr) return task;
     }
+    return task;
 }
 
 Task* Worker::stealFromDequeOf(Worker& worker)

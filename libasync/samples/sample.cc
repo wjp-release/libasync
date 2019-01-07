@@ -37,7 +37,7 @@
 using namespace wjp;
 int main()
 {
-	cfsched();
+	taskexec();
 
 #ifdef _MSC_VER
 	std::cin.get();

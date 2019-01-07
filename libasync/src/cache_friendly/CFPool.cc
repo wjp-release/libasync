@@ -24,7 +24,11 @@
  */
 
 #include "CFPool.h"
-
+#include "ConcurrentPrint.h"
+#ifdef CFProfiling
+#include <iostream>
+#include "TimeUtilities.h" // profiling
+#endif
 namespace wjp::cf{
 
 std::optional<int> TaskPool::currentThreadIndex()const noexcept
@@ -64,6 +68,9 @@ void TaskPool::start(){
 
 TaskPool::~TaskPool()
 {
+    #ifdef CFProfiling
+    auto start=wjp::now();
+    #endif
     terminating=true;
     #ifdef EnableWorkerSleep
     for(auto& w : workers){
@@ -71,8 +78,12 @@ TaskPool::~TaskPool()
     }
     #endif
     for(auto& w : workers){
-        w.workerThread.join(); 
+        if(w.workerThread.joinable()) w.workerThread.join(); 
     }
+    #ifdef CFProfiling
+    auto e=wjp::microsec_elapsed_count(start);
+    std::cout<<"elapsed="<<e<<"microseconds\n";
+    #endif
 }
 
 

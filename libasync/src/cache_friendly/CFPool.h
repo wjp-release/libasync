@@ -117,7 +117,8 @@ private:
     bool                isCalledByWorkerThread()noexcept{
         return currentThreadIndex().has_value();
     }
-	volatile bool       terminating;  
+    volatile bool       terminating;  
+	//volatile std::atomic<bool>       terminating;  
     Worker              workers[WorkerNumber];
 };
 

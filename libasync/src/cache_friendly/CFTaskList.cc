@@ -32,10 +32,7 @@ bool    TaskList::contains(Task* target) const noexcept
 }
 void    TaskList::remove(Task* t)noexcept
 {
-    if constexpr(SanityCheck && EnableAssert){
-        assert(t!=nullptr && "Precondition: t != nullptr");
-        assert(contains(t) && "Precondition: t must be in list.");
-    }
+    if(t==nullptr) return;
     if(empty()) return;
     if(t->notInList()) return; // already removed
     if(listSize==1){

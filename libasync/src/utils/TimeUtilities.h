@@ -62,6 +62,11 @@ namespace wjp{
         return std::chrono::duration_cast<std::chrono::milliseconds>(now() - start).count();
     }
 
+    static inline int64_t microsec_elapsed_count(time_point start)
+    {
+        return std::chrono::duration_cast<std::chrono::microseconds>(now() - start).count();
+    }
+
     static inline auto ms_elapsed(time_point start)
     {
         return std::chrono::duration_cast<std::chrono::milliseconds>(now() - start);

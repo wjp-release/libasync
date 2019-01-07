@@ -49,12 +49,13 @@ static constexpr bool       SanityCheck = true;
 static constexpr bool       VerboseDebug = true;
 
 // If turned on, the user-defined returned task of Task::execute() will be executed immediately after the return. Note that this may delay the termniation of the pool until the AfterDeathShortcut-chain finishes.
-static constexpr bool       EnableAfterDeathShortcut = true;
+static constexpr bool       EnableAfterDeathShortcut = false;
 
 static constexpr bool       PrintTestTaskOutput = true;
+
 
 }
 
 //#define EnableWorkerSleep
 //#define EnableInternalMonitor
-
+//#define CFProfiling

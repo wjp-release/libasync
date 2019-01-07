@@ -58,7 +58,7 @@ public:
 
     }
     #endif
-void                            reclaim(Task* executed) noexcept;
+    void                            reclaim(Task* executed) noexcept;
     void                            routine(); 
     std::string                     stat(); 
     void                            setIndex(uint8_t workerIndex) noexcept{
