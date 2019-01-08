@@ -29,11 +29,15 @@
 #include "CFConfig.h"
 #include "CFTaskHeader.h"
 #include "CFPool.h"
-
+#include <string>
 namespace wjp::cf{
 
 class Task{
 public:
+    // Return human-readable unique task identity info
+    virtual std::string     stats(){
+        return "Task<"+std::to_string(reinterpret_cast<uint64_t>(this))+">";
+    }
     TaskHeader&             taskHeader() const noexcept{
         return reinterpret_cast<TaskHeader*>(const_cast<Task*>(this))[-1];
     }

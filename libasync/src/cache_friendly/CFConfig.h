@@ -38,15 +38,19 @@ static constexpr uint32_t   CacheLineSize = 128;  // 64B is a little bit too sma
 static constexpr uint32_t   TaskNumberPerWorker = 1024*1024;  
 static constexpr uint32_t   BufferCapacity = 1024;
 static constexpr uint32_t   DequeCapacity = TaskNumberPerWorker - BufferCapacity;
+static constexpr int        InternalMonitorIntervalMS=1000;  // print rate
 
 // worker yields after being idle for too long
 static constexpr auto       WorkerIdleTimeout = 3s;  
+
 
 // Turn it off if you can't even tolerate the performance loss of assertions
 static constexpr bool       EnableAssert = true; 
 static constexpr bool       MeasureInitTime = false;
 static constexpr bool       SanityCheck = true;
-static constexpr bool       VerboseDebug = true;
+static constexpr bool       VerboseDebug = false;
+static constexpr bool       InformativeDebug = true;
+static constexpr bool       SimplePause = true;
 
 // If turned on, the user-defined returned task of Task::execute() will be executed immediately after the return. Note that this may delay the termniation of the pool until the AfterDeathShortcut-chain finishes.
 static constexpr bool       EnableAfterDeathShortcut = false;
@@ -57,5 +61,7 @@ static constexpr bool       PrintTestTaskOutput = true;
 }
 
 //#define EnableWorkerSleep
-//#define EnableInternalMonitor
+
+#define EnableInternalMonitor
+
 //#define CFProfiling

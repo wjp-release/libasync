@@ -41,30 +41,47 @@ namespace wjp::cf{
  * 4. elif there exist a task in local submission buffer, run it. (FIFO)    
  * 5. elif there exist a task in other workers' submission buffer, run it. (FIFO)
  * 6. else search fails.
+ * 
+ * Priciples: 
+ *      1. parallel DFS: new>old, better temporal locality
+ *      2. avoid rampant stealing: local>steal, better spatial locality
  */
-void Worker::routine()
+bool Worker::routine()
 {
-    // Seach a task
-     // [1] execList
-    Task* task = deque.takeFromExec();
-    if(task==nullptr){
-       // [2] readyList 
-       task=deque.take(); 
-       if(task==nullptr){
-            // [3] others' readyList 
-            task=stealFromDeque(); // segment fault here!
-    //         if(task==nullptr){
-    //             // [4] local buffer
-    //             task=buffer.steal();
-    //             if(task==nullptr){
-    //                 // [5] others' buffer
-    //                 task=stealFromBuffer(); 
-    //             }       
-    //         }   
-        }
+    Task* task=nullptr;
+    task = takeFromLocalExecList();         
+    if(task) return executeTask(task);
+    task = takeFromLocalReadyList();        
+    if(task) return executeTask(task);
+    task = stealFromOtherDeques();                
+    if(task) return executeTask(task);
+    task = stealFromLocalBuffer();          
+    if(task) return executeTask(task);
+    task = stealFromOtherBuffers();              
+    if(task) return executeTask(task);
+    if constexpr(SimplePause){ 
+        // We use a very simple(and fair) strategy 
+        // to yield cpu when task becomes idle 
+        // Todo: use a sophiscated strategy here.
+        wjp::sleep(100); 
+        pauseCount++;
     }
-    if(task==nullptr) return;
-    println("cool, get a task");
+    if constexpr(InformativeDebug){
+        if(pauseCount%1000==0)
+            println("Worker"+std::to_string(index)+" pauseCount="+std::to_string(pauseCount));
+    }
+    return false;
+}
+
+bool Worker::executeTask(Task* task)
+{
+    if(task==nullptr) return false;
+    // To be done: check if the task is runnable; 
+    // Now we assume every task user gives us is good!
+    if constexpr(InformativeDebug){
+        println("Worker"+std::to_string(index)+" runs "+task->stats());
+    }
+    pauseCount=0;
     // Execute the task
     if constexpr(EnableAfterDeathShortcut){
         Task* next = task->execute();
@@ -72,18 +89,51 @@ void Worker::routine()
             next = next->execute();
         }
     }else{
-        task->execute();  // 问题根源。。。这里会执行到，然后崩。。
+        task->execute();  
     }
+    return true;
 }
 
-Task* Worker::stealFromBuffer()
+Task* Worker::takeFromLocalReadyList(){
+    if constexpr(InformativeDebug){
+        Task* t=deque.take();
+        if(t) println("A task is taken from local readylist! "+t->stats());
+        return t;
+    }
+    return deque.take();
+}
+
+Task* Worker::takeFromLocalExecList(){
+    if constexpr(InformativeDebug){
+        Task* t=deque.takeFromExec();
+        if(t) println("A task is taken from local execlist! "+t->stats());
+        return t;
+    }
+    return deque.takeFromExec();
+}
+
+Task* Worker::stealFromLocalBuffer(){
+    if constexpr(InformativeDebug){
+        Task* t=buffer.steal();
+        if(t) println("A task is stolen from local buffer! "+t->stats());
+        return t;
+    }
+    return buffer.steal();
+}
+
+Task* Worker::stealFromOtherBuffers()
 {
     Task* task=nullptr;
     for(uint8_t i=0;i<WorkerNumber;i++){
         if(i==index) continue;
         Worker& worker = TaskPool::instance().getWorker(i);
         task=stealFromBufferOf(worker);
-        if(task!=nullptr) return task;
+        if(task!=nullptr){
+            if constexpr(InformativeDebug){
+                println("A task is stolen from worker"+std::to_string(i)+"'s buffer! "+task->stats());
+            }
+            return task;
+        } 
     }
     return task;
 }
@@ -93,14 +143,19 @@ Task* Worker::stealFromBufferOf(Worker& worker)
     return worker.buffer.steal();
 }
 
-Task* Worker::stealFromDeque()
+Task* Worker::stealFromOtherDeques()
 {
     Task* task=nullptr;
     for(uint8_t i=0;i<WorkerNumber;i++){
         if(i==index) continue;
         Worker& worker = TaskPool::instance().getWorker(i);
         task=stealFromDequeOf(worker);
-        if(task!=nullptr) return task;
+        if(task!=nullptr){ 
+            if constexpr(InformativeDebug){
+                println("A task is stolen from worker"+std::to_string(i)+"'s Deque! "+task->stats());
+            }            
+            return task;
+        }
     }
     return task;
 }
@@ -131,7 +186,7 @@ std::string Worker::stat()
         ss<<"("<< ms_elapsed_count(when_idle_begins.value()) <<"ms)";
     }
     #endif
-    ss<<", deque freeListSize="<<deque.freeListSize()<<", buffer size="<<buffer.size();
+    ss<<", deque stats: "<<deque.stats()<<", buffer size="<<buffer.size();
     return ss.str();
 }
 

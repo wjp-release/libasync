@@ -1,6 +1,8 @@
 #include "CFBuffer.h"
 #include "CFTask.h"
 #include "CFTaskHeader.h"
+#include "CFConfig.h"
+
 namespace wjp::cf{
 
 // Return the least recently emplaced task
@@ -17,6 +19,7 @@ Task* TaskBuffer::steal()noexcept{
 }
 
 void TaskBuffer::reclaim(Task* executed)noexcept{
+    if constexpr(VerboseDebug) println("TaskBuffer::reclaim!");
     executed->taskHeader().state=TaskHeader::Free;
 }
 

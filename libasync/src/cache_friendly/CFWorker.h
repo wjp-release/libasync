@@ -59,7 +59,7 @@ public:
     }
     #endif
     void                            reclaim(Task* executed) noexcept;
-    void                            routine(); 
+    bool                            routine(); //return if a task gets executed
     std::string                     stat(); 
     void                            setIndex(uint8_t workerIndex) noexcept{
         index=workerIndex;
@@ -68,9 +68,13 @@ public:
     }
     // void join_routine();
 protected:
-    Task*                           stealFromBuffer();
+    bool                            executeTask(Task* task); //return if the task gets executed
+    Task*                           takeFromLocalReadyList();
+    Task*                           takeFromLocalExecList();
+    Task*                           stealFromLocalBuffer();
+    Task*                           stealFromOtherBuffers();
     Task*                           stealFromBufferOf(Worker& worker);
-    Task*                           stealFromDeque();
+    Task*                           stealFromOtherDeques();
     Task*                           stealFromDequeOf(Worker& worker);
     // void simple_frogleaping(); 
     // bool is_idle()noexcept{return when_idle_begins.has_value();}
@@ -86,13 +90,13 @@ private:
     uint8_t                         index=-1; // inited by TaskPool's constructor
     // volatile uint8_t                stealerIndex=-1; // hint for steal-back algorithm
     std::thread                     workerThread;
+    volatile uint64_t               pauseCount=0;
     #ifdef EnableWorkerSleep
     std::optional<time_point>       idleBeginTime; //Busy if empty, idle otherwise. 
     bool                            blocked=false;
     mutable std::condition_variable cv; 
     mutable std::mutex              mtx;
     #endif
-
 };
 
 

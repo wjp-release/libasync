@@ -15,8 +15,12 @@ public:
 	AddOne(int v):value(v){}
 protected:
 	int value;
+	std::string stats() override{
+		return Task::stats()+"("+std::to_string(value)+")";
+	}
 	Task* compute() override{
-		if(value==30) return nullptr;
+		if(value==14) return nullptr;
+		wjp::sleep(1000);
 		AddOne* child1=spawnDetached<AddOne>(value+1);
 		AddOne* child2=spawnDetached<AddOne>(value+1);
 		if constexpr(PrintTestTaskOutput) wjp::println(std::to_string(value));		
@@ -40,14 +44,15 @@ TEST_F(CFIntegratedTOT, StartTaskPool) {
 }
 
 TEST_F(CFIntegratedTOT, EmplaceExternallySpawnDetached) {
-	AddOne* root_task=TaskPool::instance().emplaceExternally<AddOne>(10);
-	if constexpr(PrintTestTaskOutput) wjp::sleep(3000);
+
+	
 }
 
 
+
 TEST_F(CFIntegratedTOT, EmpalceSpawnDetached) {
-	AddOne* root_task=TaskPool::instance().emplace<AddOne>(10);
-	if constexpr(PrintTestTaskOutput) wjp::sleep(3000);
+	//AddOne* root_task=TaskPool::instance().emplace<AddOne>(10);
+	//if constexpr(PrintTestTaskOutput) wjp::sleep(3000);
 }
 
 

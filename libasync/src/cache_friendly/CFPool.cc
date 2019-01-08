@@ -29,6 +29,9 @@
 #include <iostream>
 #include "TimeUtilities.h" // profiling
 #endif
+
+#include <exception>
+
 namespace wjp::cf{
 
 std::optional<int> TaskPool::currentThreadIndex()const noexcept
@@ -45,19 +48,25 @@ void TaskPool::start(){
         workers[i].index=i;
         workers[i].workerThread=std::thread{
             [this,i]{
-                println("starts!");
+                if constexpr(VerboseDebug) println("starts!");
                 while(!terminating){
-                    workers[i].routine();
+                    try{
+                        workers[i].routine();
+                    }catch(std::exception& e){
+                        println("Worker"+std::to_string(i)+e.what());
+                    }catch(...){
+                        println("Worker"+std::to_string(i)+" unknown exception");
+                    }
                 }
-                println("terminated!");
+                if constexpr(VerboseDebug) println("terminated!");
             }
         };
     }
     #ifdef EnableInternalMonitor
-    std::thread([this, nr_workers]{
+    std::thread([this]{
         while(true){
-            sleep(1000);
-            println("\nMonitoring "+std::to_string(nr_workers)+" worker:");
+            sleep(InternalMonitorIntervalMS);
+            println("\nMonitoring "+std::to_string(WorkerNumber)+" workers:");
             for(auto& w: workers){
                 println(w.stat());
             }
