@@ -62,6 +62,7 @@ public:
     using DequeMutex = std::mutex; 
     TaskDeque()noexcept{
         for(auto& b : blocks) freeList.pushBack(b.taskPointer());
+        SanityCheckSwitch=true;
     }
     void                        reclaim(Task* executed)noexcept; 
     Task*                       take()noexcept; // return nullptr on failure

@@ -52,7 +52,8 @@ void TaskPool::start(){
                 while(!terminating){
                     try{
                         workers[i].routine();
-                    }catch(std::exception& e){
+                    }catch(std::exception& e){ 
+                        // todo: handle exceptions 
                         println("Worker"+std::to_string(i)+e.what());
                     }catch(...){
                         println("Worker"+std::to_string(i)+" unknown exception");

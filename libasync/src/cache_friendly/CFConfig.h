@@ -48,6 +48,7 @@ static constexpr auto       WorkerIdleTimeout = 3s;
 static constexpr bool       EnableAssert = true; 
 static constexpr bool       MeasureInitTime = false;
 static constexpr bool       SanityCheck = true;
+static inline bool          SanityCheckSwitch=false;
 static constexpr bool       VerboseDebug = false;
 static constexpr bool       InformativeDebug = true;
 static constexpr bool       SimplePause = true;
@@ -62,6 +63,6 @@ static constexpr bool       PrintTestTaskOutput = true;
 
 //#define EnableWorkerSleep
 
-#define EnableInternalMonitor
+//#define EnableInternalMonitor
 
 //#define CFProfiling

@@ -36,4 +36,20 @@ TEST_F(CFTaskListTOT, pushBackPopBack) {
 }
 
 
+TEST_F(CFTaskListTOT, FrontBack) {
+	TaskBlock blocks[1024];
+	TaskList list;
+	for(auto& block : blocks){
+		list.pushBack(block.taskPointer());
+	}
+	for(int i=0;i<1024;i++){
+		Task* t=list.popFront();
+		TaskBlock* block=t->taskHeader().taskBlockPointer();
+		EXPECT_EQ(block, &blocks[i]);
+	}
+	
+
+}
+
+
 

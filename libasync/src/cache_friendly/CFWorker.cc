@@ -62,12 +62,14 @@ bool Worker::routine()
     if constexpr(SimplePause){ 
         // We use a very simple(and fair) strategy 
         // to yield cpu when task becomes idle 
-        // Todo: use a sophiscated strategy here.
         wjp::sleep(100); 
         pauseCount++;
+    }else{
+        // Todo: use a sophiscated strategy here.
+
     }
     if constexpr(InformativeDebug){
-        if(pauseCount%1000==0)
+        if(pauseCount%10==0)
             println("Worker"+std::to_string(index)+" pauseCount="+std::to_string(pauseCount));
     }
     return false;

@@ -40,7 +40,7 @@ protected:
 };
 
 TEST_F(CFIntegratedTOT, StartTaskPool) {
-	TaskPool::instance().start();
+	TaskPool::instance().start();	
 }
 
 TEST_F(CFIntegratedTOT, EmplaceExternallySpawnDetached) {
