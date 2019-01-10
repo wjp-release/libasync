@@ -57,46 +57,40 @@ public:
     }
 
     void                start();
-    std::optional<int>  currentThreadIndex()const noexcept;
+    std::optional<uint8_t>  currentThreadIndex()const noexcept;
 
+    // Users should use this function to create root tasks in a worker's buffer, which has limited slots and lower priority than deque's locally spawned tasks.
     template < class T, class... Args >  
-    T*                  emplace(Args&&... args)
-    {
-        auto current_worker=currentThreadIndex();
-        if(current_worker.has_value()){
-            int index=current_worker.value();
-            return workers[index].deque.emplace<T>(std::forward<Args>(args)...);
-        }else{
-            Worker& w=randomlyPickOne();
-            return w.buffer.emplace<T>(std::forward<Args>(args)...);
-        }
-    }
-
-    template < class T, class... Args >  
-    T*                  emplaceExternally(Args&&... args)
+    T*                  emplaceRoot(Args&&... args)
     {
         Worker& w=randomlyPickOne();
         return w.buffer.emplace<T>(std::forward<Args>(args)...);
     }
 
     template < class T, class... Args >  
-    T*                  emplaceLocally(Args&&... args)
+    T*                  emplaceInto(uint8_t index, Args&&... args)
     {
-        auto current_worker=currentThreadIndex();
-        if constexpr(EnableAssert) assert(current_worker.has_value() && "This method can only be called by a worker thread.");
-        int index=current_worker.value();
         return workers[index].deque.emplace<T>(std::forward<Args>(args)...);
     }
 
-    // Can only be called by a worker thread.
     template < class T, class... Args >  
-    T*                  emplaceAsExec(Args&&... args)
+    T*                  emplaceIntoAndInit(uint8_t index , Task* parent, Args&&... args)
     {
-        auto current_worker=currentThreadIndex();
-        if constexpr(EnableAssert) assert(current_worker.has_value() && "This method can only be called by a worker thread.");
-        int index=current_worker.value();
+        return workers[index].deque.emplaceAndInit<T>(parent, std::forward<Args>(args)...);
+    }
+
+    template < class T, class... Args >  
+    T*                  emplaceAsExecInto(uint8_t index, Args&&... args)
+    {
         return workers[index].deque.emplaceAsExec<T>(std::forward<Args>(args)...);
     }
+
+    template < class T, class... Args >  
+    T*                  emplaceAsExecIntoAndInit(uint8_t index, Task* parent, Args&&... args)
+    {
+        return workers[index].deque.emplaceAsExecAndInit<T>(parent, std::forward<Args>(args)...);
+    }
+
 
     #ifdef EnableWorkerSleep
     void                wakeAllSleepingWorkers()noexcept

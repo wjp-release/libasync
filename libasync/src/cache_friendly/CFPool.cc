@@ -34,7 +34,7 @@
 
 namespace wjp::cf{
 
-std::optional<int> TaskPool::currentThreadIndex()const noexcept
+std::optional<uint8_t> TaskPool::currentThreadIndex()const noexcept
 {
     auto me=std::this_thread::get_id();
     for(auto& w : workers){
@@ -51,7 +51,7 @@ void TaskPool::start(){
                 if constexpr(VerboseDebug) println("starts!");
                 while(!terminating){
                     try{
-                        workers[i].routine();
+                        workers[i].findAndRunATaskOrYield();
                     }catch(std::exception& e){ 
                         // todo: handle exceptions 
                         println("Worker"+std::to_string(i)+e.what());

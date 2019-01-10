@@ -57,7 +57,7 @@ static constexpr bool       SimplePause = true;
 static constexpr bool       EnableAfterDeathShortcut = false;
 
 static constexpr bool       PrintTestTaskOutput = true;
-
+static constexpr bool       EnableExternalSyncHelping = true; 
 
 }
 

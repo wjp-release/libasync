@@ -33,20 +33,41 @@
 namespace wjp::cf{
 
 /*
- * Worker routine fetches one task each iteration.
+ * Cache Friendly Work Stealing Scheduling Algorithm
+ * 
  * It searches a task in the following order:
  * 1. if execList is nonempty, run a task fetched from execList (newest first)
  * 2. elif readyList is nonempty, run a task fetched from readyList (newest first) 
  * 3. elif there exist tasks in other workers' readLists, run a task stolen from others.(FIFO)
  * 4. elif there exist a task in local submission buffer, run it. (FIFO)    
  * 5. elif there exist a task in other workers' submission buffer, run it. (FIFO)
- * 6. else search fails.
+ * 6. else search fails, triggers yield on idle algorithm
  * 
  * Priciples: 
  *      1. parallel DFS: new>old, better temporal locality
  *      2. avoid rampant stealing: local>steal, better spatial locality
  */
-bool Worker::routine()
+
+void Worker::findAndRunATaskOrYield()
+{
+    if(!findAndRunATask()){
+       if constexpr(SimplePause){ 
+            // We use a very simple(and fair) strategy 
+            // to yield cpu when task becomes idle 
+            wjp::sleep(100); 
+            pauseCount++;
+        }else{
+            // Todo: use a sophiscated idle cpu yielding strategy here.
+        }
+        if constexpr(InformativeDebug){
+            if(pauseCount%10==0)
+                println("Worker"+std::to_string(index)+" pauseCount="+std::to_string(pauseCount));
+        }
+    }
+}
+
+// called by Task::sync()
+bool Worker::findAndRunATask()
 {
     Task* task=nullptr;
     task = takeFromLocalExecList();         
@@ -59,20 +80,7 @@ bool Worker::routine()
     if(task) return executeTask(task);
     task = stealFromOtherBuffers();              
     if(task) return executeTask(task);
-    if constexpr(SimplePause){ 
-        // We use a very simple(and fair) strategy 
-        // to yield cpu when task becomes idle 
-        wjp::sleep(100); 
-        pauseCount++;
-    }else{
-        // Todo: use a sophiscated strategy here.
-
-    }
-    if constexpr(InformativeDebug){
-        if(pauseCount%10==0)
-            println("Worker"+std::to_string(index)+" pauseCount="+std::to_string(pauseCount));
-    }
-    return false;
+    return false;    
 }
 
 bool Worker::executeTask(Task* task)

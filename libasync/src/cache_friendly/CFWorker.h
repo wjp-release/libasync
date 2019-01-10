@@ -59,7 +59,10 @@ public:
     }
     #endif
     void                            reclaim(Task* executed) noexcept;
-    bool                            routine(); //return if a task gets executed
+    // return if a task is found and run
+    bool                            findAndRunATask();
+    // run findAndRunATask, yield cpu if idle 
+    void                            findAndRunATaskOrYield(); 
     std::string                     stat(); 
     void                            setIndex(uint8_t workerIndex) noexcept{
         index=workerIndex;

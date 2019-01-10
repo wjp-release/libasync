@@ -25,7 +25,7 @@ protected:
 
 void taskexec(){
 	TaskPool::instance().start();
-	AddOne* root_task=TaskPool::instance().emplaceExternally<AddOne>(10);
+	AddOne* root_task=TaskPool::instance().emplaceRoot<AddOne>(10);
 	std::cin.get();
 }
 

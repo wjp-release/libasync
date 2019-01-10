@@ -28,10 +28,29 @@
 
 namespace wjp::cf{
 
-
-void Task::syncAndShortcut(Task* lastSubTask)
+// Help or busy wait until refcnt decreases to 0.
+// Helping to avoid losing concurrency: worker's routine will get executed during sync 
+void Task::sync()
 {
-    
+    auto index=TaskPool::instance().currentThreadIndex();
+    if(index.has_value()){ // called by a worker thread
+        localSync(TaskPool::instance().getWorker(index.value()));
+    }else{ // called by a user thread
+        externalSync();
+    }
+}
+
+void Task::localSync(Worker& worker)
+{
+    TaskHeader& header=taskHeader();
+    while(header.refCount>0){
+        worker.findAndRunATask(); 
+    }
+}
+
+void Task::externalSync(){
+
+
 }
 
 // Run user-defined routine and release the task.

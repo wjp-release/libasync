@@ -1,12 +1,12 @@
 Determining if the pthread_create exist failed with the following output:
 Change Dir: /mnt/d/projects/libasync/libasync/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/ninja" "cmTC_66c04"
-[1/2] Building C object CMakeFiles/cmTC_66c04.dir/CheckSymbolExists.c.o
-[2/2] Linking C executable cmTC_66c04
-FAILED: cmTC_66c04 
-: && /usr/bin/cc   -rdynamic CMakeFiles/cmTC_66c04.dir/CheckSymbolExists.c.o  -o cmTC_66c04   && :
-CMakeFiles/cmTC_66c04.dir/CheckSymbolExists.c.o: In function `main':
+Run Build Command:"/usr/bin/ninja" "cmTC_0b221"
+[1/2] Building C object CMakeFiles/cmTC_0b221.dir/CheckSymbolExists.c.o
+[2/2] Linking C executable cmTC_0b221
+FAILED: cmTC_0b221 
+: && /usr/bin/cc   -rdynamic CMakeFiles/cmTC_0b221.dir/CheckSymbolExists.c.o  -o cmTC_0b221   && :
+CMakeFiles/cmTC_0b221.dir/CheckSymbolExists.c.o: In function `main':
 CheckSymbolExists.c:(.text+0x1b): undefined reference to `pthread_create'
 collect2: error: ld returned 1 exit status
 ninja: build stopped: subcommand failed.

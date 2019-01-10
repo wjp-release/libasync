@@ -96,16 +96,39 @@ public:
     int                         NumberOfEmplacedTasks() const noexcept{
         return DequeCapacity-freeList.size();
     }
+
+    // used by spawnDetached()
     template < class T, class... Args >  
     T*                          emplace(Args&&... args){
         std::lock_guard<DequeMutex> lk(mtx);
         return new (freeToReadyAddr()) T(std::forward<Args>(args)...);
     }
+
+    // used by spawn()
+    template < class T, class... Args >  
+    T*                          emplaceAndInit(Task* parent, Args&&... args){
+        std::lock_guard<DequeMutex> lk(mtx);
+        T* task = new (freeToReadyAddr()) T(std::forward<Args>(args)...);
+        task->setParentAndIncRefCount(parent);
+        return task;
+    }
+
+    // used by spawnDetachedAsExec()
     template < class T, class... Args >  
     T*                          emplaceAsExec(Args&&... args){
         std::lock_guard<DequeMutex> lk(mtx);
         return new (freeToExecAddr()) T(std::forward<Args>(args)...);
     }
+
+    // used by spawnAsExec()
+    template < class T, class... Args >  
+    T*                          emplaceAsExecAndInit(Task* parent, Args&&... args){
+        std::lock_guard<DequeMutex> lk(mtx);
+        T* task = new (freeToExecAddr()) T(std::forward<Args>(args)...);
+        task->setParentAndIncRefCount(parent);
+        return task;
+    }
+
     void                        setIndex(uint8_t workerIndex)noexcept{ 
         for(auto& b : blocks) b.setIndex(workerIndex);
     }    

@@ -45,11 +45,11 @@ public:
     };
     Task*                       parent=nullptr;   // 8 bytes
     Task*                       next=nullptr;     // 8 bytes
-    Task*                       prev=nullptr;     // 8 bytes
-    std::atomic<uint32_t>       refCount;       // 4 bytes
+    Task*                       prev=nullptr;     // 8 bytes 
+    std::atomic<uint32_t>       refCount;         // 4 bytes | The number of pending child tasks to sync with.
     uint16_t                    state=Free;       // 2 bytes
-    uint8_t                     stealerIndex=0;   // 1 byte
-    uint8_t                     emplacerIndex=0;  // 1 byte
+    uint8_t                     stealerIndex=0;   // 1 byte | Tasks whose state is Stolen should have a valid stealerIndex. Note that StolenFromBuffer is not Stolen.
+    uint8_t                     emplacerIndex=0;  // 1 byte | Used for memory reclaimation
     TaskBlock*                  taskBlockPointer() noexcept{
         return reinterpret_cast<TaskBlock*>(this);
     }

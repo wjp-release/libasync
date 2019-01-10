@@ -51,8 +51,8 @@ TEST_F(CFIntegratedTOT, EmplaceExternallySpawnDetached) {
 
 
 TEST_F(CFIntegratedTOT, EmpalceSpawnDetached) {
-	//AddOne* root_task=TaskPool::instance().emplace<AddOne>(10);
-	//if constexpr(PrintTestTaskOutput) wjp::sleep(3000);
+
+
 }
 
 

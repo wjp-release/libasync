@@ -30,8 +30,9 @@
 #include "CFTaskHeader.h"
 #include "CFPool.h"
 #include <string>
-namespace wjp::cf{
 
+namespace wjp::cf{
+class Worker;
 class Task{
 public:
     // Return human-readable unique task identity info
@@ -51,14 +52,16 @@ public:
     // It does not have any effect on parent task's refcount as well.
     template < class T, class... Args >  
     T*                      spawnDetached(Args&&... args){
-        return TaskPool::instance().emplaceLocally<T>(std::forward<Args>(args)...);
+        return TaskPool::instance().emplaceInto<T>(TaskPool::instance().currentThreadIndex().value_or(taskHeader().emplacerIndex),
+        std::forward<Args>(args)...);
     }
 
     // Spawn a detached child task that's protected against stealing.
     // You can return this task in user-defined compute() function to promote it as a shortcut.
     template < class T, class... Args >  
-    T*                      spawnDetachedAsExec(Args&&... args){  
-        return TaskPool::instance().emplaceAsExec<T>(std::forward<Args>(args)...);
+    T*                      spawnDetachedAsExec(Args&&... args){ 
+        return TaskPool::instance().emplaceAsExecInto<T>(TaskPool::instance().currentThreadIndex().value_or(taskHeader().emplacerIndex),
+        std::forward<Args>(args)...);
     }
 
     // Spawn a child task in deque in Ready state, 
@@ -66,11 +69,9 @@ public:
     // or stolen by a hungry wild worker.
     template < class T, class... Args >  
     T*                      spawn(Args&&... args){
-
-        T* child=TaskPool::instance().emplaceLocally<T>(std::forward<Args>(args)...);
-        incRefCount();
-        child->setParent(this);
-        return child;
+        return TaskPool::instance().emplaceIntoAndInit<T>(TaskPool::instance().currentThreadIndex().value_or(taskHeader().emplacerIndex), 
+        this, 
+        std::forward<Args>(args)...);
     }
 
     // Spawn a child task in deque in Exec state.
@@ -79,21 +80,13 @@ public:
     // Don't overuse spawnAsExec though, single worker cannot execute everything.
     template < class T, class... Args >  
     T*                      spawnAsExec(Args&&... args){  
-        T* child=TaskPool::instance().emplaceAsExec<T>(std::forward<Args>(args)...);
-        incRefCount();
-        child->setParent(this);
-        return child;
+        return TaskPool::instance().emplaceAsExecIntoAndInit<T>(TaskPool::instance().currentThreadIndex().value_or(taskHeader().emplacerIndex), 
+        this, 
+        std::forward<Args>(args)...);
     }
 
     // Note that sync always waits for all child tasks. 
-    // sync(Task*) could be easily misunderstood, so I decide not to expose it as public API.
-    // Use spawnLastChildAndSync to benefit from shortcut.
-    virtual void            sync(){  
-        syncAndShortcut(nullptr);
-    }
-
-    // Execute the given task before fetching tasks from execList
-    virtual void            syncAndShortcut(Task* shortcut); 
+    void                    sync();
 
     void                    decRefCount() noexcept{
         taskHeader().refCount--; // atomic
@@ -102,21 +95,20 @@ public:
     {
         taskHeader().refCount=r;
     }
-    void                    setParent(Task* parent){
+    void                    setParentAndIncRefCount(Task* parent){
+        taskHeader().refCount++;
         taskHeader().parent=parent;
     }
     bool                    notInList(){
         return taskHeader().next==nullptr && taskHeader().prev==nullptr;
     }
 protected:
+    void                    localSync(Worker&worker);
+    void                    externalSync();
     virtual void            onComputeDone();
     // user-defined task routine
     virtual Task*           compute() = 0; 
     // shortcut must be emplaced as Exec; it will be executed immediately
-private:
-    void                    incRefCount() noexcept{
-        taskHeader().refCount++;   
-    }
 };
 
 class EmptyTask : public Task {
