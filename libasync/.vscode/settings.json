@@ -1,7 +1,0 @@
-{
-    "files.associations": {
-        "thread": "cpp",
-        "string": "cpp",
-        "xxatomic": "cpp"
-    }
-}
