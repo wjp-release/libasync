@@ -32,6 +32,7 @@ namespace wjp::cf{
 
 class Task;
 class TaskBlock;
+class BufferTaskBlock;
 
 class TaskHeader{
 public:
@@ -50,8 +51,12 @@ public:
     uint16_t                    state=Free;       // 2 bytes
     uint8_t                     stealerIndex=0;   // 1 byte | Tasks whose state is Stolen should have a valid stealerIndex. Note that StolenFromBuffer is not Stolen.
     uint8_t                     emplacerIndex=0;  // 1 byte | Used for memory reclaimation
+    bool                        isRoot=false;
     TaskBlock*                  taskBlockPointer() noexcept{
         return reinterpret_cast<TaskBlock*>(this);
+    }
+    BufferTaskBlock*            bufferTaskBlockPointer() noexcept{
+        return reinterpret_cast<BufferTaskBlock*>(this);
     }
     template< class T >
     T*                          taskPointer() noexcept{

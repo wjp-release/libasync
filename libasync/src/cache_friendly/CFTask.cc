@@ -25,6 +25,8 @@
 
 #include "CFTask.h"
 #include "CFPool.h"
+#include "CFBufferTaskBlock.h"
+#include "ConcurrentPrint.h"
 
 namespace wjp::cf{
 
@@ -48,9 +50,30 @@ void Task::localSync(Worker& worker)
     }
 }
 
+bool Task::stillPending(){
+    return taskHeader().refCount>0;
+}
+
+void Task::signal(){
+    TaskHeader& header=taskHeader();
+    if(header.isRoot){
+        if constexpr(VerboseDebug) wjp::println("Signal Root Task!");
+        BufferTaskBlock* block=header.bufferTaskBlockPointer();
+        block->getConVar().notify_all();
+    }else{
+        // do nothing if the parent task is not a root task
+    }
+}
+
 void Task::externalSync(){
-
-
+    TaskHeader& header=taskHeader();
+    if(header.isRoot){
+        BufferTaskBlock* block=header.bufferTaskBlockPointer();
+        std::unique_lock<std::mutex> lk(block->getMutex());
+        block->getConVar().wait(lk, [this]{return !stillPending();});
+    }else{
+        assert(false && "externSync() can only be called on a root task stolen from a buffer which has a mtx and a convar.");
+    }
 }
 
 // Run user-defined routine and release the task.

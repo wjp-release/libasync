@@ -26,8 +26,7 @@
 #pragma once
 
 #include "CFConfig.h"
-#include "CFTaskBlock.h"
-#include <mutex> 
+#include "CFBufferTaskBlock.h"
 
 namespace wjp::cf{
 class Task;
@@ -48,7 +47,7 @@ public:
         if(endPosition-beginPosition >= BufferCapacity){
             return nullptr; // return nullptr if current size == capacity
         }
-        TaskBlock& block=at(endPosition);
+        BufferTaskBlock& block=at(endPosition);
         if(block.taskHeader().state==TaskHeader::StolenFromBuffer){
             return nullptr;  
         }
@@ -62,11 +61,11 @@ public:
     }    
 protected:
     // Random access should only be used internally under lock protection
-    TaskBlock&                  at(uint64_t index) noexcept{
+    BufferTaskBlock&            at(uint64_t index) noexcept{
         return blocks[index%BufferCapacity];
     }
 private:
-    TaskBlock                   blocks[BufferCapacity];  // pre-constructed empty TaskBlocks
+    BufferTaskBlock             blocks[BufferCapacity];  // pre-constructed empty TaskBlocks
     mutable BufferMutex         mtx;
     uint64_t                    beginPosition=0; 
     uint64_t                    endPosition=0; // always >= beginPosition

@@ -89,7 +89,10 @@ public:
     void                    sync();
 
     void                    decRefCount() noexcept{
-        taskHeader().refCount--; // atomic
+        uint32_t refcnt=taskHeader().refCount.fetch_sub(1);
+        if(refcnt==1){ // last child done
+            signal();
+        }
     }
     void                    setRefCount(int r) noexcept
     {
@@ -102,6 +105,8 @@ public:
     bool                    notInList(){
         return taskHeader().next==nullptr && taskHeader().prev==nullptr;
     }
+    bool                    stillPending();
+    void                    signal();
 protected:
     void                    localSync(Worker&worker);
     void                    externalSync();
