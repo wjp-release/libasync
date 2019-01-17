@@ -92,6 +92,7 @@ public:
         uint32_t refcnt=taskHeader().refCount.fetch_sub(1);
         if(refcnt==1){ // last child done
             signal();
+            taskHeader().isDone=true;
         }
     }
     void                    setRefCount(int r) noexcept
@@ -99,8 +100,9 @@ public:
         taskHeader().refCount=r;
     }
     void                    setParentAndIncRefCount(Task* parent){
-        taskHeader().refCount++;
+        parent->taskHeader().refCount++;
         taskHeader().parent=parent;
+        if constexpr(VerboseDebug) println("set parent and inc refcnt to "+std::to_string(parent->taskHeader().refCount));
     }
     bool                    notInList(){
         return taskHeader().next==nullptr && taskHeader().prev==nullptr;

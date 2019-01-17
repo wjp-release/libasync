@@ -45,13 +45,13 @@ void Task::sync()
 void Task::localSync(Worker& worker)
 {
     TaskHeader& header=taskHeader();
-    while(header.refCount>0){
+    while(stillPending()){
         worker.findAndRunATask(); 
     }
 }
-
+// note that refCount==0 doesn't always guarantee that the task is done, since it also holds true if the task has not spawned any child task yet.
 bool Task::stillPending(){
-    return taskHeader().refCount>0;
+    return !taskHeader().isDone;
 }
 
 void Task::signal(){
@@ -68,9 +68,12 @@ void Task::signal(){
 void Task::externalSync(){
     TaskHeader& header=taskHeader();
     if(header.isRoot){
+        if constexpr(VerboseDebug) wjp::println("Root blocked! refcnt="+std::to_string(taskHeader().refCount));
         BufferTaskBlock* block=header.bufferTaskBlockPointer();
         std::unique_lock<std::mutex> lk(block->getMutex());
-        block->getConVar().wait(lk, [this]{return !stillPending();});
+        while(stillPending()){
+            block->getConVar().wait(lk);
+        }
     }else{
         assert(false && "externSync() can only be called on a root task stolen from a buffer which has a mtx and a convar.");
     }

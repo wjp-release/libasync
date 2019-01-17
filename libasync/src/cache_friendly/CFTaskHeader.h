@@ -52,6 +52,7 @@ public:
     uint8_t                     stealerIndex=0;   // 1 byte | Tasks whose state is Stolen should have a valid stealerIndex. Note that StolenFromBuffer is not Stolen.
     uint8_t                     emplacerIndex=0;  // 1 byte | Used for memory reclaimation
     bool                        isRoot=false;
+    bool                        isDone=false;
     TaskBlock*                  taskBlockPointer() noexcept{
         return reinterpret_cast<TaskBlock*>(this);
     }

@@ -49,7 +49,7 @@ static constexpr bool       EnableAssert = true;
 static constexpr bool       MeasureInitTime = false;
 static constexpr bool       SanityCheck = true;
 static inline bool          SanityCheckSwitch=false;
-static constexpr bool       VerboseDebug = false;
+static constexpr bool       VerboseDebug = true;
 static constexpr bool       InformativeDebug = true;
 static constexpr bool       SimplePause = true;
 

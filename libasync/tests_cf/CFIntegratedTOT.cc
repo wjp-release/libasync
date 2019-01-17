@@ -7,6 +7,7 @@
 #include <string>
 #include "ConcurrentPrint.h"
 #include "ThreadUtilities.h"
+#include "CFParallelSum.h"
 
 using namespace wjp::cf;
 
@@ -19,7 +20,7 @@ protected:
 		return Task::stats()+"("+std::to_string(value)+")";
 	}
 	Task* compute() override{
-		if(value==14) return nullptr;
+		if(value==12) return nullptr;
 		wjp::sleep(1000);
 		AddOne* child1=spawnDetached<AddOne>(value+1);
 		AddOne* child2=spawnDetached<AddOne>(value+1);
@@ -27,7 +28,6 @@ protected:
 		return nullptr;
 	}
 };
-
 
 class CFIntegratedTOT : public ::testing::Test {
 protected:
@@ -43,14 +43,15 @@ TEST_F(CFIntegratedTOT, StartTaskPool) {
 	TaskPool::instance().start();	
 }
 
-TEST_F(CFIntegratedTOT, EmplaceExternallySpawnDetached) {
-
-	
+TEST_F(CFIntegratedTOT, EmplaceRootDetached) {
+	TaskPool::instance().start();
+	AddOne* root_task=TaskPool::instance().emplaceRoot<AddOne>(10);
+	wjp::sleep(1000);
 }
 
 
 
-TEST_F(CFIntegratedTOT, EmpalceSpawnDetached) {
+TEST_F(CFIntegratedTOT, EmpalceRootAndSync) {
 
 
 }
