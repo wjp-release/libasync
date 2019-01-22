@@ -52,7 +52,7 @@ public:
     uint8_t                     stealerIndex=0;   // 1 byte | Tasks whose state is Stolen should have a valid stealerIndex. Note that StolenFromBuffer is not Stolen.
     uint8_t                     emplacerIndex=0;  // 1 byte | Used for memory reclaimation
     bool                        isRoot=false;
-    bool                        isDone=false;
+    volatile bool               allChildTasksDone=false; // allChildTasksDone denotes the state that all pending child tasks have been finished. At this point the parent task may safely pass across its sync() barrier and finish soon.
     TaskBlock*                  taskBlockPointer() noexcept{
         return reinterpret_cast<TaskBlock*>(this);
     }
@@ -66,7 +66,17 @@ public:
     template< class T >
     T&                          taskReference() noexcept{
         return *reinterpret_cast<T*>(this+1);
-    }                 
+    }         
+    void                        reset() noexcept{
+        if(!isRoot) allChildTasksDone=false;
+        // If the task is a root task, allChildTasksDone should be reserved as true until the waiting thread wakes up. 
+        parent=nullptr;
+        refCount=0;
+        stealerIndex=0;
+        // state should be reserved as it is until Deque/Buffer finishes reclaim() routine and resets it to Free.
+        // emplacerIndex/isRoot are immutable values
+        // next/prev should only be accessed by TaskList.
+    }        
 };
 
 }

@@ -48,7 +48,7 @@ void TaskPool::start(){
         workers[i].index=i;
         workers[i].workerThread=std::thread{
             [this,i]{
-                if constexpr(VerboseDebug) println("starts!");
+                if constexpr(VeryVerboseDebug) println("starts!");
                 while(!terminating){
                     try{
                         workers[i].findAndRunATaskOrYield();
@@ -59,7 +59,7 @@ void TaskPool::start(){
                         println("Worker"+std::to_string(i)+" unknown exception");
                     }
                 }
-                if constexpr(VerboseDebug) println("terminated!");
+                if constexpr(VeryVerboseDebug) println("terminated!");
             }
         };
     }

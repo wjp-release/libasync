@@ -33,11 +33,12 @@
 #include "worksteal.h"
 #include "cfdeque.h"
 #include "cfsched.h"
+#include "tasklist.h"
 
 using namespace wjp;
 int main()
 {
-	parallelsum();
+	tasklist();
 
 #ifdef _MSC_VER
 	std::cin.get();

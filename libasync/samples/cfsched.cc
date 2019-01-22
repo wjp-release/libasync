@@ -39,7 +39,7 @@ void cfsched(){
     pool.terminate();
 }
 
-#define workload_size 100
+#define workload_size 500
 
 void parallelsum(){
 	TaskPool::instance().start();
@@ -49,7 +49,9 @@ void parallelsum(){
         v[i]=wjp::randint<0,10>();
 		c+=v[i];
     }		
+	auto start=wjp::now();
 	int sum=parallelSum<10>(v.data(),v.size());
-	std::cout<<"sum="<<sum<<", c="<<c<<std::endl;
+	int time_elapsed=wjp::ms_elapsed_count(start);
+	wjp::println("sum="+std::to_string(sum)+", actual="+std::to_string(c)+", time_elapsed="+std::to_string(time_elapsed)+"ms");
 }
 

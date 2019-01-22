@@ -50,19 +50,20 @@ static constexpr bool       MeasureInitTime = false;
 static constexpr bool       SanityCheck = true;
 static inline bool          SanityCheckSwitch=false;
 static constexpr bool       VerboseDebug = true;
+static constexpr bool       VeryVerboseDebug = false;
 static constexpr bool       InformativeDebug = true;
-static constexpr bool       SimplePause = true;
+static constexpr bool       SimplePause = false;
 
 // If turned on, the user-defined returned task of Task::execute() will be executed immediately after the return. Note that this may delay the termniation of the pool until the AfterDeathShortcut-chain finishes.
 static constexpr bool       EnableAfterDeathShortcut = false;
 
-static constexpr bool       PrintTestTaskOutput = true;
-static constexpr bool       EnableExternalSyncHelping = true; 
+static constexpr bool       PrintTestTaskOutput = false;
+static constexpr bool       EnableExternalSyncHelping = false; 
 
 }
 
 //#define EnableWorkerSleep
 
-//#define EnableInternalMonitor
+#define EnableInternalMonitor
 
 //#define CFProfiling

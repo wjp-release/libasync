@@ -80,6 +80,9 @@ public:
     // Don't overuse spawnAsExec though, single worker cannot execute everything.
     template < class T, class... Args >  
     T*                      spawnAsExec(Args&&... args){  
+        if constexpr(VerboseDebug && EnableAssert){
+            assert(!taskHeader().allChildTasksDone&&"allChildTasksDone must be false at this point.");
+        }
         return TaskPool::instance().emplaceAsExecIntoAndInit<T>(TaskPool::instance().currentThreadIndex().value_or(taskHeader().emplacerIndex), 
         this, 
         std::forward<Args>(args)...);
@@ -91,8 +94,8 @@ public:
     void                    decRefCount() noexcept{
         uint32_t refcnt=taskHeader().refCount.fetch_sub(1);
         if(refcnt==1){ // last child done
-            signal();
-            taskHeader().isDone=true;
+            taskHeader().allChildTasksDone=true;
+            if constexpr(EnableAssert) assert(taskHeader().refCount==0 && "Last child done; refcnt should be 0!");
         }
     }
     void                    setRefCount(int r) noexcept
@@ -102,16 +105,16 @@ public:
     void                    setParentAndIncRefCount(Task* parent){
         parent->taskHeader().refCount++;
         taskHeader().parent=parent;
-        if constexpr(VerboseDebug) println("set parent and inc refcnt to "+std::to_string(parent->taskHeader().refCount));
+        if constexpr(VeryVerboseDebug) println("set parent and inc refcnt to "+std::to_string(parent->taskHeader().refCount));
     }
     bool                    notInList(){
         return taskHeader().next==nullptr && taskHeader().prev==nullptr;
     }
     bool                    stillPending();
     void                    signal();
+    void                    externalSync();
 protected:
     void                    localSync(Worker&worker);
-    void                    externalSync();
     virtual void            onComputeDone();
     // user-defined task routine
     virtual Task*           compute() = 0; 

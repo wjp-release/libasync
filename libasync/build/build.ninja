@@ -12,7 +12,7 @@
 
 # =============================================================================
 # Project: libasync
-# Configuration: Debug
+# Configuration: Release
 # =============================================================================
 
 #############################################
@@ -41,16 +41,6 @@ build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
 build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 
 #############################################
-# Utility command for test
-
-build CMakeFiles/test.util: CUSTOM_COMMAND
-  COMMAND = cd /mnt/d/projects/libasync/libasync/build && /usr/bin/ctest --force-new-ctest-process
-  DESC = Running tests...
-  pool = console
-  restat = 1
-build test: phony CMakeFiles/test.util
-
-#############################################
 # Utility command for edit_cache
 
 build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
@@ -63,15 +53,6 @@ build edit_cache: phony CMakeFiles/edit_cache.util
 # /mnt/d/projects/libasync/libasync/CMakeLists.txt
 # =============================================================================
 
-
-#############################################
-# Utility command for edit_cache
-
-build src/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /mnt/d/projects/libasync/libasync/build/src && /usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-  DESC = No interactive CMake dialog available...
-  restat = 1
-build src/edit_cache: phony src/CMakeFiles/edit_cache.util
 
 #############################################
 # Utility command for rebuild_cache
@@ -92,7 +73,7 @@ build src/rebuild_cache: phony src/CMakeFiles/rebuild_cache.util
 build cmake_object_order_depends_target_async: phony || cmake_object_order_depends_target_cf cmake_object_order_depends_target_pf cmake_object_order_depends_target_utils
 build src/CMakeFiles/async.dir/Profiler.cc.o: CXX_COMPILER__async ../src/Profiler.cc || cmake_object_order_depends_target_async
   DEP_FILE = src/CMakeFiles/async.dir/Profiler.cc.o.d
-  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder   -std=gnu++1z
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall   -std=gnu++1z
   INCLUDES = -I.././include -I.././src/utils -I.././src/cache_friendly -I.././src/programmer_friendly -I.././src
   OBJECT_DIR = src/CMakeFiles/async.dir
   OBJECT_FILE_DIR = src/CMakeFiles/async.dir
@@ -105,7 +86,7 @@ build src/CMakeFiles/async.dir/Profiler.cc.o: CXX_COMPILER__async ../src/Profile
 # Link the static library src/libasync.a
 
 build src/libasync.a: CXX_STATIC_LIBRARY_LINKER__async src/CMakeFiles/async.dir/Profiler.cc.o || src/cache_friendly/libcf.a src/programmer_friendly/libpf.a src/utils/libutils.a
-  LANGUAGE_COMPILE_FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder
+  LANGUAGE_COMPILE_FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall
   OBJECT_DIR = src/CMakeFiles/async.dir
   POST_BUILD = :
   PRE_LINK = :
@@ -113,14 +94,13 @@ build src/libasync.a: CXX_STATIC_LIBRARY_LINKER__async src/CMakeFiles/async.dir/
   TARGET_PDB = async.a.dbg
 
 #############################################
-# Utility command for test
+# Utility command for edit_cache
 
-build src/CMakeFiles/test.util: CUSTOM_COMMAND
-  COMMAND = cd /mnt/d/projects/libasync/libasync/build/src && /usr/bin/ctest --force-new-ctest-process
-  DESC = Running tests...
-  pool = console
+build src/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /mnt/d/projects/libasync/libasync/build/src && /usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  DESC = No interactive CMake dialog available...
   restat = 1
-build src/test: phony src/CMakeFiles/test.util
+build src/edit_cache: phony src/CMakeFiles/edit_cache.util
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
 # /mnt/d/projects/libasync/libasync/src/CMakeLists.txt
@@ -136,15 +116,6 @@ build src/programmer_friendly/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
   pool = console
   restat = 1
 build src/programmer_friendly/rebuild_cache: phony src/programmer_friendly/CMakeFiles/rebuild_cache.util
-
-#############################################
-# Utility command for edit_cache
-
-build src/programmer_friendly/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /mnt/d/projects/libasync/libasync/build/src/programmer_friendly && /usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-  DESC = No interactive CMake dialog available...
-  restat = 1
-build src/programmer_friendly/edit_cache: phony src/programmer_friendly/CMakeFiles/edit_cache.util
 # =============================================================================
 # Object build statements for STATIC_LIBRARY target pf
 
@@ -155,25 +126,25 @@ build src/programmer_friendly/edit_cache: phony src/programmer_friendly/CMakeFil
 build cmake_object_order_depends_target_pf: phony
 build src/programmer_friendly/CMakeFiles/pf.dir/Async.cc.o: CXX_COMPILER__pf ../src/programmer_friendly/Async.cc || cmake_object_order_depends_target_pf
   DEP_FILE = src/programmer_friendly/CMakeFiles/pf.dir/Async.cc.o.d
-  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder   -std=gnu++1z
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall   -std=gnu++1z
   INCLUDES = -I.././include -I.././src/utils -I.././src/cache_friendly -I.././src/programmer_friendly -I.././src
   OBJECT_DIR = src/programmer_friendly/CMakeFiles/pf.dir
   OBJECT_FILE_DIR = src/programmer_friendly/CMakeFiles/pf.dir
 build src/programmer_friendly/CMakeFiles/pf.dir/WorkStealingScheduler.cc.o: CXX_COMPILER__pf ../src/programmer_friendly/WorkStealingScheduler.cc || cmake_object_order_depends_target_pf
   DEP_FILE = src/programmer_friendly/CMakeFiles/pf.dir/WorkStealingScheduler.cc.o.d
-  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder   -std=gnu++1z
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall   -std=gnu++1z
   INCLUDES = -I.././include -I.././src/utils -I.././src/cache_friendly -I.././src/programmer_friendly -I.././src
   OBJECT_DIR = src/programmer_friendly/CMakeFiles/pf.dir
   OBJECT_FILE_DIR = src/programmer_friendly/CMakeFiles/pf.dir
 build src/programmer_friendly/CMakeFiles/pf.dir/WorkStealingWorker.cc.o: CXX_COMPILER__pf ../src/programmer_friendly/WorkStealingWorker.cc || cmake_object_order_depends_target_pf
   DEP_FILE = src/programmer_friendly/CMakeFiles/pf.dir/WorkStealingWorker.cc.o.d
-  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder   -std=gnu++1z
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall   -std=gnu++1z
   INCLUDES = -I.././include -I.././src/utils -I.././src/cache_friendly -I.././src/programmer_friendly -I.././src
   OBJECT_DIR = src/programmer_friendly/CMakeFiles/pf.dir
   OBJECT_FILE_DIR = src/programmer_friendly/CMakeFiles/pf.dir
 build src/programmer_friendly/CMakeFiles/pf.dir/WorkStealingWorkerPool.cc.o: CXX_COMPILER__pf ../src/programmer_friendly/WorkStealingWorkerPool.cc || cmake_object_order_depends_target_pf
   DEP_FILE = src/programmer_friendly/CMakeFiles/pf.dir/WorkStealingWorkerPool.cc.o.d
-  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder   -std=gnu++1z
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall   -std=gnu++1z
   INCLUDES = -I.././include -I.././src/utils -I.././src/cache_friendly -I.././src/programmer_friendly -I.././src
   OBJECT_DIR = src/programmer_friendly/CMakeFiles/pf.dir
   OBJECT_FILE_DIR = src/programmer_friendly/CMakeFiles/pf.dir
@@ -186,7 +157,7 @@ build src/programmer_friendly/CMakeFiles/pf.dir/WorkStealingWorkerPool.cc.o: CXX
 # Link the static library src/programmer_friendly/libpf.a
 
 build src/programmer_friendly/libpf.a: CXX_STATIC_LIBRARY_LINKER__pf src/programmer_friendly/CMakeFiles/pf.dir/Async.cc.o src/programmer_friendly/CMakeFiles/pf.dir/WorkStealingScheduler.cc.o src/programmer_friendly/CMakeFiles/pf.dir/WorkStealingWorker.cc.o src/programmer_friendly/CMakeFiles/pf.dir/WorkStealingWorkerPool.cc.o
-  LANGUAGE_COMPILE_FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder
+  LANGUAGE_COMPILE_FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall
   OBJECT_DIR = src/programmer_friendly/CMakeFiles/pf.dir
   POST_BUILD = :
   PRE_LINK = :
@@ -194,14 +165,13 @@ build src/programmer_friendly/libpf.a: CXX_STATIC_LIBRARY_LINKER__pf src/program
   TARGET_PDB = pf.a.dbg
 
 #############################################
-# Utility command for test
+# Utility command for edit_cache
 
-build src/programmer_friendly/CMakeFiles/test.util: CUSTOM_COMMAND
-  COMMAND = cd /mnt/d/projects/libasync/libasync/build/src/programmer_friendly && /usr/bin/ctest --force-new-ctest-process
-  DESC = Running tests...
-  pool = console
+build src/programmer_friendly/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /mnt/d/projects/libasync/libasync/build/src/programmer_friendly && /usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  DESC = No interactive CMake dialog available...
   restat = 1
-build src/programmer_friendly/test: phony src/programmer_friendly/CMakeFiles/test.util
+build src/programmer_friendly/edit_cache: phony src/programmer_friendly/CMakeFiles/edit_cache.util
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
 # /mnt/d/projects/libasync/libasync/src/CMakeLists.txt
@@ -217,15 +187,6 @@ build src/cache_friendly/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
   pool = console
   restat = 1
 build src/cache_friendly/rebuild_cache: phony src/cache_friendly/CMakeFiles/rebuild_cache.util
-
-#############################################
-# Utility command for edit_cache
-
-build src/cache_friendly/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /mnt/d/projects/libasync/libasync/build/src/cache_friendly && /usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-  DESC = No interactive CMake dialog available...
-  restat = 1
-build src/cache_friendly/edit_cache: phony src/cache_friendly/CMakeFiles/edit_cache.util
 # =============================================================================
 # Object build statements for STATIC_LIBRARY target cf
 
@@ -236,37 +197,37 @@ build src/cache_friendly/edit_cache: phony src/cache_friendly/CMakeFiles/edit_ca
 build cmake_object_order_depends_target_cf: phony
 build src/cache_friendly/CMakeFiles/cf.dir/CFBuffer.cc.o: CXX_COMPILER__cf ../src/cache_friendly/CFBuffer.cc || cmake_object_order_depends_target_cf
   DEP_FILE = src/cache_friendly/CMakeFiles/cf.dir/CFBuffer.cc.o.d
-  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder   -std=gnu++1z
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall   -std=gnu++1z
   INCLUDES = -I.././include -I.././src/utils -I.././src/cache_friendly -I.././src/programmer_friendly -I.././src
   OBJECT_DIR = src/cache_friendly/CMakeFiles/cf.dir
   OBJECT_FILE_DIR = src/cache_friendly/CMakeFiles/cf.dir
 build src/cache_friendly/CMakeFiles/cf.dir/CFDeque.cc.o: CXX_COMPILER__cf ../src/cache_friendly/CFDeque.cc || cmake_object_order_depends_target_cf
   DEP_FILE = src/cache_friendly/CMakeFiles/cf.dir/CFDeque.cc.o.d
-  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder   -std=gnu++1z
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall   -std=gnu++1z
   INCLUDES = -I.././include -I.././src/utils -I.././src/cache_friendly -I.././src/programmer_friendly -I.././src
   OBJECT_DIR = src/cache_friendly/CMakeFiles/cf.dir
   OBJECT_FILE_DIR = src/cache_friendly/CMakeFiles/cf.dir
 build src/cache_friendly/CMakeFiles/cf.dir/CFPool.cc.o: CXX_COMPILER__cf ../src/cache_friendly/CFPool.cc || cmake_object_order_depends_target_cf
   DEP_FILE = src/cache_friendly/CMakeFiles/cf.dir/CFPool.cc.o.d
-  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder   -std=gnu++1z
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall   -std=gnu++1z
   INCLUDES = -I.././include -I.././src/utils -I.././src/cache_friendly -I.././src/programmer_friendly -I.././src
   OBJECT_DIR = src/cache_friendly/CMakeFiles/cf.dir
   OBJECT_FILE_DIR = src/cache_friendly/CMakeFiles/cf.dir
 build src/cache_friendly/CMakeFiles/cf.dir/CFTask.cc.o: CXX_COMPILER__cf ../src/cache_friendly/CFTask.cc || cmake_object_order_depends_target_cf
   DEP_FILE = src/cache_friendly/CMakeFiles/cf.dir/CFTask.cc.o.d
-  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder   -std=gnu++1z
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall   -std=gnu++1z
   INCLUDES = -I.././include -I.././src/utils -I.././src/cache_friendly -I.././src/programmer_friendly -I.././src
   OBJECT_DIR = src/cache_friendly/CMakeFiles/cf.dir
   OBJECT_FILE_DIR = src/cache_friendly/CMakeFiles/cf.dir
 build src/cache_friendly/CMakeFiles/cf.dir/CFTaskList.cc.o: CXX_COMPILER__cf ../src/cache_friendly/CFTaskList.cc || cmake_object_order_depends_target_cf
   DEP_FILE = src/cache_friendly/CMakeFiles/cf.dir/CFTaskList.cc.o.d
-  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder   -std=gnu++1z
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall   -std=gnu++1z
   INCLUDES = -I.././include -I.././src/utils -I.././src/cache_friendly -I.././src/programmer_friendly -I.././src
   OBJECT_DIR = src/cache_friendly/CMakeFiles/cf.dir
   OBJECT_FILE_DIR = src/cache_friendly/CMakeFiles/cf.dir
 build src/cache_friendly/CMakeFiles/cf.dir/CFWorker.cc.o: CXX_COMPILER__cf ../src/cache_friendly/CFWorker.cc || cmake_object_order_depends_target_cf
   DEP_FILE = src/cache_friendly/CMakeFiles/cf.dir/CFWorker.cc.o.d
-  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder   -std=gnu++1z
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall   -std=gnu++1z
   INCLUDES = -I.././include -I.././src/utils -I.././src/cache_friendly -I.././src/programmer_friendly -I.././src
   OBJECT_DIR = src/cache_friendly/CMakeFiles/cf.dir
   OBJECT_FILE_DIR = src/cache_friendly/CMakeFiles/cf.dir
@@ -279,7 +240,7 @@ build src/cache_friendly/CMakeFiles/cf.dir/CFWorker.cc.o: CXX_COMPILER__cf ../sr
 # Link the static library src/cache_friendly/libcf.a
 
 build src/cache_friendly/libcf.a: CXX_STATIC_LIBRARY_LINKER__cf src/cache_friendly/CMakeFiles/cf.dir/CFBuffer.cc.o src/cache_friendly/CMakeFiles/cf.dir/CFDeque.cc.o src/cache_friendly/CMakeFiles/cf.dir/CFPool.cc.o src/cache_friendly/CMakeFiles/cf.dir/CFTask.cc.o src/cache_friendly/CMakeFiles/cf.dir/CFTaskList.cc.o src/cache_friendly/CMakeFiles/cf.dir/CFWorker.cc.o
-  LANGUAGE_COMPILE_FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder
+  LANGUAGE_COMPILE_FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall
   OBJECT_DIR = src/cache_friendly/CMakeFiles/cf.dir
   POST_BUILD = :
   PRE_LINK = :
@@ -287,14 +248,13 @@ build src/cache_friendly/libcf.a: CXX_STATIC_LIBRARY_LINKER__cf src/cache_friend
   TARGET_PDB = cf.a.dbg
 
 #############################################
-# Utility command for test
+# Utility command for edit_cache
 
-build src/cache_friendly/CMakeFiles/test.util: CUSTOM_COMMAND
-  COMMAND = cd /mnt/d/projects/libasync/libasync/build/src/cache_friendly && /usr/bin/ctest --force-new-ctest-process
-  DESC = Running tests...
-  pool = console
+build src/cache_friendly/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /mnt/d/projects/libasync/libasync/build/src/cache_friendly && /usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  DESC = No interactive CMake dialog available...
   restat = 1
-build src/cache_friendly/test: phony src/cache_friendly/CMakeFiles/test.util
+build src/cache_friendly/edit_cache: phony src/cache_friendly/CMakeFiles/edit_cache.util
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
 # /mnt/d/projects/libasync/libasync/src/CMakeLists.txt
@@ -310,15 +270,6 @@ build src/utils/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
   pool = console
   restat = 1
 build src/utils/rebuild_cache: phony src/utils/CMakeFiles/rebuild_cache.util
-
-#############################################
-# Utility command for edit_cache
-
-build src/utils/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /mnt/d/projects/libasync/libasync/build/src/utils && /usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-  DESC = No interactive CMake dialog available...
-  restat = 1
-build src/utils/edit_cache: phony src/utils/CMakeFiles/edit_cache.util
 # =============================================================================
 # Object build statements for STATIC_LIBRARY target utils
 
@@ -329,7 +280,7 @@ build src/utils/edit_cache: phony src/utils/CMakeFiles/edit_cache.util
 build cmake_object_order_depends_target_utils: phony
 build src/utils/CMakeFiles/utils.dir/ConcurrentPrint.cc.o: CXX_COMPILER__utils ../src/utils/ConcurrentPrint.cc || cmake_object_order_depends_target_utils
   DEP_FILE = src/utils/CMakeFiles/utils.dir/ConcurrentPrint.cc.o.d
-  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder   -std=gnu++1z
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall   -std=gnu++1z
   INCLUDES = -I.././include -I.././src/utils -I.././src/cache_friendly -I.././src/programmer_friendly -I.././src
   OBJECT_DIR = src/utils/CMakeFiles/utils.dir
   OBJECT_FILE_DIR = src/utils/CMakeFiles/utils.dir
@@ -342,7 +293,7 @@ build src/utils/CMakeFiles/utils.dir/ConcurrentPrint.cc.o: CXX_COMPILER__utils .
 # Link the static library src/utils/libutils.a
 
 build src/utils/libutils.a: CXX_STATIC_LIBRARY_LINKER__utils src/utils/CMakeFiles/utils.dir/ConcurrentPrint.cc.o
-  LANGUAGE_COMPILE_FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder
+  LANGUAGE_COMPILE_FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall
   OBJECT_DIR = src/utils/CMakeFiles/utils.dir
   POST_BUILD = :
   PRE_LINK = :
@@ -350,28 +301,18 @@ build src/utils/libutils.a: CXX_STATIC_LIBRARY_LINKER__utils src/utils/CMakeFile
   TARGET_PDB = utils.a.dbg
 
 #############################################
-# Utility command for test
+# Utility command for edit_cache
 
-build src/utils/CMakeFiles/test.util: CUSTOM_COMMAND
-  COMMAND = cd /mnt/d/projects/libasync/libasync/build/src/utils && /usr/bin/ctest --force-new-ctest-process
-  DESC = Running tests...
-  pool = console
+build src/utils/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /mnt/d/projects/libasync/libasync/build/src/utils && /usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  DESC = No interactive CMake dialog available...
   restat = 1
-build src/utils/test: phony src/utils/CMakeFiles/test.util
+build src/utils/edit_cache: phony src/utils/CMakeFiles/edit_cache.util
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
 # /mnt/d/projects/libasync/libasync/CMakeLists.txt
 # =============================================================================
 
-
-#############################################
-# Utility command for edit_cache
-
-build samples/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /mnt/d/projects/libasync/libasync/build/samples && /usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-  DESC = No interactive CMake dialog available...
-  restat = 1
-build samples/edit_cache: phony samples/CMakeFiles/edit_cache.util
 
 #############################################
 # Utility command for rebuild_cache
@@ -392,25 +333,25 @@ build samples/rebuild_cache: phony samples/CMakeFiles/rebuild_cache.util
 build cmake_object_order_depends_target_sample: phony || cmake_object_order_depends_target_async cmake_object_order_depends_target_cf cmake_object_order_depends_target_pf cmake_object_order_depends_target_utils
 build samples/CMakeFiles/sample.dir/cfdeque.cc.o: CXX_COMPILER__sample ../samples/cfdeque.cc || cmake_object_order_depends_target_sample
   DEP_FILE = samples/CMakeFiles/sample.dir/cfdeque.cc.o.d
-  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder   -std=gnu++1z
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall   -std=gnu++1z
   INCLUDES = -I.././include -I.././src/utils -I.././src/cache_friendly -I.././src/programmer_friendly -I.././src
   OBJECT_DIR = samples/CMakeFiles/sample.dir
   OBJECT_FILE_DIR = samples/CMakeFiles/sample.dir
 build samples/CMakeFiles/sample.dir/cfsched.cc.o: CXX_COMPILER__sample ../samples/cfsched.cc || cmake_object_order_depends_target_sample
   DEP_FILE = samples/CMakeFiles/sample.dir/cfsched.cc.o.d
-  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder   -std=gnu++1z
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall   -std=gnu++1z
   INCLUDES = -I.././include -I.././src/utils -I.././src/cache_friendly -I.././src/programmer_friendly -I.././src
   OBJECT_DIR = samples/CMakeFiles/sample.dir
   OBJECT_FILE_DIR = samples/CMakeFiles/sample.dir
 build samples/CMakeFiles/sample.dir/sample.cc.o: CXX_COMPILER__sample ../samples/sample.cc || cmake_object_order_depends_target_sample
   DEP_FILE = samples/CMakeFiles/sample.dir/sample.cc.o.d
-  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder   -std=gnu++1z
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall   -std=gnu++1z
   INCLUDES = -I.././include -I.././src/utils -I.././src/cache_friendly -I.././src/programmer_friendly -I.././src
   OBJECT_DIR = samples/CMakeFiles/sample.dir
   OBJECT_FILE_DIR = samples/CMakeFiles/sample.dir
 build samples/CMakeFiles/sample.dir/worksteal.cc.o: CXX_COMPILER__sample ../samples/worksteal.cc || cmake_object_order_depends_target_sample
   DEP_FILE = samples/CMakeFiles/sample.dir/worksteal.cc.o.d
-  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder   -std=gnu++1z
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall   -std=gnu++1z
   INCLUDES = -I.././include -I.././src/utils -I.././src/cache_friendly -I.././src/programmer_friendly -I.././src
   OBJECT_DIR = samples/CMakeFiles/sample.dir
   OBJECT_FILE_DIR = samples/CMakeFiles/sample.dir
@@ -423,7 +364,7 @@ build samples/CMakeFiles/sample.dir/worksteal.cc.o: CXX_COMPILER__sample ../samp
 # Link the executable samples/sample
 
 build samples/sample: CXX_EXECUTABLE_LINKER__sample samples/CMakeFiles/sample.dir/cfdeque.cc.o samples/CMakeFiles/sample.dir/cfsched.cc.o samples/CMakeFiles/sample.dir/sample.cc.o samples/CMakeFiles/sample.dir/worksteal.cc.o | src/libasync.a src/programmer_friendly/libpf.a src/cache_friendly/libcf.a src/utils/libutils.a || src/cache_friendly/libcf.a src/libasync.a src/programmer_friendly/libpf.a src/utils/libutils.a
-  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder
+  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O2 -Wall
   LINK_LIBRARIES = -Wl,-rpath,/mnt/d/projects/libasync/libasync/./src src/libasync.a -lpthread src/programmer_friendly/libpf.a src/cache_friendly/libcf.a src/utils/libutils.a
   LINK_PATH = -L/mnt/d/projects/libasync/libasync/./src
   OBJECT_DIR = samples/CMakeFiles/sample.dir
@@ -433,207 +374,20 @@ build samples/sample: CXX_EXECUTABLE_LINKER__sample samples/CMakeFiles/sample.di
   TARGET_PDB = sample.dbg
 
 #############################################
-# Utility command for test
-
-build samples/CMakeFiles/test.util: CUSTOM_COMMAND
-  COMMAND = cd /mnt/d/projects/libasync/libasync/build/samples && /usr/bin/ctest --force-new-ctest-process
-  DESC = Running tests...
-  pool = console
-  restat = 1
-build samples/test: phony samples/CMakeFiles/test.util
-# =============================================================================
-# Write statements declared in CMakeLists.txt:
-# /mnt/d/projects/libasync/libasync/CMakeLists.txt
-# =============================================================================
-
-
-#############################################
-# Utility command for rebuild_cache
-
-build googletest/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /mnt/d/projects/libasync/libasync/build/googletest && /usr/bin/cmake -H/mnt/d/projects/libasync/libasync -B/mnt/d/projects/libasync/libasync/build
-  DESC = Running CMake to regenerate build system...
-  pool = console
-  restat = 1
-build googletest/rebuild_cache: phony googletest/CMakeFiles/rebuild_cache.util
-
-#############################################
-# Utility command for test
-
-build googletest/CMakeFiles/test.util: CUSTOM_COMMAND
-  COMMAND = cd /mnt/d/projects/libasync/libasync/build/googletest && /usr/bin/ctest --force-new-ctest-process
-  DESC = Running tests...
-  pool = console
-  restat = 1
-build googletest/test: phony googletest/CMakeFiles/test.util
-# =============================================================================
-# Object build statements for STATIC_LIBRARY target gtest
-
-
-#############################################
-# Order-only phony target for gtest
-
-build cmake_object_order_depends_target_gtest: phony
-build googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.o: CXX_COMPILER__gtest ../googletest/src/gtest-all.cc || cmake_object_order_depends_target_gtest
-  DEP_FILE = googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.o.d
-  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder   -Wall -Wshadow -Werror -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -pthread -std=gnu++1z
-  INCLUDES = -I.././include -I.././src/utils -I.././src/cache_friendly -I.././src/programmer_friendly -I.././src -I../googletest/include -I../googletest
-  OBJECT_DIR = googletest/CMakeFiles/gtest.dir
-  OBJECT_FILE_DIR = googletest/CMakeFiles/gtest.dir/src
-
-# =============================================================================
-# Link build statements for STATIC_LIBRARY target gtest
-
-
-#############################################
-# Link the static library lib/libgtestd.a
-
-build lib/libgtestd.a: CXX_STATIC_LIBRARY_LINKER__gtest googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.o
-  LANGUAGE_COMPILE_FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder
-  OBJECT_DIR = googletest/CMakeFiles/gtest.dir
-  POST_BUILD = :
-  PRE_LINK = :
-  TARGET_FILE = lib/libgtestd.a
-  TARGET_PDB = gtest.a.dbg
-
-#############################################
 # Utility command for edit_cache
 
-build googletest/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /mnt/d/projects/libasync/libasync/build/googletest && /usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+build samples/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /mnt/d/projects/libasync/libasync/build/samples && /usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
   DESC = No interactive CMake dialog available...
   restat = 1
-build googletest/edit_cache: phony googletest/CMakeFiles/edit_cache.util
-# =============================================================================
-# Object build statements for STATIC_LIBRARY target gtest_main
-
-
-#############################################
-# Order-only phony target for gtest_main
-
-build cmake_object_order_depends_target_gtest_main: phony || cmake_object_order_depends_target_gtest
-build googletest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o: CXX_COMPILER__gtest_main ../googletest/src/gtest_main.cc || cmake_object_order_depends_target_gtest_main
-  DEP_FILE = googletest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o.d
-  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder   -Wall -Wshadow -Werror -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -pthread -std=gnu++1z
-  INCLUDES = -I.././include -I.././src/utils -I.././src/cache_friendly -I.././src/programmer_friendly -I.././src -isystem ../googletest/include -isystem ../googletest
-  OBJECT_DIR = googletest/CMakeFiles/gtest_main.dir
-  OBJECT_FILE_DIR = googletest/CMakeFiles/gtest_main.dir/src
-
-# =============================================================================
-# Link build statements for STATIC_LIBRARY target gtest_main
-
-
-#############################################
-# Link the static library lib/libgtest_maind.a
-
-build lib/libgtest_maind.a: CXX_STATIC_LIBRARY_LINKER__gtest_main googletest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o || lib/libgtestd.a
-  LANGUAGE_COMPILE_FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder
-  OBJECT_DIR = googletest/CMakeFiles/gtest_main.dir
-  POST_BUILD = :
-  PRE_LINK = :
-  TARGET_FILE = lib/libgtest_maind.a
-  TARGET_PDB = gtest_main.a.dbg
-# =============================================================================
-# Write statements declared in CMakeLists.txt:
-# /mnt/d/projects/libasync/libasync/CMakeLists.txt
-# =============================================================================
-
-
-#############################################
-# Utility command for rebuild_cache
-
-build tests_cf/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /mnt/d/projects/libasync/libasync/build/tests_cf && /usr/bin/cmake -H/mnt/d/projects/libasync/libasync -B/mnt/d/projects/libasync/libasync/build
-  DESC = Running CMake to regenerate build system...
-  pool = console
-  restat = 1
-build tests_cf/rebuild_cache: phony tests_cf/CMakeFiles/rebuild_cache.util
-
-#############################################
-# Utility command for edit_cache
-
-build tests_cf/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /mnt/d/projects/libasync/libasync/build/tests_cf && /usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-  DESC = No interactive CMake dialog available...
-  restat = 1
-build tests_cf/edit_cache: phony tests_cf/CMakeFiles/edit_cache.util
-# =============================================================================
-# Object build statements for EXECUTABLE target cftests
-
-
-#############################################
-# Order-only phony target for cftests
-
-build cmake_object_order_depends_target_cftests: phony || cmake_object_order_depends_target_async cmake_object_order_depends_target_cf cmake_object_order_depends_target_gtest cmake_object_order_depends_target_gtest_main cmake_object_order_depends_target_pf cmake_object_order_depends_target_utils
-build tests_cf/CMakeFiles/cftests.dir/CFBufferTOT.cc.o: CXX_COMPILER__cftests ../tests_cf/CFBufferTOT.cc || cmake_object_order_depends_target_cftests
-  DEP_FILE = tests_cf/CMakeFiles/cftests.dir/CFBufferTOT.cc.o.d
-  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder   -pthread -std=gnu++1z
-  INCLUDES = -I.././include -I.././src/utils -I.././src/cache_friendly -I.././src/programmer_friendly -I.././src -isystem ../googletest/include -isystem ../googletest
-  OBJECT_DIR = tests_cf/CMakeFiles/cftests.dir
-  OBJECT_FILE_DIR = tests_cf/CMakeFiles/cftests.dir
-build tests_cf/CMakeFiles/cftests.dir/CFDequeTOT.cc.o: CXX_COMPILER__cftests ../tests_cf/CFDequeTOT.cc || cmake_object_order_depends_target_cftests
-  DEP_FILE = tests_cf/CMakeFiles/cftests.dir/CFDequeTOT.cc.o.d
-  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder   -pthread -std=gnu++1z
-  INCLUDES = -I.././include -I.././src/utils -I.././src/cache_friendly -I.././src/programmer_friendly -I.././src -isystem ../googletest/include -isystem ../googletest
-  OBJECT_DIR = tests_cf/CMakeFiles/cftests.dir
-  OBJECT_FILE_DIR = tests_cf/CMakeFiles/cftests.dir
-build tests_cf/CMakeFiles/cftests.dir/CFIntegratedTOT.cc.o: CXX_COMPILER__cftests ../tests_cf/CFIntegratedTOT.cc || cmake_object_order_depends_target_cftests
-  DEP_FILE = tests_cf/CMakeFiles/cftests.dir/CFIntegratedTOT.cc.o.d
-  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder   -pthread -std=gnu++1z
-  INCLUDES = -I.././include -I.././src/utils -I.././src/cache_friendly -I.././src/programmer_friendly -I.././src -isystem ../googletest/include -isystem ../googletest
-  OBJECT_DIR = tests_cf/CMakeFiles/cftests.dir
-  OBJECT_FILE_DIR = tests_cf/CMakeFiles/cftests.dir
-build tests_cf/CMakeFiles/cftests.dir/CFTaskBlockTOT.cc.o: CXX_COMPILER__cftests ../tests_cf/CFTaskBlockTOT.cc || cmake_object_order_depends_target_cftests
-  DEP_FILE = tests_cf/CMakeFiles/cftests.dir/CFTaskBlockTOT.cc.o.d
-  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder   -pthread -std=gnu++1z
-  INCLUDES = -I.././include -I.././src/utils -I.././src/cache_friendly -I.././src/programmer_friendly -I.././src -isystem ../googletest/include -isystem ../googletest
-  OBJECT_DIR = tests_cf/CMakeFiles/cftests.dir
-  OBJECT_FILE_DIR = tests_cf/CMakeFiles/cftests.dir
-build tests_cf/CMakeFiles/cftests.dir/CFTaskListTOT.cc.o: CXX_COMPILER__cftests ../tests_cf/CFTaskListTOT.cc || cmake_object_order_depends_target_cftests
-  DEP_FILE = tests_cf/CMakeFiles/cftests.dir/CFTaskListTOT.cc.o.d
-  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder   -pthread -std=gnu++1z
-  INCLUDES = -I.././include -I.././src/utils -I.././src/cache_friendly -I.././src/programmer_friendly -I.././src -isystem ../googletest/include -isystem ../googletest
-  OBJECT_DIR = tests_cf/CMakeFiles/cftests.dir
-  OBJECT_FILE_DIR = tests_cf/CMakeFiles/cftests.dir
-
-# =============================================================================
-# Link build statements for EXECUTABLE target cftests
-
-
-#############################################
-# Link the executable tests_cf/cftests
-
-build tests_cf/cftests: CXX_EXECUTABLE_LINKER__cftests tests_cf/CMakeFiles/cftests.dir/CFBufferTOT.cc.o tests_cf/CMakeFiles/cftests.dir/CFDequeTOT.cc.o tests_cf/CMakeFiles/cftests.dir/CFIntegratedTOT.cc.o tests_cf/CMakeFiles/cftests.dir/CFTaskBlockTOT.cc.o tests_cf/CMakeFiles/cftests.dir/CFTaskListTOT.cc.o | lib/libgtest_maind.a src/libasync.a lib/libgtestd.a src/programmer_friendly/libpf.a src/cache_friendly/libcf.a src/utils/libutils.a || lib/libgtest_maind.a lib/libgtestd.a src/cache_friendly/libcf.a src/libasync.a src/programmer_friendly/libpf.a src/utils/libutils.a
-  FLAGS = -std=c++17 -fPIC -Wno-reorder  -O0 -Wall -g2 -ggdb -Wno-reorder
-  LINK_LIBRARIES = -Wl,-rpath,/mnt/d/projects/libasync/libasync/./src lib/libgtest_maind.a src/libasync.a lib/libgtestd.a -pthread -lpthread src/programmer_friendly/libpf.a src/cache_friendly/libcf.a src/utils/libutils.a
-  LINK_PATH = -L/mnt/d/projects/libasync/libasync/./src
-  OBJECT_DIR = tests_cf/CMakeFiles/cftests.dir
-  POST_BUILD = :
-  PRE_LINK = :
-  TARGET_FILE = tests_cf/cftests
-  TARGET_PDB = cftests.dbg
-
-#############################################
-# Utility command for test
-
-build tests_cf/CMakeFiles/test.util: CUSTOM_COMMAND
-  COMMAND = cd /mnt/d/projects/libasync/libasync/build/tests_cf && /usr/bin/ctest --force-new-ctest-process
-  DESC = Running tests...
-  pool = console
-  restat = 1
-build tests_cf/test: phony tests_cf/CMakeFiles/test.util
+build samples/edit_cache: phony samples/CMakeFiles/edit_cache.util
 # =============================================================================
 # Target aliases.
 
 build async: phony src/libasync.a
 build cf: phony src/cache_friendly/libcf.a
-build cftests: phony tests_cf/cftests
-build gtest: phony lib/libgtestd.a
-build gtest_main: phony lib/libgtest_maind.a
 build libasync.a: phony src/libasync.a
 build libcf.a: phony src/cache_friendly/libcf.a
-build libgtest_maind.a: phony lib/libgtest_maind.a
-build libgtestd.a: phony lib/libgtestd.a
 build libpf.a: phony src/programmer_friendly/libpf.a
 build libutils.a: phony src/utils/libutils.a
 build pf: phony src/programmer_friendly/libpf.a
@@ -643,12 +397,6 @@ build utils: phony src/utils/libutils.a
 # Folder targets.
 
 # =============================================================================
-# =============================================================================
-
-#############################################
-# Folder: /mnt/d/projects/libasync/libasync/build/googletest
-
-build  googletest/all: phony gtest gtest_main
 # =============================================================================
 
 #############################################
@@ -680,19 +428,13 @@ build  src/programmer_friendly/all: phony pf
 
 build  src/utils/all: phony utils
 # =============================================================================
-
-#############################################
-# Folder: /mnt/d/projects/libasync/libasync/build/tests_cf
-
-build  tests_cf/all: phony cftests
-# =============================================================================
 # Built-in targets
 
 
 #############################################
 # The main all target.
 
-build all: phony src/libasync.a src/programmer_friendly/libpf.a src/cache_friendly/libcf.a src/utils/libutils.a samples/sample lib/libgtestd.a lib/libgtest_maind.a tests_cf/cftests
+build all: phony src/libasync.a src/programmer_friendly/libpf.a src/cache_friendly/libcf.a src/utils/libutils.a samples/sample
 
 #############################################
 # Make the all target the default.
@@ -702,13 +444,13 @@ default all
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | ../CMakeLists.txt ../googletest/CMakeLists.txt ../googletest/cmake/internal_utils.cmake ../samples/CMakeLists.txt ../src/CMakeLists.txt ../src/cache_friendly/CMakeLists.txt ../src/programmer_friendly/CMakeLists.txt ../src/utils/CMakeLists.txt ../tests_cf/CMakeLists.txt /usr/share/cmake-3.10/Modules/CMakeCInformation.cmake /usr/share/cmake-3.10/Modules/CMakeCXXInformation.cmake /usr/share/cmake-3.10/Modules/CMakeCommonLanguageInclude.cmake /usr/share/cmake-3.10/Modules/CMakeGenericSystem.cmake /usr/share/cmake-3.10/Modules/CMakeLanguageInformation.cmake /usr/share/cmake-3.10/Modules/CMakeSystemSpecificInformation.cmake /usr/share/cmake-3.10/Modules/CMakeSystemSpecificInitialize.cmake /usr/share/cmake-3.10/Modules/CheckIncludeFile.cmake /usr/share/cmake-3.10/Modules/CheckLibraryExists.cmake /usr/share/cmake-3.10/Modules/CheckSymbolExists.cmake /usr/share/cmake-3.10/Modules/Compiler/CMakeCommonCompilerMacros.cmake /usr/share/cmake-3.10/Modules/Compiler/GNU-C.cmake /usr/share/cmake-3.10/Modules/Compiler/GNU-CXX.cmake /usr/share/cmake-3.10/Modules/Compiler/GNU.cmake /usr/share/cmake-3.10/Modules/FindPackageHandleStandardArgs.cmake /usr/share/cmake-3.10/Modules/FindPackageMessage.cmake /usr/share/cmake-3.10/Modules/FindPythonInterp.cmake /usr/share/cmake-3.10/Modules/FindThreads.cmake /usr/share/cmake-3.10/Modules/Platform/Linux-GNU-C.cmake /usr/share/cmake-3.10/Modules/Platform/Linux-GNU-CXX.cmake /usr/share/cmake-3.10/Modules/Platform/Linux-GNU.cmake /usr/share/cmake-3.10/Modules/Platform/Linux.cmake /usr/share/cmake-3.10/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.10.2/CMakeCCompiler.cmake CMakeFiles/3.10.2/CMakeCXXCompiler.cmake CMakeFiles/3.10.2/CMakeSystem.cmake
+build build.ninja: RERUN_CMAKE | ../CMakeLists.txt ../samples/CMakeLists.txt ../src/CMakeLists.txt ../src/cache_friendly/CMakeLists.txt ../src/programmer_friendly/CMakeLists.txt ../src/utils/CMakeLists.txt /usr/share/cmake-3.10/Modules/CMakeCInformation.cmake /usr/share/cmake-3.10/Modules/CMakeCXXInformation.cmake /usr/share/cmake-3.10/Modules/CMakeCommonLanguageInclude.cmake /usr/share/cmake-3.10/Modules/CMakeGenericSystem.cmake /usr/share/cmake-3.10/Modules/CMakeLanguageInformation.cmake /usr/share/cmake-3.10/Modules/CMakeSystemSpecificInformation.cmake /usr/share/cmake-3.10/Modules/CMakeSystemSpecificInitialize.cmake /usr/share/cmake-3.10/Modules/Compiler/CMakeCommonCompilerMacros.cmake /usr/share/cmake-3.10/Modules/Compiler/GNU-C.cmake /usr/share/cmake-3.10/Modules/Compiler/GNU-CXX.cmake /usr/share/cmake-3.10/Modules/Compiler/GNU.cmake /usr/share/cmake-3.10/Modules/Platform/Linux-GNU-C.cmake /usr/share/cmake-3.10/Modules/Platform/Linux-GNU-CXX.cmake /usr/share/cmake-3.10/Modules/Platform/Linux-GNU.cmake /usr/share/cmake-3.10/Modules/Platform/Linux.cmake /usr/share/cmake-3.10/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.10.2/CMakeCCompiler.cmake CMakeFiles/3.10.2/CMakeCXXCompiler.cmake CMakeFiles/3.10.2/CMakeSystem.cmake
   pool = console
 
 #############################################
 # A missing CMake input file is not an error.
 
-build ../CMakeLists.txt ../googletest/CMakeLists.txt ../googletest/cmake/internal_utils.cmake ../samples/CMakeLists.txt ../src/CMakeLists.txt ../src/cache_friendly/CMakeLists.txt ../src/programmer_friendly/CMakeLists.txt ../src/utils/CMakeLists.txt ../tests_cf/CMakeLists.txt /usr/share/cmake-3.10/Modules/CMakeCInformation.cmake /usr/share/cmake-3.10/Modules/CMakeCXXInformation.cmake /usr/share/cmake-3.10/Modules/CMakeCommonLanguageInclude.cmake /usr/share/cmake-3.10/Modules/CMakeGenericSystem.cmake /usr/share/cmake-3.10/Modules/CMakeLanguageInformation.cmake /usr/share/cmake-3.10/Modules/CMakeSystemSpecificInformation.cmake /usr/share/cmake-3.10/Modules/CMakeSystemSpecificInitialize.cmake /usr/share/cmake-3.10/Modules/CheckIncludeFile.cmake /usr/share/cmake-3.10/Modules/CheckLibraryExists.cmake /usr/share/cmake-3.10/Modules/CheckSymbolExists.cmake /usr/share/cmake-3.10/Modules/Compiler/CMakeCommonCompilerMacros.cmake /usr/share/cmake-3.10/Modules/Compiler/GNU-C.cmake /usr/share/cmake-3.10/Modules/Compiler/GNU-CXX.cmake /usr/share/cmake-3.10/Modules/Compiler/GNU.cmake /usr/share/cmake-3.10/Modules/FindPackageHandleStandardArgs.cmake /usr/share/cmake-3.10/Modules/FindPackageMessage.cmake /usr/share/cmake-3.10/Modules/FindPythonInterp.cmake /usr/share/cmake-3.10/Modules/FindThreads.cmake /usr/share/cmake-3.10/Modules/Platform/Linux-GNU-C.cmake /usr/share/cmake-3.10/Modules/Platform/Linux-GNU-CXX.cmake /usr/share/cmake-3.10/Modules/Platform/Linux-GNU.cmake /usr/share/cmake-3.10/Modules/Platform/Linux.cmake /usr/share/cmake-3.10/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.10.2/CMakeCCompiler.cmake CMakeFiles/3.10.2/CMakeCXXCompiler.cmake CMakeFiles/3.10.2/CMakeSystem.cmake: phony
+build ../CMakeLists.txt ../samples/CMakeLists.txt ../src/CMakeLists.txt ../src/cache_friendly/CMakeLists.txt ../src/programmer_friendly/CMakeLists.txt ../src/utils/CMakeLists.txt /usr/share/cmake-3.10/Modules/CMakeCInformation.cmake /usr/share/cmake-3.10/Modules/CMakeCXXInformation.cmake /usr/share/cmake-3.10/Modules/CMakeCommonLanguageInclude.cmake /usr/share/cmake-3.10/Modules/CMakeGenericSystem.cmake /usr/share/cmake-3.10/Modules/CMakeLanguageInformation.cmake /usr/share/cmake-3.10/Modules/CMakeSystemSpecificInformation.cmake /usr/share/cmake-3.10/Modules/CMakeSystemSpecificInitialize.cmake /usr/share/cmake-3.10/Modules/Compiler/CMakeCommonCompilerMacros.cmake /usr/share/cmake-3.10/Modules/Compiler/GNU-C.cmake /usr/share/cmake-3.10/Modules/Compiler/GNU-CXX.cmake /usr/share/cmake-3.10/Modules/Compiler/GNU.cmake /usr/share/cmake-3.10/Modules/Platform/Linux-GNU-C.cmake /usr/share/cmake-3.10/Modules/Platform/Linux-GNU-CXX.cmake /usr/share/cmake-3.10/Modules/Platform/Linux-GNU.cmake /usr/share/cmake-3.10/Modules/Platform/Linux.cmake /usr/share/cmake-3.10/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.10.2/CMakeCCompiler.cmake CMakeFiles/3.10.2/CMakeCXXCompiler.cmake CMakeFiles/3.10.2/CMakeSystem.cmake: phony
 
 #############################################
 # Clean all the built files.

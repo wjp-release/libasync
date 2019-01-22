@@ -59,8 +59,8 @@ void Worker::findAndRunATaskOrYield()
         }else{
             // Todo: use a sophiscated idle cpu yielding strategy here.
         }
-        if constexpr(InformativeDebug){
-            if(pauseCount%10==0)
+        if constexpr(VerboseDebug && SimplePause){
+            if(pauseCount%100==0)
                 println("Worker"+std::to_string(index)+" pauseCount="+std::to_string(pauseCount));
         }
     }
@@ -83,15 +83,18 @@ bool Worker::findAndRunATask()
     return false;    
 }
 
+// Note that if TaskList is not lock-free, and executeTask() does not yield cpu ownership at all, the thread that runs the current task can always generate new tasks to readylist which prevents other workers from stealing. 
+// Therefore readylist must be lock-free. 
 bool Worker::executeTask(Task* task)
 {
     if(task==nullptr) return false;
     // To be done: check if the task is runnable; 
     // Now we assume every task user gives us is good!
-    if constexpr(InformativeDebug){
+    if constexpr(VeryVerboseDebug){
         println("Worker"+std::to_string(index)+" runs "+task->stats());
     }
-    pauseCount=0;
+    //wjp::sleep(10);
+    if constexpr(SimplePause) pauseCount=0;
     // Execute the task
     if constexpr(EnableAfterDeathShortcut){
         Task* next = task->execute();
@@ -105,7 +108,7 @@ bool Worker::executeTask(Task* task)
 }
 
 Task* Worker::takeFromLocalReadyList(){
-    if constexpr(InformativeDebug){
+    if constexpr(VeryVerboseDebug){
         Task* t=deque.take();
         if(t) println("A task is taken from local readylist! "+t->stats());
         return t;
@@ -114,7 +117,7 @@ Task* Worker::takeFromLocalReadyList(){
 }
 
 Task* Worker::takeFromLocalExecList(){
-    if constexpr(InformativeDebug){
+    if constexpr(VeryVerboseDebug){
         Task* t=deque.takeFromExec();
         if(t) println("A task is taken from local execlist! "+t->stats());
         return t;
@@ -123,7 +126,7 @@ Task* Worker::takeFromLocalExecList(){
 }
 
 Task* Worker::stealFromLocalBuffer(){
-    if constexpr(InformativeDebug){
+    if constexpr(VeryVerboseDebug){
         Task* t=buffer.steal();
         if(t) println("A task is stolen from local buffer! "+t->stats());
         return t;
@@ -139,7 +142,7 @@ Task* Worker::stealFromOtherBuffers()
         Worker& worker = TaskPool::instance().getWorker(i);
         task=stealFromBufferOf(worker);
         if(task!=nullptr){
-            if constexpr(InformativeDebug){
+            if constexpr(VeryVerboseDebug){
                 println("A task is stolen from worker"+std::to_string(i)+"'s buffer! "+task->stats());
             }
             return task;
@@ -161,7 +164,7 @@ Task* Worker::stealFromOtherDeques()
         Worker& worker = TaskPool::instance().getWorker(i);
         task=stealFromDequeOf(worker);
         if(task!=nullptr){ 
-            if constexpr(InformativeDebug){
+            if constexpr(VeryVerboseDebug){
                 println("A task is stolen from worker"+std::to_string(i)+"'s Deque! "+task->stats());
             }            
             return task;

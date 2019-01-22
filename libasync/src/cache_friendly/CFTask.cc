@@ -45,13 +45,18 @@ void Task::sync()
 void Task::localSync(Worker& worker)
 {
     TaskHeader& header=taskHeader();
-    while(stillPending()){
+    while(!taskHeader().allChildTasksDone){
         worker.findAndRunATask(); 
+    }
+    assert(header.allChildTasksDone && "All child tasks should be done at this point! "); 
+    if constexpr(VerboseDebug){
+        if(header.refCount!=0) 
+            println("ref count should be zero at this point! But refcnt="+std::to_string(header.refCount));
     }
 }
 // note that refCount==0 doesn't always guarantee that the task is done, since it also holds true if the task has not spawned any child task yet.
 bool Task::stillPending(){
-    return !taskHeader().isDone;
+    return !taskHeader().allChildTasksDone;
 }
 
 void Task::signal(){
@@ -74,6 +79,7 @@ void Task::externalSync(){
         while(stillPending()){
             block->getConVar().wait(lk);
         }
+        taskHeader().allChildTasksDone=false; // reset to default value such that this task can be recycled
     }else{
         assert(false && "externSync() can only be called on a root task stolen from a buffer which has a mtx and a convar.");
     }
@@ -89,8 +95,14 @@ Task* Task::execute(){
 void Task::onComputeDone(){
     TaskHeader& header=taskHeader();
     Task* parent=header.parent;
-    if(parent) parent->decRefCount();
+    if(parent) parent->decRefCount(); // tell parent I'm done
+    if(header.isRoot){  
+        signal(); // signal root task
+    }
     TaskPool::instance().getWorker(header.emplacerIndex).reclaim(this);
+    header.reset();
 }
+
+
 
 }
